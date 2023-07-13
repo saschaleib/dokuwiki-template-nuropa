@@ -1,0 +1,105 @@
+@charset "UTF-8";
+
+/* Stylesheet for DokuWiki Nuropa template
+ * by Sascha Leib
+ * File name: site-toolbar.css
+ */
+ 
+#toolbar-layout {
+	background-color: @ini_toolbar_background;
+	color: @ini_toolbar_text;
+	border-bottom: @ini_toolbar_border solid 1px;
+}
+
+#site-toolbar {
+	display: flex;
+	justify-content: space-between;
+	font-size: 1rem;
+	overflow: hidden;
+}
+
+#site-toolbar .toolbar-group {
+	display: flex;
+}
+#site-toolbar .toolbar-group label {
+	padding: 2.5px;
+}
+#site-toolbar .toolbar-menu {
+	display: inline-block;
+	list-style: none;
+}
+
+#site-toolbar button {
+	display: inline-grid;
+	grid-template-columns: 19px auto;
+	column-gap: 2px;
+	cursor: pointer;
+	border: @ini_toolbar_border solid 0;
+	border-width: 0 1px;
+	background: transparent none;
+	padding: 2px 5px;
+}
+#site-toolbar button:hover {
+	text-decoration: underline;
+}
+#site-toolbar button:before {
+	content: ' ';
+	display: inline-block;
+	width: 19px;
+	height: 19px;
+	background: transparent url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTEyLDhBNCw0IDAgMCwxIDE2LDEyQTQsNCAwIDAsMSAxMiwxNkE0LDQgMCAwLDEgOCwxMkE0LDQgMCAwLDEgMTIsOE0xMiwxMEEyLDIgMCAwLDAgMTAsMTJBMiwyIDAgMCwwIDEyLDE0QTIsMiAwIDAsMCAxNCwxMkEyLDIgMCAwLDAgMTIsMTBNMTAsMjJDOS43NSwyMiA5LjU0LDIxLjgyIDkuNSwyMS41OEw5LjEzLDE4LjkzQzguNSwxOC42OCA3Ljk2LDE4LjM0IDcuNDQsMTcuOTRMNC45NSwxOC45NUM0LjczLDE5LjAzIDQuNDYsMTguOTUgNC4zNCwxOC43M0wyLjM0LDE1LjI3QzIuMjEsMTUuMDUgMi4yNywxNC43OCAyLjQ2LDE0LjYzTDQuNTcsMTIuOTdMNC41LDEyTDQuNTcsMTFMMi40Niw5LjM3QzIuMjcsOS4yMiAyLjIxLDguOTUgMi4zNCw4LjczTDQuMzQsNS4yN0M0LjQ2LDUuMDUgNC43Myw0Ljk2IDQuOTUsNS4wNUw3LjQ0LDYuMDVDNy45Niw1LjY2IDguNSw1LjMyIDkuMTMsNS4wN0w5LjUsMi40MkM5LjU0LDIuMTggOS43NSwyIDEwLDJIMTRDMTQuMjUsMiAxNC40NiwyLjE4IDE0LjUsMi40MkwxNC44Nyw1LjA3QzE1LjUsNS4zMiAxNi4wNCw1LjY2IDE2LjU2LDYuMDVMMTkuMDUsNS4wNUMxOS4yNyw0Ljk2IDE5LjU0LDUuMDUgMTkuNjYsNS4yN0wyMS42Niw4LjczQzIxLjc5LDguOTUgMjEuNzMsOS4yMiAyMS41NCw5LjM3TDE5LjQzLDExTDE5LjUsMTJMMTkuNDMsMTNMMjEuNTQsMTQuNjNDMjEuNzMsMTQuNzggMjEuNzksMTUuMDUgMjEuNjYsMTUuMjdMMTkuNjYsMTguNzNDMTkuNTQsMTguOTUgMTkuMjcsMTkuMDQgMTkuMDUsMTguOTVMMTYuNTYsMTcuOTVDMTYuMDQsMTguMzQgMTUuNSwxOC42OCAxNC44NywxOC45M0wxNC41LDIxLjU4QzE0LjQ2LDIxLjgyIDE0LjI1LDIyIDE0LDIySDEwTTExLjI1LDRMMTAuODgsNi42MUM5LjY4LDYuODYgOC42Miw3LjUgNy44NSw4LjM5TDUuNDQsNy4zNUw0LjY5LDguNjVMNi44LDEwLjJDNi40LDExLjM3IDYuNCwxMi42NCA2LjgsMTMuOEw0LjY4LDE1LjM2TDUuNDMsMTYuNjZMNy44NiwxNS42MkM4LjYzLDE2LjUgOS42OCwxNy4xNCAxMC44NywxNy4zOEwxMS4yNCwyMEgxMi43NkwxMy4xMywxNy4zOUMxNC4zMiwxNy4xNCAxNS4zNywxNi41IDE2LjE0LDE1LjYyTDE4LjU3LDE2LjY2TDE5LjMyLDE1LjM2TDE3LjIsMTMuODFDMTcuNiwxMi42NCAxNy42LDExLjM3IDE3LjIsMTAuMkwxOS4zMSw4LjY1TDE4LjU2LDcuMzVMMTYuMTUsOC4zOUMxNS4zOCw3LjUgMTQuMzIsNi44NiAxMy4xMiw2LjYyTDEyLjc1LDRIMTEuMjVaIiAvPjwvc3ZnPg==") center no-repeat;
+}
+#site-toolbar button .label {
+	margin-top: 2px;
+}
+
+#site-toolbar .toolbar-menu li {
+	display: inline-block;
+	padding: 2px 5px 0 5px;
+	border: @ini_toolbar_border solid 0;
+	border-width: 0 1px;
+}
+
+#site-toolbar .toolbar-menu li a {
+	display: inline-grid;
+	grid-template-columns: 19px auto;
+	column-gap: 2px;
+}	
+#site-toolbar .toolbar-menu li a:link,
+#site-toolbar .toolbar-menu li a:visited {
+	color: @ini_toolbar_text;
+	text-decoration: none;
+}
+#site-toolbar .toolbar-menu li a:hover {
+	text-decoration: underline;
+}
+#site-toolbar .toolbar-menu li .icon svg {
+	width: 19px; height: 19px;
+	fill: @ini_toolbar_text;
+}
+#site-toolbar .toolbar-menu li .label {
+	font-size: 1rem;
+}
+
+/* compact styles: */
+#site-toolbar .toolbar-group.compact button .label {
+	display: none;
+}
+
+#site-toolbar .toolbar-group.compact .toolbar-menu li {
+	display: block;
+	border-width: 0 0 1px 0;
+}
+#site-toolbar .toolbar-group.compact .toolbar-menu {
+	position: absolute;
+	top: 25px;
+	background-color: @ini_toolbar_background;
+	border: 1px solid #ccc;
+	-webkit-box-shadow: 0 4px 5px 0 rgba(0,0,0,.4);
+	-moz-box-shadow: 0 4px 5px 0 rgba(0,0,0,.4);
+	box-shadow: 0 4px 5px 0 rgba(0,0,0,.4);
+	color: @ini_toolbar_text;
+}
+#site-toolbar .toolbar-group.compact .toolbar-menu a {
+	padding: 2px 0;
+}

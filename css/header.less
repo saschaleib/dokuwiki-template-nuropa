@@ -1,0 +1,90 @@
+@charset "UTF-8";
+
+/* Stylesheet for DokuWiki Nuropa template
+ * by Sascha Leib
+ * File name: header.css
+ */
+
+#pre-header {
+	padding: 1em 0;
+}
+#header-tools-layout {
+	display: grid;
+	grid-template-columns: 2fr 5fr 2fr 2fr;
+	gap: .5em;
+	align-items: center;
+}
+
+#site-logo {
+	max-width: 160px;
+	max-height: 80px;
+}
+#user-block {
+	& {
+		font-size: .9em;
+		text-align: center;
+	}
+	a {
+		display: inline-grid;
+		grid-template-columns: 22px auto;
+		column-gap: 3px;
+	}
+	a:link, a:visited {
+		color: @ini_link_color;
+		text-decoration: none;
+	}
+	a:focus, a:hover {
+		text-decoration: underline;
+	}
+	a svg {
+		fill: @ini_link_color;
+	}
+}
+
+#dw__search:focus-within {
+	outline: @ini_focus_outline solid 2px;
+}
+
+#dw__search div.no {
+	width: 100%;	
+	display: grid;
+	grid-template-columns: auto 4.5em;
+	border: @ini_form_field_outline solid 1px;
+}
+#dw__search div.no input {
+	border: @ini_form_field_bg 0 none;
+	padding: .5em;
+	color: @ini_form_field_text;
+}
+#dw__search div.no input:focus {
+	outline: none;
+}
+#dw__search div.no button {
+	background-color: @ini_form_btn_bg;
+	color: @ini_form_btn_text;
+	border: none;
+}
+#dw__search div.no button:hover,
+#dw__search div.no button:focus {
+	background-color: @ini_form_btn_hover_bg;
+	color: @ini_form_btn_hover_text;
+	outline: none;
+}
+
+#header-layout {
+	#page-headline-layout {
+		padding: 1em 0;
+	}
+	#site-headline {
+		& {
+			font-size: 2em;
+		}
+		a:link, a:visited {
+			color: @ini_header_text;
+			text-decoration: none;
+		}
+		a:hover, a:focus {
+			text-decoration: underline;
+		}
+	}
+}
