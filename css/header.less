@@ -41,6 +41,36 @@
 	}
 }
 
+#languages-block {
+	& #language-menu-button {
+		margin-top: 10pt;
+		background-color: transparent;
+		border: transparent none 0;
+		font-size: 1rem;
+		cursor: pointer;
+		position: relative;
+		color: @ini_link_color;
+		fill: @ini_link_color;
+	}
+	& #language-menu-button span.icon svg {
+		width: 24px;
+		height: 24px;
+	}
+	& #language-menu-button span.icon:before {
+		content: attr(data-lang);
+		position: relative;
+		display: inline-block;
+		color: @ini_background;
+		text-align: center;
+		text-transform: lowercase;
+		letter-spacing: .3pt;
+		left: 18px;
+		font-size: 9px;
+		font-weight: bold;
+		top: -10px;
+	}
+}
+
 #dw__search:focus-within {
 	outline: @ini_focus_outline solid 2px;
 }

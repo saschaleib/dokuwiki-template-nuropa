@@ -27,8 +27,8 @@ require_once('my_template.php');
 		</div>
 		<div id="toolbar-layout">
 			<div id="site-toolbar">
-				<?php tpl_includeFile('toolbar.html'); ?>
-				<?php my_toolbar(); ?>
+				<div class="siteinfo" role="banner"><?php tpl_includeFile('siteinfo.html'); ?></div>
+				<div class="toolbar-actions"><?php my_toolbar(); ?></div>
 			</div>
 		</div>
 		<div id="pre-header-layout">
@@ -40,7 +40,10 @@ require_once('my_template.php');
 						<?php my_userinfo(str_repeat(chr(9),6)); ?>
 					</div>
 					<div id="languages-block">
-						<button type="button" id="language-menu-button" aria-haspopup="menu" aria-controls="languages-menu" aria-expanded="true">English</button>
+						<button type="button" id="language-menu-button" aria-haspopup="menu" aria-controls="languages-menu" aria-expanded="false">
+							<span class="icon" data-lang="en"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,2H4A2,2 0 0,0 2,4V22L6,18H20A2,2 0 0,0 22,16V4C22,2.89 21.1,2 20,2Z" /></svg></span>
+							<span class="label">English</span>
+						</button>
 						<div id="languages-menu" role="menu">
 							<div class="close-popup"><h3>Available languages:</h3><button type="button" id="close-lang-menu" title="Close this menu">✖</button></div>
 							<div class="language-list-layout">

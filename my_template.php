@@ -16,47 +16,33 @@ use dokuwiki\File\PageResolver;
 function my_toolbar() {
     global $lang;
 
-	echo '<span class="toolbar-group">'
-		.'<button id="pagetools-btn" aria-haspopup="menu" aria-controls="pagetools-menu" data-type="menu">'
+	echo '<button id="pagetools-btn" aria-haspopup="menu" aria-controls="pagetools-menu" data-type="menu">'
 		.'<span class="label">' . $lang['page_tools'] . '</span></button>'
 		.'<ul id="pagetools-menu" class="toolbar-menu">';
 	
-	// get the page menu items:
-	$items = (new \dokuwiki\Menu\PageMenu())->getItems();
-	foreach($items as $item) {
-		switch ($item->getType()) {
-			case 'top':
-				// do nothing
-				break;
-			default:
-				echo '<li data-type="' . $item->getType() . '">'
-					.'<a href="'.$item->getLink().'" title="'.$item->getTitle().'" rel="nofollow">'
-					.'<span class="icon">'.inlineSVG($item->getSvg()).'</span>'
-					.'<span class="label">'.$item->getLabel().'</span>'
-					.'</a></li>';
+	$print_list = function($list, $exclude = []) {
+		foreach($list as $it) {
+			$typ = $it->getType();
+			if (!in_array($typ, $exclude)) {
+				echo '<li data-type="' . $typ . '">'
+					 .'<a href="'.$it->getLink().'" title="'.$it->getTitle().'" rel="nofollow">'
+					 .'<span class="icon">'.inlineSVG($it->getSvg()).'</span>'
+					 .'<span class="label">'.$it->getLabel().'</span>'
+					 .'</a></li>';
+			}
 		}
-	}
+	};
 	
-	// get the user menu items:
-	$items = (new \dokuwiki\Menu\UserMenu())->getItems();
-	foreach($items as $item) {
-		switch ($item->getType()) {
-			case 'profile':
-			case 'login':
-				// ignore
-				break;
-			default:
-				echo '<li data-type="' . $item->getType() . '">'
-					.'<a href="'.$item->getLink().'" title="'.$item->getTitle().'" rel="nofollow">'
-					.'<span class="icon">'.inlineSVG($item->getSvg()).'</span>'
-					.'<span class="label">'.$item->getLabel().'</span>'
-					.'</a></li>';
-		}
-	}
+	// page menu items:
+	$print_list( (new \dokuwiki\Menu\PageMenu())->getItems(), ['top'] );
 
+	// site menu items:
+	$print_list( (new \dokuwiki\Menu\SiteMenu())->getItems() );
+
+	// user menu items:
+	$print_list( (new \dokuwiki\Menu\UserMenu())->getItems(), ['profile', 'login'] );
 	
-	
-	echo '</ul></span>';
+	echo '</ul>';
 
 }
 
