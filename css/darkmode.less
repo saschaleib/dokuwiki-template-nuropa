@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+/* Stylesheet for DokuWiki Nuropa template
+ * by Sascha Leib
+ * File name: darkmode.less
+ */
+
+
+@media (prefers-color-scheme: dark) {
+    body { background-color: @ini_background_dark; color: @ini_text_dark; }
+
+    #toolbar-layout, #toolbar-menus {
+        background-color: @ini_toolbar_background_dark;
+        color: @ini_toolbar_text_dark;
+    }
+    #toolbar-layout { border-bottom-color: @ini_toolbar_border_dark; }
+
+
+    #header-layout {background-color: @ini_header_background_dark; color: @ini_header_text_dark; }
+
+}

@@ -13,37 +13,41 @@ use dokuwiki\File\PageResolver;
  * Creates the Site toolbar:
  *
  */
-function my_toolbar() {
+function my_toolbar($prefix = '') {
     global $lang;
 
-	echo '<button id="pagetools-btn" aria-haspopup="menu" aria-controls="pagetools-menu" data-type="menu">'
-		.'<span class="label">' . $lang['page_tools'] . '</span></button>'
-		.'<ul id="pagetools-menu" class="toolbar-menu">';
-	
-	$print_list = function($list, $exclude = []) {
-		foreach($list as $it) {
-			$typ = $it->getType();
-			if (!in_array($typ, $exclude)) {
-				echo '<li data-type="' . $typ . '">'
-					 .'<a href="'.$it->getLink().'" title="'.$it->getTitle().'" rel="nofollow">'
-					 .'<span class="icon">'.inlineSVG($it->getSvg()).'</span>'
-					 .'<span class="label">'.$it->getLabel().'</span>'
-					 .'</a></li>';
-			}
-		}
-	};
-	
-	// page menu items:
-	$print_list( (new \dokuwiki\Menu\PageMenu())->getItems(), ['top'] );
+    /* collect all tool items: */
+	$list = array_merge(
+	    (new \dokuwiki\Menu\PageMenu())->getItems(),
+	    (new \dokuwiki\Menu\SiteMenu())->getItems(),
+	    (new \dokuwiki\Menu\UserMenu())->getItems(),
+	);
 
-	// site menu items:
-	$print_list( (new \dokuwiki\Menu\SiteMenu())->getItems() );
+    /* the menu icon to be inserted as SVG: */
+    $icon = '<svg viewBox="0 0 24 24"><path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" /></svg>';
 
-	// user menu items:
-	$print_list( (new \dokuwiki\Menu\UserMenu())->getItems(), ['profile', 'login'] );
-	
-	echo '</ul>';
+    /* list of items that should be ignored: */
+    $exclude = ['top', 'profile', 'login','logout'];
 
+    echo $prefix . "<div id=\"toolbar-layout\">\n";
+    echo $prefix . "\t<div id=\"site-toolbar\">\n";
+    echo $prefix . "\t\t<div class=\"siteinfo\" role=\"banner\">";
+        tpl_includeFile('siteinfo.html');
+    echo $prefix . "\t\t</div>\n";
+    echo $prefix . "\t\t<div id=\"site-toolbar-items\">\n";
+	pActionlist($prefix . "\t\t", 'pagetools-menu', $list, $exclude);
+    echo $prefix . "\t\t\t<div id=\"pagetools-popup-group\">\n";
+    echo $prefix . "\t\t\t<button id=\"pagetools-btn\" aria-haspopup=\"menu\" aria-controls=\"pagetools-popup\" data-type=\"menu\" title=\"" . htmlentities($lang['tools']) . "\">\n";
+    echo $prefix . "\t\t\t\t\t<span class=\"icon\">" . $icon . "</span>\n";
+    echo $prefix . "\t\t\t\t\t<span class=\"label\">" . htmlentities($lang['tools']) . "</span>\n";
+    echo $prefix . "\t\t\t\t</button>\n";
+    echo $prefix . "\t\t\t</div>\n";
+    echo $prefix . "\t\t</div>\n";
+    echo $prefix . "\t</div>\n";
+    echo $prefix . "\t<div id=\"toolbar-menus\">\n";
+	pActionlist($prefix . "\t\t", 'pagetools-popup', $list, $exclude, true);
+    echo $prefix . "\t</div>\n";
+    echo $prefix . "</div>\n";
 }
 
 /**
@@ -71,7 +75,7 @@ function my_sitelogo() {
  */
 function my_homelink() {
     global $conf;
-	
+
 	$hl = trim(tpl_getConf('homelink'));
 
 	if ( $hl !== '' ) {
@@ -95,35 +99,33 @@ function my_userinfo($prefix = '') {
     global $lang;
     global $INPUT;
     global $INFO;
+    global $USERINFO;
 
-	// get the user menu items:
-	$items = (new \dokuwiki\Menu\UserMenu())->getItems();
+    // is there a user logged in?
+    $userid = $INPUT->server->str('REMOTE_USER');
 
-	// prefix:
-	echo $prefix . "<dl id=\"gUserTools\">\n";
-	
-	// find the login/user name item first:
-	foreach($items as $it) {
-		$typ = $it->getType();
-		if ($typ === 'profile') {
-			echo $prefix . "\t<dt><span class=\"sr-only\">" . $lang['loggedinas'] . "</span></dt>\n"
-				. $prefix . "\t<dd data-type=\"profile\">"
-				. '<a href="'.htmlentities($it->getLink()).'" title="'.$it->getTitle().'" rel="nofollow">'
-					.'<span class="icon">'.inlineSVG($it->getSvg()).'</span>'
-					.'<span class="label">'.$INFO['userinfo']['name'].'</span>'
-				.'</a></dd>';
-		} else if ($typ === 'login') {
-			echo $prefix . "\t<dt><span class=\"sr-only\">" . $it->getTitle() . "</span></dt>\n"
-				. $prefix . "\t<dd data-type=\"login\">"
-				.'<a href="'.htmlentities($it->getLink()).'" title="'.$it->getTitle().'" rel="nofollow">'
-					.'<span class="icon">'.inlineSVG($it->getSvg()).'</span>'
-					.'<span class="label">'.$it->getLabel().'</span>'
-				.'</a></dd>';
-		}
-	}
-	echo $prefix . "</dl>";
+    // get the user menu items:
+    $items = (new \dokuwiki\Menu\UserMenu())->getItems();
+
+    if (isset($USERINFO['name'])) { // user is loggd in:
+
+        $icon = '<svg viewBox="0 0 24 24"><path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" /></svg>';
+
+        // output the button:
+        echo $prefix . "<button id=\"user-button\">\n";
+        echo $prefix . "\t<span class=\"icon\">" . $icon . "</span>\n";
+        echo $prefix . "\t<span class=\"sr-only\">" . htmlentities($lang['loggedinas']) . "</span>\n";
+        echo $prefix . "\t<span class=\"label\">" . htmlentities($USERINFO['name']) . "</span>\n";
+        echo $prefix . "</button>\n";
+
+        // add the menu:
+        pActionlist($prefix, 'user-action-menu', $items, ['admin']);
+
+    } else {
+        pActionlist($prefix, 'user-action-buttons', $items, ['admin']);
+    }
+
 }
-
 
 /**
  * Hierarchical breadcrumbs
@@ -150,7 +152,7 @@ function my_youarehere($prefix = '') {
     $parts = explode(':', $ID);
     $count = count($parts);
 	$isdir = ( $parts[$count-1] == $conf['start']);
-	
+
 	$hl = trim(tpl_getConf('homelink'));
 
 	echo $prefix . "\t<p class=\"sr-only\">" . $lang['youarehere'] . "</p>\n";
@@ -171,13 +173,13 @@ function my_youarehere($prefix = '') {
         $page .= $part . ':';
 
 		if ($i == $count-2 && $isdir)  break; // Skip last if it is an index page
-	
+
 		echo $prefix . "\t\t<li>" . tpl_pagelink($page, null, true) . "</li>\n";
     }
 
     // chould the current page be included in the listing?
 	$trail = tpl_getConf('navtrail');
-	
+
 	if ($trail !== 'none' && $trail !== '') {
 
 		echo $prefix . "\t\t<li class=\"current\">";
@@ -188,7 +190,24 @@ function my_youarehere($prefix = '') {
 		}
 		echo "</li>\n";
 	}
-	
+
 	echo $prefix . "\t</ol>\n";
 }
 
+/* private helper function to putput a list of action items: */
+function pActionlist($prefix, $id, $list, $exclude, $hidden = false) {
+
+        /* build th menu */
+        echo $prefix . '<ul id="' . $id . '"' . ($hidden ? ' hidden ' : '') . '>';
+        foreach($list as $it) {
+            $typ = $it->getType();
+            if (!in_array($typ, $exclude)) {
+               echo '<li data-type="' . $typ . '">'
+                     .'<a href="'.$it->getLink().'" title="'.$it->getTitle().'" rel="nofollow">'
+                     .'<span class="icon">'.inlineSVG($it->getSvg()).'</span>'
+                     .'<span class="label">'.$it->getLabel().'</span>'
+                     .'</a></li>';
+            }
+        }
+        echo '</ul>';
+    };
