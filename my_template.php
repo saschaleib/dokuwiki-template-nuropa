@@ -147,7 +147,7 @@ function my_youarehere($prefix = '') {
     global $lang;
 
     // check if enabled
-    if(!$conf['youarehere']) return false;
+    //if(!$conf['youarehere']) return false;
 
     $parts = explode(':', $ID);
     $count = count($parts);
@@ -178,7 +178,7 @@ function my_youarehere($prefix = '') {
     }
 
     // chould the current page be included in the listing?
-	$trail = tpl_getConf('navtrail');
+	$trail = 'link'; //tpl_getConf('navtrail');
 
 	if ($trail !== 'none' && $trail !== '') {
 

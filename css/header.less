@@ -64,6 +64,7 @@
             display: grid;
             grid-template-columns: auto 4.5em;
             border: @ini_form_field_outline solid 1px;
+            margin: 2rem 0;
         }
         input {
             border: @ini_form_field_bg 0 none;
@@ -195,4 +196,47 @@
 }
 #user-action-menu a svg {
     fill: @ini_link_color;
+}
+
+#header-breadcrumbs ul,
+#header-breadcrumbs ol {
+    list-style: none;
+    font-size: smaller;
+    padding: 1rem 0 .5rem 0;
+}
+#header-breadcrumbs ul a:link,
+#header-breadcrumbs ol a:link,
+#header-breadcrumbs ul a:visited,
+#header-breadcrumbs ol a:visited {
+    color: @ini_header_link_color;
+    text-decoration: none;
+}
+#header-breadcrumbs li.current a:link,
+#header-breadcrumbs li.current a:visited {
+    color: @ini_header_current_page_link;
+}
+#header-breadcrumbs ul li,
+#header-breadcrumbs ol li {
+    display: inline-block;
+}
+#header-breadcrumbs ul li::after,
+#header-breadcrumbs ol li::after {
+    content: '\203A';
+    margin: 0 .5em;
+    font-size: 1.2em;
+}
+#header-breadcrumbs ul li:last-child::after,
+#header-breadcrumbs ol li:last-child::after {
+    content: none;
+}
+
+#header-breadcrumbs ul a:hover,
+#header-breadcrumbs ol a:hover,
+#header-breadcrumbs ul a:focus,
+#header-breadcrumbs ol a:focus {
+    text-decoration: underline;
+}
+#header-breadcrumbs ul li a.wikilink2 {
+    text-decoration: underline;
+    text-decoration-style: dashed;
 }

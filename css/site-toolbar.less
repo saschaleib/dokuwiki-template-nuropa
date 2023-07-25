@@ -18,7 +18,7 @@
 #site-toolbar {
 	display: flex;
 	justify-content: space-between;
-	font-size: 1rem;
+	font-size: .8rem;
 	line-height: 1.1rem;
 	overflow: hidden;
 	white-space: nowrap;
@@ -74,13 +74,13 @@
 	text-decoration: underline;
 }
 #pagetools-menu li .icon svg,
-#pagetools-poup li .icon svg{
+#pagetools-popup li .icon svg {
 	width: 19px; height: 19px;
 	fill: @ini_toolbar_text;
 }
 #pagetools-menu li .label,
 #pagetools-popup li .label {
-	font-size: 1rem;
+	font-size: .8rem;
 	line-height: 1.3rem;
 }
 
@@ -144,6 +144,9 @@
 #pagetools-btn .label {
 	margin-top: 2px;
 	padding-left: .5rem;
+}
+#pagetools-btn .icon svg {
+    fill: @ini_toolbar_text;
 }
 #pagetools-btn:before {
     content: ' ';

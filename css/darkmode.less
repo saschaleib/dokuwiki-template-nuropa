@@ -7,15 +7,46 @@
 
 
 @media (prefers-color-scheme: dark) {
+
+    /* general colour settings: */
     body { background-color: @ini_background_dark; color: @ini_text_dark; }
 
+    a:link { color: @ini_link_color_dark; }
+
+    /* site toolbar: */
     #toolbar-layout, #toolbar-menus {
         background-color: @ini_toolbar_background_dark;
         color: @ini_toolbar_text_dark;
     }
     #toolbar-layout { border-bottom-color: @ini_toolbar_border_dark; }
+    #pagetools-menu li a:link, #pagetools-menu li a:visited,
+    #pagetools-popup li a:link, #pagetools-popup li a:visited { color: @ini_toolbar_text_dark; }
+    #pagetools-menu li .icon svg, #pagetools-popup li .icon svg { fill: @ini_toolbar_text_dark; }
+    #pagetools-btn .icon svg { fill: @ini_toolbar_text_dark; }
+    #pagetools-menu li {border-color: @ini_toolbar_border_dark; }
+    #pagetools-btn { border-color: @ini_toolbar_border_dark; }
 
+    #user-button, #user-action-buttons a { color: @ini_link_color_dark; }
+    #user-button svg, #user-action-buttons svg { fill: @ini_link_color_dark; }
 
     #header-layout {background-color: @ini_header_background_dark; color: @ini_header_text_dark; }
+    #pagetools-popup { background: @ini_toolbar_background_dark; }
+    #pagetools-popup li { border-color: @ini_toolbar_border_dark; }
+    #pagetools-popup::before { border-bottom-color: @ini_toolbar_border_dark; }
+    #pagetools-popup::after { border-bottom-color: @ini_toolbar_background_dark; }
+
+    /* user menu */
+    #user-action-menu {
+        background-color: @ini_background_dark;
+        color: @ini_link_color_dark;
+        border-color: @ini_border_color_dark;
+    }
+    #user-action-menu a:link, #user-action-menu a:visited {
+        color: @ini_link_color_dark;
+    }
+    #user-action-menu::before { border-bottom-color: @ini_border_color_dark; }
+    #user-action-menu::after { border-bottom-color: @ini_background_dark; }
+
+    #user-action-menu a svg { fill: @ini_link_color_dark; }
 
 }
