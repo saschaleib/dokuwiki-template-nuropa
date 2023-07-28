@@ -90,7 +90,7 @@
 
 #header-layout {
 	#page-headline-layout {
-		padding: 1em 0;
+		padding: 1em 0 1rem .5rem;
 	}
 	#site-headline {
 		& {
@@ -198,12 +198,26 @@
     fill: @ini_link_color;
 }
 
+.breadcrumbs-nav {
+    padding: .5rem 0 4px 0;
+}
+
 #header-breadcrumbs ul,
 #header-breadcrumbs ol {
     list-style: none;
     font-size: smaller;
-    padding: 1rem 0 .5rem 0;
+    padding: .25rem .5rem;
 }
+
+#post-header-breadcrumbs ul,
+#post-header-breadcrumbs ol {
+    list-style: none;
+    font-size: smaller;
+    padding: .25rem .5rem;
+    width: max-content;
+    background-color: @ini_background;
+}
+
 #header-breadcrumbs ul a:link,
 #header-breadcrumbs ol a:link,
 #header-breadcrumbs ul a:visited,
@@ -211,32 +225,51 @@
     color: @ini_header_link_color;
     text-decoration: none;
 }
+#post-header-breadcrumbs ul a:link,
+#post-header-breadcrumbs ol a:link,
+#post-header-breadcrumbs ul a:visited,
+#post-header-breadcrumbs ol a:visited {
+    color: @ini_link_color;
+    text-decoration: none;
+}
 #header-breadcrumbs li.current a:link,
 #header-breadcrumbs li.current a:visited {
     color: @ini_header_current_page_link;
 }
 #header-breadcrumbs ul li,
-#header-breadcrumbs ol li {
+#header-breadcrumbs ol li,
+#post-header-breadcrumbs ul li,
+#post-header-breadcrumbs ol li {
     display: inline-block;
 }
 #header-breadcrumbs ul li::after,
-#header-breadcrumbs ol li::after {
+#header-breadcrumbs ol li::after,
+#post-header-breadcrumbs ul li::after,
+#post-header-breadcrumbs ol li::after {
     content: '\203A';
     margin: 0 .5em;
     font-size: 1.2em;
 }
 #header-breadcrumbs ul li:last-child::after,
-#header-breadcrumbs ol li:last-child::after {
+#header-breadcrumbs ol li:last-child::after,
+#post-header-breadcrumbs ul li:last-child::after,
+#post-header-breadcrumbs ol li:last-child::after {
     content: none;
 }
 
-#header-breadcrumbs ul a:hover,
-#header-breadcrumbs ol a:hover,
-#header-breadcrumbs ul a:focus,
-#header-breadcrumbs ol a:focus {
+#header-breadcrumbs a:hover,
+#header-breadcrumbs a:focus,
+#post-header-breadcrumbs a:hover,
+#post-header-breadcrumbs a:focus {
     text-decoration: underline;
 }
-#header-breadcrumbs ul li a.wikilink2 {
+#header-breadcrumbs a.wikilink2,
+#post-header-breadcrumbs a.wikilink2 {
     text-decoration: underline;
     text-decoration-style: dashed;
+}
+
+#post-header-layout {
+    display: flex;
+    align-items: flex-end;
 }

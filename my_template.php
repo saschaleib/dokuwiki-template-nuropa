@@ -15,6 +15,7 @@ use dokuwiki\File\PageResolver;
  */
 function my_toolbar($prefix = '') {
     global $lang;
+    global $conf;
 
     /* collect all tool items: */
 	$list = array_merge(
@@ -32,12 +33,23 @@ function my_toolbar($prefix = '') {
     echo $prefix . "<div id=\"toolbar-layout\">\n";
     echo $prefix . "\t<div id=\"site-toolbar\">\n";
     echo $prefix . "\t\t<div class=\"siteinfo\" role=\"banner\">";
+    if (tpl_getConf('userinfo') == 'toolbar') {
+        // is there a user logged in?
+        if (isset($USERINFO['name'])) { // user is loggd in:
+            echo $prefix . "\t\t<span class=\"sr-only\">" . htmlentities($lang['loggedinas']) . "</span>\n";
+            echo $prefix . "\t\t<span class=\"label\">" . htmlentities($USERINFO['name']) . "</span>\n";
+        } else {
+            echo $prefix . "\t\t<p>" . $conf['title'] . "</p>\n";
+        }
+
+    } else {
         tpl_includeFile('siteinfo.html');
+    }
     echo $prefix . "\t\t</div>\n";
     echo $prefix . "\t\t<div id=\"site-toolbar-items\">\n";
 	pActionlist($prefix . "\t\t", 'pagetools-menu', $list, $exclude);
     echo $prefix . "\t\t\t<div id=\"pagetools-popup-group\">\n";
-    echo $prefix . "\t\t\t<button id=\"pagetools-btn\" aria-haspopup=\"menu\" aria-controls=\"pagetools-popup\" data-type=\"menu\" title=\"" . htmlentities($lang['tools']) . "\">\n";
+    echo $prefix . "\t\t\t<button id=\"pagetools-btn\" class=\"menu-button\" aria-haspopup=\"menu\" aria-controls=\"pagetools-popup\" data-type=\"menu\" title=\"" . htmlentities($lang['tools']) . "\">\n";
     echo $prefix . "\t\t\t\t\t<span class=\"icon\">" . $icon . "</span>\n";
     echo $prefix . "\t\t\t\t\t<span class=\"label\">" . htmlentities($lang['tools']) . "</span>\n";
     echo $prefix . "\t\t\t\t</button>\n";
@@ -112,14 +124,14 @@ function my_userinfo($prefix = '') {
         $icon = '<svg viewBox="0 0 24 24"><path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" /></svg>';
 
         // output the button:
-        echo $prefix . "<button id=\"user-button\">\n";
+        echo $prefix . "<button id=\"user-button\" class=\"menu-button\">\n";
         echo $prefix . "\t<span class=\"icon\">" . $icon . "</span>\n";
         echo $prefix . "\t<span class=\"sr-only\">" . htmlentities($lang['loggedinas']) . "</span>\n";
         echo $prefix . "\t<span class=\"label\">" . htmlentities($USERINFO['name']) . "</span>\n";
         echo $prefix . "</button>\n";
 
         // add the menu:
-        pActionlist($prefix, 'user-action-menu', $items, ['admin']);
+        pActionlist($prefix, 'user-action-menu', $items, ['admin'], true);
 
     } else {
         pActionlist($prefix, 'user-action-buttons', $items, ['admin']);
@@ -141,13 +153,16 @@ function my_userinfo($prefix = '') {
  * @param  string $prefix to be added before each line
  *
  */
-function my_youarehere($prefix = '') {
+function my_youarehere($prefix, $position) {
     global $conf;
     global $ID;
     global $lang;
 
     // check if enabled
-    //if(!$conf['youarehere']) return false;
+    if(!$conf['youarehere']) return false;
+
+    // check if right position:
+    if(tpl_getConf('youareherepos', 'none') !== $position) return false;
 
     $parts = explode(':', $ID);
     $count = count($parts);
@@ -178,7 +193,7 @@ function my_youarehere($prefix = '') {
     }
 
     // chould the current page be included in the listing?
-	$trail = 'link'; //tpl_getConf('navtrail');
+	$trail = tpl_getConf('navtrail');
 
 	if ($trail !== 'none' && $trail !== '') {
 
@@ -192,6 +207,96 @@ function my_youarehere($prefix = '') {
 	}
 
 	echo $prefix . "\t</ol>\n";
+}
+
+/**
+ * Print the breadcrumbs trace
+ *
+ * Cleanup of the original code to create neater and more accessible HTML
+ *
+ * @author Sascha Leib <sascha@leib.be>
+ * @author Andreas Gohr <andi@splitbrain.org>
+ *
+ * @param string $prefix inserted before each line
+ *
+ * @return void
+ */
+function my_breadcrumbs($prefix, $position) {
+    global $lang;
+    global $conf;
+
+    //check if enabled
+    if(!$conf['breadcrumbs']) return false;
+
+    // check if right position:
+    if(tpl_getConf('breadcrumbpos', 'none') !== $position) return false;
+
+    $crumbs = breadcrumbs(); //setup crumb trace
+
+	/* begin listing */
+	echo $prefix . '<p class="sr-only">' . $lang['breadcrumb'] . "</p>\n";
+	echo $prefix . "<ol reversed>\n";
+
+    $last = count($crumbs);
+    $i    = 0;
+    foreach($crumbs as $id => $name) {
+        $i++;
+		echo $prefix . "\t<li" . ($i == $last ? ' class="current"' : '') . '><bdi>' . tpl_link(wl($id), hsc($name), '', true) .  "</bdi></li>\n";
+    }
+	echo $prefix . "</ol>\n";
+}
+
+/**
+ * Print the breadcrumbs trace
+ *
+ * Cleanup of the original code to create neater and more accessible HTML
+ *
+ * @author Sascha Leib <sascha@leib.be>
+ * @author Andreas Gohr <andi@splitbrain.org>
+ *
+ * @param string $prefix inserted before each line
+ *
+ * @return void
+ */
+function my_banner_style() {
+    global $ID;
+    global $conf;
+
+    /* don't run if banner image is disabled */
+    if (trim(tpl_getConf('bannerimg')) == '') return;
+
+    $background = null;
+
+    /* list of extensions to look for (in reverse order) */
+    $exts = array('jpg','jpeg','png','svg');
+
+    /* build a list of paths to look at: */
+    $cpath = '';
+    $paths = array();
+    foreach (explode(':', $ID) as $it) {
+        foreach ($exts as $ext) {
+            array_push($paths, $cpath . trim(tpl_getConf('bannerimg')) . '.' . $ext);
+        }
+        $cpath .= $it . ':';
+    }
+    $paths = array_reverse($paths); /* reverse the order */
+
+    /* check if an image exists in one of the paths: */
+    foreach ($paths as $rpath) {
+        $lpath = mediaFN($rpath);
+        if (file_exists($lpath)) {
+            $background = ml($rpath, '', true, '', false);
+            break;
+        }
+    }
+
+    /* find the element height */
+    $height = tpl_getConf('bannersize', 'inherit');
+
+
+    if ($background) {
+        echo "background-image: url('" . $background . "');min-height: " . $height . ';';
+    }
 }
 
 /* private helper function to putput a list of action items: */

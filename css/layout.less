@@ -59,6 +59,7 @@ body {
 #toolbar-layout,
 #pre-header-layout,
 #header-layout,
+#post-header-layout,
 #main-layout,
 #footer-layout,
 #dokuwiki__footer {
@@ -68,6 +69,7 @@ body {
 #toolbar-layout > div,
 #pre-header-layout > div,
 #header-layout > header,
+#post-header-layout > div,
 #main-layout > main,
 #footer-layout > footer,
 #dokuwiki__footer > div {
@@ -126,4 +128,17 @@ body {
 }
 .column-3-4 {
 	.layout-4-columns & { grid-column: e("3 / 4") }
+}
+
+/* click overlay: */
+#overlay {
+  display: block;
+  position: fixed;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(.5,0,0,.5);
+  z-index: 998;
 }

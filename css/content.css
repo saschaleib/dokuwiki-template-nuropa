@@ -1,0 +1,98 @@
+main {
+	display: block;
+	clear: both;
+	width: 100%;
+	max-width: 1170px;
+	margin: 0 auto;
+	padding: 21pt 0;
+}
+main h2 {
+	font-size: 18pt;
+	font-weight: bold;
+	color: #333;
+	margin: .75em 0 1em 0;
+	padding-bottom: 3pt;
+	border-bottom: #000 solid 2.5px;
+}
+main h3 {
+	font-size: 16pt;
+	font-weight: bold;
+	color: #333;
+	margin: 1.5em 0 1em 0;
+}
+main h4 {
+	font-size: 12pt;
+	font-weight: bold;
+	color: #333;
+	margin: 12pt 0 8pt 0;
+}
+main h5 {
+	font-size: 12pt;
+	font-weight: normal;
+	margin: 12pt 0 6pt 0;
+}
+main h6 {
+	font-size: 11pt;
+	font-weight: normal;
+	margin: 11pt 0 3pt 0;
+}
+
+main section {
+	padding: 0 6pt;
+}
+
+main aside {
+	float: right;
+	width: 49%;
+	margin: 3pt 0 6pt 10pt;
+}
+main aside.left {
+	float: left;
+	margin: 3pt 10 6pt 0;
+}
+
+main p,
+main li,
+main dl {
+	line-height: 1.5em;
+	margin-bottom: .5em;
+}
+
+main ul,
+main ol {
+	padding-left: 1.75em;
+}
+main dl dt {
+	color: #333;
+	font-weight: bold;
+}
+main dl dd {
+	margin-left: 1.75em;
+}
+
+main dl.compact {
+	display: table-row;
+}
+
+main dl.compact dt {
+	display: table-cell;
+	width: 20%;
+	padding-right: 1.5%;
+}
+main dl.compact dd {
+	display: table-cell;
+	vertical-align: bottom;
+	padding-bottom: .5em;
+}
+main a:link,
+main a:visited {
+	color: #004494;
+	text-decoration: underline;
+}
+main a:hover {
+	color: #404040;
+}
+main a:focus {
+	outline: 3px solid #ffd617;
+	text-decoration: none;
+}
