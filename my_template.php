@@ -25,10 +25,13 @@ function my_toolbar($prefix = '') {
 	);
 
     /* the menu icon to be inserted as SVG: */
-    $icon = '<svg viewBox="0 0 24 24"><path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" /></svg>';
+    $icon = '<svg viewBox="0 0 24 24"><path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" /></svg>';
 
     /* list of items that should be ignored: */
-    $exclude = ['top', 'profile', 'login','logout'];
+    $exTB  = ['top', 'profile', 'login','logout']; /* don't show in toolbar */
+    $exPop = ['top']; /* don't show in popup menu */
+
+    $tbType = tpl_getConf('toolbarstyle');
 
     echo $prefix . "<div id=\"toolbar-layout\">\n";
     echo $prefix . "\t<div id=\"site-toolbar\">\n";
@@ -47,7 +50,7 @@ function my_toolbar($prefix = '') {
     }
     echo $prefix . "\t\t</div>\n";
     echo $prefix . "\t\t<div id=\"site-toolbar-items\">\n";
-	pActionlist($prefix . "\t\t", 'pagetools-menu', $list, $exclude);
+	pActionlist($prefix . "\t\t", 'pagetools-menu', $list, $exTB, $tbType, false);
     echo $prefix . "\t\t\t<div id=\"pagetools-popup-group\">\n";
     echo $prefix . "\t\t\t<button id=\"pagetools-btn\" aria-haspopup=\"menu\" aria-controls=\"pagetools-popup\" title=\"" . htmlentities($lang['tools']) . "\">\n";
     echo $prefix . "\t\t\t\t\t<span class=\"icon\">" . $icon . "</span>\n";
@@ -57,7 +60,7 @@ function my_toolbar($prefix = '') {
     echo $prefix . "\t\t</div>\n";
     echo $prefix . "\t</div>\n";
     echo $prefix . "\t<div id=\"toolbar-menus\">\n";
-	pActionlist($prefix . "\t\t", 'pagetools-popup', $list, $exclude, true);
+	pActionlist($prefix . "\t\t", 'pagetools-popup', $list, $exPop, '', true);
     echo $prefix . "\t</div>\n";
     echo $prefix . "</div>\n";
 }
@@ -131,7 +134,7 @@ function my_userinfo($prefix = '') {
         echo $prefix . "</button>\n";
 
         // add the menu:
-        pActionlist($prefix, 'user-action-menu', $items, ['admin'], true);
+        pActionlist($prefix, 'user-action-menu', $items, ['admin'], '', true);
 
     } else {
         pActionlist($prefix, 'user-action-buttons', $items, ['admin']);
@@ -300,10 +303,10 @@ function my_banner_style() {
 }
 
 /* private helper function to putput a list of action items: */
-function pActionlist($prefix, $id, $list, $exclude, $hidden = false) {
+function pActionlist($prefix, $id, $list, $exclude, $type = '', $hidden = false) {
 
         /* build th menu */
-        echo $prefix . '<ul id="' . $id . '"' . ($hidden ? ' hidden ' : '') . '>';
+        echo $prefix . '<ul id="' . $id . '" class="' . htmlentities($type) . '"'  . ($hidden ? ' hidden ' : '') . '>';
         foreach($list as $it) {
             $typ = $it->getType();
             if (!in_array($typ, $exclude)) {

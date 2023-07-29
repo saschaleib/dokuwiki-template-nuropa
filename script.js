@@ -10,6 +10,7 @@ $p = {
 
 	/* called to initialize the entire script */
 	init:	function() {
+        console.info('init()')
 	    $p.gui.init();
 	},
 
@@ -17,12 +18,65 @@ $p = {
 
         init: function() {
 
+            console.info('gui.init()')
+
             $p.gui.overlay.init();
+            $p.gui.toolbar.init();
             $p.gui.menus.init();
         },
 
+        toolbar: {
+
+            init: function() {
+                //console.info('gui.toolbar.init()');
+
+                jQuery(window).on('resize', function() {
+                    $p.gui.toolbar._callback.resized();
+                });
+
+                $p.gui.toolbar._callback.resized();
+            },
+
+            _callback: {
+                resized: function() {
+
+                    console.info('gui.toolbar._callback.resized()');
+
+                    /* recalculate the overflow menu */
+
+                    /* first, check which items are visible in the toolbar: */
+                    let tb = jQuery('#pagetools-menu');
+                    let parentWidth = jQuery(tb).innerWidth();
+                    var itemPos = 0; /* current position */
+                    let shown = []; /* list of items shown in the toolbar */
+
+                    jQuery(tb).children('li').each((i, it) => {
+
+                        let itemId = jQuery(it).data('type');
+                        let itemWidth = jQuery(it).outerWidth(true);
+                        if ( (itemId) && (itemPos + itemWidth - 10) < parentWidth ) {
+                            shown.push(itemId);
+                        }
+                        itemPos += itemWidth;
+                    });
+
+                    /* hide already shown items in the popup: */
+                    jQuery('#pagetools-popup').children('li').each((i, it) => {
+                        let itemId = jQuery(it).data('type');
+                        if (itemId) {
+                            if (shown.includes(itemId)) {
+                                jQuery(it).hide();
+                            } else {
+                                jQuery(it).show();
+                            }
+                        }
+                    });
+                }
+            }
+        },
+
         /**
-		 * Page.GUI.Manus Namespace
+		 * Page.GUI.Menus Namespace
 		 *
 		 * @description Namespace for all functions related to the page menus
 		 */
