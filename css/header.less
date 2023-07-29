@@ -243,12 +243,18 @@
     display: inline-block;
 }
 #header-breadcrumbs ul li::after,
-#header-breadcrumbs ol li::after,
+#header-breadcrumbs ol li::after {
+    content: '\203A';
+    margin: 0 .5em;
+    font-size: 1.2em;
+    color: @ini_header_text;
+}
 #post-header-breadcrumbs ul li::after,
 #post-header-breadcrumbs ol li::after {
     content: '\203A';
     margin: 0 .5em;
     font-size: 1.2em;
+    color: @ini_border_color;
 }
 #header-breadcrumbs ul li:last-child::after,
 #header-breadcrumbs ol li:last-child::after,
@@ -272,4 +278,6 @@
 #post-header-layout {
     display: flex;
     align-items: flex-end;
+    background-position: center;
+    background-repeat: repeat-x;
 }

@@ -30,10 +30,38 @@ $p = {
 
             init: function() {
 
-                jQuery('.menu-button').on('click', () => { alert("click"); } );
+                jQuery('*[aria-haspopup=menu]')
+                    .on('click', $p.gui.menus._callback.onMenuButtonClick );
+            },
 
+            _openMenus: [],
+
+            _callback: {
+
+                onMenuButtonClick: function(e) {
+
+                    try {
+                        let tid = jQuery(this).attr('aria-controls');
+                        jQuery('#' + tid).slideDown();
+                        $p.gui.menus._openMenus.push(tid);
+                        $p.gui.overlay.show($p.gui.menus._callback.onBackdropClick);
+                    } catch(e) {
+                        console.error(e);
+                    }
+
+                },
+
+                onBackdropClick: function() {
+
+                    try {
+                        let tid = $p.gui.menus._openMenus.pop();
+                        jQuery('#' + tid).slideUp();
+                    } catch(e) {
+                        console.error(e);
+                    }
+
+                }
             }
-
         },
 
         /**
@@ -60,9 +88,6 @@ $p = {
 			show: function(callback) {
 
 				let ov = jQuery('#overlay');
-				if (zIdx !== undefined) {
-					jQuery(ov).css('z-index', parseInt(zIdx));
-				}
 				if (callback !== undefined && typeof callback == "function") {
 					$p.gui.overlay._callbacks.push(callback);
 				}

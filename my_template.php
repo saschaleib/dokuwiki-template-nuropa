@@ -49,7 +49,7 @@ function my_toolbar($prefix = '') {
     echo $prefix . "\t\t<div id=\"site-toolbar-items\">\n";
 	pActionlist($prefix . "\t\t", 'pagetools-menu', $list, $exclude);
     echo $prefix . "\t\t\t<div id=\"pagetools-popup-group\">\n";
-    echo $prefix . "\t\t\t<button id=\"pagetools-btn\" class=\"menu-button\" aria-haspopup=\"menu\" aria-controls=\"pagetools-popup\" data-type=\"menu\" title=\"" . htmlentities($lang['tools']) . "\">\n";
+    echo $prefix . "\t\t\t<button id=\"pagetools-btn\" aria-haspopup=\"menu\" aria-controls=\"pagetools-popup\" title=\"" . htmlentities($lang['tools']) . "\">\n";
     echo $prefix . "\t\t\t\t\t<span class=\"icon\">" . $icon . "</span>\n";
     echo $prefix . "\t\t\t\t\t<span class=\"label\">" . htmlentities($lang['tools']) . "</span>\n";
     echo $prefix . "\t\t\t\t</button>\n";
@@ -124,7 +124,7 @@ function my_userinfo($prefix = '') {
         $icon = '<svg viewBox="0 0 24 24"><path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" /></svg>';
 
         // output the button:
-        echo $prefix . "<button id=\"user-button\" class=\"menu-button\">\n";
+        echo $prefix . "<button id=\"user-button\" aria-haspopup=\"menu\" aria-controls=\"user-action-menu\">\n";
         echo $prefix . "\t<span class=\"icon\">" . $icon . "</span>\n";
         echo $prefix . "\t<span class=\"sr-only\">" . htmlentities($lang['loggedinas']) . "</span>\n";
         echo $prefix . "\t<span class=\"label\">" . htmlentities($USERINFO['name']) . "</span>\n";

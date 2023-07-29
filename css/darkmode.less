@@ -49,4 +49,26 @@
 
     #user-action-menu a svg { fill: @ini_link_color_dark; }
 
+    #header-breadcrumbs ul li::after,
+    #header-breadcrumbs ol li::after {
+        color: @ini_header_text_dark;
+    }
+
+
+    /* post header */
+    #post-header-breadcrumbs ul,
+    #post-header-breadcrumbs ol {
+        background-color: @ini_background_dark;
+    }
+    #post-header-breadcrumbs ul a:link,
+    #post-header-breadcrumbs ol a:link,
+    #post-header-breadcrumbs ul a:visited,
+    #post-header-breadcrumbs ol a:visited {
+        color: @ini_link_color_dark;
+    }
+    #post-header-breadcrumbs ul li::after,
+    #post-header-breadcrumbs ol li::after {
+        color: @ini_border_color_dark;
+    }
+
 }

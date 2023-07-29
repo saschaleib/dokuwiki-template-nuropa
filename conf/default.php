@@ -6,8 +6,8 @@
  */
 
 $conf['breadcrumbpos']  = 'header';
-$conf['youareherepos']  = 'banner';
+$conf['youareherepos']  = 'header';
 $conf['navtrail']		= 'link';
 $conf['userinfo']		= 'toolbar';
 $conf['bannerimg']		= 'banner';
-$conf['bannersize']		= '160px';
+$conf['bannersize']		= '48px';
