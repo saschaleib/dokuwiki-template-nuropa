@@ -37,14 +37,7 @@ function my_toolbar($prefix = '') {
     echo $prefix . "\t<div id=\"site-toolbar\">\n";
     echo $prefix . "\t\t<div class=\"siteinfo\" role=\"banner\">";
     if (tpl_getConf('userinfo') == 'toolbar') {
-        // is there a user logged in?
-        if (isset($USERINFO['name'])) { // user is loggd in:
-            echo $prefix . "\t\t<span class=\"sr-only\">" . htmlentities($lang['loggedinas']) . "</span>\n";
-            echo $prefix . "\t\t<span class=\"label\">" . htmlentities($USERINFO['name']) . "</span>\n";
-        } else {
-            echo $prefix . "\t\t<p>" . $conf['title'] . "</p>\n";
-        }
-
+        my_userinfo($prefix . str_repeat(chr(9),3));
     } else {
         tpl_includeFile('siteinfo.html');
     }
@@ -165,7 +158,7 @@ function my_youarehere($prefix, $position) {
     if(!$conf['youarehere']) return false;
 
     // check if right position:
-    if(tpl_getConf('youareherepos', 'none') !== $position) return false;
+    if(tpl_getConf('youareherepos') !== $position) return false;
 
     $parts = explode(':', $ID);
     $count = count($parts);

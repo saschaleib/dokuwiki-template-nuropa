@@ -45,8 +45,8 @@ require_once('my_template.php');
                     <!-- - - - - - - - - BREADCRUMBS CONTENT - - - - - - - -->
                     <?php
                         tpl_flush();
-                        if($conf['youarehere']) {my_youarehere(str_repeat(chr(9),4), 'header');}
-                        if($conf['breadcrumbs']) {my_breadcrumbs(str_repeat(chr(9),4), 'header');}
+                        my_youarehere(str_repeat(chr(9),4), 'header');
+                        my_breadcrumbs(str_repeat(chr(9),4), 'header');
                     ?>				</nav>
                     <!-- - - - - - - - - END OF BREADCRUMBS CONTENT  - - - - - - - -->
                     </nav>
@@ -56,12 +56,12 @@ require_once('my_template.php');
 					<p id="site-claim"><?php echo htmlentities($conf['tagline']); ?></p>
 				</div>
 				<div id="header-navigation">
-					<!-- - - - - - - - - SIDEBAR CONTENT - - - - - - - --
+					<!-- - - - - - - - - SIDEBAR CONTENT - - - - - - - -->
 					<?php
 								tpl_flush();
-								tpl_include_page($conf['sidebar'], true, true);
+								//tpl_include_page($conf['sidebar'], true, true);
 					?>
-					  -- - - - - - - - - END OF SIDEBAR CONTENT  - - - - - - - -->
+				<!-- - - - - - - - - END OF SIDEBAR CONTENT  - - - - - - - -->
 				</div>
 			</header>
 		</div>
@@ -72,8 +72,8 @@ require_once('my_template.php');
                     <!-- - - - - - - - - BREADCRUMBS CONTENT - - - - - - - -->
                     <?php
                         tpl_flush();
-                        if($conf['youarehere']) {my_youarehere(str_repeat(chr(9),4),'banner');}
-                        if($conf['breadcrumbs']) {my_breadcrumbs(str_repeat(chr(9),4),'banner');}
+                        my_youarehere(str_repeat(chr(9),4),'banner');
+                        my_breadcrumbs(str_repeat(chr(9),4),'banner');
                     ?>				</nav>
                     <!-- - - - - - - - - END OF BREADCRUMBS CONTENT  - - - - - - - -->
                     </nav>

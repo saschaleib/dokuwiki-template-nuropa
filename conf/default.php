@@ -6,8 +6,8 @@
  */
 
 /* position of the breadcrumbs and 'you are here' lists ('header' or 'post') */
-$conf['breadcrumbpos']  = 'header';
-$conf['youareherepos']  = 'header';
+$conf['breadcrumbpos']  = 'banner';
+$conf['youareherepos']  = 'banner';
 
 /* how to show the last element in the nav trail ('you are here')? */
 $conf['navtrail']		= 'link';
