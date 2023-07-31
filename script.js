@@ -49,14 +49,18 @@ $p = {
                     let parentWidth = jQuery(tb).innerWidth();
                     var itemPos = 0; /* current position */
                     let shown = []; /* list of items shown in the toolbar */
-
+					let items = jQuery(tb).children('li');
+					
+					jQuery(items).show();
                     jQuery(tb).children('li').each((i, it) => {
 
                         let itemId = jQuery(it).data('type');
                         let itemWidth = jQuery(it).outerWidth(true);
                         if ( (itemId) && (itemPos + itemWidth - 10) < parentWidth ) {
                             shown.push(itemId);
-                        }
+                        } else {
+							//jQuery(it).hide();
+						}
                         itemPos += itemWidth;
                     });
 
@@ -129,7 +133,7 @@ $p = {
 
 				let ov = jQuery('<div>')
 				    .attr('id','overlay')
-				    .attr('style', 'z-index:99; display:none;')
+				    .attr('style', 'display:none;')
 				    .attr('tabindex', '-1');
 
 				// attach callback

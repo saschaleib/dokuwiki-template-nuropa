@@ -20,14 +20,17 @@ require_once('my_template.php');
 		<meta name="viewport" content="width=device-width,initial-scale=1" />
 		<?php echo tpl_favicon(array('favicon', 'mobile')) ?>
 		<?php tpl_includeFile('meta.html') ?>
+
 	</head>
 	<body class="site <?php echo trim(tpl_classes()); ?>" data-pageid="<?php echo htmlentities($ID); ?>">
 		<div id="skip-link">
 			<a href="#main-content"><?php echo htmlentities($lang['skip_to_content']); ?></a>
 		</div>
-<?php my_toolbar("\t\t"); ?>
+		<div id="toolbar-layout">
+<?php include('tpl_toolbar.php') ?>
+		</div>
 		<div id="pre-header-layout">
-			<div id="pre-header">
+			<!--div id="pre-header">
 				<div id="header-tools-layout">
 					<div id="site-logo"><?php my_sitelogo(); ?></div>
 					<div id="search-group"><?php tpl_searchform(); ?></div>
@@ -36,7 +39,7 @@ require_once('my_template.php');
 					</div>
 					<!-- languages menu placeholder -->
 				</div>
-			</div>
+			</div-->
 		</div>
 		<div id="header-layout">
 			<header>

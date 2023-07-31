@@ -10,55 +10,6 @@ use dokuwiki\Extension\Event;
 use dokuwiki\File\PageResolver;
 
 /**
- * Creates the Site toolbar:
- *
- */
-function my_toolbar($prefix = '') {
-    global $lang;
-    global $conf;
-
-    /* collect all tool items: */
-	$list = array_merge(
-	    (new \dokuwiki\Menu\PageMenu())->getItems(),
-	    (new \dokuwiki\Menu\SiteMenu())->getItems(),
-	    (new \dokuwiki\Menu\UserMenu())->getItems(),
-	);
-
-    /* the menu icon to be inserted as SVG: */
-    $icon = '<svg viewBox="0 0 24 24"><path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" /></svg>';
-
-    /* list of items that should be ignored: */
-    $exTB  = ['top', 'profile', 'login','logout']; /* don't show in toolbar */
-    $exPop = ['top']; /* don't show in popup menu */
-
-    $tbType = tpl_getConf('toolbarstyle');
-
-    echo $prefix . "<div id=\"toolbar-layout\">\n";
-    echo $prefix . "\t<div id=\"site-toolbar\">\n";
-    echo $prefix . "\t\t<div class=\"siteinfo\" role=\"banner\">";
-    if (tpl_getConf('userinfo') == 'toolbar') {
-        my_userinfo($prefix . str_repeat(chr(9),3));
-    } else {
-        tpl_includeFile('siteinfo.html');
-    }
-    echo $prefix . "\t\t</div>\n";
-    echo $prefix . "\t\t<div id=\"site-toolbar-items\">\n";
-	pActionlist($prefix . "\t\t", 'pagetools-menu', $list, $exTB, $tbType, false);
-    echo $prefix . "\t\t\t<div id=\"pagetools-popup-group\">\n";
-    echo $prefix . "\t\t\t<button id=\"pagetools-btn\" aria-haspopup=\"menu\" aria-controls=\"pagetools-popup\" title=\"" . htmlentities($lang['tools']) . "\">\n";
-    echo $prefix . "\t\t\t\t\t<span class=\"icon\">" . $icon . "</span>\n";
-    echo $prefix . "\t\t\t\t\t<span class=\"label\">" . htmlentities($lang['tools']) . "</span>\n";
-    echo $prefix . "\t\t\t\t</button>\n";
-    echo $prefix . "\t\t\t</div>\n";
-    echo $prefix . "\t\t</div>\n";
-    echo $prefix . "\t</div>\n";
-    echo $prefix . "\t<div id=\"toolbar-menus\">\n";
-	pActionlist($prefix . "\t\t", 'pagetools-popup', $list, $exPop, '', true);
-    echo $prefix . "\t</div>\n";
-    echo $prefix . "</div>\n";
-}
-
-/**
  * Creates the Site logo image link
  *
  */
@@ -117,13 +68,10 @@ function my_userinfo($prefix = '') {
 
     if (isset($USERINFO['name'])) { // user is loggd in:
 
-        $icon = '<svg viewBox="0 0 24 24"><path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" /></svg>';
-
         // output the button:
         echo $prefix . "<button id=\"user-button\" aria-haspopup=\"menu\" aria-controls=\"user-action-menu\">\n";
-        echo $prefix . "\t<span class=\"icon\">" . $icon . "</span>\n";
-        echo $prefix . "\t<span class=\"sr-only\">" . htmlentities($lang['loggedinas']) . "</span>\n";
-        echo $prefix . "\t<span class=\"label\">" . htmlentities($USERINFO['name']) . "</span>\n";
+        echo $prefix . "\t<svg class=\"icon\" viewBox=\"0 0 24 24\"><path d=\"M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z\" /></svg>\n";
+        echo $prefix . "\t<span class=\"label\"><span class=\"sr-only\">" . htmlentities($lang['loggedinas']) . ' </span>' . htmlentities($USERINFO['name']) . "</span>\n";
         echo $prefix . "</button>\n";
 
         // add the menu:
@@ -298,17 +246,17 @@ function my_banner_style() {
 /* private helper function to putput a list of action items: */
 function pActionlist($prefix, $id, $list, $exclude, $type = '', $hidden = false) {
 
-        /* build th menu */
-        echo $prefix . '<ul id="' . $id . '" class="' . htmlentities($type) . '"'  . ($hidden ? ' hidden ' : '') . '>';
-        foreach($list as $it) {
-            $typ = $it->getType();
-            if (!in_array($typ, $exclude)) {
-               echo '<li data-type="' . $typ . '">'
-                     .'<a href="'.$it->getLink().'" title="'.$it->getTitle().'" rel="nofollow">'
-                     .'<span class="icon">'.inlineSVG($it->getSvg()).'</span>'
-                     .'<span class="label">'.$it->getLabel().'</span>'
-                     .'</a></li>';
-            }
-        }
-        echo '</ul>';
-    };
+	/* build menu */
+	echo $prefix . '<ul id="' . $id . '" class="' . htmlentities($type) . '"'  . ($hidden ? ' style="display:none"' : '') . ">\n";
+	foreach($list as $it) {
+		$typ = $it->getType();
+		if (!in_array($typ, $exclude)) {
+		   echo $prefix . "\t<li data-type=\"" . $typ . '">'
+				 .'<a href="'.$it->getLink().'" title="'.$it->getTitle().'" rel="nofollow">'
+				 .inlineSVG($it->getSvg())
+				 .'<span class="label">'.$it->getLabel().'</span>'
+				 ."</a></li>\n";
+		}
+	}
+	echo $prefix . "</ul>\n";
+};

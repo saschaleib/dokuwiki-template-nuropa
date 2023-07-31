@@ -39,9 +39,9 @@ body {
 }
 #skip-link a {
 	position: absolute;
-	background-color: #4073AF;
+	background-color: @ini_background;
 	font-size: 1.25em;
-	color: #fff;
+	color: @ini_link_color;
 	height: 1px;
 	overflow: hidden;
 	clip: rect(1px,1px,1px,1px);
@@ -56,79 +56,7 @@ body {
 }
 
 /* layout elements: */
-#toolbar-layout,
-#pre-header-layout,
-#header-layout,
-#post-header-layout,
-#main-layout,
-#footer-layout,
-#dokuwiki__footer {
-	width: 100%;
-	clear: both;
-}
-#toolbar-layout > div,
-#pre-header-layout > div,
-#header-layout > header,
-#post-header-layout > div,
-#main-layout > main,
-#footer-layout > footer,
-#dokuwiki__footer > div {
-	width: 100%;
-	max-width: @ini_site_width;
-	margin: 0 auto;
-	padding: 0 .25rem;
-}
 
-/* column layouts: */
-.layout-2-columns,
-.layout-3-columns,
-.layout-4-columns {
-	display: grid;
-	box-sizing: border-box;
-    column-gap: 12pt;
-	width: 100%;
-    clear: both;
-}
-.layout-2-columns { grid-template-columns: 1fr 1fr; }
-.layout-3-columns { grid-template-columns: 1fr 1fr 1fr; }
-.layout-4-columns { grid-template-columns: 1fr 1fr 1fr 1fr; }
-
-.column-1 {
-	.layout-2-columns &,
-	.layout-3-columns &,
-	.layout-4-columns & { grid-column: e("1 / 1") }
-}
-.column-2 {
-	.layout-2-columns &,
-	.layout-3-columns &,
-	.layout-4-columns & { grid-column: e("2 / 2") }
-}
-.column-3 {
-	.layout-3-columns &,
-	.layout-4-columns & { grid-column: e("3 / 3") }
-}
-.column-4 {
-	.layout-4-columns & { grid-column: e("4 / 4") }
-}
-.column-1-2 {
-	.layout-2-columns &,
-	.layout-3-columns &,
-	.layout-4-columns & { grid-column: e("1 / 2") }
-}
-.column-2-3 {
-	.layout-3-columns &,
-	.layout-4-columns & { grid-column: e("2 / 3") }
-}
-.column-1-3 {
-	.layout-3-columns &,
-	.layout-4-columns & { grid-column: e("1 / 3") }
-}
-.column-2-4 {
-	.layout-4-columns & { grid-column: e("2 / 4") }
-}
-.column-3-4 {
-	.layout-4-columns & { grid-column: e("3 / 4") }
-}
 
 /* click overlay: */
 #overlay {
@@ -139,6 +67,6 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(.5,0,0,.5);
-  z-index: 998;
+  background-color: rgba(0,0,0,.1);
+  z-index: 98;
 }
