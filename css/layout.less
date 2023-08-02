@@ -7,23 +7,25 @@
 
 /* Root styles */
 
+html, body {
+	font-family: @ini_default_fonts;
+	font-size: @ini_default_font_size;
+	margin: 0;
+	padding: 0;
+	scrollbar-gutter: auto;
+	scrollbar-width: thin;
+	/*scrollbar-color: @ini_blockquote @ini_background_site;*/
+}
 html {
-	line-height: 1.15;
 	scroll-behavior: smooth;
+}
+body {
+	background-color: @ini_background;
 }
 
 * {
 	margin: 0;
 	padding: 0;
-}
-
-body {
-	font-family: @ini_default_fonts;
-	font-size: @ini_default_font_size;
-	overflow-x: hidden;
-	overflow-y: auto;
-	background-color: @ini_background;
-	color: @ini_text;
 }
 
 /* utility classes: */
@@ -54,9 +56,6 @@ body {
 	clip: auto;
 	overflow: visible;
 }
-
-/* layout elements: */
-
 
 /* click overlay: */
 #overlay {

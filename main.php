@@ -26,63 +26,8 @@ require_once('my_template.php');
 		<div id="skip-link">
 			<a href="#main-content"><?php echo htmlentities($lang['skip_to_content']); ?></a>
 		</div>
-		<div id="toolbar-layout">
 <?php include('tpl_toolbar.php') ?>
-		</div>
-		<div id="pre-header-layout">
-			<!--div id="pre-header">
-				<div id="header-tools-layout">
-					<div id="site-logo"><?php my_sitelogo(); ?></div>
-					<div id="search-group"><?php tpl_searchform(); ?></div>
-					<div id="user-group">
-						<?php my_userinfo(str_repeat(chr(9),6)); ?>
-					</div>
-					<!-- languages menu placeholder -->
-				</div>
-			</div-->
-		</div>
-		<div id="header-layout">
-			<header>
-				<div id="header-breadcrumbs">
-                    <nav class="breadcrumbs-nav">
-                    <!-- - - - - - - - - BREADCRUMBS CONTENT - - - - - - - -->
-                    <?php
-                        tpl_flush();
-                        my_youarehere(str_repeat(chr(9),4), 'header');
-                        my_breadcrumbs(str_repeat(chr(9),4), 'header');
-                    ?>				</nav>
-                    <!-- - - - - - - - - END OF BREADCRUMBS CONTENT  - - - - - - - -->
-                    </nav>
-                </div>
-				<div id="page-headline-layout">
-					<p id="site-headline"><?php tpl_link( my_homelink(), htmlentities($conf['title']), ''); ?></p>
-					<p id="site-claim"><?php echo htmlentities($conf['tagline']); ?></p>
-				</div>
-				<div id="header-navigation">
-					<!-- - - - - - - - - SIDEBAR CONTENT - - - - - - - -->
-					<?php
-								tpl_flush();
-								//tpl_include_page($conf['sidebar'], true, true);
-					?>
-				<!-- - - - - - - - - END OF SIDEBAR CONTENT  - - - - - - - -->
-				</div>
-			</header>
-		</div>
-		<div id="post-header-layout" style="<?php my_banner_style(); ?>">
-			<div id="post-header">
-                <div id="post-header-breadcrumbs">
-                    <nav class="breadcrumbs-nav">
-                    <!-- - - - - - - - - BREADCRUMBS CONTENT - - - - - - - -->
-                    <?php
-                        tpl_flush();
-                        my_youarehere(str_repeat(chr(9),4),'banner');
-                        my_breadcrumbs(str_repeat(chr(9),4),'banner');
-                    ?>				</nav>
-                    <!-- - - - - - - - - END OF BREADCRUMBS CONTENT  - - - - - - - -->
-                    </nav>
-                </div>
-            </div>
-        </div>
+<?php include('tpl_header.php') ?>
 		<div id="main-layout">
 			<main id="main-content">
 <!-- - - - - - - - - ARTICLE CONTENT - - - - - - - -->
@@ -90,11 +35,7 @@ require_once('my_template.php');
 <!-- - - - - - - - - END OF ARTICLE  - - - - - - - -->
 			</main>
 		</div>
-		<div id="footer-layout">
-			<footer>
-				<?php tpl_includeFile('footer.html') ?>
-			</footer>
-		</div>
+<?php include('tpl_footer.php') ?>
 		<div class="no"><?php tpl_indexerWebBug() /* provide DokuWiki housekeeping, required in all templates */ ?></div>
 	</body>
 </html>
