@@ -1,7 +1,6 @@
-		<div id="toolbar-layout"><!-- begin toolbar -->
 			<div id="site-toolbar">
 				<div id="tb-siteinfo">
-<?php 
+<?php
 
     $tbStyle = tpl_getConf('toolbarstyle');
 
@@ -38,4 +37,3 @@
 					</div>
 				</div>
 			</div>
-		</div><!-- end of toolbar -->

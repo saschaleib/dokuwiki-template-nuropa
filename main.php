@@ -26,8 +26,12 @@ require_once('my_template.php');
 		<div id="skip-link">
 			<a href="#main-content"><?php echo htmlentities($lang['skip_to_content']); ?></a>
 		</div>
+		<div id="toolbar-layout"><!-- begin toolbar -->
 <?php include('tpl_toolbar.php') ?>
+		</div><!-- end of toolbar -->
+        <div id="header-layout"><!-- begin header -->
 <?php include('tpl_header.php') ?>
+        </div><!-- end header -->
 		<div id="main-layout">
 			<main id="main-content">
 <!-- - - - - - - - - ARTICLE CONTENT - - - - - - - -->

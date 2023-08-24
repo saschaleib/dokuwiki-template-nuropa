@@ -5,7 +5,11 @@
  * File name: header.css
  */
 
-body > header {
+body > #header-layout {
+    & {
+        width: 100%;
+        clear: both;
+    }
 	#searchbar-layout {
 		& {
 			width: 100%;
@@ -149,234 +153,49 @@ body > header {
 					}
 				}
 			}
-	
+
 		}
 	}
-}
-
-/*
-#languages-block {
-	& #language-menu-button {
-		margin-top: 10pt;
-		background-color: transparent;
-		border: transparent none 0;
-		font-size: 1rem;
-		cursor: pointer;
-		position: relative;
-		color: @ini_link_color;
-		fill: @ini_link_color;
-	}
-	& #language-menu-button span.icon svg {
-		width: 24px;
-		height: 24px;
-	}
-	& #language-menu-button span.icon:before {
-		content: attr(data-lang);
-		position: relative;
-		display: inline-block;
-		color: @ini_background;
-		text-align: center;
-		text-transform: lowercase;
-		letter-spacing: .3pt;
-		left: 18px;
-		font-size: 9px;
-		font-weight: bold;
-		top: -10px;
-	}
-}
-
-
-#header-layout {
-	#page-headline-layout {
-		padding: 1em 0 1rem .5rem;
-	}
-	#site-headline {
+    #menu-layout {
 		& {
-			font-size: 2em;
+			width: 100%;
+			clear: both;
+			background-color: @ini_menubar_background;
+			color: @ini_menubar_text;
 		}
 		a:link, a:visited {
-			color: @ini_header_text;
-			text-decoration: none;
+		    color: @ini_menubar_link;
+		    text-decoration: none;
 		}
-		a:hover, a:focus {
-			text-decoration: underline;
-		}
-	}
-} */
-
-/* user info group
-#user-group {
-    position: relative;
-    text-align: right;
-    padding-right: 0.25rem;
+		#menu-block {
+			& {
+				width: 100%;
+				max-width: @ini_site_width;
+				margin: 0 auto;
+		    }
+		    #menubar-breadcrumbs {
+		        & {
+		            padding: .25rem 0 .5rem 0;
+		        }
+		        ul, ol {
+		            & {
+                        list-style: none;
+                        padding: .5rem 0 0 0;
+                    }
+                    li {
+                        display: inline-block;
+                    }
+                    li:after, ol li:after {
+                        content: '\203A';
+                        margin: 0 .5rem;
+                        font-size: 1.2em;
+                        color: @ini_menubar_text;
+                    }
+                    li.current:after {
+                        content: none;
+                    }
+                }
+		    }
+        }
+    }
 }
-
-#user-button,
-#user-action-buttons a {
-    border: none;
-    background-color: transparent;
-    color: @ini_link_color;
-    text-decoration: none;
-    font-size: 1rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 2px;
-    cursor: pointer;
-    margin: 0 .5rem 0 0;
-}
-#user-action-buttons {
-    list-style: none;
-}
-#user-button svg,
-#user-action-buttons svg {
-    width: 20px; height: 20px;
-    fill: @ini_link_color;
-}
-#user-button:hover,
-#user-button:focus,
-#user-action-buttons a:hover,
-#user-action-buttons a:focus {
-    text-decoration: underline;
-}
-
-#user-action-menu {
-    position: absolute;
-    background-color: @ini_background;
-	color: @ini_toolbar_text;
-	list-style: none inside;
-    right: .25rem;
-    text-align: left;
-    font-size: 1rem;
-    border: @ini_border_color solid 1px;
-    border-radius: 2px;
-    margin: 7px 4px 0 0;
-    z-index: 101;
-    box-shadow: 2px 2px 3px 0px rgba(0,0,0,.5);
-}
-
-#user-action-menu:after,
-#user-action-menu:before {
-	bottom: 100%;
-	left: 50%;
-	border: solid transparent;
-	content: "";
-	height: 0;
-	width: 0;
-	position: absolute;
-	pointer-events: none;
-}
-#user-action-menu:after {
-	border-color: transparent;
-	border-bottom-color: @ini_background;
-	border-width: 8px;
-	margin-left: -8px;
-}
-#user-action-menu:before {
-	border-color: transparent;
-	border-bottom-color: @ini_border_color;
-	border-width: 9px;
-	margin-left: -9px;
-}
-
-#user-action-menu a:link,
-#user-action-menu a:visited {
-    color: @ini_link_color;
-    text-decoration: none;
-    display: inline-grid;
-    grid-template-columns: 20px auto;
-    column-gap: 2px;
-    width: 100%;
-    padding: 2pt 3pt;
-}
-#user-action-menu a:hover,
-#user-action-menu a:focus {
-    text-decoration: underline;
-}
-#user-action-menu a svg {
-    fill: @ini_link_color;
-}
-
-.breadcrumbs-nav {
-    padding: .5rem 0 4px 0;
-}
-
-#header-breadcrumbs ul,
-#header-breadcrumbs ol {
-    list-style: none;
-    font-size: smaller;
-    padding: .25rem .5rem;
-}
-
-#post-header-breadcrumbs ul,
-#post-header-breadcrumbs ol {
-    list-style: none;
-    font-size: smaller;
-    padding: .25rem .5rem;
-    width: max-content;
-    background-color: @ini_background;
-}
-
-#header-breadcrumbs ul a:link,
-#header-breadcrumbs ol a:link,
-#header-breadcrumbs ul a:visited,
-#header-breadcrumbs ol a:visited {
-    color: @ini_header_link_color;
-    text-decoration: none;
-}
-#post-header-breadcrumbs ul a:link,
-#post-header-breadcrumbs ol a:link,
-#post-header-breadcrumbs ul a:visited,
-#post-header-breadcrumbs ol a:visited {
-    color: @ini_link_color;
-    text-decoration: none;
-}
-#header-breadcrumbs li.current a:link,
-#header-breadcrumbs li.current a:visited {
-    color: @ini_header_current_page_link;
-}
-#header-breadcrumbs ul li,
-#header-breadcrumbs ol li,
-#post-header-breadcrumbs ul li,
-#post-header-breadcrumbs ol li {
-    display: inline-block;
-}
-#header-breadcrumbs ul li::after,
-#header-breadcrumbs ol li::after {
-    content: '\203A';
-    margin: 0 .5em;
-    font-size: 1.2em;
-    color: @ini_header_text;
-}
-#post-header-breadcrumbs ul li::after,
-#post-header-breadcrumbs ol li::after {
-    content: '\203A';
-    margin: 0 .5em;
-    font-size: 1.2em;
-    color: @ini_border_color;
-}
-#header-breadcrumbs ul li:last-child::after,
-#header-breadcrumbs ol li:last-child::after,
-#post-header-breadcrumbs ul li:last-child::after,
-#post-header-breadcrumbs ol li:last-child::after {
-    content: none;
-}
-
-#header-breadcrumbs a:hover,
-#header-breadcrumbs a:focus,
-#post-header-breadcrumbs a:hover,
-#post-header-breadcrumbs a:focus {
-    text-decoration: underline;
-}
-#header-breadcrumbs a.wikilink2,
-#post-header-breadcrumbs a.wikilink2 {
-    text-decoration: underline;
-    text-decoration-style: dashed;
-}
-
-#post-header-layout {
-    display: flex;
-    align-items: flex-end;
-    background-position: center;
-    background-repeat: repeat-x;
-}
- */

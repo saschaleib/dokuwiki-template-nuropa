@@ -11,19 +11,18 @@
 	width: 100%;
 	font-family: @ini_toolbar_fonts;
 	font-size: @ini_toolbar_font_size;
-	height: e('calc(1.4em + 1px);');
+	//height: e('calc(1.4em + 1px);');
 	clear: both;
 	border-bottom: @ini_toolbar_border solid 1px;
 }
 
 #site-toolbar {
-	width: 100%; height: 100%;
-	max-width: @ini_site_width;
+	//max-width: @ini_site_width;
 	margin: 0 auto;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	line-height: 1.1em;
+	line-height: 1.5em;
 	overflow: hidden;
 	white-space: nowrap;
 }
@@ -31,7 +30,6 @@
 #site-toolbar-group {
 	display: grid;
 	grid-template-columns: auto e('calc(1.5em + 2px)');
-	/*margin-left: 1rem; */
 }
 #tb-menu-group {
 	display: grid;
@@ -39,12 +37,13 @@
 	width: 1.5em;
 	border: @ini_toolbar_border solid 0;
 	border-width: 0 1px;
+	height: e('calc(100% - 1px)');
 }
 #tb-menu-group::before {
 	content: ' ';
 	display: inline-block;
 	width: 4px;
-	height: 100%;
+	height: e('calc(100% - 2px);');
 	background: linear-gradient(90deg, transparent 0, @ini_toolbar_background 80%);
 	position: relative;
 	left: -5px;
@@ -106,8 +105,9 @@
 				display: flex;
 			}
 			a {
-				grid-template-columns: 1em auto;
+				grid-template-columns: 1.5em auto;
 				align-items: center;
+				padding: .25em;
 			}
 			a:link,
 			a:visited {
@@ -121,7 +121,7 @@
 				text-decoration: underline;
 			}
 		}
-	}		
+	}
 }
 
 /* tools menu button */
@@ -140,8 +140,9 @@
 	}
 	.icon svg {
 		fill: @ini_toolbar_text;
-		width: 1em; height: 1em;
+		width: 1.5em; height: 1.5em;
 	}
+	&:hover,
 	&:focus {
 		& {
 			background-color: @ini_toolbar_text;
@@ -163,7 +164,7 @@
 		li {
 			a {
 				display: inline-grid;
-				grid-template-columns: 1em auto;
+				grid-template-columns: 1.5em auto;
 				gap: .4em;
 				height: 100%; width: 100%;
 				box-sizing: border-box;
@@ -181,7 +182,7 @@
 				outline: none;
 			}
 			svg {
-				width: 1em; height: auto;
+				width: 1.5em; height: auto;
 				fill: @ini_toolbar_text;
 			}
 			a:hover svg,
@@ -212,7 +213,7 @@
 			}
 		}
 	}
-	
+
 	#user-action-menu {
 		z-index: 101;
 	}
@@ -243,7 +244,7 @@
 		margin-left: -10em;
 		z-index: 102;
 	}
-	
+
 	/* triangles: */
 	#user-action-menu::after,
 	#user-action-menu::before,

@@ -13,62 +13,83 @@
 
     a:link { color: @ini_link_color_dark; }
 
-    /* site toolbar: */
-    #toolbar-layout, #toolbar-menus {
+    /* toolbar: */
+    #toolbar-layout {
         background-color: @ini_toolbar_background_dark;
         color: @ini_toolbar_text_dark;
+    	border-bottom-color: @ini_toolbar_border_dark;
     }
-    #toolbar-layout { border-bottom-color: @ini_toolbar_border_dark; }
-    #pagetools-menu li a:link, #pagetools-menu li a:visited,
-    #pagetools-popup li a:link, #pagetools-popup li a:visited { color: @ini_toolbar_text_dark; }
-    #pagetools-menu li .icon svg, #pagetools-popup li .icon svg { fill: @ini_toolbar_text_dark; }
-    #pagetools-btn .icon svg { fill: @ini_toolbar_text_dark; }
-    #pagetools-menu li {border-color: @ini_toolbar_border_dark; }
-    #pagetools-btn { border-color: @ini_toolbar_border_dark; }
-
-    #user-button, #user-action-buttons a { color: @ini_link_color_dark; }
-    #user-button svg, #user-action-buttons svg { fill: @ini_link_color_dark; }
-
-    #header-layout {background-color: @ini_header_background_dark; color: @ini_header_text_dark; }
-    #pagetools-popup { background: @ini_toolbar_background_dark; }
-    #pagetools-popup li { border-color: @ini_toolbar_border_dark; }
-    #pagetools-popup::before { border-bottom-color: @ini_toolbar_border_dark; }
-    #pagetools-popup::after { border-bottom-color: @ini_toolbar_background_dark; }
-
-    /* user menu */
-    #user-action-menu {
-        background-color: @ini_background_dark;
-        color: @ini_link_color_dark;
-        border-color: @ini_border_color_dark;
+    #tb-menu-group {
+    	border-color: @ini_toolbar_border_dark;
     }
-    #user-action-menu a:link, #user-action-menu a:visited {
-        color: @ini_link_color_dark;
+    #tb-menu-group::before {
+        background: linear-gradient(90deg, transparent 0, @ini_toolbar_background_dark 80%);
     }
-    #user-action-menu::before { border-bottom-color: @ini_border_color_dark; }
-    #user-action-menu::after { border-bottom-color: @ini_background_dark; }
-
-    #user-action-menu a svg { fill: @ini_link_color_dark; }
-
-    #header-breadcrumbs ul li::after,
-    #header-breadcrumbs ol li::after {
-        color: @ini_header_text_dark;
+    #tb-siteinfo #user-button {
+        border-color: @ini_toolbar_border_dark;
+        color: @ini_toolbar_text_dark;
+    }
+	#tb-siteinfo #user-button svg {
+        fill: @ini_toolbar_text_dark;
+    }
+	#tb-siteinfo #user-button:hover,
+	#tb-siteinfo #user-button:focus {
+        background-color: @ini_toolbar_text_dark;
+        color: @ini_toolbar_background_dark;
+    }
+	#tb-siteinfo #user-button:hover svg,
+	#tb-siteinfo #user-button:focus svg {
+        fill: @ini_toolbar_background_dark;
+    }
+	#tb-siteinfo #user-button:after {
+		background: linear-gradient(90deg, @ini_toolbar_background_dark 20%, transparent 100%);
+	}
+	#site-toolbar #user-action-buttons li a:link,
+	#site-toolbar #user-action-buttons li a:visited {
+		color: @ini_toolbar_text_dark;
+    }
+    #site-toolbar #pagetools-btn .icon svg {
+		fill: @ini_toolbar_text_dark;
+	}
+	#site-toolbar #pagetools-btn:hover,
+	#site-toolbar #pagetools-btn:focus {
+        background-color: @ini_toolbar_text_dark;
+        color: @ini_toolbar_background_dark;
+    }
+	#site-toolbar #pagetools-btn:hover svg,
+	#site-toolbar #pagetools-btn:focus svg {
+        fill: @ini_toolbar_background_dark;
     }
 
-
-    /* post header
-    #post-header-breadcrumbs ul,
-    #post-header-breadcrumbs ol {
-        background-color: @ini_background_dark;
+	#site-toolbar #pagetools-menu li a:link,
+	#site-toolbar #pagetools-popup li a:link,
+	#site-toolbar #user-action-menu li a:link,
+	#site-toolbar #pagetools-menu li a:visited,
+	#site-toolbar #pagetools-popup li a:visited,
+	#site-toolbar #user-action-menu li a:visited {
+        color: @ini_toolbar_text_dark;
     }
-    #post-header-breadcrumbs ul a:link,
-    #post-header-breadcrumbs ol a:link,
-    #post-header-breadcrumbs ul a:visited,
-    #post-header-breadcrumbs ol a:visited {
-        color: @ini_link_color_dark;
+	#site-toolbar #pagetools-menu li a:hover,
+	#site-toolbar #pagetools-popup li a:hover,
+	#site-toolbar #user-action-menu li a:hover,
+	#site-toolbar #pagetools-menu li a:focus,
+	#site-toolbar #pagetools-popup li a:focus,
+	#site-toolbar #user-action-menu li a:focus {
+        background-color: @ini_toolbar_text_dark;
+        color: @ini_toolbar_background_dark;
     }
-    #post-header-breadcrumbs ul li::after,
-    #post-header-breadcrumbs ol li::after {
-        color: @ini_border_color_dark;
-    } */
+	#site-toolbar #pagetools-menu li svg,
+	#site-toolbar #pagetools-popup li svg,
+	#site-toolbar #user-action-menu li svg {
+		fill: @ini_toolbar_text_dark;
+	}
+	#site-toolbar #pagetools-menu li a:hover svg,
+	#site-toolbar #pagetools-popup li a:hover svg,
+	#site-toolbar #user-action-menu li a:hover svg,
+	#site-toolbar #pagetools-menu li a:focus svg,
+	#site-toolbar #pagetools-popup li a:focus svg,
+	#site-toolbar #user-action-menu li a:focus svg {
+        fill: @ini_toolbar_background_dark;
+    }
 
 }
