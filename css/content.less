@@ -1,0 +1,95 @@
+main {
+	h1, h2, h3, h4, h5, h6 {
+		font-family: @ini_headline_fonts;
+		color: @ini_headline_color;
+		margin: .67em 0;
+	}
+	h1, h2, h3, h4 {
+		font-weight: 500;
+	}
+	h1 {
+		font-size: 2rem;
+		line-height: 2.5rem;
+	}
+	h2 {
+		font-size: 1.75rem;
+		line-height: 2rem;
+	}
+	h3 {
+		font-size: 1.5rem;
+		line-height: 1.75rem;
+	}
+	h4 {
+		font-size: 1.25rem;
+		line-height: 1.75rem;
+	}
+	h5 {
+		font-size: 1rem;
+		line-height: 1.5rem;
+	}
+	h6 {
+		font-size: 1rem;
+		line-height: 1.5rem;
+	}
+
+	section {
+		padding: 0 6pt;
+	}
+
+	aside.float-right {
+		float: right;
+		width: 33%;
+		margin: 3pt 0 6pt 10pt;
+	}
+	aside.float-left {
+		float: left;
+		width: 33%;
+		margin: 3pt 10 6pt 0;
+	}
+
+	p,
+	li,
+	dl {
+		line-height: 1.5em;
+		margin-bottom: .5em;
+	}
+
+	ul,
+	ol {
+		padding-left: 1.75em;
+	}
+	dl dt {
+		color: @ini_headline_color;
+		font-weight: bold;
+	}
+	dl dd {
+		margin-left: 1.75em;
+	}
+
+	dl.compact {
+		display: table-row;
+	}
+
+	dl.compact dt {
+		display: table-cell;
+		width: 20%;
+		padding-right: 1.5%;
+	}
+	dl.compact dd {
+		display: table-cell;
+		vertical-align: bottom;
+		padding-bottom: .5em;
+	}
+	a:link,
+	a:visited {
+		color: @ini_link_color;
+		text-decoration: underline;
+	}
+	a:hover {
+		color: @ini_link_color;
+	}
+	a:focus {
+		outline: 3px solid @ini_focus_outline;
+		text-decoration: none;
+	}
+}

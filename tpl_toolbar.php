@@ -28,8 +28,9 @@
  ?>
 					<div id="tb-menu-group">
 						<button id="pagetools-btn" aria-haspopup="menu" aria-controls="pagetools-popup" title="<?php echo htmlentities($lang['tools']); ?>">
-							<span class="icon"><svg viewBox="0 0 24 24"><path d="M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M13,7H11V11H7V13H11V17H13V13H17V11H13V7Z" /></svg></span>
-							<span class="label"><?php echo htmlentities($lang['tools']); ?></span>
+							<svg class="overflow" viewBox="0 0 24 24"><path d="M16.59,5.59L18,7L12,13L6,7L7.41,5.59L12,10.17L16.59,5.59M16.59,11.59L18,13L12,19L6,13L7.41,11.59L12,16.17L16.59,11.59Z" /></svg>
+							<svg class="menu" viewBox="0 0 24 24"><path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" /></svg>
+							<span class="label sr-only"><?php echo htmlentities($lang['tools']); ?></span>
 						</button>
 <?php
 	pActionlist(str_repeat(chr(9),6), 'pagetools-popup', $list, $exPop, '', true);
