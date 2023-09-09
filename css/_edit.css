@@ -1,0 +1,177 @@
+@charset "UTF-8";
+
+/* Stylesheet for DokuWiki Nuropa template
+ * by Sascha Leib
+ * File name: content.css
+ */
+
+main {
+	.secedit {
+		& {
+			float: right;
+			margin-top: -22pt;
+			line-height: 0;
+			z-index: 5;
+		}
+		div.no {
+			display: inline;
+			margin: 0;
+			padding: 0;
+		}
+		button {
+			border: @ini_border_color solid 1pt;
+			background-color: transparent;
+			color: transparent;
+			width: 1.75rem; height: 1.75rem;
+			border-radius: 50%;
+			font-size: 0;
+			cursor: pointer;
+		}
+		button::before {
+			content: ' ';
+			display: inline-block;
+			width: .9rem; height: .9rem;
+			background: transparent url('/latest/lib/tpl/nuropa/images/icon/edit.svg') no-repeat center;
+			background-size: 100%;
+		}
+	}
+}
+
+body.mode_edit, body.mode_preview {
+	#main-layout > main {
+		& {
+			max-width: 100%;
+		}
+		& > p:first-of-type {
+			font-size: small;
+		}
+		.editBox {
+			& {
+				background-color: @ini_alt_color;
+				border-radius: .25rem;
+				padding: .125rem;
+			}
+			.toolbar {
+				z-index: 9;
+				position: sticky;
+				top: 0;
+				background-color: @ini_alt_color;
+			}
+			#tool__bar {
+				& {
+					margin-bottom: .125rem;
+				}
+				button.toolbutton {
+					& {
+						width: 24px; height: 24px;
+						border: transparent solid 1px;
+						border-radius: .125rem;
+						background-color: @ini_background;
+						padding: .125rem;
+						margin: .125rem 0 .125rem .25rem;
+						cursor: pointer;
+					}
+					&:hover {
+						border-color: @ini_focus_outline;
+					}
+					&:nth-child(6),
+					&:nth-child(10),
+					&:nth-child(12),
+					&:nth-child(14),
+					&:nth-child(16) {
+						margin-left: .5rem;
+					}
+				}
+			}
+			#draft__status {
+				font-size: small;
+				margin: .125rem 0 .125rem .5rem;
+			}
+			#dw__editform {
+				textarea {
+					width: 100%;
+					box-sizing: border-box;
+					min-width: 100%;
+					max-width: 100%;
+					font-family: @ini_mono_fonts;
+					font-size: @ini_mono_font_size;
+				}
+				div.license {
+					font-size: small;
+					margin: 1.5em .125em 1em .5em;
+				}
+			}
+			#wiki__editbar {
+				& {
+					margin-top: .25rem;
+				}
+				#size__ctl {
+					& {
+						float: right;
+					}
+					img {
+						width: 24px;
+						height: 24px;
+						margin-left: .25rem;
+					}
+				}
+				.editButtons {
+					& {
+						display: flex;
+						justify-content: center;
+						padding: .5rem 0 1rem 0;
+					}
+					button {
+						min-height: 24px;
+						margin: 0 .5rem;
+						border: #CCC solid 1.5pt;
+						padding: .25rem .5rem;
+					}
+					button:before {
+						content: ' ';
+						display: inline-block;
+						position: relative;
+						top: .1rem;
+						width: 1rem; height: 1rem;
+						background: none center bottom no-repeat;
+						background-size: 1rem;
+						margin-right: 4px;
+					}
+					button#edbtn__save {
+						background-color: #ccddff;
+					}
+					button#edbtn__preview {
+						background-color: #ccffdd;
+					}
+					button[name="do[cancel]"] {
+						background-color: #ffccdd;
+					}
+				}
+			}
+		}
+	}
+	h1#preview {
+		& {
+			max-width: @ini_site_width;
+			font-size: 1rem;
+			line-height: 1rem;
+			margin: .25rem auto;
+		}
+		& + div.level1 {
+			max-width: @ini_site_width;
+			margin: 0 auto;
+		}
+	}
+	div.preview {
+		max-width: @ini_site_width;
+		margin: 0 auto;
+		border: @ini_border_color solid 1px;
+		padding: .5rem .25rem;
+		-webkit-box-shadow: .125rem .125rem .5rem 0 rgba(0,0,0,.2);
+		-moz-box-shadow: .125rem .125rem .5rem 0 rgba(0,0,0,.2);
+		box-shadow: .125rem .125rem .5rem 0 rgba(0,0,0,.2);
+		border-top: @ini_menubar_background solid 1rem;
+		border-bottom: @ini_footer_background solid 1rem;
+		overflow: hidden;
+	}
+}

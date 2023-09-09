@@ -1,11 +1,18 @@
+@charset "UTF-8";
+
+/* Stylesheet for DokuWiki Nuropa template
+ * by Sascha Leib
+ * File name: content.css
+ */
+
 main {
 	h1, h2, h3, h4, h5, h6 {
 		font-family: @ini_headline_fonts;
 		color: @ini_headline_color;
-		margin: .67em 0;
+		margin: .5em 0;
 	}
 	h1, h2, h3, h4 {
-		font-weight: 500;
+		font-weight: 600;
 	}
 	h1 {
 		font-size: 2rem;
@@ -47,11 +54,20 @@ main {
 		margin: 3pt 10 6pt 0;
 	}
 
-	p,
-	li,
-	dl {
+	p, li, dl {
+		font-size: 1rem;
 		line-height: 1.5em;
-		margin-bottom: .5em;
+	}
+
+	p {
+		margin: .75rem 0;
+		word-wrap: break-word;
+		overflow-wrap: break-word;
+		hyphens: auto;
+		-ms-hyphens: auto;
+		-moz-hyphens: auto;
+		-webkit-hyphens: auto;
+		hyphenate-limit-chars: 6 2 3;
 	}
 
 	ul,
@@ -92,4 +108,52 @@ main {
 		outline: 3px solid @ini_focus_outline;
 		text-decoration: none;
 	}
+
+	blockquote {
+		font-family: @ini_alternate_fonts;
+		font-size: 1rem;
+		line-height: 1.5rem;
+		border: @ini_border_color solid 0;
+		border-width: 0 0 0 .125rem;
+		border-radius: .25rem;
+		padding: .25rem 0 .25rem 1.25rem;
+		margin: .5rem 0 .5rem 0;
+		hanging-punctuation: first allow-end;
+		text-indent: -1rem;
+	}
+	blockquote::before {
+		content: open-quote;
+		color: @ini_alt_color;
+		font-size: 1.5rem;
+		display: inline-block;
+		width: .75rem;
+		text-align: center;
+		vertical-align: sub;
+		text-indent: 0;
+	}
+	blockquote::after {
+		content: no-close-quote;
+		visibility: hidden;
+	}
+
+	/* inline styles */
+	u {
+		-webkit-text-decoration-color: #F30;
+		-webkit-text-decoration-line: underline;
+		-webkit-text-decoration-style: wavy;
+		-webkit-text-decoration-thickness: .7pt;
+		text-decoration: underline #F30 wavy .7pt;
+	}
+	s {
+		-webkit-text-decoration-color: rgba(255,0,0,0.5);
+		-webkit-text-decoration-line: line-through;
+		-webkit-text-decoration-style: solid;
+		-webkit-text-decoration-thickness: .075em;
+		text-decoration: line-through rgba(255,0,0,0.5) solid .075em;
+	}
+	code, tt {
+		font-family: @ini_mono_fonts;
+		font-size: @ini_mono_font_size;
+	}
+
 }
