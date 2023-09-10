@@ -1,4 +1,8 @@
-			<div id="site-toolbar">
+<?php // must be run from within DokuWiki
+
+	if (!defined('DOKU_INC')) die();
+
+?>			<div id="site-toolbar">
 				<div id="tb-siteinfo">
 <?php
 

@@ -26,20 +26,35 @@ require_once('my_template.php');
 		<div id="skip-link">
 			<a href="#main-content"><?php echo htmlentities($lang['skip_to_content']); ?></a>
 		</div>
-		<div id="toolbar-layout"><!-- begin toolbar -->
+		<div id="toolbar-layout">
+			<!-- BEGIN TOOLBAR -->
 <?php include('tpl_toolbar.php') ?>
-		</div><!-- end of toolbar -->
-        <div id="header-layout"><!-- begin header -->
-<?php include('tpl_header.php') ?>
-        </div><!-- end header -->
-		<div id="main-layout">
-			<main id="main-content"<?php echo ( my_headerstyle() == 'pagename' ? ' class="nopageheadline"' : '' ); ?>>
-<!-- - - - - - - - - ARTICLE CONTENT - - - - - - - -->
-<?php tpl_content(false) ?>
-<!-- - - - - - - - - END OF ARTICLE  - - - - - - - -->
-			</main>
+			<!-- END OF TOOLBAR -->
 		</div>
+        <div id="header-layout">
+			<!-- BEGIN HEADER -->
+<?php include('tpl_header.php') ?>
+			<!-- END HEADER -->
+		</div>
+		<div id="main-layout">
+			<div id="main-sidebar-layout">
+				<!-- - - - - - - - - BEGIN SIDEBAR - - - - - - - -->
+<?php include('tpl_sidebar.php') ?>
+				<!-- - - - - - - - - END OF SIDEBAR  - - - - - - - -->
+				<main id="main-content"<?php echo ( my_headerstyle() == 'pagename' ? ' class="nopageheadline"' : '' ); ?>>
+<!-- - - - - - - - - ARTICLE CONTENT - - - - - - - -->
+
+<?php tpl_content(false) ?>
+
+<!-- - - - - - - - - END OF ARTICLE  - - - - - - - -->
+				</main>
+			</div>
+		</div>
+		<div id="footer-layout">
+			<!-- BEGIN FOOTER -->
 <?php include('tpl_footer.php') ?>
-		<div class="no"><?php tpl_indexerWebBug() /* provide DokuWiki housekeeping, required in all templates */ ?></div>
+			<!-- END OF FOOTER -->
+			<div class="no"><?php tpl_indexerWebBug() /* provide DokuWiki housekeeping, required in all templates */ ?></div>
+		</div>
 	</body>
 </html>
