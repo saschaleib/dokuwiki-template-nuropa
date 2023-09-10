@@ -29,7 +29,7 @@
                         <!-- - - - - - - - - END OF BREADCRUMBS CONTENT  - - - - - - - -->
                     </nav>
                     <div id="page-headline-layout">
-    <?php					tpl_includeFile('title.html'); ?>
+    <?php				my_pagetitle(str_repeat(chr(9),5)); ?>
                     </div>
                     <div id="horizontal-menu">
                         <!-- - - - - - - - - MENU INCLUDE - - - - - - - -->
@@ -47,9 +47,9 @@
 						<nav class="breadcrumbs-nav">
 						<!-- - - - - - - - - BREADCRUMBS CONTENT - - - - - - - -->
 						<?php
-							//tpl_flush();
-							//my_youarehere(str_repeat(chr(9),4),'banner');
-							//my_breadcrumbs(str_repeat(chr(9),4),'banner');
+							tpl_flush();
+							my_youarehere(str_repeat(chr(9),4),'banner');
+							my_breadcrumbs(str_repeat(chr(9),4),'banner');
 						?>				</nav>
 						<!-- - - - - - - - - END OF BREADCRUMBS CONTENT  - - - - - - - -->
 						</nav>

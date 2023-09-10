@@ -191,6 +191,54 @@ function my_breadcrumbs($prefix, $position) {
 }
 
 /**
+ * Insert the main headline for the page
+ *
+ * provides additional configuration options for this element
+ *
+ * @author Sascha Leib <sascha@leib.be>
+ *
+ * @param string $prefix inserted before each line
+ *
+ * @return void
+ */
+function my_pagetitle($prefix) {
+    global $ID;
+    global $conf;
+	
+	/* what kind of headline should be included? */
+	$type = tpl_getConf('pageheadline');
+	if ($type == 'siteonhp') {
+		if ($ID == $conf['start']) {
+			$type = 'sitename';
+		} else {
+			$type = 'pagename';
+		}
+	}
+
+	/* build the headline section */
+	echo $prefix . '<div class="type-' . $type . "\">\n";
+	switch ($type) {
+		case 'file':
+			tpl_includeFile('title.html');
+			break;
+		case 'sitename':
+			echo $prefix . "\t<p class=\"title\">" . $conf['title'] . "</p>\n";
+			echo $prefix . "\t<p class=\"tagline\">" . $conf['tagline'] . "</p>\n";
+			break;
+		case 'pagename':
+			echo $prefix . "\t<h1>" . tpl_pagetitle($ID, true) . "</h1>\n";
+			break;
+		default:
+			echo "<pre>UNKNOWN:" . tpl_getConf('pageheadline') . "</pre>";
+			break;
+	}
+	echo $prefix . "</div>\n";
+
+}
+
+
+
+/**
  * Print the breadcrumbs trace
  *
  * Cleanup of the original code to create neater and more accessible HTML

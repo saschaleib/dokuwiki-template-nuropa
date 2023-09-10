@@ -13,6 +13,9 @@ $meta['breadcrumbpos'] = array('multichoice',
 $meta['youareherepos'] = array('multichoice',
 						'_choices' => array ('header', 'banner'));
 
+$meta['pageheadline'] = array('multichoice',
+						'_choices' => array ('sitename', 'pagename', 'siteonhp','file'));
+
 $meta['navtrail'] = array('multichoice',
 						'_choices' => array ('none', 'text', 'link'));
 

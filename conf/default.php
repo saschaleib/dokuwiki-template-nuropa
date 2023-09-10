@@ -9,6 +9,9 @@
 $conf['breadcrumbpos']  = 'menu';
 $conf['youareherepos']  = 'menu';
 
+/* what to show in place of a page headline */
+$conf['pageheadline']  = 'sitename';
+
 /* how to show the last element in the nav trail ('you are here')? */
 $conf['navtrail']		= 'link';
 

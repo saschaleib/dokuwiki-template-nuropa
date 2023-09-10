@@ -17,9 +17,16 @@ $lang['breadcrumbpos'] = 'Where should the page history trail be displayed';
 	$lang['breadcrumbpos_o_header']	= 'In the header';
 	$lang['breadcrumbpos_o_banner']	= 'Below the header';
 
-$lang['youareherepos'] = 'Where should the “You are here” bar be displayed';
-	$lang['youareherepos_o_header']	= 'In the header';
-	$lang['youareherepos_o_banner']	= 'Below the header';
+$lang['pageheadline'] = 'What title shoud be displayed in the page header';
+	$lang['pageheadline_o_sitename']	= 'Site name';
+	$lang['pageheadline_o_pagename']	= 'Page name';
+	$lang['pageheadline_o_siteonhp']	= 'Site on HP';
+	$lang['pageheadline_o_file']	= 'Static file';
+
+$lang['navtrail']			= 'Show current page in the breadcrumbs';
+	$lang['navtrail_o_none']	= 'Don’t show';
+	$lang['navtrail_o_text']	= 'Show as text';
+	$lang['navtrail_o_link']	= 'Show as link';
 
 $lang['navtrail']			= 'Show current page in the breadcrumbs';
 	$lang['navtrail_o_none']	= 'Don’t show';
