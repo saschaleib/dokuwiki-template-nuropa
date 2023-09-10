@@ -19,14 +19,12 @@
 			</div>
 			<div id="menu-layout">
 			    <div id="menu-block">
-                    <nav id="menubar-breadcrumbs">
-                        <!-- - - - - - - - - BREADCRUMBS CONTENT - - - - - - - -->
-                        <?php
+                    <nav id="menubar-breadcrumbs"><!-- - - - - - - - - MENUBAR BREADCRUMBS - - - - - - - -->
+<?php
                             tpl_flush();
-                            my_youarehere(str_repeat(chr(9),5), 'menu');
-                            my_breadcrumbs(str_repeat(chr(9),5), 'menu');
-                        ?>				</nav>
-                        <!-- - - - - - - - - END OF BREADCRUMBS CONTENT  - - - - - - - -->
+                            my_youarehere(str_repeat(chr(9),6), 'header');
+                            my_breadcrumbs(str_repeat(chr(9),6), 'header');
+?>					</nav><!-- - - - - - - - - END OF MENUBAR BREADCRUMBS  - - - - - - - -->
                     </nav>
                     <div id="page-headline-layout">
     <?php				my_pagetitle(str_repeat(chr(9),5)); ?>
@@ -37,6 +35,7 @@
                             tpl_flush();
                             tpl_include_page('menu', true, true);
                         ?>
+
                     <!-- - - - - - - - - END OF MENU  - - - - - - - -->
                     </div>
                 </div>
@@ -44,15 +43,12 @@
 			<div id="post-header-layout" style="<?php my_banner_style(); ?>">
 				<div id="post-header">
 					<div id="post-header-breadcrumbs">
-						<nav class="breadcrumbs-nav">
-						<!-- - - - - - - - - BREADCRUMBS CONTENT - - - - - - - -->
+						<nav class="breadcrumbs-nav"><!-- - - - - - - - - BREADCRUMBS CONTENT - - - - - - - -->
 						<?php
 							tpl_flush();
 							my_youarehere(str_repeat(chr(9),4),'banner');
 							my_breadcrumbs(str_repeat(chr(9),4),'banner');
-						?>				</nav>
-						<!-- - - - - - - - - END OF BREADCRUMBS CONTENT  - - - - - - - -->
-						</nav>
+						?>				</nav><!-- - - - - - - - - END OF BREADCRUMBS CONTENT  - - - - - - - -->
 					</div>
 				</div>
 			</div>

@@ -1,4 +1,4 @@
-@charset "UTF-8";
+@charset "UTF-8";		
 
 /* Stylesheet for DokuWiki Nuropa template
  * by Sascha Leib
@@ -167,14 +167,15 @@ body > #header-layout {
 		            & {
                         list-style: none;
                         padding: .5rem 0 0 0;
+						font-size: .75rem;
+						font-weight: 600;
                     }
                     li {
                         display: inline-block;
                     }
                     li:after, ol li:after {
                         content: '\203A';
-                        margin: 0 .5rem;
-                        font-size: 1.2em;
+                        margin: 0 .5em;
                         color: @ini_menubar_text;
                     }
                     li.current:after {
@@ -184,7 +185,7 @@ body > #header-layout {
 		    }
 			#page-headline-layout {
 				& > div {
-					padding: .5rem 0 1rem 0;
+					padding: 1rem 0 1rem 0;
 				}
 				h1, p.title {
 					font-family: @ini_headline_fonts;
@@ -203,4 +204,57 @@ body > #header-layout {
 			}
         }
     }
+	#post-header-layout {
+		& {
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-end;
+		}
+		#post-header {
+			& {
+				width: 100%;
+				max-width: @ini_site_width;
+				margin: 0 auto;
+			}
+			.breadcrumbs-nav {
+				display: grid;
+				grid-template-rows: auto auto;
+				margin-top: .5rem;
+			}
+			#post-header-breadcrumbs {
+				& {
+				}
+		        ul, ol {
+		            & {
+						width: max-content;
+                        list-style: none;
+                        padding: .25em .5em;
+						font-size: .75rem;
+						font-weight: 300;
+						background-color: @ini_background;
+                    }
+                    li {
+                        display: inline-block;
+                    }
+                    li:after, ol li:after {
+                        content: '\203A';
+                        margin: 0 .5em;
+                        color: @ini_text;
+                    }
+                    li.current:after {
+                        content: none;
+                    }
+					a {
+						font-size: .86rem;
+						line-height: 1.25em;
+					}
+                }
+			
+			}
+		}
+	}
+}
+
+body #main-layout main.nopageheadline h1:first-of-type {
+	display: none;
 }

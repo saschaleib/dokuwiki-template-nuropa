@@ -33,7 +33,7 @@ require_once('my_template.php');
 <?php include('tpl_header.php') ?>
         </div><!-- end header -->
 		<div id="main-layout">
-			<main id="main-content">
+			<main id="main-content"<?php echo ( my_headerstyle() == 'pagename' ? ' class="nopageheadline"' : '' ); ?>>
 <!-- - - - - - - - - ARTICLE CONTENT - - - - - - - -->
 <?php tpl_content(false) ?>
 <!-- - - - - - - - - END OF ARTICLE  - - - - - - - -->

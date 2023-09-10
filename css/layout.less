@@ -16,13 +16,15 @@ html, body {
 	scrollbar-width: thin;
 	color: @ini_text;
 	background-color: @ini_background;
-	/*scrollbar-color: @ini_blockquote @ini_background_site;*/
+	scrollbar-color: @ini_alt_color @ini_background;
+	overflow: hidden scroll;
 }
 html {
 	scroll-behavior: smooth;
 }
 body {
 	background-color: @ini_background;
+	max-width: 100%;;
 }
 
 * {

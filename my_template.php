@@ -114,15 +114,15 @@ function my_youarehere($prefix, $position) {
 
 	$hl = trim(tpl_getConf('homelink'));
 
-	echo $prefix . "\t<p class=\"sr-only\">" . $lang['youarehere'] . "</p>\n";
-	echo $prefix . "\t<ol>\n";
+	echo $prefix . "<p class=\"sr-only\">" . $lang['youarehere'] . "</p>\n";
+	echo $prefix . "<ol>";
 
     // always print the startpage
 	if ( $hl !== '' ) {
-		echo $prefix . "\t\t<li class=\"home\">" . tpl_link( $hl, htmlentities(tpl_getLang('homepage')), ' title="' . htmlentities(tpl_getLang('homepage')) . '"', true) . "</li>\n";
-		echo $prefix . "\t\t<li>" . tpl_pagelink(':'.$conf['start'], null, true) . "</li>\n";
+		echo '<li class="home">' . tpl_link( $hl, htmlentities(tpl_getLang('homepage')), ' title="' . htmlentities(tpl_getLang('homepage')) . '"', true) . '</li>';
+		echo '<li>' . tpl_pagelink(':'.$conf['start'], null, true) . '</li>';
 	} else {
-		echo $prefix . "\t\t<li class=\"home\">" . tpl_pagelink(':'.$conf['start'], null, true) . "</li>\n";
+		echo '<li class="home">' . tpl_pagelink(':'.$conf['start'], null, true) . '</li>';
 	}
 
     // print intermediate namespace links
@@ -133,7 +133,7 @@ function my_youarehere($prefix, $position) {
 
 		if ($i == $count-2 && $isdir)  break; // Skip last if it is an index page
 
-		echo $prefix . "\t\t<li>" . tpl_pagelink($page, null, true) . "</li>\n";
+		echo '<li>' . tpl_pagelink($page, null, true) . '</li>';
     }
 
     // chould the current page be included in the listing?
@@ -141,16 +141,16 @@ function my_youarehere($prefix, $position) {
 
 	if ($trail !== 'none' && $trail !== '') {
 
-		echo $prefix . "\t\t<li class=\"current\">";
+		echo '<li class="current">';
 		if ($trail == 'text') {
 			echo tpl_pagetitle($page . $parts[$count-1], true);
 		} else if ($trail == 'link') {
 			echo tpl_pagelink($page . $parts[$count-1], null, true);
 		}
-		echo "</li>\n";
+		echo "</li>";
 	}
 
-	echo $prefix . "\t</ol>\n";
+	echo "</ol>\n";
 }
 
 /**
@@ -179,15 +179,15 @@ function my_breadcrumbs($prefix, $position) {
 
 	/* begin listing */
 	echo $prefix . '<p class="sr-only">' . $lang['breadcrumb'] . "</p>\n";
-	echo $prefix . "<ol reversed>\n";
+	echo $prefix . "<ol reversed>";
 
     $last = count($crumbs);
     $i    = 0;
     foreach($crumbs as $id => $name) {
         $i++;
-		echo $prefix . "\t<li" . ($i == $last ? ' class="current"' : '') . '><bdi>' . tpl_link(wl($id), hsc($name), '', true) .  "</bdi></li>\n";
+		echo '<li' . ($i == $last ? ' class="current"' : '') . '><bdi>' . tpl_link(wl($id), hsc($name), '', true) .  '</bdi></li>';
     }
-	echo $prefix . "</ol>\n";
+	echo "</ol>\n";
 }
 
 /**
@@ -205,15 +205,8 @@ function my_pagetitle($prefix) {
     global $ID;
     global $conf;
 	
-	/* what kind of headline should be included? */
-	$type = tpl_getConf('pageheadline');
-	if ($type == 'siteonhp') {
-		if ($ID == $conf['start']) {
-			$type = 'sitename';
-		} else {
-			$type = 'pagename';
-		}
-	}
+	/* get the header style */
+	$type = my_headerstyle();
 
 	/* build the headline section */
 	echo $prefix . '<div class="type-' . $type . "\">\n";
@@ -235,8 +228,6 @@ function my_pagetitle($prefix) {
 	echo $prefix . "</div>\n";
 
 }
-
-
 
 /**
  * Print the breadcrumbs trace
@@ -281,6 +272,10 @@ function my_banner_style() {
             break;
         }
     }
+	/* if not found, use the template banner: */
+	if (!$background) {
+		$background = tpl_basedir() . 'images/banner.jpg';
+	}
 
     /* find the element height */
     $height = tpl_getConf('bannersize', 'inherit');
@@ -308,3 +303,20 @@ function pActionlist($prefix, $id, $list, $exclude, $type = '', $hidden = false)
 	}
 	echo $prefix . "</ul>\n";
 };
+
+/* helper function to determine the headline style: */
+function my_headerstyle() {
+	global $ID;
+    global $conf;
+	
+	/* what kind of headline should be included? */
+	$type = tpl_getConf('pageheadline');
+	if ($type == 'siteonhp') {
+		if ($ID == $conf['start']) {
+			$type = 'sitename';
+		} else {
+			$type = 'pagename';
+		}
+	}
+	return $type;
+}
