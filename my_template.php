@@ -286,6 +286,28 @@ function my_banner_style() {
     }
 }
 
+/**
+ * Modification of the original tpl_license in the DokuWiki code
+ *
+ * @author Andreas Gohr <andi@splitbrain.org>
+ * @author Sascha Leib <ad@hominem.info>
+ *
+ * @param string $target open link in new tab?
+ */
+function my_license_button($target) {
+    global $license;
+    global $conf;
+    global $lang;
+    if(!$conf['license']) return '';
+    if(!is_array($license[$conf['license']])) return '';
+    $lic = $license[$conf['license']];
+    $trg = ($target) ? ' target="'.$target.'"' : '';
+
+    $src = 'lib/tpl/nuropa/images/license/'.$conf['license'].'.svg';
+
+    echo "\t<a href=\"".$lic['url'].'" rel="license"'.$trg.'><img src="'.DOKU_BASE.$src.'" alt="'.$lic['name'].'" width="80" height="15" /></a>';
+}
+
 /* private helper function to putput a list of action items: */
 function pActionlist($prefix, $id, $list, $exclude, $type = '', $hidden = false) {
 
