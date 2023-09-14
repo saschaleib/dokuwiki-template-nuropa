@@ -14,10 +14,10 @@ require_once('my_template.php');
 ?><!DOCTYPE html>
 <html lang="<?php echo $conf['lang'] ?>">
 	<head>
-		<meta charset="utf-8" />
+		<meta charset="utf-8">
 		<title><?php tpl_pagetitle() ?> - <?php echo strip_tags($conf['title']) ?></title>
 		<?php tpl_metaheaders() ?>
-		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<meta name="viewport" content="width=device-width,initial-scale=1">
 		<?php echo tpl_favicon(array('favicon', 'mobile')) ?>
 		<?php tpl_includeFile('meta.html') ?>
 
@@ -51,9 +51,7 @@ require_once('my_template.php');
 			</div>
 		</div>
 		<div id="footer-layout">
-			<!-- BEGIN FOOTER -->
 <?php include('tpl_footer.php') ?>
-			<!-- END OF FOOTER -->
 			<div class="no"><?php tpl_indexerWebBug() /* provide DokuWiki housekeeping, required in all templates */ ?></div>
 		</div>
 	</body>

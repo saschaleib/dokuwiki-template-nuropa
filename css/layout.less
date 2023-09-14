@@ -101,14 +101,24 @@ body > #main-layout {
 			width: 100%;
 			max-width: @ini_site_width;
 			margin: 0 auto;
-			display: flex;
-			justify-content: space-between;
-			align-content: stretch;
+			display: grid;
+			grid-template-columns: @ini_sidebar_width auto;
 			column-gap: .5rem;
 		}
 		main {
 			width: auto;
 		}
+	}
+}
+body > #footer-layout {
+	& {
+		width: 100%;
+		clear: both;
+	}
+	& > footer {
+		width: 100%;
+		max-width: @ini_site_width;
+		margin: 0 auto;
 	}
 }
 
