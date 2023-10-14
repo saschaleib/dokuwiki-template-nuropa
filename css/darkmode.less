@@ -9,87 +9,88 @@
 @media (prefers-color-scheme: dark) {
 
     /* general colour settings: */
-    body { background-color: @ini_background_dark; color: @ini_text_dark; }
+    body.darkmode {
+		& { background-color: @ini_background_dark; color: @ini_text_dark; }
 
-    a:link { color: @ini_link_color_dark; }
+		a:link { color: @ini_link_color_dark; }
 
-    /* toolbar: */
-    #toolbar-layout {
-        background-color: @ini_toolbar_background_dark;
-        color: @ini_toolbar_text_dark;
-    	border-bottom-color: @ini_toolbar_border_dark;
-    }
-    #tb-menu-group {
-    	border-color: @ini_toolbar_border_dark;
-    }
-    #tb-menu-group::before {
-        background: linear-gradient(90deg, transparent 0, @ini_toolbar_background_dark 80%);
-    }
-    #tb-siteinfo #user-button {
-        border-color: @ini_toolbar_border_dark;
-        color: @ini_toolbar_text_dark;
-    }
-	#tb-siteinfo #user-button svg {
-        fill: @ini_toolbar_text_dark;
-    }
-	#tb-siteinfo #user-button:hover,
-	#tb-siteinfo #user-button:focus {
-        background-color: @ini_toolbar_text_dark;
-        color: @ini_toolbar_background_dark;
-    }
-	#tb-siteinfo #user-button:hover svg,
-	#tb-siteinfo #user-button:focus svg {
-        fill: @ini_toolbar_background_dark;
-    }
-	#tb-siteinfo #user-button:after {
-		background: linear-gradient(90deg, @ini_toolbar_background_dark 20%, transparent 100%);
+		/* toolbar: */
+		#toolbar-layout {
+			background-color: @ini_toolbar_background_dark;
+			color: @ini_toolbar_text_dark;
+			border-bottom-color: @ini_toolbar_border_dark;
+		}
+		#tb-menu-group {
+			border-color: @ini_toolbar_border_dark;
+		}
+		#tb-menu-group::before {
+			background: linear-gradient(90deg, transparent 0, @ini_toolbar_background_dark 80%);
+		}
+		#tb-siteinfo #user-button {
+			border-color: @ini_toolbar_border_dark;
+			color: @ini_toolbar_text_dark;
+		}
+		#tb-siteinfo #user-button svg {
+			fill: @ini_toolbar_text_dark;
+		}
+		#tb-siteinfo #user-button:hover,
+		#tb-siteinfo #user-button:focus {
+			background-color: @ini_toolbar_text_dark;
+			color: @ini_toolbar_background_dark;
+		}
+		#tb-siteinfo #user-button:hover svg,
+		#tb-siteinfo #user-button:focus svg {
+			fill: @ini_toolbar_background_dark;
+		}
+		#tb-siteinfo #user-button:after {
+			background: linear-gradient(90deg, @ini_toolbar_background_dark 20%, transparent 100%);
+		}
+		#site-toolbar #user-action-buttons li a:link,
+		#site-toolbar #user-action-buttons li a:visited {
+			color: @ini_toolbar_text_dark;
+		}
+		#site-toolbar #pagetools-btn .icon svg {
+			fill: @ini_toolbar_text_dark;
+		}
+		#site-toolbar #pagetools-btn:hover,
+		#site-toolbar #pagetools-btn:focus {
+			background-color: @ini_toolbar_text_dark;
+			color: @ini_toolbar_background_dark;
+		}
+		#site-toolbar #pagetools-btn:hover svg,
+		#site-toolbar #pagetools-btn:focus svg {
+			fill: @ini_toolbar_background_dark;
+		}
+
+		#site-toolbar #pagetools-menu li a:link,
+		#site-toolbar #pagetools-popup li a:link,
+		#site-toolbar #user-action-menu li a:link,
+		#site-toolbar #pagetools-menu li a:visited,
+		#site-toolbar #pagetools-popup li a:visited,
+		#site-toolbar #user-action-menu li a:visited {
+			color: @ini_toolbar_text_dark;
+		}
+		#site-toolbar #pagetools-menu li a:hover,
+		#site-toolbar #pagetools-popup li a:hover,
+		#site-toolbar #user-action-menu li a:hover,
+		#site-toolbar #pagetools-menu li a:focus,
+		#site-toolbar #pagetools-popup li a:focus,
+		#site-toolbar #user-action-menu li a:focus {
+			background-color: @ini_toolbar_text_dark;
+			color: @ini_toolbar_background_dark;
+		}
+		#site-toolbar #pagetools-menu li svg,
+		#site-toolbar #pagetools-popup li svg,
+		#site-toolbar #user-action-menu li svg {
+			fill: @ini_toolbar_text_dark;
+		}
+		#site-toolbar #pagetools-menu li a:hover svg,
+		#site-toolbar #pagetools-popup li a:hover svg,
+		#site-toolbar #user-action-menu li a:hover svg,
+		#site-toolbar #pagetools-menu li a:focus svg,
+		#site-toolbar #pagetools-popup li a:focus svg,
+		#site-toolbar #user-action-menu li a:focus svg {
+			fill: @ini_toolbar_background_dark;
+		}
 	}
-	#site-toolbar #user-action-buttons li a:link,
-	#site-toolbar #user-action-buttons li a:visited {
-		color: @ini_toolbar_text_dark;
-    }
-    #site-toolbar #pagetools-btn .icon svg {
-		fill: @ini_toolbar_text_dark;
-	}
-	#site-toolbar #pagetools-btn:hover,
-	#site-toolbar #pagetools-btn:focus {
-        background-color: @ini_toolbar_text_dark;
-        color: @ini_toolbar_background_dark;
-    }
-	#site-toolbar #pagetools-btn:hover svg,
-	#site-toolbar #pagetools-btn:focus svg {
-        fill: @ini_toolbar_background_dark;
-    }
-
-	#site-toolbar #pagetools-menu li a:link,
-	#site-toolbar #pagetools-popup li a:link,
-	#site-toolbar #user-action-menu li a:link,
-	#site-toolbar #pagetools-menu li a:visited,
-	#site-toolbar #pagetools-popup li a:visited,
-	#site-toolbar #user-action-menu li a:visited {
-        color: @ini_toolbar_text_dark;
-    }
-	#site-toolbar #pagetools-menu li a:hover,
-	#site-toolbar #pagetools-popup li a:hover,
-	#site-toolbar #user-action-menu li a:hover,
-	#site-toolbar #pagetools-menu li a:focus,
-	#site-toolbar #pagetools-popup li a:focus,
-	#site-toolbar #user-action-menu li a:focus {
-        background-color: @ini_toolbar_text_dark;
-        color: @ini_toolbar_background_dark;
-    }
-	#site-toolbar #pagetools-menu li svg,
-	#site-toolbar #pagetools-popup li svg,
-	#site-toolbar #user-action-menu li svg {
-		fill: @ini_toolbar_text_dark;
-	}
-	#site-toolbar #pagetools-menu li a:hover svg,
-	#site-toolbar #pagetools-popup li a:hover svg,
-	#site-toolbar #user-action-menu li a:hover svg,
-	#site-toolbar #pagetools-menu li a:focus svg,
-	#site-toolbar #pagetools-popup li a:focus svg,
-	#site-toolbar #user-action-menu li a:focus svg {
-        fill: @ini_toolbar_background_dark;
-    }
-
 }

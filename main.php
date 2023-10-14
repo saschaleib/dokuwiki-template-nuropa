@@ -22,7 +22,7 @@ require_once('my_template.php');
 		<?php tpl_includeFile('meta.html') ?>
 
 	</head>
-	<body class="site <?php echo trim(tpl_classes()); ?>" data-pageid="<?php echo htmlentities($ID); ?>">
+	<body class="site <?php echo my_bodyclasses(); ?>" data-pageid="<?php echo htmlentities($ID); ?>">
 		<div id="skip-link">
 			<a href="#main-content"><?php echo htmlentities($lang['skip_to_content']); ?></a>
 		</div>
@@ -38,9 +38,9 @@ require_once('my_template.php');
 		</div>
 		<div id="main-layout">
 			<div id="main-sidebar-layout">
-				<!-- - - - - - - - - BEGIN SIDEBAR - - - - - - - -->
+				<!-- BEGIN SIDEBAR -->
 <?php include('tpl_sidebar.php') ?>
-				<!-- - - - - - - - - END OF SIDEBAR  - - - - - - - -->
+				<!-- END OF SIDEBAR -->
 				<main id="main-content"<?php echo ( my_headerstyle() == 'pagename' ? ' class="nopageheadline"' : '' ); ?>>
 <!-- - - - - - - - - ARTICLE CONTENT - - - - - - - -->
 

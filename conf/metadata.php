@@ -25,3 +25,6 @@ $meta['userinfo'] = array('multichoice',
 $meta['bannerimg'] = array('string');
 
 $meta['bannersize'] = array('string');
+
+$meta['darkmode'] = array('multichoice',
+						'_choices' => array ('off', 'auto'));

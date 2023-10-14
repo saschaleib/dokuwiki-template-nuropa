@@ -17,14 +17,15 @@ html, body {
 	color: @ini_text;
 	background-color: @ini_background;
 	scrollbar-color: @ini_alt_color @ini_background;
-	overflow: hidden scroll;
 }
 html {
 	scroll-behavior: smooth;
+	overflow: hidden scroll;
 }
 body {
 	background-color: @ini_background;
-	max-width: 100%;;
+	max-width: 100%;
+	overflow: auto;
 }
 
 * {
@@ -120,12 +121,6 @@ body > #footer-layout {
 		max-width: @ini_site_width;
 		margin: 0 auto;
 	}
-}
-
-#sidebar {
-	width: @ini_sidebar_width;
-	flex-shrink: 0;
-	overflow: hidden;
 }
 
 /* click overlay: */

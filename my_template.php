@@ -308,6 +308,25 @@ function my_license_button($target) {
     echo "\t<a href=\"".$lic['url'].'" rel="license"'.$trg.'><img src="'.DOKU_BASE.$src.'" alt="'.$lic['name'].'" width="80" height="15" /></a>';
 }
 
+/**
+ * Wrapper for tpl_classes to add template classes
+ *
+ * @author Sascha Leib <ad@hominem.info>
+ */
+function my_bodyclasses() {
+
+    global $conf;
+	
+	$cls = tpl_classes();
+	
+	/* enable darkmode? */
+	if (tpl_getConf('darkmode') === 'auto') {
+		$cls .= ' darkmode';
+	}
+	
+	return $cls;
+}
+
 /* private helper function to putput a list of action items: */
 function pActionlist($prefix, $id, $list, $exclude, $type = '', $hidden = false) {
 

@@ -1,0 +1,61 @@
+@charset "UTF-8";
+
+/* Stylesheet for DokuWiki Nuropa template
+ * by Sascha Leib
+ * File name: site-toolbar.css
+ */
+
+#sidebar {
+	& #sbNavigation {
+	  line-height: 1.5rem;
+	  font-size: 1rem;
+	}
+	&.toggle.hide #sbNavigation,
+	&.toggle.alt #sbNavigation {
+		display: none;
+	}
+	&.toggle #sbNavigation,
+	&.toggle.auto #sbNavigation,
+	&.toggle.show #sbNavigation {
+		display: initial;
+	}
+	
+	/* show/hide button */
+	& > button.tg_button {
+		float: right;
+		display: block;
+		background-color: transparent;
+		border: transparent none 0;
+		margin-right: 2px;
+		font-size: 1.5rem;
+	}
+	& > button:focus {
+		outline: @ini_focus_outline solid 2px;
+	}
+	& > button.tg_button span {
+		display: none;
+	}
+	&.hide > button.tg_button,
+	&.alt > button.tg_button {
+		margin-left: 0;
+		width: 11pt;
+	}
+	& > button.tg_button::after {
+		content: '\2039';
+		color: @ini_link;
+		display: inline-block;
+		width: .75em;
+		height: 1.25em;
+		text-align: center;
+	}
+	&.hide>button.tg_button span,
+	&.alt>button.tg_button span {
+		display: none;
+	}
+	&.hide>button.tg_button::after,
+	&.alt>button.tg_button::after {
+		content: '\203A';
+		width: auto;
+	}
+
+}
