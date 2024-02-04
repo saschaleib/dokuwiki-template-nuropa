@@ -1,8 +1,6 @@
-@charset "UTF-8";
-
 /* Stylesheet for DokuWiki Nuropa template
  * by Sascha Leib
- * File name: content.css
+ * File name: _edit.css
  */
 
 main {
@@ -25,6 +23,7 @@ main {
 			width: 1.75rem; height: 1.75rem;
 			border-radius: 50%;
 			font-size: 0;
+			z-index: 90;
 			cursor: pointer;
 		}
 		button::before {
@@ -222,7 +221,6 @@ body.mode_edit, body.mode_preview {
 		border: @ini_border_color solid 1px;
 		padding: .5rem .25rem;
 		-webkit-box-shadow: .125rem .125rem .5rem 0 rgba(0,0,0,.2);
-		-moz-box-shadow: .125rem .125rem .5rem 0 rgba(0,0,0,.2);
 		box-shadow: .125rem .125rem .5rem 0 rgba(0,0,0,.2);
 		border-top: @ini_menubar_background solid 1rem;
 		border-bottom: @ini_footer_background solid 1rem;
@@ -238,7 +236,6 @@ body.mode_edit, body.mode_preview {
 			color: @ini_toolbar_text;
 			padding: .125rem;
 			-webkit-box-shadow: .125rem .125rem .5rem 0 rgba(0,0,0,.2);
-			-moz-box-shadow: .125rem .125rem .5rem 0 rgba(0,0,0,.2);
 			box-shadow: .125rem .125rem .5rem 0 rgba(0,0,0,.2);
 		}
 		button {

@@ -1,0 +1,204 @@
+/* Stylesheet for DokuWiki Nuropa template
+ * by Sascha Leib
+ * File name: _config.css
+ */
+
+#config__manager {
+	& {
+		position: relative;
+	}
+	fieldset {
+		& {
+			margin: .5em 0 0 0;
+			background-color: @ini_alt_color;
+			color: @ini_text;
+			border-color: @ini_border_color;
+		}
+		legend {
+			font-family:@ini_headline_fonts;
+			color: @ini_headline_color;
+			background: linear-gradient(0deg, @ini_alt_color 49%, @ini_background 51%);
+			padding: 0 .25em
+		}
+	}
+	table {
+		&, tbody, thead, tr, td, th {
+			display: block;
+		}
+		td.label {
+			& {
+				padding: 0;
+				font-size: .9rem;
+			}
+			span.outkey {
+				& {
+					margin: 0;
+					background-color: transparent;
+					float: right;
+					z-index: initial;
+				}
+				a:link, a:visited {
+					color: @ini_text;
+					background-color: @ini_background;
+					border-color: @ini_border_color;
+					text-decoration: none;
+					padding: .25em;
+					border-radius: .25em;
+				}
+				a:hover, a:focus {
+					color: @ini_link_color;
+				}
+			}
+			img {
+				padding: 0 .25em;
+			}
+		}
+		td.value {
+			& {
+				clear: right;
+				margin-left: 1em;
+				width: ~"calc(100% - 1em)";
+				margin-bottom: .5em;
+				font-size: .85rem;
+			}
+			div.input {
+				& {
+					width: 100%;
+					background-color: transparent;
+					font-size: smaller;
+				}
+				& > * {
+					font-size: .85rem;
+				}
+			}
+			input[type=text], input[type=password], select, textarea {
+				border: @ini_form_field_outline solid 1px;
+				background-color: @ini_form_field_bg;
+				color: @ini_form_field_text;
+				padding: .25em .5em;
+				border-radius: .125em;
+			}
+			input[type=text], input[type=password] {
+				font-family: @ini_mono_fonts;
+				font-size: @ini_mono_font_size;
+				width: ~"calc(100% - 1.5em)";
+			}
+			input[name="config[fmode]"], input[name="config[dmode]"],
+			input[name="config[auth_security_timeout]"],
+			input[name="config[cssdatauri]"],
+			input[name="config[tpl____nuropa____bannersize]"] {
+				max-width: 3em;
+			}
+			input[name="config[recent]"], input[name="config[recent_days]"], input[name="config[breadcrumbs]"],
+			input[name="config[jpg_quality]"],
+			input[name="config[sitemap]"],
+			input[name="config[readdircache]"], input[name="config[search_nslimit]"],
+			input[name="config[logretain]"] {
+				max-width: 1.25em;
+			}
+			input[name="config[defaultgroup]"],
+			input[name="config[indexdelay]"],
+			input[name="config[locktime]"], input[name="config[cachetime]"],
+			input[name="config[fetchsize]"],
+			input[name="config[subscribe_time]"],
+			input[name="config[rss_update]"],
+			input[name="config[tpl____nuropa____bannerimg]"] {
+				max-width: 10em;
+			}
+			input[type=text]:focus, input[type=password]:focus {
+				outline: @ini_focus_outline solid 2pt;
+				-webkit-box-shadow: inset 1px 1px 1px 0px rgba(0,0,0,.5);
+				box-shadow: inset 1px 1px 1px 0px rgba(0,0,0,.5);
+			}
+			select {
+				padding-right: 1.5em;
+			}
+			select:hover, select:focus {
+				-webkit-box-shadow:	1px 1px 1px 0 rgba(0,0,0,.3);
+				box-shadow:	1px 1px 1px 0 rgba(0,0,0,.3);
+			}
+			div.selection {
+				& {
+					display: grid;
+					grid-template-columns: auto 1.25em;
+					column-gap: .25em;
+					place-items: start center;
+					background-color: transparent;
+				}
+				&:nth-child(4n+1), &:nth-child(4n) {
+					background-color: #FFF;
+				}
+				label {
+					float: initial;
+					color: @ini_link_color;
+					font-weight: bold;
+				}
+			}
+			div.selectiondefault {
+				& {
+					background-color: transparent;
+				}
+				label {
+					color: @ini_text;
+					font-weight: normal;
+				}
+			}
+			textarea {
+				width: 100%;
+				resize: vertical;
+				font-family: @ini_mono_fonts;
+				font-size: @ini_mono_font_size;
+			}
+		}
+		tr:not(.default) {
+			td.value {
+				input[type=text], select, textarea {
+					& {
+						border: @ini_link_color solid 2px;
+						color: @ini_link_color;
+						font-weight: bold;
+					}
+				}
+			}
+		}
+	}
+	#dw__configform > p:last-child {
+		& {
+			position: -webkit-sticky;
+			position: sticky;
+			bottom: 0;
+			box-sizing: border-box;
+			background-color: rgba(255,255,255,0.67);
+			border: @ini_border_color solid 2pt;
+			padding: .5em 0;
+			/*z-index: 9;*/
+			display: grid;
+			grid-template-columns: auto auto;
+			justify-items: center;
+		}
+		button[type=submit] {
+			background-color: @ini_form_btn_bg;
+			color: @ini_form_btn_text;
+			font-weight: bold;
+			padding: .25em 1em;
+			border: @ini_form_field_outline solid 1px;
+			border-radius: .25em;
+			cursor: pointer;
+		}
+		button[type=submit]:hover {
+			background-color: @ini_form_btn_hover_bg;
+			color: @ini_form_btn_hover_text;
+		}
+		button[type=reset] {
+			background-color: transparent;
+			border: transparent 0 none;
+			padding: 0 .5em;
+			color: @ini_link;
+			cursor: pointer;
+		}
+		button[type=reset]:hover {
+			text-decoration: underline;
+		}
+	}
+}
+			

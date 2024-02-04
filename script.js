@@ -10,7 +10,7 @@ $p = {
 
 	/* called to initialize the entire script */
 	init:	function() {
-        console.info('init()')
+        //console.info('init()')
 	    $p.gui.init();
 	    $p.keyboard.init();
 	},
@@ -18,7 +18,7 @@ $p = {
 	/* all functions that are related to the keyboard control */
 	keyboard: {
 		init: function() {
-			console.info('keyboard.init()')
+			//console.info('keyboard.init()')
 		},
 		
 		/* ask to be informed about a specific key press event.
@@ -64,7 +64,7 @@ $p = {
 		
 		/* cancel a specific active monitor (pass the id): */
 		cancel: function(id) {
-			console.info('keyboard.cancel(' + id + ')');
+			//console.info('keyboard.cancel(' + id + ')');
 		
 			$p.keyboard._list = $p.keyboard._list.filter( it => { 
 				return (it.id !== id);
@@ -79,7 +79,7 @@ $p = {
 			
 			/* called internally on any registered keyup event */
 			_handleKeyUp: function(e) {
-				console.info('_handleKeyUp');
+				//console.info('_handleKeyUp');
 				
 				/* collect the interesting info: */
 				let target = e.target;
@@ -100,7 +100,7 @@ $p = {
 						
 						// TODO: also check for modifiers! 
 						
-						console.log("correct key. calling callback:");
+						//console.log("correct key. calling callback:");
 						if (it.c && it.c instanceof Function) {
 							it.c();
 						}
@@ -114,7 +114,7 @@ $p = {
 
         init: function() {
 
-            console.info('gui.init()')
+            //console.info('gui.init()')
 
             $p.gui.overlay.init();
             $p.gui.toolbar.init();
@@ -136,7 +136,7 @@ $p = {
             _callback: {
                 resized: function() {
 
-                    console.info('gui.toolbar._callback.resized()');
+                    //console.info('gui.toolbar._callback.resized()');
 
                     /* recalculate the overflow menu */
 
@@ -194,17 +194,19 @@ $p = {
 
                 onMenuButtonClick: function(e) {
 
-					console.info('onMenuButtonClick');
+					//console.info('onMenuButtonClick');
 					
 					let btn = e.currentTarget;
 					
                     try {
                         let tid = jQuery(this).attr('aria-controls');
 						let menu = jQuery('#' + tid);
+						let align = jQuery(this).attr('data-align_menu');
 						
 						/* position the menu under the menu button: */
-						let mLeft = 0 - (jQuery(menu).outerWidth() - 18);
-						jQuery(menu).css('margin-left', mLeft + 'px'); 
+						if (align == 'right') {
+							jQuery(menu).css('margin-left', 0 - (jQuery(menu).outerWidth() - 25) + 'px'); 
+						}
 						
 						/* show the menu: */
                         menu.slideDown(200, () => {

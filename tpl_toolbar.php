@@ -31,7 +31,7 @@
 	pActionlist(str_repeat(chr(9),4), 'pagetools-menu', $list, $exTB, $tbStyle, false);
  ?>
 					<div id="tb-menu-group">
-						<button id="pagetools-btn" aria-haspopup="menu" aria-controls="pagetools-popup" title="<?php echo htmlentities($lang['tools']); ?>">
+						<button id="pagetools-btn" aria-haspopup="menu" aria-controls="pagetools-popup" title="<?php echo htmlentities($lang['tools']); ?>" data-align_menu="right">
 							<svg class="overflow" viewBox="0 0 24 24"><path d="M16.59,5.59L18,7L12,13L6,7L7.41,5.59L12,10.17L16.59,5.59M16.59,11.59L18,13L12,19L6,13L7.41,11.59L12,16.17L16.59,11.59Z" /></svg>
 							<svg class="menu" viewBox="0 0 24 24"><path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" /></svg>
 							<span class="label sr-only"><?php echo htmlentities($lang['tools']); ?></span>
