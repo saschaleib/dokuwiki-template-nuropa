@@ -3,23 +3,78 @@
  * File name: _config.css
  */
 
+/* login form */
+#dw__login {
+	fieldset {
+		& {
+			background-color: @ini_alt_color;
+		}
+		legend {
+		}
+		label {
+			width: 80%;
+		}
+		label.block {
+			& {
+				display: inline-grid;
+				gap: .5em;
+				grid-template-columns: 1fr 2fr;
+				align-items: center;	
+				margin: .25em 0;
+			}
+			span {
+				justify-self: end;
+			}
+		}
+		label[for=remember__me] {
+			display: inline-block;
+			width: 100%;
+		}
+		button {
+			margin: 1em auto 0 auto;
+		}
+	}
+}
+
+/* admin homepage UI */
+main .ui-admin {
+	& {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		margin-bottom: 1em;
+	}
+	h1, h2, & > div {
+		grid-column: 1 / span 2;
+	}
+	ul {
+		& {
+			list-style: none inside;
+			padding: 0;
+		}
+		li {
+			& {
+				padding: .25em;
+			}
+			a {
+				display: block;
+				border-radius: .25em;
+				color: @ini_link;
+				display: flex;
+				align-items: flex-start;
+				gap: .25em;
+				text-decoration: none;
+			}
+			svg {
+				fill: @ini_link;
+			}
+		}
+	}
+}
+
+/* configuration manager */
 #config__manager {
 	& {
 		position: relative;
-	}
-	fieldset {
-		& {
-			margin: .5em 0 0 0;
-			background-color: @ini_alt_color;
-			color: @ini_text;
-			border-color: @ini_border_color;
-		}
-		legend {
-			font-family:@ini_headline_fonts;
-			color: @ini_headline_color;
-			background: linear-gradient(0deg, @ini_alt_color 49%, @ini_background 51%);
-			padding: 0 .25em
-		}
 	}
 	table {
 		&, tbody, thead, tr, td, th {
@@ -29,6 +84,8 @@
 			& {
 				padding: 0;
 				font-size: .9rem;
+				line-height: 1.5em;
+				margin-bottom: .25em;
 			}
 			span.outkey {
 				& {
@@ -46,7 +103,7 @@
 					border-radius: .25em;
 				}
 				a:hover, a:focus {
-					color: @ini_link_color;
+					color: @ini_link;
 				}
 			}
 			img {
@@ -72,29 +129,23 @@
 				}
 			}
 			input[type=text], input[type=password], select, textarea {
-				border: @ini_form_field_outline solid 1px;
 				background-color: @ini_form_field_bg;
-				color: @ini_form_field_text;
-				padding: .25em .5em;
-				border-radius: .125em;
 			}
 			input[type=text], input[type=password] {
-				font-family: @ini_mono_fonts;
-				font-size: @ini_mono_font_size;
 				width: ~"calc(100% - 1.5em)";
 			}
 			input[name="config[fmode]"], input[name="config[dmode]"],
 			input[name="config[auth_security_timeout]"],
 			input[name="config[cssdatauri]"],
 			input[name="config[tpl____nuropa____bannersize]"] {
-				max-width: 3em;
+				max-width: 4em;
 			}
 			input[name="config[recent]"], input[name="config[recent_days]"], input[name="config[breadcrumbs]"],
 			input[name="config[jpg_quality]"],
 			input[name="config[sitemap]"],
 			input[name="config[readdircache]"], input[name="config[search_nslimit]"],
 			input[name="config[logretain]"] {
-				max-width: 1.25em;
+				max-width: 2.25em;
 			}
 			input[name="config[defaultgroup]"],
 			input[name="config[indexdelay]"],
@@ -103,20 +154,9 @@
 			input[name="config[subscribe_time]"],
 			input[name="config[rss_update]"],
 			input[name="config[tpl____nuropa____bannerimg]"] {
-				max-width: 10em;
+				max-width: 11em;
 			}
-			input[type=text]:focus, input[type=password]:focus {
-				outline: @ini_focus_outline solid 2pt;
-				-webkit-box-shadow: inset 1px 1px 1px 0px rgba(0,0,0,.5);
-				box-shadow: inset 1px 1px 1px 0px rgba(0,0,0,.5);
-			}
-			select {
-				padding-right: 1.5em;
-			}
-			select:hover, select:focus {
-				-webkit-box-shadow:	1px 1px 1px 0 rgba(0,0,0,.3);
-				box-shadow:	1px 1px 1px 0 rgba(0,0,0,.3);
-			}
+
 			div.selection {
 				& {
 					display: grid;
@@ -130,7 +170,7 @@
 				}
 				label {
 					float: initial;
-					color: @ini_link_color;
+					color: @ini_link;
 					font-weight: bold;
 				}
 			}
@@ -154,8 +194,8 @@
 			td.value {
 				input[type=text], select, textarea {
 					& {
-						border: @ini_link_color solid 2px;
-						color: @ini_link_color;
+						border: @ini_link solid 2px;
+						color: @ini_link;
 						font-weight: bold;
 					}
 				}
@@ -163,42 +203,127 @@
 		}
 	}
 	#dw__configform > p:last-child {
-		& {
-			position: -webkit-sticky;
-			position: sticky;
-			bottom: 0;
-			box-sizing: border-box;
-			background-color: rgba(255,255,255,0.67);
-			border: @ini_border_color solid 2pt;
-			padding: .5em 0;
-			/*z-index: 9;*/
-			display: grid;
-			grid-template-columns: auto auto;
-			justify-items: center;
-		}
-		button[type=submit] {
-			background-color: @ini_form_btn_bg;
-			color: @ini_form_btn_text;
-			font-weight: bold;
-			padding: .25em 1em;
-			border: @ini_form_field_outline solid 1px;
-			border-radius: .25em;
-			cursor: pointer;
-		}
-		button[type=submit]:hover {
-			background-color: @ini_form_btn_hover_bg;
-			color: @ini_form_btn_hover_text;
-		}
-		button[type=reset] {
-			background-color: transparent;
-			border: transparent 0 none;
-			padding: 0 .5em;
-			color: @ini_link;
-			cursor: pointer;
-		}
-		button[type=reset]:hover {
-			text-decoration: underline;
-		}
+		display: grid;
+		grid-template-columns: auto auto;
+		justify-items: center;
 	}
 }
 			
+/* style manager */
+#plugin__styling {
+	form.styling {
+		p:first-child {
+			text-align: right;
+		}
+		table {
+			tr:nth-child(odd) {
+				background-color: @ini_alt_color;
+			}
+			& {
+				width: 100%;
+			}
+			input {
+				width: 100%;
+				min-width: 16em;
+				text-align: left;
+			}
+			input[type=text] {
+				font-size: 75%;
+			}
+		}
+		button[name="run[preview]"],
+		button[name="run[reset]"],
+		button[name="run[revert]"] {
+			border: @ini_form_btn_outline solid 1px;
+			background-color: @ini_form_btn_bg;
+			color: @ini_form_btn_text;
+		}
+	}
+}
+
+/* extension manager */
+#extension__manager {
+	form.install.doku_form {
+		& {
+			width: 100%;
+		}
+		label.block {
+			& {
+			}
+			span {
+				display: block;
+				text-align: left;
+				width: ~"calc(100% - .5em)";
+			}
+			input {
+				display: block;
+				width: ~"calc(100% - 2em)";
+				margin: .25em 0 0 1em;
+			}
+			&:nth-of-type(3) {
+				& {
+					display: grid;
+					grid-template-columns: 2em auto;
+					gap: .5em;
+				}
+				input[type=checkbox] {
+					width: 1.25em; height: 1.25em;
+				}
+			}
+		}
+	}
+}
+
+/* user manager */
+#user__manager {
+	& {
+		font-size: small;
+	}
+	table {
+		& {
+			border: @ini_border_color solid 2px;
+		}
+		thead, tfooter {
+			background-color: @ini_alt_color;
+		}
+		tbody {
+			tr:nth-child(even) {
+				background-color: @ini_alt_color;
+			}
+		}
+		button:not([name="fn[add]"]) {
+			border: @ini_form_btn_outline solid 1px;
+			background-color: @ini_form_btn_bg;
+			color: @ini_form_btn_text;
+			font-size: small;
+			padding: .25em .5em;
+		}
+	}
+}
+
+/* account profile page */
+#dw__register, #dw__profiletoken {
+	fieldset {
+		& {
+			background-color: @ini_alt_color;
+			font-size: smaller;
+		}
+		label.block {
+			& {
+				display: inline-grid;
+				grid-template-columns: 1fr 2fr;
+				align-items: center;
+				gap: .5em;
+				width: ~"calc(100% - .25em)";
+				padding: .25em 0;
+			}
+			span {
+				text-align: right;
+			}
+		}
+		button {
+			margin: 1em;
+		}
+	}
+}
+#dw__profiletoken

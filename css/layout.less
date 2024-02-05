@@ -46,7 +46,7 @@ body {
 	position: absolute;
 	background-color: @ini_background;
 	font-size: 1.25em;
-	color: @ini_link_color;
+	color: @ini_link;
 	height: 1px;
 	overflow: hidden;
 	clip: rect(1px,1px,1px,1px);
@@ -62,7 +62,7 @@ body {
 
 /* general lik settings */
 a:link, a:visited {
-	color: @ini_link_color;
+	color: @ini_link;
 	text-decoration: none;
 }
 a:hover {
@@ -94,6 +94,7 @@ body > #main-layout {
     & {
         width: 100%;
         clear: both;
+		padding-bottom: 1rem;
     }
 	#main-sidebar-layout {
 		& {
@@ -118,6 +119,113 @@ body > #footer-layout {
 		width: 100%;
 		max-width: @ini_site_width;
 		margin: 0 auto;
+	}
+}
+
+/* general button formatting */
+button {
+	border: @ini_form_btn_outline solid 1px;
+	background-color: @ini_form_btn_bg;
+	color: @ini_form_btn_text;
+	padding: .5em 1em;
+	border-radius: .5em;
+	cursor: pointer;
+}
+button[type=submit] {
+	border-color: @ini_form_submit_btn_text;
+	background-color: @ini_form_submit_btn_bg;
+	color: @ini_form_submit_btn_text;
+}
+button:hover, button:focus {
+	filter: ~"brightness(80%) contrast(150%)";
+}
+button[type=submit]:hover, button[type=submit]:focus {
+	border-color: @ini_form_submit_btn_text;
+	background-color: @ini_form_submit_btn_bg;
+	color: @ini_form_submit_btn_text;
+	filter: ~"brightness(67%) contrast(150%)";
+}
+
+/* general text-field styles */
+input[type=text], input[type=password], input[type=email], input[type=url], textarea {
+	background-color: @ini_form_field_bg;
+	color: @ini_form_field_text;
+	border: @ini_form_field_outline solid 1px;
+	border-radius: .125em;
+	font-family: @ini_mono_fonts;
+	font-size: @ini_mono_font_size;
+	padding: .25em .5em;
+	box-sizing: border-box;
+}
+input[type=text]:focus, input[type=password]:focus, input[type=url]:focus, textarea:focus {
+	outline: @ini_focus_outline solid 2pt;
+	-webkit-box-shadow: inset 1px 1px 1px 0px rgba(0,0,0,.5);
+	box-shadow: inset 1px 1px 1px 0px rgba(0,0,0,.5);
+}
+
+/* checkboxes */
+input[type=checkbox] {
+	width: 1.25em; height: 1.25em;
+}
+
+/* url field */
+input[type=url] {
+	font-size: smaller;
+	background: @ini_form_field_bg url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAABdklEQVR4AWMgAVRo1zY3rGk41rC+rqvCBCJWBpPM4WoomLHtdtuv/t9Lfk263TtrQ0t7Oj9cbzZDc/W6s/8T7khD+P+F/8bv29PZlswJVVBu0vPuVZyNYHFZbmAqE1SR0cbjXR6pjGBO58am962Ta3e3ftqy6B5LCcMasOj7gInrm9jBzI4vTX+bfjT/7/4/p/w/zFXybUmt71u4wJzGfxP/t/xvA+KaP2XnQSKVFpWPav/U/6+HKJjz++OVJUDp1n9N/+r+19QyMCz1mPC/8X/X/26Igrn3GiUeL5n/v+F/8//6/9NOMTC0hDUDefP/L4MoOL6ickVeSQ1QqAGooPdBJE/lnloge/fhixBHftFd9bLkR83/+n/1QAXVP8qX1Pyv/L/s/12f/4xQNz8s3Pa/6X/Vvzqgour/5f/r/q//f2fmLy54WP7lfJN74eMSoKIyoNFz/5/+9ar+Px9aZL3Xfjvz7aO3/96+eLvsnSVE7CPhOAYA9nvIX0UoNU8AAAAASUVORK5CYII=') 5px center no-repeat;
+	border-radius: 1.25em;
+	padding: .25em .5em .25em 24px;
+}
+
+/* select popup styles */
+select {
+	background-color: @ini_form_field_bg;
+	color: @ini_form_field_text;
+	border: @ini_form_field_outline solid 1px;
+	padding: .25em 1.5em .25em .5em;
+	border-radius: .125em;
+}
+select:hover, select:focus {
+	-webkit-box-shadow:	1px 1px 1px 0 rgba(0,0,0,.3);
+	box-shadow:	1px 1px 1px 0 rgba(0,0,0,.3);
+}
+
+/* fieldset styles */
+fieldset {
+	& {
+		padding: .5em 1em;
+	}
+	legend {
+		font-family: @ini_headline_fonts;
+		padding: 0 .25em;
+	}
+}
+
+/* tab list */
+ul.tabs {
+	& {
+		list-style: none inside;
+		padding: 0 .5em;
+		border-bottom: @ini_form_btn_outline solid 1pt;
+		margin-bottom: .5em;
+	}
+	li {
+		& {
+			display: inline-block;
+		}
+		&.active {
+			background-color: @ini_form_btn_bg;
+		}
+		& > * {
+			padding: .25em .5em;
+			border: @ini_form_btn_outline solid 1px;
+			border-radius: .5em .5em 0 0;
+			border-bottom-width: 0;
+			font-size: smaller;
+		}
+		& > a {
+			text-decoration: none;
+		}
+		
 	}
 }
 

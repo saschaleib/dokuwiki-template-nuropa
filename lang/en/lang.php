@@ -20,12 +20,11 @@ $lang['__background_neu__']			= 'Unused (background_neu)';
 $lang['__border__']					= 'Border colour (old)';
 $lang['__highlight__']				= 'Highlight colour <small>(e.g. for search results)</small>';
 
-$lang['__link__']					= 'Link colour (old)';
+$lang['__link__']					= 'Link colour';
 
 $lang['__site_width__']				= 'Width of the site content box <small>(<abbr>CSS</abbr> length)</small>';
 $lang['__sidebar_width__']			= 'Width of the sidebar, if present <small>(<abbr>CSS</abbr> length)</small>';
 
-$lang['__link_color__']				= 'Link colour (new)';
 $lang['__focus_outline__']			= 'Focus outline colour';
 $lang['__border_color__']			= 'Border colour (new)';
 

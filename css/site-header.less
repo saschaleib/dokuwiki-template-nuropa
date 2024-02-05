@@ -59,10 +59,8 @@ body > #header-layout {
 							margin: 2rem 0;
 						}
 						input {
-							border: @ini_form_field_bg 0 none;
-							padding: .25rem;
-							color: @ini_form_field_text;
 							line-height: 1rem;
+							border: transparent 0 none;
 						}
 						input:focus {
 							outline: none;
@@ -70,13 +68,11 @@ body > #header-layout {
 						button {
 							background-color: @ini_form_btn_bg;
 							color: @ini_form_btn_text;
-							border: none;
+							border: none; border-radius: 0;
 						}
 						button:hover,
 						button:focus {
-								background-color: @ini_form_btn_hover_bg;
-								color: @ini_form_btn_hover_text;
-								outline: none;
+							outline: none;
 						}
 					}
 				}
@@ -85,7 +81,7 @@ body > #header-layout {
 				& {
 					position: absolute;
 					width: 100%;
-					margin-top: ~"calc(1.5rem + 1px)";
+					margin-top: ~"calc(1.5rem + 5px)";
 					padding: 0;
 					white-space: nowrap;
 					font-size: 1rem;
@@ -125,7 +121,7 @@ body > #header-layout {
 				#user-button {
 					& {
 						display: flex;
-						border: none;
+						border: transparent 0 none;
 						border-radius: 0;
 						background: transparent;
 						color: @ini_searchbar_link;

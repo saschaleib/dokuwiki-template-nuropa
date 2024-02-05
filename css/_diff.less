@@ -1,0 +1,49 @@
+/* Stylesheet for DokuWiki Nuropa template
+ * by Sascha Leib
+ * File name: _diff.less
+ */
+
+body.mode_diff {
+	table.diff_sidebyside {
+		& {
+			width: 100%;
+			border: @ini_border_color solid 2px;
+			font-family: @ini_mono_fonts;
+			font-size: smaller;
+		}
+		td {
+			vertical-align: top;
+		}
+		td.diff-blockheader {
+			background-color: @ini_alt_color;
+		}
+		td.diff-lineheader {
+			width: 1.5em;
+			text-align: center;
+		}
+		td.diff-deletedline {
+			& {
+				color: #000;
+				background-color: #F1D5D3;
+			}
+			strong.diff-mark {
+				color: #701710;
+				text-decoration: line-through;
+				font-weight: 600;
+				text-decoration-color: #70171077;
+			}
+		}
+		td.diff-addedline {
+			& {
+				color: #000;
+				background-color: #D3F1D9;
+			}
+			strong.diff-mark {
+				color: #10491B;
+				text-decoration: underline;
+				font-weight: 600;
+				text-decoration-color: #10491B77;
+			}
+		}
+	}
+}
