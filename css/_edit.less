@@ -26,6 +26,10 @@ main {
 			z-index: 90;
 			cursor: pointer;
 		}
+		button:hover, button:focus {
+			border-color: @ini_border_color;
+			background-color: transparent;			
+		}
 		button::before {
 			content: ' ';
 			display: inline-block;

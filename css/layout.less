@@ -110,7 +110,7 @@ body > #main-layout {
 		}
 	}
 }
-body > #footer-layout {
+body > #footer-layout #main-sidebar-layout {
 	& {
 		width: 100%;
 		clear: both;
@@ -205,27 +205,29 @@ ul.tabs {
 	& {
 		list-style: none inside;
 		padding: 0 .5em;
-		border-bottom: @ini_form_btn_outline solid 1pt;
+		border-bottom: @ini_border_color solid 1pt;
 		margin-bottom: .5em;
+		line-height: 1.4em;
 	}
 	li {
 		& {
 			display: inline-block;
 		}
-		&.active {
-			background-color: @ini_form_btn_bg;
-		}
 		& > * {
 			padding: .25em .5em;
-			border: @ini_form_btn_outline solid 1px;
+			border: @ini_border_color solid 1pt;
 			border-radius: .5em .5em 0 0;
 			border-bottom-width: 0;
+			background-color: @ini_background;
 			font-size: smaller;
 		}
 		& > a {
 			text-decoration: none;
 		}
-		
+		& > strong,
+		&.active > a {
+			border-bottom: @ini_background 3px solid;
+		}
 	}
 }
 

@@ -62,6 +62,21 @@
 	left: -5px;
 }
 
+/* toolbar is fixed if the user is logged in: */
+body.loggedIn #toolbar-layout {
+	& {
+		position: fixed;
+		top: 0; left: 0; right: 0;
+		opacity: .93;
+		-webkit-box-shadow: .5px .5px .5px 0px rgba(0,0,0,0.4);
+		box-shadow: .5px .5px .5px 0px rgba(0,0,0,0.4);
+		z-index: 97;
+	}
+	#site-toolbar {
+		opacity: 1;
+	}
+}
+
 /* style the user menu, if in the toolbar: */
 #tb-siteinfo {
 	& {
