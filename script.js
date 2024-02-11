@@ -92,11 +92,11 @@ $p = {
 				let evt = e.originalEvent;
 				let key = evt.key;
 				let modifiers = {
-					alt: evt.altKey,
-					ctrl: evt.ctrlKey,
-					meta: evt.metaKey,
-					shift: evt.shiftKey
-				}
+					'alt': evt.altKey,
+					'ctrl': evt.ctrlKey,
+					'meta': evt.metaKey,
+					'shift': evt.shiftKey
+				};
 				
 				/* check if any registered callback matches: */
 				var match = null;
