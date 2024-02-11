@@ -70,7 +70,7 @@ body.loggedIn #toolbar-layout {
 		opacity: .93;
 		-webkit-box-shadow: .5px .5px .5px 0px rgba(0,0,0,0.4);
 		box-shadow: .5px .5px .5px 0px rgba(0,0,0,0.4);
-		z-index: 97;
+		z-index: 101;
 	}
 	#site-toolbar {
 		opacity: 1;
@@ -182,6 +182,9 @@ body.loggedIn #toolbar-layout {
 	#pagetools-menu,
 	#pagetools-popup,
 	#user-action-menu {
+		& {
+			z-index: 102;
+		}
 		li {
 			a {
 				display: inline-grid;

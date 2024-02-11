@@ -71,6 +71,11 @@ $p = {
 			});
 		},
 		
+		/* clear all waitForKey callbacks */
+		clear: function() {
+			$p.keyboard._list = [];
+		},
+		
 		/* list of monitoring callbacks */
 		_list: [],
 		
@@ -199,22 +204,32 @@ $p = {
 					let btn = e.currentTarget;
 					
                     try {
-                        let tid = jQuery(this).attr('aria-controls');
-						let menu = jQuery('#' + tid);
-						let align = jQuery(this).attr('data-align_menu');
+                        const tid = jQuery(this).attr('aria-controls');
+						const menu = jQuery('#' + tid);
+						const align = jQuery(this).attr('data-align_menu');
 						
-						/* position the menu under the menu button: */
-						if (align == 'right') {
-							jQuery(menu).css('margin-left', 0 - (jQuery(menu).outerWidth() - 25) + 'px'); 
+						if ( jQuery(this).attr('aria-expanded') == 'true' ) { /* menu already expanded */
+
+							menu.slideUp(200);
+							//jQuery(this).attr('aria-expanded', 'false');
+							$p.gui.overlay.hide(tid);
+							
+						} else {
+							
+							/* position the menu under the menu button: */
+							if (align == 'right') {
+								jQuery(menu).css('margin-left', 0 - (jQuery(menu).outerWidth() - 25) + 'px'); 
+							}
+							
+							/* show the menu: */
+							menu.slideDown(200, () => {
+								let a = jQuery(menu).find('a:visible').first();
+								a.focus();
+							});
+							jQuery(this).attr('aria-expanded', 'true');
+							$p.gui.menus._openMenus.push(tid);
+							$p.gui.overlay.show($p.gui.menus._callback.onBackdropClick, this);
 						}
-						
-						/* show the menu: */
-                        menu.slideDown(200, () => {
-							let a = jQuery(menu).find('a:visible').first();
-							a.focus();
-						});
-                        $p.gui.menus._openMenus.push(tid);
-                        $p.gui.overlay.show($p.gui.menus._callback.onBackdropClick);
 						
                     } catch(e) {
                         console.error(e);
@@ -225,8 +240,10 @@ $p = {
                 onBackdropClick: function() {
 
                     try {
-                        let tid = $p.gui.menus._openMenus.pop();
-                        jQuery('#' + tid).slideUp(200);
+						while ( $p.gui.menus._openMenus.length > 0) {
+							let tid = $p.gui.menus._openMenus.pop();
+							jQuery('#' + tid).slideUp(200);
+						}
                     } catch(e) {
                         console.error(e);
                     }
@@ -256,11 +273,16 @@ $p = {
 
 			},
 
-			show: function(callback) {
+			show: function(callback, btn) {
+
+				//console.log('$p.gui.overlay.show(...)');
 
 				let ov = jQuery('#overlay');
 				if (callback !== undefined && typeof callback == "function") {
-					$p.gui.overlay._callbacks.push(callback);
+					$p.gui.overlay._callbacks.push({
+						'cb': callback,
+						'btn': btn
+					});
 				}
 				jQuery(ov).show();
 				
@@ -269,21 +291,31 @@ $p = {
 				$p.gui.overlay._monitors.push(id);
 			},
 
-			hide: function() {
+			hide: function(tid) {
+				
+				//console.log('$p.gui.overlay.hide("' + tid + '")');
 
-				/* cancel all active keyboard monitors */
-				while ($p.gui.overlay._monitors.length > 0) {
-
-					let monitor = $p.gui.overlay._monitors.pop();
-					$p.keyboard.cancel(monitor);
-				}
-
-				/* call all the registered callbacks: */
+				/* call and remove all callbacks (TODO: only unregister a specific callback!) */
 				while ($p.gui.overlay._callbacks.length > 0) {
 
-					let callback = $p.gui.overlay._callbacks.pop();
-					if (callback && callback instanceof Function) {
-						callback();
+					const cbObj = $p.gui.overlay._callbacks.pop();
+					if (cbObj) {
+						if (cbObj.cb && cbObj.cb instanceof Function) {
+							cbObj.cb();
+						}
+						/* update the button attributes */
+						if (cbObj.btn) {
+							jQuery(cbObj.btn).attr('aria-expanded', false);
+						}
+					}
+				}
+
+				/* if the list is now empty, also cancel all active keyboard monitors */
+				if ($p.gui.overlay._callbacks.length < 1) {
+					while ($p.gui.overlay._monitors.length > 0) {
+
+						let monitor = $p.gui.overlay._monitors.pop();
+						$p.keyboard.cancel(monitor);
 					}
 				}
 

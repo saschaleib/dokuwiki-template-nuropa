@@ -4,56 +4,55 @@
  */
 
 #sidebar {
-	& #sbNavigation {
-	  line-height: 1.5rem;
-	  font-size: 1rem;
+	& {
+		/*border: red dotted 1px;*/
 	}
-	&.toggle.hide #sbNavigation,
-	&.toggle.alt #sbNavigation {
-		display: none;
+	.tg_button {
+		& {
+			float: right;
+			display: block;
+			background-color: transparent;
+			border: transparent none 0;
+			padding: 0;
+			margin-right: 2px;
+			font-size: 1.5rem;
+			visibility: hidden;
+		}
+		&::after {
+			content: '\2039';
+			color: @ini_link;
+			display: inline-block;
+			width: .75em;
+			height: 1.25em;
+			text-align: center;
+		}
+		&:focus {
+			outline: @ini_focus_outline solid 2px;
+		}
+		span {
+			display: none;
+		}
 	}
-	&.toggle #sbNavigation,
-	&.toggle.auto #sbNavigation,
-	&.toggle.show #sbNavigation {
-		display: initial;
+	#sbNavigation {
+		& {
+			clear: both;
+		}
+		& > ul, & > ol {
+			margin-left: 1.75em;
+		}
 	}
-	
-	/* show/hide button */
-	& > button.tg_button {
-		float: right;
-		display: block;
-		background-color: transparent;
-		border: transparent none 0;
-		margin-right: 2px;
-		font-size: 1.5rem;
-	}
-	& > button:focus {
-		outline: @ini_focus_outline solid 2px;
-	}
-	& > button.tg_button span {
-		display: none;
-	}
-	&.hide > button.tg_button,
-	&.alt > button.tg_button {
-		margin-left: 0;
-		width: 11pt;
-	}
-	& > button.tg_button::after {
-		content: '\2039';
-		color: @ini_link;
-		display: inline-block;
-		width: .75em;
-		height: 1.25em;
-		text-align: center;
-	}
-	&.hide>button.tg_button span,
-	&.alt>button.tg_button span {
-		display: none;
-	}
-	&.hide>button.tg_button::after,
-	&.alt>button.tg_button::after {
-		content: '\203A';
-		width: auto;
-	}
+}
 
+/* hide sidebar in special modes: */
+body.mode_admin,
+body.mode_edit,
+body.mode_index,
+body.mode_revisions,
+body.mode_backlink,
+body.mode_recent,
+body.mode_profile,
+body.mode_login {
+	#main-sidebar-layout {
+		grid-template-columns: 21px auto !important;
+	}
 }
