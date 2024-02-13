@@ -209,30 +209,41 @@ fieldset {
 /* tab list */
 ul.tabs {
 	& {
+		margin: .5em 0; padding: 0 0 0 1em;
 		list-style: none inside;
-		padding: 0 .5em;
-		border-bottom: @ini_border_color solid 1pt;
-		margin-bottom: .5em;
 		line-height: 1.4em;
+		border-bottom: @ini_border_color solid 1.5pt;
+		display: flex;
+		gap: .5em;
 	}
 	li {
 		& {
 			display: inline-block;
+			margin: 0; padding: 0 0 2pt 0;
+		}
+		&.active {
+			background-color: transparent;
 		}
 		& > * {
-			padding: .25em .5em;
-			border: @ini_border_color solid 1pt;
-			border-radius: .5em .5em 0 0;
-			border-bottom-width: 0;
-			background-color: @ini_background;
+			padding: .5em 1em;
 			font-size: smaller;
+			border-bottom: transparent solid 1.5pt;
 		}
 		& > a {
-			text-decoration: none;
+			color: @ini_form_btn_text !important;
+			text-decoration: none !important;
+			border-radius: .25em .25em 0 0;
 		}
-		& > strong,
-		&.active > a {
-			border-bottom: @ini_background 3px solid;
+		& > a:hover,
+		& > a:focus {
+			border-bottom-color: @ini_form_btn_outline !important;
+		}
+		&.active > a,
+		& > strong {
+			background-color: transparent;
+			border-bottom: @ini_theme_color solid 1.5pt !important;
+			font-weight: 700;
+			text-decoration: none;
 		}
 	}
 }
