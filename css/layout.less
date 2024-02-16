@@ -65,6 +65,7 @@ body.dokuwiki {
 	a:link, a:visited {
 		color: @ini_link;
 		text-decoration: underline;
+		border-radius: 3px;
 	}
 	a[href^="#"] {
 		text-decoration-style: dashed;
@@ -229,7 +230,7 @@ ul.tabs {
 			font-size: smaller;
 			border-bottom: transparent solid 1.5pt;
 		}
-		& > a {
+		& > a, & > strong {
 			color: @ini_form_btn_text !important;
 			text-decoration: none !important;
 			border-radius: .25em .25em 0 0;
@@ -240,8 +241,10 @@ ul.tabs {
 		}
 		&.active > a,
 		& > strong {
-			background-color: transparent;
-			border-bottom: @ini_theme_color solid 1.5pt !important;
+			background-color: @ini_background;
+			border: @ini_border_color solid 1px !important;
+			border-top: @ini_theme_color solid 2pt !important;
+			border-bottom: @ini_background solid 1.5pt !important;
 			font-weight: 700;
 			text-decoration: none;
 		}

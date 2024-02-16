@@ -75,10 +75,10 @@ function my_userinfo($prefix = '') {
         echo $prefix . "</button>\n";
 
         // add the menu:
-        pActionlist($prefix, 'user-action-menu', $items, ['admin'], '', true);
+        my_actionlist($prefix, 'user-action-menu', $items, ['admin'], '', true);
 
     } else {
-        pActionlist($prefix, 'user-action-buttons', $items, ['admin']);
+        my_actionlist($prefix, 'user-action-buttons', $items, ['admin']);
     }
 
 }
@@ -328,22 +328,37 @@ function my_bodyclasses() {
 }
 
 /* private helper function to putput a list of action items: */
-function pActionlist($prefix, $id, $list, $exclude, $type = '', $hidden = false) {
+function my_actionlist($prefix, $id, $list, $exclude, $type = '', $hidden = false) {
 
 	/* build menu */
 	echo $prefix . '<ul id="' . $id . '" class="' . htmlentities($type) . '"'  . ($hidden ? ' style="display:none"' : '') . ">\n";
 	foreach($list as $it) {
-		$typ = $it->getType();
+		//echo '<!-- ' . print_r($it, true) . ' -->';
+		$typ = htmlentities($it->getType());
 		if (!in_array($typ, $exclude)) {
-		   echo $prefix . "\t<li data-type=\"" . $typ . '">'
-				 .'<a href="'.$it->getLink().'" title="'.$it->getTitle().'" rel="nofollow">'
-				 .inlineSVG($it->getSvg())
-				 .'<span class="label">'.$it->getLabel().'</span>'
-				 ."</a></li>\n";
+			
+		echo $prefix . "\t<li data-type=\"" . $typ . '">'
+					 . my_HtmlLink($it, false, true)
+					 . "</li>\n";
 		}
 	}
 	echo $prefix . "</ul>\n";
 };
+
+/* overwrite the asHtmlLink function for my purposes */
+function my_HtmlLink($item, $classprefix = 'menuitem ', $svg = true) {
+
+	$attr = buildAttributes($item->getLinkAttributes($classprefix));
+	$html = "<a $attr>";
+	if ($svg) {
+		$html .= inlineSVG($item->getSvg());
+		$html .= '<span>' . hsc($item->getLabel()) . '</span>';
+	} else {
+		$html .= hsc($item->getLabel());
+	}
+	$html .= "</a>";
+	return $html;
+}
 
 /* helper function to determine the headline style: */
 function my_headerstyle() {

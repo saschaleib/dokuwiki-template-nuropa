@@ -4,6 +4,14 @@
  */
 
 body.mode_diff {
+	.diff-deletedline {
+		color: #000;
+		background-color: #F1D5D3;
+	}
+	.diff-addedline {
+		color: #000;
+		background-color: #D3F1D9;
+	}
 	table.diff_sidebyside {
 		& {
 			width: 100%;
@@ -22,10 +30,6 @@ body.mode_diff {
 			text-align: center;
 		}
 		td.diff-deletedline {
-			& {
-				color: #000;
-				background-color: #F1D5D3;
-			}
 			strong.diff-mark {
 				color: #701710;
 				text-decoration: line-through;
@@ -34,10 +38,6 @@ body.mode_diff {
 			}
 		}
 		td.diff-addedline {
-			& {
-				color: #000;
-				background-color: #D3F1D9;
-			}
 			strong.diff-mark {
 				color: #10491B;
 				text-decoration: underline;
@@ -45,5 +45,21 @@ body.mode_diff {
 				text-decoration-color: #10491B77;
 			}
 		}
+	}
+	table.diff_inline {
+		&, select {
+			width: 100%;
+		}
+		tr:nth-child(odd) {
+			background-color: @ini_alt_color;
+		}
+		td, th {
+			padding: .25em 0;
+		}
+		th {
+			text-align: left;
+			font-weight: normal;
+		}
+		
 	}
 }

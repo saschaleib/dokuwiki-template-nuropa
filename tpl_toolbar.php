@@ -8,13 +8,6 @@
 
     $tbStyle = tpl_getConf('toolbarstyle');
 
-    /* collect all toolbar items from various DW menus: */
-	$list = array_merge(
-	    (new \dokuwiki\Menu\PageMenu())->getItems(),
-	    (new \dokuwiki\Menu\SiteMenu())->getItems(),
-	    (new \dokuwiki\Menu\UserMenu())->getItems(),
-	);
-
     /* lists of tb items that should *not* be shown: */
     $exTB  = ['top', 'profile', 'login','logout']; /* don't show in toolbar */
     $exPop = ['top']; /* don't show in popup menu */
@@ -24,11 +17,21 @@
     } else {
         tpl_includeFile('siteinfo.html');
     }
+	
+    /* collect all toolbar items from various DW menus: */
+	$list = array_merge(
+	    (new \dokuwiki\Menu\PageMenu())->getItems(),
+	    (new \dokuwiki\Menu\SiteMenu())->getItems(),
+	    (new \dokuwiki\Menu\UserMenu())->getItems(),
+	);
+
+	echo '<!-- ALL TB ITEMS: ' . print_r($list, true) . ' -->';
+
  ?>
 				</div>
 				<div id="site-toolbar-group">
 <?php
-	pActionlist(str_repeat(chr(9),4), 'pagetools-menu', $list, $exTB, $tbStyle, false);
+	my_actionlist(str_repeat(chr(9),4), 'pagetools-menu', $list, $exTB, $tbStyle, false);
  ?>
 					<div id="tb-menu-group">
 						<button id="pagetools-btn" aria-haspopup="menu" aria-controls="pagetools-popup" title="<?php echo htmlentities($lang['tools']); ?>" data-align_menu="right">
@@ -37,7 +40,7 @@
 							<span class="label sr-only"><?php echo htmlentities($lang['tools']); ?></span>
 						</button>
 <?php
-	pActionlist(str_repeat(chr(9),6), 'pagetools-popup', $list, $exPop, '', true);
+	my_actionlist(str_repeat(chr(9),6), 'pagetools-popup', $list, $exPop, '', true);
  ?>
 					</div>
 				</div>

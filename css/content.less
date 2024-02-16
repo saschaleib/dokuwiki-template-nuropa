@@ -197,9 +197,13 @@ main {
 				transform: rotate(0deg);
 				transition: transform .3s ease-in-out;
 			}
-			&:hover, &:focus {
+			&:hover {
 				border-color: @ini_form_btn_outline;
 				background-color: @ini_form_btn_bg;
+			}
+			&:focus {
+				border-color: transparent;
+				outline: @ini_focus_outline solid 2pt;
 			}
 		}
 		&[open] {
