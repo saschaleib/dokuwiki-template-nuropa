@@ -1,44 +1,64 @@
 /* Stylesheet for DokuWiki Nuropa template
  * by Sascha Leib
- * File name: site-toolbar.css
+ * File name: sidebar.less
  */
 
 #sidebar {
-	.tg_button {
-		& {
-			float: right;
-			display: block;
-			background-color: transparent;
-			border: transparent none 0;
-			padding: 0;
-			margin-right: 2px;
-			font-size: 1.5rem;
-			visibility: hidden;
-		}
-		&::after {
-			content: '\2039';
-			color: @ini_link;
-			display: inline-block;
-			width: .75em;
-			height: 1.25em;
-			text-align: center;
-		}
-		&:focus {
-			outline: @ini_focus_outline solid 2px;
-		}
-		span {
-			display: none;
-		}
+	border: blue dashed 1px;
+}
+#sidebar .tg_button {
+	& {
+		float: right;
+		display: block;
+		background-color: transparent;
+		border: transparent none 0;
+		padding: 0;
+		margin-right: 2px;
+		font-size: 1.5rem;
+		visibility: hidden;
 	}
-	#sbNavigation {
-		& {
-			clear: both;
-		}
-		& > ul, & > ol {
-			margin-left: 1.75em;
-		}
+	&::after {
+		content: '\2039';
+		color: @ini_link;
+		display: inline-block;
+		width: .75em;
+		height: 1.25em;
+		text-align: center;
+	}
+	&:focus {
+		outline: @ini_focus_outline solid 2px;
+	}
+	span {
+		display: none;
 	}
 }
+#sbNavigation {
+	& {
+		clear: both;
+		text-align: @ini_sidebar_text_align;
+		font-size: .9rem;
+	}
+	ul, ol {
+		margin: 0;
+		list-style: none inside;
+	}
+	li li {
+		font-size: smaller;
+		padding-left: 1em;
+	}
+	& a:link, & a:visited {
+		display: block;
+		padding: .5em;
+		width: 100%;
+		box-sizing: border-box;
+		color: @ini_sidebar_link_color;
+		text-decoration: none;
+	}
+	& a:hover {
+		text-decoration: underline;
+	}
+}
+
 
 /* hide sidebar in special modes: */
 body.mode_admin,

@@ -7,9 +7,8 @@
 
 ?>				<div id="sidebar" class="toggle <?php echo ( $showSidebar ? 'auto' : 'hide' ); ?>">
 					<button type="button" class="tg_button" title="<?php echo $lang['sidebar'] ?>"><span><?php echo $lang['sidebar'] ?></span></button>
-
-						<nav id="sbNavigation">
-						<!-- - - - - - - - - Sidebar header include - - - - - - - -->
+					<nav id="sbNavigation">
+<!-- - - - - - - - - Sidebar header include - - - - - - - -->
 <?php
 			tpl_flush();
 			tpl_includeFile('sidebarheader.html');
@@ -17,10 +16,10 @@
 <?php
 
 			tpl_include_page($conf['sidebar'], true, true);
-?>							<!-- - - - - - - - - Sidebarfooter include - - - - - - - -->
+?><!-- - - - - - - - - Sidebarfooter include - - - - - - - -->
 <?php
 			tpl_includeFile('sidebarfooter.html');
 ?>
-							<!-- - - - - - - - - End of Sidebarfooter - - - - - - - -->
-						</nav>
-					</div>
+<!-- - - - - - - - - End of Sidebarfooter - - - - - - - -->
+					</nav>
+				</div>

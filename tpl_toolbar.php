@@ -25,8 +25,6 @@
 	    (new \dokuwiki\Menu\UserMenu())->getItems(),
 	);
 
-	echo '<!-- ALL TB ITEMS: ' . print_r($list, true) . ' -->';
-
  ?>
 				</div>
 				<div id="site-toolbar-group">
