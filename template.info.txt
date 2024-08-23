@@ -1,7 +1,7 @@
 base     nuropa
 author   Sascha Leib
 email    ad@hominem.info
-date     2024-02-04
+date     2024-08-22
 name     Nuropa Template
 desc     Nu style DokuWiki template (experimental)
 url      tbd

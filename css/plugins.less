@@ -46,6 +46,8 @@
 	table {
 		&, tbody, thead, tr, td, th {
 			display: block;
+			border: none;
+			box-sizing: border-box;
 		}
 		td.label {
 			& {
@@ -53,6 +55,7 @@
 				font-size: .9rem;
 				line-height: 1.5em;
 				margin-bottom: .25em;
+				border: none;
 			}
 			span.outkey {
 				& {
@@ -84,7 +87,7 @@
 			& {
 				clear: right;
 				margin-left: 6pt; padding-left: 6pt;
-				border-left: transparent solid 2pt;
+				border: transparent 2pt solid;
 				width: ~"calc(100% - 1em)";
 				margin-bottom: .5em;
 				font-size: .85rem;
@@ -231,13 +234,17 @@
 			}
 		}
 	}
+	ul.extensionList {
+		a.info, a.info.close {
+			background-position: right;
+			width: 40px; height: 22px;
+			margin-bottom: 2px;
+		}
+	}
 }
 
 /* user manager */
 #user__manager {
-	& {
-		font-size: small;
-	}
 	table {
 		& {
 			border: @ini_border_color solid 2px;
@@ -257,5 +264,30 @@
 			font-size: small;
 			padding: .25em .5em;
 		}
+	}
+}
+
+/* move plugin */
+body.mode_admin form.plugin_move_form fieldset {
+
+	& {
+		padding-top: 1em;
+	}
+
+	label {
+		display: block;
+		width: 100%;
+	}
+	input[name="dst"] {
+		width: 100%;
+	}
+	label.block.indent.select {
+		margin: 1em 0;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+	}
+	button[type="submit"] {
+		display: block;
+		margin: 0 auto;
 	}
 }

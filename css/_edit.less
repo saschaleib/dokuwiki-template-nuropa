@@ -39,6 +39,10 @@ main {
 			background-size: 100%;
 		}
 	}
+	div.section_highlight_wrapper.section_highlight {
+		outline: @ini_focus_outline dashed 3px;
+		border-radius: .5em;
+	}
 }
 
 body.mode_edit, body.mode_preview {
@@ -243,7 +247,7 @@ body.mode_edit, body.mode_preview {
 			-webkit-box-shadow: .125rem .125rem .5rem 0 rgba(0,0,0,.2);
 			box-shadow: .125rem .125rem .5rem 0 rgba(0,0,0,.2);
 		}
-		button {
+		button.toolbutton {
 			& {
 				background-color: @ini_toolbar_background;
 				border: @ini_toolbar_border solid 1px;
@@ -252,20 +256,49 @@ body.mode_edit, body.mode_preview {
 				margin: 1px;
 			}
 			&:hover {
-				background-color: @ini_toolbar_text;
-				color: @ini_toolbar_background;
+				background-color: @ini_background_alt;
+				color: @ini_text_alt;
+				filter: none;
 			}
 		}
 		&#picker1 {
-			width: 308px; max-width: 308px; min-width: 308px;
-			resize: both;
-			overflow: auto;
+			& {
+				width: 308px; max-width: 308px; min-width: 308px;
+				resize: both;
+				overflow: auto;
+			}
+			button {
+				padding: .1em;
+				border-color: @ini_toolbar_border;
+			}
 		}
 		&#picker2 {
-			width: 585px; max-width: 585px; min-width: 585px;
-			resize: both;
-			overflow: auto;
+			& {
+				width: 585px; max-width: 585px; min-width: 585px;
+				resize: both;
+				overflow: auto;
+			}
+			button {
+				padding: .25em;
+				border-color: @ini_toolbar_border;
+			}
 		}
-	}	
-}
+	}
+	.editBox {
+		.toolbar {
+			& {
+				margin-bottom: .25em;
+				position: sticky;
+				top: 0;
+			}
+			#tool__bar {
+				button {
+					padding: .5em;
+					margin-right: .25em;
+				}
 
+
+			}
+		}
+	}
+}
