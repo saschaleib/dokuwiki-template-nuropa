@@ -117,17 +117,6 @@ body > #main-layout {
 		}
 	}
 }
-body > #footer-layout #main-sidebar-layout {
-	& {
-		width: 100%;
-		clear: both;
-	}
-	& > footer {
-		width: 100%;
-		max-width: @ini_site_width;
-		margin: 0 auto;
-	}
-}
 
 /* general button formatting */
 button {
@@ -142,6 +131,9 @@ button[type=submit] {
 	border-color: @ini_form_submit_btn_text;
 	background-color: @ini_form_submit_btn_bg;
 	color: @ini_form_submit_btn_text;
+}
+button[type=submit]:disabled {
+	filter:  ~"opacity(0.6) saturate(0.67)";
 }
 button:hover, button:focus {
 	filter: ~"brightness(80%) contrast(150%)";

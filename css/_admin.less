@@ -71,3 +71,25 @@ body.mode_admin {
         margin-left: 1em;
     }
 }
+
+/* recent changes view */
+body.mode_recent #dw__recent {
+
+    div.changeType {
+        margin: 1em 0;
+    }
+
+    ul {
+        & {
+            list-style: none inside;
+            margin: 0; padding: 0;
+        }
+        li {
+            padding-left: 2px;
+        }
+        li:nth-child(even) {
+            background-color: @ini_background_alt;
+        }
+    }
+
+}

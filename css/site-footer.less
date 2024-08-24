@@ -4,6 +4,19 @@
  */
 
 body > #footer-layout {
+
+	#main-sidebar-layout {
+		& {
+			width: 100%;
+			clear: both;
+		}
+		& > footer {
+			width: 100%;
+			max-width: @ini_site_width;
+			margin: 0 auto;
+		}
+	}
+
 	& {
 		background-color: @ini_footer_background;
 		color: @ini_footer_text;
