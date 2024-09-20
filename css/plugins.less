@@ -132,28 +132,27 @@
 			}
 
 			div.selection {
-				& {
-					display: grid;
-					grid-template-columns: auto 1.25em;
-					column-gap: .25em;
-					place-items: start center;
-					background-color: @ini_background;
-					padding: .25em;
-					border-left: @ini_theme_color solid 2pt;
-				}
-				label {
-					float: initial;
-					color: @ini_text;
-				}
+				display: grid;
+				grid-template-columns: auto 1.25em;
+				column-gap: .25em;
+				place-items: start center;
+				background-color: @ini_background;
+				padding: .25em;
+				border-left: @ini_theme_color solid 2pt;
+				width: calc(50% - 2em);
+				text-align: left;
+			}
+			div.selection:hover {
+				background-color: @ini_background_alt;
 			}
 			div.selectiondefault {
-				& {
-					border-left-color: transparent;
-				}
-				label {
-					color: @ini_text;
-					font-weight: normal;
-				}
+				border-left-color: transparent;
+			}
+			label {
+				float: initial;
+				color: @ini_text;
+				display: block;
+				width: 100%;
 			}
 			div.other {
 				background-color: transparent;
@@ -174,7 +173,7 @@
 	}
 	fieldset {
 		& {
-			background-color: @ini_alt_color;
+			background-color: @ini_background_alt;
 			border: @ini_border_color solid 1pt;
 			border-radius: .25rem;
 			-webkit-box-shadow: 1px 1px 1px 0 rgba(0,0,0,.3);
@@ -188,7 +187,7 @@
 			border: @ini_border_color solid 1pt;
 			border-top: @ini_theme_color solid 2.5pt;
 			border-bottom-width: 0;
-			background-color: @ini_alt_color;
+			background-color: @ini_background_alt;
 			border-radius: .25em .25em 0 0;
 		}
 	}
@@ -263,6 +262,19 @@
 			color: @ini_form_btn_text;
 			font-size: small;
 			padding: .25em .5em;
+		}
+	}
+}
+
+/* upgrade manager */
+#plugin__upgrade {
+	.log-notice {
+		margin: .25em 0;
+	}
+	#plugin__upgrade_meter {
+		span.stage {
+			font-size: 16px;
+			line-height: 20px;
 		}
 	}
 }

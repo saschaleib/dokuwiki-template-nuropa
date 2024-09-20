@@ -3,6 +3,29 @@
  * File name: _diff.less
  */
 
+body.mode_revisions {
+	#page__revisions {
+		ul {
+			& {
+				list-style: none inside;
+				margin: 0 0 1em 0;
+				padding: 0;
+			}
+			li {
+				padding-left: .25em;
+			}
+			li:nth-child(odd) {
+				background-color: @ini_background_alt;
+			}
+			span.date {
+				font-family: @ini_mono_fonts;
+				font-size: @ini_mono_font_size;
+				margin-right: .5em;
+			}
+		}
+	}
+}
+
 body.mode_diff {
 	.diff-deletedline {
 		color: #000;
@@ -11,6 +34,15 @@ body.mode_diff {
 	.diff-addedline {
 		color: #000;
 		background-color: #D3F1D9;
+	}
+	.diffnav {
+		a {
+			margin-right: .5em;
+		}
+		form {
+			display: block;
+			margin-top: .25em;
+		}
 	}
 	table.diff_sidebyside {
 		& {
