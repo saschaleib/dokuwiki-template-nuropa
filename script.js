@@ -123,6 +123,8 @@ $p = {
 
             $p.gui.overlay.init();
             $p.gui.toolbar.init();
+            $p.gui.sidebar.init();
+            $p.gui.toc.init();
             $p.gui.menus.init();
         },
 
@@ -180,6 +182,55 @@ $p = {
             }
         },
 
+		sidebar: {
+			
+            init: function() {
+                console.info('gui.sidebar.init()');
+
+                jQuery('#tg_button').on('click', $p.gui.sidebar._onSbBtnClick);
+
+            },
+			
+			_onSbBtnClick: function() {
+                //console.info('gui.sidebar._onSbBtnClick()');
+				
+				const layout = document.getElementById('main-sidebar-layout');
+				if (layout) {
+					layout.classList.forEach( it => {
+						if ( it == 'toggle_auto') {
+							layout.classList.replace('toggle_auto', 'toggle_collapse');
+						} else if ( it == 'toggle_collapse') {
+							layout.classList.replace('toggle_collapse', 'toggle_auto');
+						}
+					});
+				}
+			}
+		},
+
+		toc: {
+			
+            init: function() {
+                console.info('gui.toc.init()');
+
+                jQuery('#toc-menubutton').on('click', $p.gui.toc._onTocBtnClick);
+
+            },
+			
+			_onTocBtnClick: function() {
+                console.info('$p.gui.toc._onTocBtnClick()');
+				
+				const toc = document.getElementById('toc');
+				if (toc) {
+					toc.classList.forEach( it => {
+						if ( it == 'toggle_hide') {
+							toc.classList.replace('toggle_hide', 'toggle_show');
+						} else if ( it == 'toggle_show') {
+							toc.classList.replace('toggle_show', 'toggle_hide');
+						}
+					});
+				}
+			}
+		},
         /**
 		 * Page.GUI.Menus Namespace
 		 *

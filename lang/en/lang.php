@@ -12,15 +12,15 @@ $lang['__text__']					= 'Default text colour';
 $lang['__background__']				= 'Default background colour';
 
 $lang['__alt_color__']				= 'Alternative text colour';
-$lang['__background_alt__']			= 'Alternative background colour';
+$lang['__background_alt__']			= 'Alternative background colour <small>(e.g. for alternating table rows)</small>';
 
-$lang['__text_neu__']				= 'Unused (text_neu)';
-$lang['__background_neu__']			= 'Unused (background_neu)';
+$lang['__text_neu__']				= 'Neutral text color';
+$lang['__background_neu__']			= 'Neutral background color';
 
-$lang['__border__']					= 'Border colour (old)';
+$lang['__border__']					= 'Border colour';
 $lang['__highlight__']				= 'Highlight colour <small>(e.g. for search results)</small>';
 
-$lang['__link__']					= 'Link colour';
+$lang['__link__']					= 'Default link colour <small>(used for generic links)</small>';
 
 $lang['__site_width__']				= 'Width of the site content box <small>(<abbr>CSS</abbr> length)</small>';
 $lang['__sidebar_width__']			= 'Width of the sidebar, if present <small>(<abbr>CSS</abbr> length)</small>';
@@ -34,6 +34,8 @@ $lang['__headline_fonts__']			= 'Headline font family <small>(comma-separated li
 $lang['__default_fonts__']			= 'Default font family <small>(comma-separated list)</small>';
 $lang['__default_font_size__']		= 'Default font size <small>(<abbr>CSS</abbr> length)</small>';
 
+$lang['__overlay_color__']			= 'Overlay color <small>(use “transparent” or set a semi-transparent color as string)</small>';
+$lang['__theme_color__']			= 'Theme color';
 
 $lang['__toolbar_background__']		= 'Toolbar background colour';
 $lang['__toolbar_text__']			= 'Toolbar text colour';

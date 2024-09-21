@@ -279,9 +279,13 @@ body > #header-layout {
                     li.current:after {
                         content: none;
                     }
-					a {
+					a:link, a:visited {
 						font-size: .86rem;
-						line-height: 1.25em;
+						line-height: 1em;
+						text-decoration: none;
+					}
+					a:hover {
+						text-decoration: underline;
 					}
                 }
 			

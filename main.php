@@ -37,12 +37,14 @@ require_once('my_template.php');
 			<!-- END HEADER -->
 		</div>
 		<div id="main-layout">
-			<div id="main-sidebar-layout">
+<?php $hasSidebar = page_findnearest($conf['sidebar']);
+ ?>			<div id="main-sidebar-layout" class="toggle_<?php echo ( ($hasSidebar && ($ACT=='show')) ? 'auto' : 'hide' ); ?>">
 				<!-- BEGIN SIDEBAR -->
 <?php include('tpl_sidebar.php') ?>
 				<!-- END OF SIDEBAR -->
 				<main id="main-content"<?php echo ( my_headerstyle() == 'pagename' ? ' class="nopageheadline"' : '' ); ?>>
-<!-- - - - - - - - - ARTICLE CONTENT - - - - - - - -->
+<?php my_toc(str_repeat("\t", 5)); 
+?><!-- - - - - - - - - ARTICLE CONTENT - - - - - - - -->
 
 <?php tpl_content(false) ?>
 

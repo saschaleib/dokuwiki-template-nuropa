@@ -14,7 +14,7 @@ html, body {
 	scrollbar-width: thin;
 	color: @ini_text;
 	background-color: @ini_background;
-	scrollbar-color: @ini_alt_color @ini_background;
+	scrollbar-color: @ini_background_alt @ini_background;
 }
 html {
 	scroll-behavior: smooth;
@@ -111,6 +111,14 @@ body > #main-layout {
 			display: grid;
 			grid-template-columns: @ini_sidebar_width auto;
 			column-gap: 1rem;
+		}
+		&.toggle_collapse {
+			& {
+				grid-template-columns: 2rem auto;
+			}
+			#sidebar > nav {
+				display: none;
+			}
 		}
 		main {
 			width: auto;

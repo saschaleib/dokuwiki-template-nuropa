@@ -14,7 +14,7 @@
 		}
 		table {
 			tr:nth-child(odd) {
-				background-color: @ini_alt_color;
+				background-color: @ini_background_alt;
 			}
 			& {
 				width: 100%;
@@ -63,19 +63,19 @@
 					float: right;
 					z-index: initial;
 					line-height: 1.4em;
-					background-color: @ini_text;
-					color: @ini_alt_color;
-					border-radius: 3pt;
 					padding: 0 .25em;
+					background-color: transparent;
 				}
 				a:link, a:visited {
-					color: @ini_alt_color;
+					background-color: @ini_background_neu;
+					color: @ini_link;
 					text-decoration: none;
 					padding: .25em;
+					border: @ini_link solid 1px;
 					border-radius: .25em;
 				}
 				a:hover, a:focus {
-					color: @ini_background;
+					color: @ini_text;
 					text-decoration: underline;
 				}
 			}
@@ -249,11 +249,11 @@
 			border: @ini_border_color solid 2px;
 		}
 		thead, tfooter {
-			background-color: @ini_alt_color;
+			background-color: @ini_background_alt;
 		}
 		tbody {
 			tr:nth-child(even) {
-				background-color: @ini_alt_color;
+				background-color: @ini_background_alt;
 			}
 		}
 		button:not([name="fn[add]"]) {

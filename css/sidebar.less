@@ -3,36 +3,42 @@
  * File name: sidebar.less
  */
 
-#sidebar .tg_button {
-	& {
-		float: right;
-		display: block;
-		background-color: transparent;
-		border: transparent none 0;
-		padding: 0;
-		margin-right: 2px;
-		font-size: 1.5rem;
-		visibility: hidden;
-	}
-	&::after {
-		content: '\2039';
-		color: @ini_link;
-		display: inline-block;
-		width: .75em;
-		height: 1.25em;
-		text-align: center;
-	}
-	&:focus {
-		outline: @ini_focus_outline solid 2px;
-	}
-	span {
-		display: none;
+#sidebar {
+	#tg_button {
+		& {
+			float: right;
+			display: block;
+			background-color: transparent;
+			border: transparent none 0;
+			padding: 0;
+			margin-right: 2px;
+			margin-top: 1rem;
+			font-size: 1.5rem;
+			/*visibility: hidden;*/
+		}
+		&::after {
+			content: '\2039';
+			color: @ini_link;
+			display: inline-block;
+			width: .75em;
+			height: 1.25em;
+			text-align: center;
+		}
+		&:focus {
+			outline: @ini_focus_outline solid 2px;
+		}
 	}
 }
+
+/* special collapse menu: */
+#main-sidebar-layout.toggle_collapse #tg_button::after {
+	content: '\203A';
+}
+
 #sbNavigation {
 	& {
-		clear: both;
 		text-align: @ini_sidebar_text_align;
+		margin-top: 1.25rem;
 		font-size: .9rem;
 	}
 	ul, ol {

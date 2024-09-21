@@ -191,6 +191,101 @@ function my_breadcrumbs($prefix, $position) {
 }
 
 /**
+ * Inserts a cleaner version of the TOC
+ *
+ * This is an update of the original function that renders the TOC directly.
+ *
+ * @author Sascha Leib <sascha@leib.be>
+ * @author Andreas Gohr <andi@splitbrain.org>
+ *
+ * @param  string $prefix to be added before each line
+ *
+ * @return void
+ */
+function my_toc($prefix = '') {
+    global $TOC;
+    global $ACT;
+    global $ID;
+    global $REV;
+    global $INFO;
+    global $conf;
+    global $lang;
+    $toc = array();
+
+    if(is_array($TOC)) {
+        // if a TOC was prepared in global scope, always use it
+        $toc = $TOC;
+    } elseif(($ACT == 'show' || substr($ACT, 0, 6) == 'export') && !$REV && $INFO['exists']) {
+        // get TOC from metadata, render if neccessary
+        $meta = p_get_metadata($ID, '', METADATA_RENDER_USING_CACHE);
+        if(isset($meta['internal']['toc'])) {
+            $tocok = $meta['internal']['toc'];
+        } else {
+            $tocok = true;
+        }
+        $toc = isset($meta['description']['tableofcontents']) ? $meta['description']['tableofcontents'] : null;
+        if(!$tocok || !is_array($toc) || !$conf['tocminheads'] || count($toc) < $conf['tocminheads']) {
+            $toc = array();
+        }
+    } elseif($ACT == 'admin') {
+        // try to load admin plugin TOC
+        /** @var $plugin AdminPlugin */
+        if ($plugin = plugin_getRequestAdminPlugin()) {
+            $toc = $plugin->getTOC();
+            $TOC = $toc; // avoid later rebuild
+        }
+    }
+
+	/* inline icons: */
+	$iconClose = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' class='icn_close'><path d='M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z' /></svg>";
+	$iconOpen = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' class='icn_open'><path d='M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z' /></svg>";
+
+	$tocView = tpl_getConf('showtoc', 'hide');
+	if (in_array($ACT, array('admin'))) {
+		$tocView = 'hide';
+	}
+	
+	/* Build the hierarchical list of headline links: */
+	if (count($toc) >= intval($conf['tocminheads'])) {
+		echo $prefix . "<aside id=\"toc\" class=\"toggle_{$tocView}\">\n";
+		echo $prefix . "\t<div id=\"toc_header\"><h2>" . htmlentities($lang['toc']) . "</h2><button type=\"button\" id=\"toc-menubutton\" class=\"tg_button\" title=\"" . htmlentities($lang['toc']) . '" aria-haspopup="true" aria-controls="toc-menu"><span class="sr-only">' . htmlentities($lang['toc']) . "</span>" . $iconOpen . $iconClose . "</button></div>\n";
+		echo $prefix . "\t<div id=\"toc-menu\" class=\"tg_content\" role=\"menu\" aria-labelledby=\"toc-menubutton\">";
+		
+		$level = 0;
+		foreach($toc as $it) {
+			
+			$nl = intval($it['level']);
+			$cp = ($nl <=> $level);
+
+			if ($cp > 0) {
+				while ($level < $nl) {
+					echo "\n" . $prefix . str_repeat("\t", $level*2 + 2) . "<ol>\n";
+					$level++;
+				}
+			} else if ($cp < 0) {
+				while ($level > $nl) {
+					echo "\n" . $prefix . str_repeat("\t", $level*2) . "</ol>\n" . $prefix . str_repeat("\t", $level*2-1) . "</li>\n";
+					$level--;
+				}
+			} else {
+				echo "</li>\n";
+			}
+			
+			$href = ( array_key_exists('link', $it ) ? $it['link'] : '' ) . ( array_key_exists('hid', $it) && $it['hid'] !== '' ? '#' . $it['hid'] : '' );
+
+			echo $prefix . str_repeat("\t", $nl*2 + 1) . '<li  role="presentation"><a role="menuitem" href="' . $href . '">' . htmlentities($it['title']) . "</a>";
+			$level = $nl;
+		}
+		
+		for ($i = $level-1; $i > 0; $i--) {
+			echo "</li>\n" . $prefix . str_repeat("\t", $i*2 + 1) . "</ol>";
+		}
+			
+		echo "</li>\n" . $prefix . "\t\t</ol>\n" . $prefix . "\t</div>\n" . $prefix . "</aside>\n";
+	}
+}
+
+/**
  * Insert the main headline for the page
  *
  * provides additional configuration options for this element

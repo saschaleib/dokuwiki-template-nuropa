@@ -26,4 +26,7 @@ $conf['bannersize']		= '48px'; /* any CSS length, or 'auto' */
 $conf['toolbarstyle']   = 'auto';
 
 /* allow dark mode styling ('off' or 'auto') */
+$conf['showtoc']   = 'show';
+
+/* allow dark mode styling ('off' or 'auto') */
 $conf['darkmode']   = 'off';

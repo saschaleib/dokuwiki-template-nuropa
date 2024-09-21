@@ -36,6 +36,10 @@ $lang['bannerimg'] = 'Name of the image file to use as banner image<br><small>(w
 
 $lang['bannersize'] = 'Minimum banner size<br /><small>(you can use any <abbr>CSS</abbr> length string, including <tt>auto</tt>)</small>';
 
+$lang['showtoc']			= 'Default view for the Table of Contents';
+	$lang['showtoc_o_show']		= 'Opened';
+	$lang['showtoc_o_hide']	= 'Collapsed';
+
 $lang['darkmode']			= 'Alternative “dark mode” style';
 	$lang['darkmode_o_off']	= 'Disabled';
 	$lang['darkmode_o_auto']	= 'Follow user settings';

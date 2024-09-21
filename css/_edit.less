@@ -10,6 +10,7 @@ main {
 			margin-top: -22pt;
 			line-height: 0;
 			z-index: 5;
+			display: none;
 		}
 		div.no {
 			display: inline;
@@ -17,7 +18,7 @@ main {
 			padding: 0;
 		}
 		button {
-			border: @ini_border_color solid 1pt;
+			border: @ini_border_color solid 1.5pt;
 			background-color: transparent;
 			color: transparent;
 			width: 1.75rem; height: 1.75rem;
@@ -41,8 +42,13 @@ main {
 	}
 	div.section_highlight_wrapper.section_highlight {
 		outline: @ini_focus_outline dashed 3px;
-		border-radius: .5em;
+		border-radius: .25em;
 	}
+}
+
+/* show edit buttons when logged in */
+body.loggedIn main .secedit {
+	display: initial;
 }
 
 body.mode_edit, body.mode_preview {
@@ -56,7 +62,7 @@ body.mode_edit, body.mode_preview {
 		}
 		.editBox {
 			& {
-				background-color: @ini_alt_color;
+				background-color: @ini_background_alt;
 				border-radius: .25rem;
 				padding: .125rem;
 			}
@@ -64,7 +70,7 @@ body.mode_edit, body.mode_preview {
 				z-index: 9;
 				position: sticky;
 				top: 0;
-				background-color: @ini_alt_color;
+				background-color: @ini_background_alt;
 			}
 			#tool__bar {
 				& {
@@ -240,7 +246,7 @@ body.mode_edit, body.mode_preview {
 		& {
 			font-family: @ini_toolbar_fonts;
 			font-size: @ini_toolbar_font_size;
-			background-color: @ini_alt_color;
+			background-color: @ini_background_alt;
 			border: @ini_border_color solid 1px;
 			color: @ini_toolbar_text;
 			padding: .125rem;

@@ -26,5 +26,8 @@ $meta['bannerimg'] = array('string');
 
 $meta['bannersize'] = array('string');
 
+$meta['showtoc'] = array('multichoice',
+						'_choices' => array ('show', 'hide'));
+
 $meta['darkmode'] = array('multichoice',
 						'_choices' => array ('off', 'auto'));

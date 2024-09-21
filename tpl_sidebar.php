@@ -3,10 +3,9 @@
 	if (!defined('DOKU_INC')) die();
 
 	$hasSidebar = page_findnearest($conf['sidebar']);
-	$showSidebar = $hasSidebar && ($ACT=='show');
 
-?>				<div id="sidebar" class="toggle <?php echo ( $showSidebar ? 'auto' : 'hide' ); ?>">
-					<button type="button" class="tg_button" title="<?php echo $lang['sidebar'] ?>"><span><?php echo $lang['sidebar'] ?></span></button>
+?>				<div id="sidebar">
+					<button type="button" id="tg_button" title="<?php echo $lang['sidebar'] ?>"><span class="sr-only"><?php echo $lang['sidebar'] ?></span></button>
 					<nav id="sbNavigation">
 <!-- - - - - - - - - Sidebar header include - - - - - - - -->
 <?php
