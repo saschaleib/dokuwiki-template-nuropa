@@ -14,21 +14,25 @@
 		border-bottom: @ini_toolbar_border solid 1px;
 	}
 	button {
-		& {
-			height: 100%;
-			font-family: @ini_toolbar_fonts;
-			font-size: inherit;
-			border: none;
-			background: transparent;
-			color: @ini_toolbar_text;
-			padding: 0 3pt;
-			cursor: pointer;
-		}
-		&:hover,
-		&:focus {
-			background-color: @ini_toolbar_text;
-			color: @ini_toolbar_background;
-		}
+		height: 100%;
+		font-family: @ini_toolbar_fonts;
+		font-size: inherit;
+		border: none;
+		background: transparent;
+		color: @ini_toolbar_text;
+		padding: 0 3pt;
+		cursor: pointer;
+		border-radius: .25em;
+	}
+	svg {
+		fill: @ini_toolbar_text;
+	}
+	a:link, a:visited {
+		color: @ini_toolbar_text;
+		border-radius: .25em;
+	}
+	a:hover, button:hover {
+		background-color: @ini_toolbar_hl_bg;
 	}
 }
 
@@ -48,8 +52,6 @@
 #tb-menu-group {
 	display: grid;
 	grid-template-columns: 0 1.5em;
-	border: @ini_toolbar_border solid 0;
-	border-width: 0 1px;
 	height: ~"calc(100% - 1px)";
 }
 #tb-menu-group::before {
@@ -63,17 +65,22 @@
 }
 
 /* toolbar is fixed if the user is logged in: */
-body.loggedIn #toolbar-layout {
+body.loggedIn {
 	& {
-		position: fixed;
-		top: 0; left: 0; right: 0;
-		opacity: .93;
-		-webkit-box-shadow: .5px .5px .5px 0px rgba(0,0,0,0.4);
-		box-shadow: .5px .5px .5px 0px rgba(0,0,0,0.4);
-		z-index: 101;
+		margin-top: 34px;
 	}
-	#site-toolbar {
-		opacity: 1;
+	#toolbar-layout {
+		& {
+			position: fixed;
+			top: 0; left: 0; right: 0;
+			opacity: .93;
+			-webkit-box-shadow: .5px .5px .5px 0px rgba(0,0,0,0.4);
+			box-shadow: .5px .5px .5px 0px rgba(0,0,0,0.4);
+			z-index: 101;
+		}
+		#site-toolbar {
+			opacity: 1;
+		}
 	}
 }
 
@@ -89,19 +96,8 @@ body.loggedIn #toolbar-layout {
 			gap: .25em;
 			border: transparent none 0;
 			border-width: 0 1px;
-			border-radius: 0;
-			padding: .25em;
-		}
-		svg {
-			fill: @ini_toolbar_text;
-		}
-		&:hover,
-		&:focus {
-			outline: none;
-		}
-		&:hover svg,
-		&:focus svg {
-			fill: @ini_toolbar_background;
+			border-radius: .25em;
+			padding: .5em .25em;
 		}
 		&:after {
 			content: ' ';
@@ -111,6 +107,8 @@ body.loggedIn #toolbar-layout {
 			background: linear-gradient(90deg, @ini_toolbar_background 20%, transparent 100%);
 			position: relative;
 			right: -5px;
+			padding: .5em 0;
+			top: -.5em;
 		}
 	}
 	#user-action-buttons {
@@ -131,14 +129,10 @@ body.loggedIn #toolbar-layout {
 			}
 			a:link,
 			a:visited {
-				color: @ini_toolbar_text;
 				text-decoration: none;
 				display: inline-grid;
 				gap: .125em;
 				width: 100%;
-			}
-			a:hover {
-				text-decoration: underline;
 			}
 		}
 	}
@@ -157,23 +151,10 @@ body.loggedIn #toolbar-layout {
 		cursor: pointer;
 	}
 	svg {
-		fill: @ini_toolbar_text;
 		width: 1.5em; height: 1.5em;
 	}
 	svg.overflow { display: block; }
 	svg.menu { display: none; }
-
-	&:hover,
-	&:focus {
-		& {
-			background-color: @ini_toolbar_text;
-			color: @ini_toolbar_background;
-			outline: none;
-		}
-		svg {
-			fill: @ini_toolbar_background;
-		}
-	}
 }
 
 /* tools toolbar */
@@ -190,28 +171,20 @@ body.loggedIn #toolbar-layout {
 				display: inline-grid;
 				grid-template-columns: 1.5em auto;
 				gap: .4em;
-				height: 100%; width: 100%;
+				height: ~"calc(100% - 7px)";
+				width: 100%;
 				box-sizing: border-box;
 				padding: .25em .5em .25em .5em;
 			}
 			a:link,
 			a:visited {
-				color: @ini_toolbar_text;
 				text-decoration: none;
 			}
-			a:hover,
-			a:focus {
-				background-color: @ini_toolbar_text;
-				color: @ini_toolbar_background;
-				outline: none;
+			a:focus, button:focus {
+				outline-color: @ini_toolbar_focus_color;
 			}
 			svg {
 				width: 1.5em; height: auto;
-				fill: @ini_toolbar_text;
-			}
-			a:hover svg,
-			a:focus svg {
-				fill: @ini_toolbar_background;
 			}
 		}
 	}
@@ -222,7 +195,7 @@ body.loggedIn #toolbar-layout {
 			background: @ini_toolbar_background;
 			list-style: none inside;
 			position: absolute;
-			top: ~"calc(1.4em + 12px)";
+			top: ~"calc(" @ini_toolbar_font_size ~" + 2.5em)";
 			width: max-content;
 			border: @ini_toolbar_border solid 1px;
 			border-radius: 2px;
@@ -255,11 +228,8 @@ body.loggedIn #toolbar-layout {
 			& {
 				display: inline-block;
 				height: 100%;
+				padding: 4px;
 			}
-			a {
-				border-left: @ini_toolbar_border solid 1px;
-			}
-
 		}
 	}
 

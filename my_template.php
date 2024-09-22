@@ -237,8 +237,7 @@ function my_toc($prefix = '') {
     }
 
 	/* inline icons: */
-	$iconClose = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' class='icn_close'><path d='M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z' /></svg>";
-	$iconOpen = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' class='icn_open'><path d='M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z' /></svg>";
+	$iconSvg = "<svg width='100%' height='100%' viewBox='0 0 24 24' version='1.1' xmlns='http://www.w3.org/2000/svg'><rect class='top-bar' x='5' y='6' width='14' height='2'></rect><rect class='middle-bar' x='5' y='11' width='14' height='2'></rect><rect class='bottom-bar' x='5' y='16' width='14' height='2'></rect></svg>";
 
 	$tocView = tpl_getConf('showtoc', 'hide');
 	if (in_array($ACT, array('admin'))) {
@@ -248,7 +247,7 @@ function my_toc($prefix = '') {
 	/* Build the hierarchical list of headline links: */
 	if (count($toc) >= intval($conf['tocminheads'])) {
 		echo $prefix . "<aside id=\"toc\" class=\"toggle_{$tocView}\">\n";
-		echo $prefix . "\t<div id=\"toc_header\"><h2>" . htmlentities($lang['toc']) . "</h2><button type=\"button\" id=\"toc-menubutton\" class=\"tg_button\" title=\"" . htmlentities($lang['toc']) . '" aria-haspopup="true" aria-controls="toc-menu"><span class="sr-only">' . htmlentities($lang['toc']) . "</span>" . $iconOpen . $iconClose . "</button></div>\n";
+		echo $prefix . "\t<div id=\"toc_header\"><h2>" . htmlentities($lang['toc']) . "</h2><button type=\"button\" id=\"toc-menubutton\" class=\"tg_button\" title=\"" . htmlentities($lang['toc']) . '" aria-haspopup="true" aria-controls="toc-menu"><span class="sr-only">' . htmlentities($lang['toc']) . "</span>" . $iconSvg . "</button></div>\n";
 		echo $prefix . "\t<div id=\"toc-menu\" class=\"tg_content\" role=\"menu\" aria-labelledby=\"toc-menubutton\">";
 		
 		$level = 0;

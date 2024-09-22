@@ -5,25 +5,24 @@
 
 /* Root styles */
 
-html, body {
+body {
+	color: @ini_text;
+	background-color: @ini_background;
+	max-width: 100%;
+	overflow-x: hidden;
+	overflow-y: auto;
+	text-rendering: optimizeLegibility;
 	font-family: @ini_default_fonts;
 	font-size: @ini_default_font_size;
 	margin: 0;
 	padding: 0;
 	scrollbar-gutter: auto;
 	scrollbar-width: thin;
-	color: @ini_text;
-	background-color: @ini_background;
 	scrollbar-color: @ini_background_alt @ini_background;
 }
 html {
 	scroll-behavior: smooth;
 	overflow: hidden scroll;
-}
-body {
-	background-color: @ini_background;
-	max-width: 100%;
-	overflow: auto;
 }
 
 * {
@@ -114,7 +113,8 @@ body > #main-layout {
 		}
 		&.toggle_collapse {
 			& {
-				grid-template-columns: 2rem auto;
+				grid-template-columns: 1rem auto;
+				gap: 0;
 			}
 			#sidebar > nav {
 				display: none;
@@ -143,9 +143,9 @@ button[type=submit] {
 button[type=submit]:disabled {
 	filter:  ~"opacity(0.6) saturate(0.67)";
 }
-button:hover, button:focus {
+/*button:hover, button:focus {
 	filter: ~"brightness(80%) contrast(150%)";
-}
+}*/
 button[type=submit]:hover, button[type=submit]:focus {
 	border-color: @ini_form_submit_btn_text;
 	background-color: @ini_form_submit_btn_bg;

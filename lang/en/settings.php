@@ -28,7 +28,7 @@ $lang['navtrail']			= 'Show current page in the breadcrumbs';
 	$lang['navtrail_o_text']	= 'Show as text';
 	$lang['navtrail_o_link']	= 'Show as link';
 
-$lang['userinfo'] = 'Where should the user information be displayed<br><small>(the other position is available for a static HTML include)</small>';
+$lang['userinfo'] = 'Where should the user information be displayed?';
 	$lang['userinfo_o_toolbar']	= 'In the toolbar';
 	$lang['userinfo_o_header']	= 'In the header area';
 

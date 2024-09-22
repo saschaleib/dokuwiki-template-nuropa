@@ -7,7 +7,7 @@
 
 /* position of the breadcrumbs and 'you are here' lists ('header' or 'post') */
 $conf['breadcrumbpos']  = 'banner';
-$conf['youareherepos']  = 'header';
+$conf['youareherepos']  = 'banner';
 
 /* what to show in place of a page headline */
 $conf['pageheadline']  = 'sitename';

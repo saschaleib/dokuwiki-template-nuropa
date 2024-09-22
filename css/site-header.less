@@ -89,6 +89,7 @@ body > #header-layout {
 					background-color: @ini_background;
 					-webkit-box-shadow:	2px 2px 2px 0 rgba(0,0,0,.5);
 					box-shadow:	2px 2px 2px 0 rgba(0,0,0,.5);
+					overflow: hidden auto;
 				}
 				strong {
 					display: none;
@@ -161,8 +162,6 @@ body > #header-layout {
 						border-bottom-color: @ini_background;
 						border-width: 9px;
 						margin-left: -9px;
-					}
-					li {
 					}
 					a {
 						display: flex;
@@ -255,6 +254,7 @@ body > #header-layout {
 			.breadcrumbs-nav {
 				display: grid;
 				grid-template-rows: auto auto;
+				margin: .5rem 0;
 			}
 			#post-header-breadcrumbs {
 				& {

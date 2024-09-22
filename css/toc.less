@@ -5,14 +5,16 @@
 
 #toc {
 	& {
+		position: relative;
+		width: auto;
 		float: right;
 		margin-top: 3rem;
-		border-left: @ini_border_color solid 1px;
 		margin-left: .5rem;
 		border-radius: 2px 2px .25rem .25rem;
+		background-color: @ini_background;
 	}
 	#toc-menu {
-		display: none;
+		overflow: hidden;
 	}
 	#toc_header {
 		& {
@@ -30,13 +32,17 @@
 		}
 		svg {
 			& {
-				width: 1rem;
-				height: 1rem;
-				fill: @ini_link_inpage;
-				display: none;
+				width: 1.1rem;
+				height: 1.1rem;
+				fill: @ini_toc_link_color;
 			}
 			&:hover {
 				fill: @ini_link;
+			}
+			rect {
+				transform: none;
+				transition-duration: .5s;
+				transform-origin: center;
 			}
 		}
 	}
@@ -44,16 +50,30 @@
 		& {
 			width: 40%;
 			box-shadow: 0 0 4px 0 rgba(0,0,0,0.3);
+			z-index: 3;
 		}
 		#toc-menu {
-			display: block;
+			overflow: initial;
+			height: auto;
 		}
 		#toc_header {
 			& {
 				border-bottom: @ini_border_color solid 1px;
 			}
-			svg.icn_close {
-				display: block;
+			svg {
+				rect {
+					transition-duration: .5s;
+					transform-origin: center;
+				}
+				.top-bar {
+					transform: rotate(-45deg) scale(150%, 100%) translateY(20%);
+				}
+				.middle-bar {
+					transform: scale(5%, 100%);
+				}
+				.bottom-bar {
+					transform: rotate(45deg) scale(150%, 100%) translateY(-20%);
+				}
 			}
 		}
 	}
@@ -61,11 +81,11 @@
 		& {
 			width: 1.5rem;
 		}
+		#toc-menu {
+			height: 0;
+		}
 		h2 {
 			display: none;
-		}
-		#toc_header svg.icn_open {
-			display: block;
 		}
 	}
 }
@@ -105,7 +125,7 @@
 		}
 		a:link, a:visited {
 			display: block;
-			color: @ini_link_inpage;
+			color: @ini_toc_link_color;
 			text-decoration: none;
 			padding: .5em .25em .5em .5rem;
 		}
