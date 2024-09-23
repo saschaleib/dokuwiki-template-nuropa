@@ -25,6 +25,8 @@
 	    (new \dokuwiki\Menu\UserMenu())->getItems(),
 	);
 
+	$svgIcon = "<svg width='100%' height='100%' viewBox='0 0 24 24' version='1.1' xmlns='http://www.w3.org/2000/svg'><rect class='h1' x='5' y='5' width='14' height='2'/><rect class='v1' x='17' y='5' width='2' height='14'/><rect class='h2' x='5' y='17' width='14' height='2'/><rect class='v2' x='5' y='5' width='2' height='14'/></svg>";
+
  ?>
 				</div>
 				<div id="site-toolbar-group">
@@ -33,8 +35,7 @@
  ?>
 					<div id="tb-menu-group">
 						<button id="pagetools-btn" aria-haspopup="menu" aria-controls="pagetools-popup" title="<?php echo htmlentities($lang['tools']); ?>" data-align_menu="right">
-							<svg class="overflow" viewBox="0 0 24 24"><path d="M16.59,5.59L18,7L12,13L6,7L7.41,5.59L12,10.17L16.59,5.59M16.59,11.59L18,13L12,19L6,13L7.41,11.59L12,16.17L16.59,11.59Z" /></svg>
-							<svg class="menu" viewBox="0 0 24 24"><path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" /></svg>
+							<?php echo $svgIcon; ?>
 							<span class="label sr-only"><?php echo htmlentities($lang['tools']); ?></span>
 						</button>
 <?php

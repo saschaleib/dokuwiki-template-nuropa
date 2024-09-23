@@ -37,12 +37,19 @@
 }
 
 #site-toolbar {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	line-height: 1.5em;
-	overflow: hidden;
-	white-space: nowrap;
+	& {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		line-height: 1.5em;
+		overflow: hidden;
+		white-space: nowrap;
+	}
+	button {
+		&:focus {
+			outline-color: @ini_toolbar_focus_color;
+		}
+	}
 }
 
 #site-toolbar-group {
@@ -99,17 +106,6 @@ body.loggedIn {
 			border-radius: .25em;
 			padding: .5em .25em;
 		}
-		&:after {
-			content: ' ';
-			display: inline-block;
-			width: 4px;
-			height: 100%;
-			background: linear-gradient(90deg, @ini_toolbar_background 20%, transparent 100%);
-			position: relative;
-			right: -5px;
-			padding: .5em 0;
-			top: -.5em;
-		}
 	}
 	#user-action-buttons {
 		& {
@@ -141,20 +137,52 @@ body.loggedIn {
 /* tools menu button */
 #pagetools-btn {
 	& {
-		height: 100%;
+		height: ~"calc(100% - 1pt) !important";
 		width: 2.2em;
-		border: transparent none 0;
-		border-radius: 0;
-		background: transparent none;
-		padding: 2px .25em;
-		font-size: inherit;
-		cursor: pointer;
+		margin-top: 1pt;
 	}
 	svg {
-		width: 1.5em; height: 1.5em;
+		& {
+			width: 1.5em;
+			height: 1.5em;
+		}
+		.h1, .h2, .v1, .v2 {
+			transition-duration: .5s;
+			transform-origin: center;
+		}
 	}
-	svg.overflow { display: block; }
-	svg.menu { display: none; }
+	&[aria-expanded="true"] {
+		svg {
+			.h1 {
+				transform: rotate(140deg) scale(50%,80%) translate(-30%,30%);
+			}
+			.v1 {
+				transform: rotate(-130deg) scale(80%,50%) translate(-45%,5%);
+			}
+			.h2 {
+				transform: rotate(50deg) scale(50%,80%) translate(-30%,-30%);
+			}
+			.v2 {
+				transform: rotate(-40deg) scale(80%,50%) translate(10%,5%);
+			}
+		}
+	}
+	&:not([aria-expanded="true"]) {
+		svg {
+			.h1 {
+				transform: rotate(50deg) scale(50%,80%) translate(0%,0%);
+			}
+			.v1 {
+				transform: rotate(-130deg) scale(80%,50%) translate(-40%,10%);
+			}
+			.h2 {
+				transform: rotate(50deg) scale(50%,80%) translate(-30%,-30%);
+			}
+			.v2 {
+				transform: rotate(50deg) scale(80%,50%) translate(20%,15%);
+			}
+		}
+	}
 }
 
 /* tools toolbar */

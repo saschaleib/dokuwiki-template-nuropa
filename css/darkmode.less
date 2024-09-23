@@ -9,9 +9,41 @@
     /* general colour settings: */
     body.darkmode {
 
+		/* general elements */
+		ul.tabs {
+			& {
+				border-bottom-color: @ini_form_btn_outline_dark;
+			}
+			li > a {
+				color: @ini_form_btn_text_dark !important;
+			}
+			li.active > a, li > strong {
+				border-color: @ini_form_btn_outline_dark !important;
+				border-top-color: @ini_theme_color_dark !important;
+				border-bottom-color: @ini_background_dark !important;
+			}
+		}
+		input[type="text"], input[type="password"], input[type="email"], input[type="url"], textarea {
+			background-color: @ini_form_field_bg_dark;
+			color: @ini_form_field_text_dark;
+			border-color: @ini_form_btn_outline_dark;
+		}
+		button {
+			border-color: @ini_form_btn_outline_dark;
+			background-color: @ini_form_btn_bg_dark;
+			color: @ini_form_btn_text_dark;
+		}
+		button[type="submit"] {
+			border-color: @ini_form_btn_outline_dark;
+			background-color: @ini_form_submit_btn_bg_dark;
+			color: @ini_form_submit_btn_text_dark;
+		}
+
 		/* background color: */
 		& {
+			color: @ini_text_dark;
 			background-color: @ini_background_dark;
+			scrollbar-color: @ini_bg_alt_dark @ini_background_dark;
 		}
 		#skip-link a {
 			background-color: @ini_background_dark;
@@ -44,10 +76,6 @@
 			svg {
 				fill: @ini_toolbar_text_dark;
 			}
-			
-			#user-button::after {
-				background: linear-gradient(90deg, @ini_toolbar_background_dark 20%, transparent 100%);
-			}
 			#tb-menu-group::before {
 				background: linear-gradient(90deg, transparent 0, @ini_toolbar_background_dark 80%);
 			}
@@ -68,6 +96,34 @@
 						border-bottom-color: @ini_toolbar_border_dark;
 					}
 				}
+			}
+		}
+		
+		& > #header-layout {
+			#searchbar-layout {
+				background-color: @ini_searchbar_bg_dark;
+				color: @ini_searchbar_text_dark;
+			}
+			#searchbar-layout #searchbar #search-group #dw__search div.no {
+				& {
+					border: @ini_form_field_outline;
+					background-color: @ini_form_field_bg_dark;
+				}
+				input {
+					color: @ini_form_field_text_dark;
+					background-color: @ini_form_field_bg_dark;
+				}
+				button {
+					color: @ini_form_btn_text_dark;
+					background-color: @ini_form_btn_bg_dark;
+				}
+				button:hover {
+					filter: ~"brightness(120%)";
+				}
+			}
+			#menu-layout {
+				background-color: @ini_header_bg_dark;
+				color: @ini_header_text_dark;
 			}
 		}
 	}

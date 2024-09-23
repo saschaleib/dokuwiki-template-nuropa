@@ -34,7 +34,7 @@ $lang['userinfo'] = 'Where should the user information be displayed?';
 
 $lang['bannerimg'] = 'Name of the image file to use as banner image<br><small>(without file extension, leave empty to disable banner images)</small>';
 
-$lang['bannersize'] = 'Minimum banner size<br /><small>(you can use any <abbr>CSS</abbr> length string, including <tt>auto</tt>)</small>';
+$lang['bannersize'] = 'Minimum banner size <small>(you can use any <abbr>CSS</abbr> length string, including <tt>auto</tt>)</small>';
 
 $lang['showtoc']			= 'Default view for the Table of Contents';
 	$lang['showtoc_o_show']		= 'Opened';
