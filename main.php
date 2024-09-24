@@ -49,12 +49,7 @@ require_once('my_template.php');
 <?php tpl_content(false) ?>
 
 <!-- - - - - - - - - END OF ARTICLE  - - - - - - - -->
-					<div id="to-top-block">
-						<a href="#dokuwiki__top" title="Back to top [t]" rel="nofollow" accesskey="t">
-							<span class="sr-only">Back to top</span>
-							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path></svg>
-						</a>
-					</div>
+<?php echo my_topbtn(str_repeat("\t", 5)); ?>
 				</main>
 			</div>
 		</div>

@@ -73,7 +73,7 @@ $lang['__menubar_link__']			= 'Menubar link colour';
 
 /* Sidebar settings */
 
-$lang['__sidebar_text_align__']		= '<b>Sidebar</b> text alignmment <small>(use: <code>left</code>, <code>center</code>, <code>right</code> or <code>auto</code>)</small>';
+$lang['__sidebar_text_align__']		= '<b>Sidebar</b> text alignmment <small>(use: <code>left</code>, <code>center</code> or <code>right</code>)</small>';
 $lang['__sidebar_link_color__']		= 'Sidebar text colour';
 $lang['__sidebar_headline_color__']	= 'Sidebar headline colour';
 

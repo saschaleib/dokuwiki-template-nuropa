@@ -52,24 +52,34 @@ main .ui-admin {
 			padding: 0;
 		}
 		li {
-			& {
-				padding: .25em;
-			}
+			& { }
 			&:hover {
 				background-color: @ini_background_alt;
 				border-radius: .5em;
 			}
-			a {
-				display: block;
-				border-radius: .25em;
-				color: @ini_link;
+			a:link, a:visited {
 				display: flex;
-				align-items: flex-start;
-				gap: .25em;
+				align-items: center;
+				gap: .35em;
+				color: @ini_form_btn_text;
+				background-color: @ini_form_btn_bg;
+				border: @ini_border_color solid 1px;
+				border-radius: .25em;
 				text-decoration: none;
+				padding: .4em;
+			}
+			a:hover {
+				filter: ~"brightness(85%) contrast(120%)";
+			}
+			.icon {
+				height: 1.25rem;
+			}
+			.prompt {
+				line-height: 1.25rem;
 			}
 			svg {
-				fill: @ini_link;
+				fill: @ini_form_btn_text;
+				height: 1.25rem;
 			}
 		}
 	}

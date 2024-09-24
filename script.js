@@ -126,6 +126,7 @@ $p = {
             $p.gui.sidebar.init();
             $p.gui.toc.init();
             $p.gui.menus.init();
+            $p.gui.editor.init();
         },
 
         toolbar: {
@@ -185,13 +186,15 @@ $p = {
 		sidebar: {
 			
             init: function() {
-                console.info('gui.sidebar.init()');
+                //console.info('gui.sidebar.init()');
 
-                jQuery('#tg_button').on('click', $p.gui.sidebar._onSbBtnClick);
-
+				const btn = document.getElementById('tg_button');
+				if (btn) {
+					btn.addEventListener('click', $p.gui.sidebar._onSbBtnClick);
+				}
             },
 			
-			_onSbBtnClick: function() {
+			_onSbBtnClick: function(e) {
                 //console.info('gui.sidebar._onSbBtnClick()');
 				
 				const layout = document.getElementById('main-sidebar-layout');
@@ -204,13 +207,14 @@ $p = {
 						}
 					});
 				}
+				e.preventDefault();
 			}
 		},
 
 		toc: {
 			
             init: function() {
-                console.info('gui.toc.init()');
+                //console.info('gui.toc.init()');
 
                 jQuery('#toc-menubutton').on('click', $p.gui.toc._onTocBtnClick);
 
@@ -302,6 +306,38 @@ $p = {
                 }
             }
         },
+
+		/* editor */
+		editor: {
+			init: function() {
+                //console.info('gui.editor.init()');
+
+				try {
+					if (document.body.classList.contains('mode_edit') || document.body.classList.contains('mode_preview')) {
+						
+						const tb = document.getElementById('size__ctl');
+						if (tb) {
+							/* create button: */
+							const btn = document.createElement('button');
+							btn.setAttribute('id', 'btn_focus');
+							btn.setAttribute('title', 'Focus mode');
+							btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 12C17 7.55 11.62 5.31 8.46 8.46C5.31 11.61 7.55 17 12 17C14.76 17 17 14.76 17 12M12 15C9.33 15 8 11.77 9.88 9.88C11.77 8 15 9.33 15 12C15 13.66 13.66 15 12 15M5 15H3V19C3 20.1 3.9 21 5 21H9V19H5M5 5H9V3H5C3.9 3 3 3.9 3 5V9H5M19 3H15V5H19V9H21V5C21 3.9 20.1 3 19 3M19 19H15V21H19C20.1 21 21 20.1 21 19V15H19" style="fill:#C0C0C0" /></svg>';
+							btn.addEventListener('click', $p.gui.editor._onButtonClick);
+							
+							tb.appendChild(btn);
+						}
+					}
+				} catch(err) {
+					console.error(err);
+				}
+			},
+			
+			_onButtonClick: function(e) {
+
+				document.body.classList.toggle('focus_mode');
+				e.preventDefault();
+			}
+		},
 
         /**
 		 * Page.GUI.Overlay Namespace

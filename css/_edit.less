@@ -52,7 +52,7 @@ body.loggedIn main .secedit {
 }
 
 body.mode_edit, body.mode_preview {
-	#main-layout > main {
+	#main-layout main {
 		& {
 			max-width: 100%;
 		}
@@ -62,54 +62,54 @@ body.mode_edit, body.mode_preview {
 		}
 		.editBox {
 			& {
-				background-color: @ini_background_alt;
-				border-radius: .25rem;
-				padding: .125rem;
 			}
 			.toolbar {
-				z-index: 9;
+				z-index: 10;
 				position: sticky;
-				top: 0;
-				background-color: @ini_background_alt;
+				top: ~"calc(" @ini_toolbar_font_size ~" + 1.25rem)";
+				background-color: @ini_toolbar_background;
+				border: @ini_toolbar_border solid 1px;
+				padding: .25rem;
+				margin-bottom: .25em;
+				box-shadow: .125rem .125rem .5rem 0 rgba(0,0,0,.2);
 			}
 			#tool__bar {
 				& {
-					margin-bottom: .125rem;
 				}
 				button.toolbutton {
 					& {
 						width: 24px; height: 24px;
 						border: transparent solid 1px;
 						border-radius: .125rem;
-						background-color: @ini_background;
+						background-color: transparent;
 						padding: .125rem;
 						margin: .125rem 0 .125rem .25rem;
 						cursor: pointer;
 					}
 					&:hover {
-						border-color: @ini_focus_outline;
-					}
-					&:nth-child(6),
-					&:nth-child(10),
-					&:nth-child(12),
-					&:nth-child(14),
-					&:nth-child(16) {
-						margin-left: .5rem;
+						background-color: @ini_toolbar_hl_bg;
 					}
 				}
 			}
 			#draft__status {
 				font-size: small;
 				margin: .125rem 0 .125rem .5rem;
+				float: left;
 			}
 			#dw__editform {
 				textarea {
-					width: 100%;
-					box-sizing: border-box;
-					min-width: 100%;
-					max-width: 100%;
-					font-family: @ini_mono_fonts;
-					font-size: @ini_mono_font_size;
+					& {
+						width: 100%;
+						box-sizing: border-box;
+						min-width: 100%;
+						max-width: 100%;
+						font-family: @ini_mono_fonts;
+						font-size: @ini_mono_font_size;
+						resize: vertical;
+					}
+					&:focus {
+						outline: transparent none 0;
+					}
 				}
 				div.license {
 					font-size: small;
@@ -130,68 +130,52 @@ body.mode_edit, body.mode_preview {
 						height: 24px;
 						margin-left: .25rem;
 					}
+					img:nth-child(1), img:nth-child(2) {
+						display: none;
+					}
+					button {
+						& {
+							border: transparent 0 none;
+							background-color: transparent;
+							padding: 0; margin: 0;
+						}
+						svg {
+							width: 28px; height: 28px;
+						}
+					}
 				}
 				.editButtons {
 					& {
 						display: flex;
-						justify-content: center;
+						justify-content: space-around;
 						padding: .5rem 0 0 0;
 					}
 					button {
-						display: inline-grid;
-						grid-template-columns: 1em auto;
-						column-gap: .25em;
-						font-family: @ini_toolbar_fonts;
-						font-size: @ini_toolbar_font_size;
-						line-height: 1em;
-						font-weight: 550;
-						margin: 0 .5em;
-						border: @ini_toolbar_border solid 1.5pt;
-						background-color: @ini_toolbar_background;
-						padding: .25em .5em;
-						color: @ini_toolbar_text;
-						cursor: pointer;
+						& {
+							border: @ini_form_btn_outline solid 1px;
+							margin: 0 .25rem;
+						}
+						&[name="do[cancel]"] {
+							background-color: @ini_form_btn_bg;
+							color: @ini_form_btn_text;
+						}
 					}
-					button::before {
-						content: ' ';
-						width: 1em; height: 1em;
-						background: none center bottom no-repeat;
-						background-size: 1em;
-
-					}
-					button#edbtn__save {
-						background-color: #ccddff;
-					}
-					button#edbtn__save::before {
-						background-image: url('images/icon/edit-save.svg');
-					}
-					button#edbtn__preview {
-						background-color: #ccffdd;
-					}
-					button#edbtn__preview::before {
-						background-image: url('images/icon/edit-preview.svg');
-					}
-					button[name="do[cancel]"] {
-						background-color: #ffccdd;
-					}
-					button[name="do[cancel]"]::before {
-						background-image: url('images/icon/edit-cancel.svg');
-					}
-					button:hover {
-						border-color: @ini_toolbar_text;
+					#edbtn__preview {
+						background-color: @ini_form_alt_btn_bg;
+						color: @ini_form_alt_btn_text;
 					}
 				}
 				.summary {
 					& {
 						display: grid;
-						grid-template-columns: auto min-content;
+						grid-template-columns: auto max-content;
 						column-gap: .5rem;
+						font-size: .86rem;
 					}
 					label[for=edit__summary] {
 						& > span {
 							display: block;
 							width: 100%;
-							font-size: smaller;
 						}
 						input[type=text] {
 							width: e('calc(100% - 10px)');
@@ -203,7 +187,6 @@ body.mode_edit, body.mode_preview {
 							content: ' ';
 							display: block;
 							width: 100%;
-							font-size: smaller;
 							margin-bottom: .125rem;
 						}
 						input {
@@ -244,67 +227,89 @@ body.mode_edit, body.mode_preview {
 	
 	& > div.picker {
 		& {
+			z-index: 11;
 			font-family: @ini_toolbar_fonts;
 			font-size: @ini_toolbar_font_size;
-			background-color: @ini_background_alt;
-			border: @ini_border_color solid 1px;
 			color: @ini_toolbar_text;
-			padding: .125rem;
-			-webkit-box-shadow: .125rem .125rem .5rem 0 rgba(0,0,0,.2);
+			background-color: @ini_toolbar_background;
+			border: @ini_toolbar_border solid 1px;
+			padding: .125em;
 			box-shadow: .125rem .125rem .5rem 0 rgba(0,0,0,.2);
 		}
-		button.toolbutton {
-			& {
-				background-color: @ini_toolbar_background;
-				border: @ini_toolbar_border solid 1px;
-				min-width: 24px; min-height: 24px;
-				cursor: pointer;
-				margin: 1px;
-			}
-			&:hover {
-				background-color: @ini_background_alt;
-				color: @ini_text_alt;
-				filter: none;
-			}
+		button {
+			background-color: transparent;
+			border: transparent none 0;
+			min-width: 24px; min-height: 24px;
+			cursor: pointer;
+			margin: 1px;
 		}
-		&#picker1 {
-			& {
-				width: 308px; max-width: 308px; min-width: 308px;
-				resize: both;
-				overflow: auto;
-			}
-			button {
-				padding: .1em;
-				border-color: @ini_toolbar_border;
-			}
+		button:hover {
+			background-color: @ini_toolbar_hl_bg;
 		}
-		&#picker2 {
+	}
+
+	& > #picker1 {
+		& {
+			width: 308px; max-width: 308px; min-width: 308px;
+			resize: both;
+			overflow: auto;
+		}
+		button {
+			padding: .1em;
+			border-color: @ini_toolbar_border;
+		}
+	}
+	& > #picker2 {
+		& {
+			width: 585px; max-width: 585px; min-width: 585px;
+			resize: both;
+			overflow: auto;
+		}
+		button {
+			padding: .25em;
+			border-color: @ini_toolbar_border;
+		}
+	}
+}
+
+body.mode_edit.focus_mode,
+body.mode_preview.focus_mode {
+	& {
+		margin-top: 0 !important;
+	}
+	#skip-link, #toolbar-layout, #header-layout, #footer-layout,
+	#to-top-block {
+		display: none !important;
+	}
+	#main-layout {
+		& {
+			padding-bottom: 0;
+		}
+		#main-sidebar-layout {
 			& {
-				width: 585px; max-width: 585px; min-width: 585px;
-				resize: both;
-				overflow: auto;
+				max-width: 100%;
+				grid-template-columns: 0 auto 0;
 			}
-			button {
-				padding: .25em;
-				border-color: @ini_toolbar_border;
+			#sidebar {
+				visibility: hidden;
+			}
+			#main-content {
+				p:first-of-type {
+					display: none;
+				}
+				#dw__editform {
+					padding: 0 .25rem;
+				}
+			}
+			main .editBox .toolbar {
+				top: 0 !important;
 			}
 		}
 	}
-	.editBox {
-		.toolbar {
-			& {
-				margin-bottom: .25em;
-				position: sticky;
-				top: 0;
-			}
-			#tool__bar {
-				button {
-					padding: .5em;
-					margin-right: .25em;
-				}
-
-
-			}
-		}
+	#preview,
+	div.preview {
+		margin: 0 .5rem;
+		max-width: 100%;
+		border-width: 1pt 1px;
 	}
 }

@@ -345,3 +345,30 @@ main div.noteredirect {
 main #toc.toggle_show ~ div.noteredirect {
 	max-width: 50%;
 }
+
+/* prosemirror overrides */
+body.mode_edit, body.mode_preview {
+	.plugin_prosemirror_useWYSIWYG {
+		& {
+			color: @ini_link;
+			background-color: transparent;
+			border: transparent 0 none;
+			padding: 0; margin: 0 0 .25em 0;
+			float: right;
+		}
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}
+#prosemirror__editor {
+	& {
+		clear: both;
+	}
+	.menubar.prosemirror-menubar-fixed {
+		margin-top: ~"calc(" @ini_toolbar_font_size ~" + .5rem)";
+	}
+	.menubar .menuitem {
+		padding: 0;
+	}
+}

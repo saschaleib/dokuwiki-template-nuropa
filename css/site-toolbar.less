@@ -9,7 +9,7 @@
 		color: @ini_toolbar_text;
 		font-family: @ini_toolbar_fonts;
 		font-size: @ini_toolbar_font_size;
-		//height: ~"calc(1.4em + 1px)";
+		//height: ~"calc(1.4rem + 1px)";
 		clear: both;
 		border-bottom: @ini_toolbar_border solid 1px;
 	}
@@ -22,14 +22,14 @@
 		color: @ini_toolbar_text;
 		padding: 0 3pt;
 		cursor: pointer;
-		border-radius: .25em;
+		border-radius: .25rem;
 	}
 	svg {
 		fill: @ini_toolbar_text;
 	}
 	a:link, a:visited {
 		color: @ini_toolbar_text;
-		border-radius: .25em;
+		border-radius: .25rem;
 	}
 	a:hover, button:hover {
 		background-color: @ini_toolbar_hl_bg;
@@ -41,7 +41,7 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		line-height: 1.5em;
+		line-height: 1.0em;
 		overflow: hidden;
 		white-space: nowrap;
 	}
@@ -94,17 +94,17 @@ body.loggedIn {
 /* style the user menu, if in the toolbar: */
 #tb-siteinfo {
 	& {
-		padding: 0 .5em;
+		padding: 0 .5rem;
 	}
 	#user-button {
 		& {
 			display: inline-grid;
 			grid-template-columns: min-content auto 0;
-			gap: .25em;
+			gap: .25rem;
 			border: transparent none 0;
 			border-width: 0 1px;
-			border-radius: .25em;
-			padding: .5em .25em;
+			border-radius: .25rem;
+			padding: .5rem .25rem;
 		}
 	}
 	#user-action-buttons {
@@ -121,13 +121,13 @@ body.loggedIn {
 			a {
 				grid-template-columns: 1.5em auto;
 				align-items: center;
-				padding: .25em;
+				padding: .25rem;
 			}
 			a:link,
 			a:visited {
 				text-decoration: none;
 				display: inline-grid;
-				gap: .125em;
+				gap: .125rem;
 				width: 100%;
 			}
 		}
@@ -143,8 +143,8 @@ body.loggedIn {
 	}
 	svg {
 		& {
-			width: 1.5em;
-			height: 1.5em;
+			width: 1.5rem;
+			height: 1.5rem;
 		}
 		.h1, .h2, .v1, .v2 {
 			transition-duration: .5s;
@@ -196,23 +196,31 @@ body.loggedIn {
 		}
 		li {
 			a {
-				display: inline-grid;
-				grid-template-columns: 1.5em auto;
-				gap: .4em;
-				height: ~"calc(100% - 7px)";
-				width: 100%;
-				box-sizing: border-box;
-				padding: .25em .5em .25em .5em;
+				& {
+					display: inline-grid;
+					grid-template-columns: 1.5em auto;
+					gap: .4em;
+					height: ~"calc(100% - 7px)";
+					width: 100%;
+					box-sizing: border-box;
+					padding: .25rem .5rem;
+				}
+				&:link,
+				&:visited {
+					text-decoration: none;
+				}
+				&:focus, button:focus {
+					outline-color: @ini_toolbar_focus_color;
+				}
+				svg {
+					width: 1.5em; height: auto;
+				}
+				span {
+					padding: .25em 0;
+				}
 			}
-			a:link,
-			a:visited {
-				text-decoration: none;
-			}
-			a:focus, button:focus {
+			button:focus {
 				outline-color: @ini_toolbar_focus_color;
-			}
-			svg {
-				width: 1.5em; height: auto;
 			}
 		}
 	}
@@ -223,7 +231,7 @@ body.loggedIn {
 			background: @ini_toolbar_background;
 			list-style: none inside;
 			position: absolute;
-			top: ~"calc(" @ini_toolbar_font_size ~" + 2.5em)";
+			top: ~"calc(" @ini_toolbar_font_size ~" + 2.5rem)";
 			width: max-content;
 			border: @ini_toolbar_border solid 1px;
 			border-radius: 2px;

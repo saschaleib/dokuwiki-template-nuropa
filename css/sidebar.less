@@ -4,20 +4,22 @@
  */
 
 #sidebar {
-	margin-top: 2rem;
-
+	margin-top: 1.2rem;
+	margin-right: 1rem;
 }
 
 /* animated collapse menu: */
 #main-sidebar-layout {
 	& {
-		transition-duration: .5s;
+		transition-duration: .4s;
 	}
 	#sb-header {
 		#tg_button {
 			& {
 				background-color: transparent;
 				border: transparent none 0;
+				position: relative;
+				top: 1.5rem;
 				padding: 0;
 			}
 			svg {
@@ -36,6 +38,7 @@
 		#tg_button {
 			& {
 				float: right;
+				left: .5rem;
 			}
 			svg {
 				.top-bar { transform: scale(100%,125%) translate(10%,-25%) rotate(-60deg); }
@@ -47,6 +50,7 @@
 		#tg_button {
 			& {
 				float: left;
+				left: 0;
 			}
 			svg {
 				.top-bar { transform: scale(100%, 125%) translate(-20%,-15%) rotate(60deg); }
@@ -61,22 +65,56 @@
 		margin-top: 1.25rem;
 		font-size: .9rem;
 	}
-	ul, ol, dl {
+	ul, ol {
+		margin: .25rem;
+		list-style: none inside;
+	}
+	ul ul, ol ol, ul ol, ol ul {
+		margin-left: .75rem;
+		list-style: none inside;
+	}
+	dl {
 		margin: 0;
 		list-style: none inside;
 	}
-	li li, dd {
-		padding-left: .75em;
+	dl dd {
+		margin-left: .5rem;
+		list-style: none inside;
 	}
-	& a:link, & a:visited {
+	details {
+		& {
+			margin-left: 1em;
+		}
+		summary {
+			& {
+				font-family: @ini_headline_fonts;
+				font-size: .90rem;
+				line-height: 1em;
+				text-indent: -.75em;
+				color: @ini_sidebar_headline_color;
+				cursor: pointer;
+				border-radius: .25em;
+				padding: .5em .5em .5em 2px;
+			}
+			&:hover {
+				color: @ini_sidebar_link_color;
+			}
+			&:focus {
+				outline: @ini_focus_outline 2px solid;
+			}
+		}
+	}
+	
+	
+	a:link, a:visited {
 		display: block;
-		padding: .5em .5em .5em 0;
+		padding: .5em .5em .5em 2px;
 		width: 100%;
 		box-sizing: border-box;
 		color: @ini_sidebar_link_color;
 		text-decoration: none;
 	}
-	& a:hover {
+	a:hover {
 		text-decoration: underline;
 	}
 	h1, h2, h3, h4, h5, h6, dt {

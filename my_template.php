@@ -470,3 +470,29 @@ function my_headerstyle() {
 	}
 	return $type;
 }
+
+/**
+ * creates a back to top button
+ *
+ * Buids the HTML code to insert the "to top" button
+ *
+ * @author Sascha Leib <sascha@leib.be>
+ * @author Andreas Gohr <andi@splitbrain.org>
+ *
+ * @param string $prefix inserted before each line
+ *
+ * @return string html
+**/
+function my_topbtn($prefix)
+{
+    global $lang;
+
+	$iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z" style="fill:#166DDF" /></svg>';
+
+	$html = $prefix . "<div id=\"to-top-block\">\n"
+					. "\t<a href=\"#main-content\" title=\"" . $lang['btn_top'] ." [t]\" rel=\"nofollow\" accesskey=\"t\">\n"
+					. "\t<span class=\"sr-only\">" . $lang['btn_top'] ." </span>\n"
+					. "\t\t" . $iconSvg . "</a></div>\n";
+
+    return $html;
+}
