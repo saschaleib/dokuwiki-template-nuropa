@@ -11,7 +11,7 @@ $lang['toolbarstyle'] = 'How should the toolbar menu be displayed?';
 
 $lang['breadcrumbpos'] = 'Where should the page history trail be displayed';
 	$lang['breadcrumbpos_o_header']	= 'In the header';
-	$lang['breadcrumbpos_o_banner']	= 'Below the header';
+	$lang['breadcrumbpos_o_banner']	= 'In the banner';
 
 $lang['youareherepos']			= 'Where should the hierarchical breadcrumbs appear?';
 	$lang['youareherepos_o_header']	= 'In the header';
@@ -20,7 +20,6 @@ $lang['youareherepos']			= 'Where should the hierarchical breadcrumbs appear?';
 $lang['pageheadline'] = 'What title shoud be displayed in the page header';
 	$lang['pageheadline_o_sitename']	= 'Site name';
 	$lang['pageheadline_o_pagename']	= 'Page name';
-	$lang['pageheadline_o_siteonhp']	= 'Homepage name';
 	$lang['pageheadline_o_file']	= 'Static file';
 
 $lang['navtrail']			= 'Show current page in the breadcrumbs';

@@ -131,14 +131,16 @@ body > #main-layout {
 				position: sticky;
 				bottom: 1rem;
 				width: 32px; height: 32px;
+				height: 0;
 			}
 			a:link, a:visited {
 				display: block;
 				width: 32px; height: 32px;
-				margin-left: 40px;
+				position: relative;
+				top: -2em; left: 4em;
+				background-color: @ini_background_alt;
 				border: @ini_border_color solid 1pt;
 				border-radius: 50%;
-				background-color: @ini_background_alt;
 			}
 			a:hover {
 				filter: ~"brightness(80%) contrast(120%)";

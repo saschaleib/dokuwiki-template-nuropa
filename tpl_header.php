@@ -14,7 +14,7 @@
     if (tpl_getConf('userinfo') == 'header') {
         my_userinfo(str_repeat(chr(9),8));
     } else {
-        tpl_includeFile('siteinfo.html');
+        tpl_includeFile('userinfo.html');
     }
 
  ?>

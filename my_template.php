@@ -309,8 +309,10 @@ function my_pagetitle($prefix) {
 			tpl_includeFile('title.html');
 			break;
 		case 'sitename':
-			echo $prefix . "\t<p class=\"title\">" . $conf['title'] . "</p>\n";
-			echo $prefix . "\t<p class=\"tagline\">" . $conf['tagline'] . "</p>\n";
+			echo $prefix . "\t<h2 class=\"title\">" . $conf['title'] . "</h2>\n";
+			if ($conf['tagline'] && $conf['tagline'] !== '') {
+				echo $prefix . "\t<p class=\"tagline\">" . $conf['tagline'] . "</p>\n";
+			}
 			break;
 		case 'pagename':
 			echo $prefix . "\t<h1>" . tpl_pagetitle($ID, true) . "</h1>\n";

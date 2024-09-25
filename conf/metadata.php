@@ -14,7 +14,7 @@ $meta['youareherepos'] = array('multichoice',
 						'_choices' => array ('header', 'banner'));
 
 $meta['pageheadline'] = array('multichoice',
-						'_choices' => array ('sitename', 'pagename', 'siteonhp','file'));
+						'_choices' => array ('sitename', 'pagename', 'file'));
 
 $meta['navtrail'] = array('multichoice',
 						'_choices' => array ('none', 'text', 'link'));

@@ -178,6 +178,7 @@
 			border-radius: .25rem;
 			-webkit-box-shadow: 1px 1px 1px 0 rgba(0,0,0,.3);
 			box-shadow: 1px 1px 1px 0 rgba(0,0,0,.3);
+			margin: 1.5rem 0 1rem 0;
 		}
 		legend {
 			font-size: 1em;
@@ -192,9 +193,18 @@
 		}
 	}
 	#dw__configform > p:last-child {
-		display: grid;
-		grid-template-columns: auto auto;
-		justify-items: center;
+		& {
+			position: sticky;
+			bottom: 0;
+			padding: .5rem;
+			display: grid;
+			grid-template-columns: auto auto;
+			justify-items: center;
+			background-color: rgba(246,246,246,.8);
+		}
+		button {
+			box-shadow: 0 0 4px rgba(0,0,0,0.3);
+		}
 	}
 }
 			

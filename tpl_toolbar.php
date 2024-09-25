@@ -15,7 +15,7 @@
     if (tpl_getConf('userinfo') == 'toolbar') {
         my_userinfo(str_repeat(chr(9),5));
     } else {
-        tpl_includeFile('siteinfo.html');
+        tpl_includeFile('toolbarinfo.html');
     }
 	
     /* collect all toolbar items from various DW menus: */
