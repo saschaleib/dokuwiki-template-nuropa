@@ -63,7 +63,6 @@ $lang['__searchbar_link__']			= 'Searchbar link colour';
 $lang['__header_background__']			= '<b>Page header</b> background colour';
 $lang['__header_text__']				= 'Page header text colour';
 $lang['__header_link_color__']			= 'Page header link colour';
-$lang['__header_current_page_link__']	= 'Page header colour for link to <em>current</em> page';
 
 /* Menubar settings */
 
@@ -98,3 +97,6 @@ $lang['__form_submit_btn_text__']	= 'Form submit button text colour';
 $lang['__footer_background__']		= '<b>Page footer</b> background colour';
 $lang['__footer_text__']			= 'Page footer text colour';
 $lang['__footer_link__']			= 'Page footer link colour';
+
+/* Homepage link: */
+$lang['homepage']					= 'Homepage';

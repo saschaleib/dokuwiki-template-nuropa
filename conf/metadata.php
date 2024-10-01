@@ -16,9 +16,6 @@ $meta['youareherepos'] = array('multichoice',
 $meta['pageheadline'] = array('multichoice',
 						'_choices' => array ('sitename', 'pagename', 'file'));
 
-$meta['navtrail'] = array('multichoice',
-						'_choices' => array ('none', 'text', 'link'));
-
 $meta['userinfo'] = array('multichoice',
 						'_choices' => array ('toolbar', 'header'));
 
@@ -28,6 +25,8 @@ $meta['bannersize'] = array('string');
 
 $meta['showtoc'] = array('multichoice',
 						'_choices' => array ('show', 'hide'));
+
+$meta['homelink'] = array('string');
 
 $meta['darkmode'] = array('multichoice',
 						'_choices' => array ('off', 'auto'));

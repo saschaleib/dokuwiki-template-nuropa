@@ -1,6 +1,6 @@
 /* Stylesheet for DokuWiki Nuropa template
  * by Sascha Leib
- * File name: header.css
+ * File name: site-header.css
  */
 
 body > #header-layout {
@@ -119,7 +119,7 @@ body > #header-layout {
 				svg {
 					fill: @ini_searchbar_link;
 				}
-				#user-button {
+				button {
 					& {
 						display: flex;
 						border: transparent 0 none;
@@ -130,7 +130,7 @@ body > #header-layout {
 						cursor: pointer;
 					}
 				}
-				#user-action-menu {
+				ul {
 					& {
 						position: absolute;
 						background-color: @ini_background;
@@ -170,7 +170,7 @@ body > #header-layout {
 						gap: .25em;
 					}						
 				}
-				#user-action-buttons {
+				/*#user-action-buttons {
 					& {
 						list-style: none;
 					    font-size: .86em;
@@ -178,9 +178,8 @@ body > #header-layout {
 					a {
 						display: flex;
 					}
-				}
+				}*/
 			}
-
 		}
 	}
     #menu-layout {
@@ -200,22 +199,50 @@ body > #header-layout {
 		        }
 		        ul, ol {
 		            & {
+						display: flex;
+						align-items: center;
                         list-style: none;
                         padding: .5rem 0 0 0;
 						font-size: .75rem;
 						font-weight: 600;
+						white-space: nowrap;
+						width: min-content;						
                     }
                     li {
-                        display: inline-block;
-                    }
-                    li:after, ol li:after {
-                        content: '\203A';
-                        margin: 0 .5em;
-                        color: @ini_menubar_text;
-                    }
-                    li.current:after {
-                        content: none;
-                    }
+                        & {
+							display: inline-flex;
+						}
+						&:after {
+							content: '\203A';
+							margin: 0 .5em;
+							color: @ini_menubar_text;
+						}
+						&:first-child, &:last-child {
+						}
+						&:last-child::after {
+							content: none !important;
+						}
+						&.hasicon {
+							a {
+								& {
+									display: inline-flex;
+									align: center;
+								}
+								svg {
+									width: 1.1em; height: auto;
+									fill: @ini_menubar_link;
+								}
+								span {
+									width: 0; overflow: hidden;
+								}
+							}
+						}
+						bdi {
+						}
+					}
+					&.youarehere li:after {
+						content: "\002F";
+					}
                 }
 		    }
 			#page-headline-layout {
@@ -252,15 +279,16 @@ body > #header-layout {
 				margin: 0 auto;
 			}
 			.breadcrumbs-nav {
-				display: grid;
-				grid-template-rows: auto auto;
-				margin: .5rem 0;
+				& {
+					margin: .5rem 0;
+				}
 			}
 			#post-header-breadcrumbs {
-				& {
-				}
+				& {}
 		        ul, ol {
 		            & {
+						display: flex;
+						align-items: center;
 						width: max-content;
                         list-style: none;
                         padding: .25em .5em;
@@ -268,27 +296,47 @@ body > #header-layout {
 						font-weight: 300;
 						background-color: @ini_background;
                     }
-                    li {
-                        display: inline-block;
-                    }
-                    li:after, ol li:after {
-                        content: '\203A';
-                        margin: 0 .5em;
-                        color: @ini_text;
-                    }
-                    li.current:after {
-                        content: none;
-                    }
-					a:link, a:visited {
-						font-size: .86rem;
-						line-height: 1em;
-						text-decoration: none;
+					li {
+						& {
+							display: inline-flex;
+						}
+						&::after {
+							content: '\203A';
+							margin: 0 .5em;
+							color: @ini_text;
+							display: inline-block;
+						}
+						&.current::after, &:last-of-type::after {
+							content: none !important;
+						}
+						&.hasicon {
+							a {
+								& {
+									display: inline-flex;
+									align: baseline;
+								}
+								svg {
+									width: 1.1em; height: auto;
+									fill: @ini_link;
+								}
+								span {
+									width: 0; overflow: hidden;
+								}
+							}
+						}
+						a:link, a:visited {
+							font-size: .86rem;
+							line-height: 1em;
+							text-decoration: none;
+						}
+						a:hover {
+							text-decoration: underline;
+						}
 					}
-					a:hover {
-						text-decoration: underline;
+					&.youarehere li::after {
+						content: "\002F";
 					}
                 }
-			
 			}
 		}
 	}

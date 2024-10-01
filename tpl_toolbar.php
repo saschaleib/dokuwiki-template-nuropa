@@ -25,8 +25,7 @@
 	    (new \dokuwiki\Menu\UserMenu())->getItems(),
 	);
 
-	$svgIcon = "<svg width='100%' height='100%' viewBox='0 0 24 24' version='1.1' xmlns='http://www.w3.org/2000/svg'><rect class='h1' x='5' y='5' width='14' height='2'/><rect class='v1' x='17' y='5' width='2' height='14'/><rect class='h2' x='5' y='17' width='14' height='2'/><rect class='v2' x='5' y='5' width='2' height='14'/></svg>";
-
+	$svgIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5.59,7.41L7,6L13,12L7,18L5.59,16.59L10.17,12L5.59,7.41M11.59,7.41L13,6L19,12L13,18L11.59,16.59L16.17,12L11.59,7.41Z" /></svg>';
  ?>
 				</div>
 				<div id="site-toolbar-group">

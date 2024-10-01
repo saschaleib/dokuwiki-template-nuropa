@@ -97,60 +97,74 @@ function my_userinfo($prefix = '') {
  * @param  string $prefix to be added before each line
  *
  */
-function my_youarehere($prefix, $position) {
-    global $conf;
-    global $ID;
-    global $lang;
-
-    // check if enabled
-    if(!$conf['youarehere']) return false;
-
+function my_youarehere($prefix, $position, $return = false) {
+	global $conf;
+	global $ID;
+	global $lang;
+	
+	// check if enabled
+	if (!$conf['youarehere']) return false;
+	
     // check if right position:
     if(tpl_getConf('youareherepos') !== $position) return false;
+	
+	// prepare output string:
+	$out =  $prefix . '<h2 class="sr-only">' . $lang['youarehere'] . "</h2>\n";
+	
+	$parts = explode(':', $ID);
+	$count = count($parts);
 
-    $parts = explode(':', $ID);
-    $count = count($parts);
-	$isdir = ( $parts[$count-1] == $conf['start']);
-
+	/* start the list: */
+	$out .= $prefix . "<ol class=\"youarehere\">\n";
+	
+	/* is there a higher-level homepage defined? */
 	$hl = trim(tpl_getConf('homelink'));
-
-	echo $prefix . "<p class=\"sr-only\">" . $lang['youarehere'] . "</p>\n";
-	echo $prefix . "<ol>";
-
-    // always print the startpage
 	if ( $hl !== '' ) {
-		echo '<li class="home">' . tpl_link( $hl, htmlentities(tpl_getLang('homepage')), ' title="' . htmlentities(tpl_getLang('homepage')) . '"', true) . '</li>';
-		echo '<li>' . tpl_pagelink(':'.$conf['start'], null, true) . '</li>';
-	} else {
-		echo '<li class="home">' . tpl_pagelink(':'.$conf['start'], null, true) . '</li>';
+		
+		$homeIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 5.69L17 10.19V18H15V12H9V18H7V10.19L12 5.69M12 3L2 12H5V20H11V14H13V20H19V12H22" /></svg>';
+		
+		$out .= $prefix . "\t<li class=\"home hasicon\">" . tpl_link( $hl, $homeIcon . '<span>' . htmlentities(tpl_getLang('homepage')) . '</span>', ' title="' . htmlentities(tpl_getLang('homepage')) . '"', true) . "</li>\n";
 	}
-
-    // print intermediate namespace links
-    $page = '';
-    for($i = 0; $i < $count - 1; $i++) {
-        $part = $parts[$i];
-        $page .= $part . ':';
-
-		if ($i == $count-2 && $isdir)  break; // Skip last if it is an index page
-
-		echo '<li>' . tpl_pagelink($page, null, true) . '</li>';
-    }
-
-    // chould the current page be included in the listing?
-	$trail = tpl_getConf('navtrail');
-
-	if ($trail !== 'none' && $trail !== '') {
-
-		echo '<li class="current">';
-		if ($trail == 'text') {
-			echo tpl_pagetitle($page . $parts[$count-1], true);
-		} else if ($trail == 'link') {
-			echo tpl_pagelink($page . $parts[$count-1], null, true);
+	
+	// always print the startpage
+	$out .= $prefix . "\t<li" . ( $hl == '' ? ' class="home"' : '' ) . '>' . tpl_pagelink(':' . $conf['start'], null, true) . "</li>\n";
+	
+	// print intermediate namespace links
+	$part = '';
+	for ($i = 0; $i < $count - 1; $i++) {
+		$part .= $parts[$i] . ':';
+		$page = $part;
+		if ($page == $conf['start']) continue; // Skip startpage
+	
+		// output
+		$out .= $prefix . "\t<li>" . tpl_pagelink($page, null, true) . "</li>\n";
+	}
+	
+	// print current page, skipping start page, skipping for namespace index
+	if (isset($page)) {
+		$page = (new PageResolver('root'))->resolveId($page);
+		if ($page == $part . $parts[$i]) {
+			$out .= $prefix . "</ol>\n";
+			if ($return) return $out;
+			echo $out;
+			return true;
 		}
-		echo "</li>";
 	}
+	$page = $part . $parts[$i];
+	if ($page == $conf['start']) {
+		$out .= $prefix . "</ol>\n";
+		if ($return) return $out;
+		echo $out;
+		return true;
+	}
+	
+	/* actual page link and end: */
+	$out .= $prefix . "\t<li>" .tpl_pagelink($page, null, true) . "</li>\n";
+	$out .= $prefix . "</ol>\n";
 
-	echo "</ol>\n";
+	if ($return) return $out;
+	echo $out;
+	return (bool)$out;
 }
 
 /**
@@ -179,7 +193,7 @@ function my_breadcrumbs($prefix, $position) {
 
 	/* begin listing */
 	echo $prefix . '<p class="sr-only">' . $lang['breadcrumb'] . "</p>\n";
-	echo $prefix . "<ol reversed>";
+	echo $prefix . "<ol class=\"trace\" reversed>";
 
     $last = count($crumbs);
     $i    = 0;
