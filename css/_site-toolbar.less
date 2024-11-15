@@ -1,0 +1,135 @@
+/* Stylesheet for DokuWiki Nuropa template
+ * by Sascha Leib
+ * File name: css/_site-toolbar.css
+ */
+
+#toolbar__layout {
+	& {
+		clear: both;
+		width: 100%;
+		
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		overflow: hidden;
+		
+		background-color: @ini_toolbar_background;
+		color: @ini_toolbar_text;
+		font-family: @ini_toolbar_fonts;
+		font-size: @ini_toolbar_font_size;
+		line-height: 1.0rem;
+		white-space: nowrap;
+		
+		border-bottom: @ini_toolbar_border solid 1pt;
+	}
+	ul, ol {
+		list-style: none inside;
+		column-gap: .25em;
+	}
+	button {
+		font-family: @ini_toolbar_fonts;
+		font-size: @ini_toolbar_font_size;
+		border: none;
+		background: transparent;
+		color: @ini_toolbar_text;
+		padding: 0 3pt;
+		cursor: pointer;
+		border-radius: .25rem;
+	}
+	a {
+		color: @ini_toolbar_text;
+		background-color: @ini_toolbar_background;
+		border-radius: .25rem;
+		margin: 2px;
+		padding: 2px .75em 2px .5em;
+	}
+	a:hover, button:hover {
+		filter: brightness(.9);
+	}
+	a:focus, button:focus, input:focus {
+		outline: @ini_toolbar_focus solid 2px;
+	}
+	svg {
+		fill: @ini_toolbar_text;
+	}
+	li {
+		& {
+			display: inline-block;
+		}
+		a {
+			display: inline-flex;
+			justify-content: flex-start;
+			align-items: center;
+			text-decoration: none;
+			column-gap: .5em;
+		}
+	}
+
+}
+
+#tb__tools__group {
+	& {
+		display: grid;
+		grid-template-columns: auto 1.8rem;
+	}
+	#tb__tools__menu {
+		& {
+			display: flex;
+			flex-wrap: nowrap;
+			overflow: hidden;
+		}
+		&.compact {
+			max-width: 0 !important;
+		}
+	}
+}
+
+/* item highlights depending on wiki mode: */
+body.mode_revisions #tb__tools__menu li[data-type="revs"] a,
+body.mode_backlink #tb__tools__menu li[data-type="backlink"] a,
+body.mode_recent #tb__tools__menu li[data-type="recent"] a,
+body.mode_media #tb__tools__menu li[data-type="media"] a,
+body.mode_index #tb__tools__menu li[data-type="index"] a,
+body.mode_admin #tb__tools__menu li[data-type="admin"] a {
+	filter: ~"brightness(.9)";
+}
+
+@media (prefers-color-scheme: dark) {
+
+    /* general colour settings: */
+    body.darkmode {
+		
+		#toolbar__layout {
+			& {
+				background-color: @ini_toolbar_background_dark;
+				color: @ini_toolbar_text_dark;
+				border-bottom-color: @ini_toolbar_border_dark;
+			}
+			button {
+				color: @ini_toolbar_text_dark;
+			}
+			a:link, a:visited {
+				color: @ini_toolbar_text_dark;
+				background-color: @ini_toolbar_background_dark;
+			}
+			a:hover, button:hover {
+				filter: brightness(1.5);
+			}
+			a:focus, button:focus, input:focus {
+				outline-color: @ini_toolbar_focus_dark;
+			}
+			svg {
+				fill: @ini_toolbar_text_dark;
+			}
+		}
+		&.mode_revisions #tb__tools__menu li[data-type="revs"] a,
+		&.mode_backlink #tb__tools__menu li[data-type="backlink"] a,
+		&.mode_recent #tb__tools__menu li[data-type="recent"] a,
+		&.mode_media #tb__tools__menu li[data-type="media"] a,
+		&.mode_index #tb__tools__menu li[data-type="index"] a,
+		&.mode_admin #tb__tools__menu li[data-type="admin"] a {
+			filter: brightness(.9);
+		}
+
+	}
+}

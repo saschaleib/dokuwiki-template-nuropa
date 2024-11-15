@@ -1,0 +1,82 @@
+/* Stylesheet for DokuWiki Nuropa template
+ * by Sascha Leib
+ * File name: layout.css
+ */
+
+/* Root styles */
+* {
+	margin: 0;
+	padding: 0;
+}
+html {
+	scroll-behavior: smooth;
+	font-size: @ini_base_fontsize;
+	font-family: @ini_default_fonts;
+}
+body {
+	color: @ini_text;
+	background-color: @ini_background;
+	max-width: 100%;
+	text-rendering: optimizeLegibility;
+	margin: 0; padding: 0;
+	scrollbar-gutter: auto;
+	scrollbar-width: thin;
+	scrollbar-color: @ini_background_alt @ini_background;
+	overflow-x: hidden;
+}
+
+/* utility classes: */
+.sr-only { display: none; }
+
+/* Skip Link */
+#skip__link {
+	position: fixed;
+	left: 4pt;
+	top: 4pt;
+	width: auto;
+	z-index: 9999;
+}
+#skip__link a {
+	position: absolute;
+	background-color: @ini_background;
+	font-size: 1.25em;
+	color: @ini_link;
+	height: 1px;
+	overflow: hidden;
+	clip: rect(1px,1px,1px,1px);
+}
+#skip__link a:focus {
+	position: static;
+	display: inline-block;
+	padding: 8px;
+	height: auto;
+	clip: auto;
+	overflow: visible;
+}
+
+/* DEBUG: Hide elements we're not looking at yet */
+#header-layout,
+#main-layout,
+#footer-layout {
+	display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+
+    /* general colour settings: */
+    body.darkmode {
+		
+		& {
+			color: @ini_text_dark;
+			background-color: @ini_background_dark;
+			/*scrollbar-color: @ini_background_alt @ini_background;*/
+		}
+
+		#skip__link a {
+			background-color: @ini_background_dark;
+			color: @ini_link_dark;
+		}
+
+		
+	}
+}

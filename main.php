@@ -23,10 +23,10 @@ require_once('my_template.php');
 
 	</head>
 	<body class="site <?php echo my_bodyclasses(); ?>" data-pageid="<?php echo htmlentities($ID); ?>">
-		<div id="skip-link">
+		<div id="skip__link">
 			<a href="#main-content"><?php echo htmlentities($lang['skip_to_content']); ?></a>
 		</div>
-		<div id="toolbar-layout">
+		<div id="toolbar__layout">
 			<!-- BEGIN TOOLBAR -->
 <?php include('tpl_toolbar.php') ?>
 			<!-- END OF TOOLBAR -->
