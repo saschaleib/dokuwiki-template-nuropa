@@ -7,20 +7,17 @@
 	& {
 		clear: both;
 		width: 100%;
-		
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 		overflow: hidden;
-		
 		background-color: @ini_toolbar_background;
 		color: @ini_toolbar_text;
 		font-family: @ini_toolbar_fonts;
 		font-size: @ini_toolbar_font_size;
 		line-height: 1em;
 		white-space: nowrap;
-		
-		border-bottom: @ini_toolbar_border solid 1pt;
+		border-bottom: darken(@ini_toolbar_background, 15%) solid 1px;
 	}
 	ul, ol {
 		list-style: none inside;
@@ -80,9 +77,9 @@
 			inset: unset;
 			background-color: @ini_toolbar_background;
 			width: max-content;
-			border: @ini_toolbar_border solid 1px;
+			border: darken(@ini_toolbar_background, 15%) solid 1px;
 			border-radius: .5em;
-			box-shadow: 1.5px 1.5px 1px .5px rgba(0, 0, 0, 0.4);
+			box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.1);
 			padding: 2px 5px 2px 2px;
 			z-index: 101;
 		}
@@ -204,8 +201,8 @@ body.loggedIn {
 		left: 0;
 		right: 0;
 		opacity: .93;
-		-webkit-box-shadow: .5px .5px .5px 0px rgba(0,0,0,0.4);
-		box-shadow: .5px .5px .5px 0px rgba(0,0,0,0.4);
+		-webkit-box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);
+		box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);
 		z-index: 101;
 	}
 }
@@ -219,7 +216,8 @@ body.loggedIn {
 			& {
 				background-color: @ini_toolbar_background_dark;
 				color: @ini_toolbar_text_dark;
-				border-bottom-color: @ini_toolbar_border_dark;
+				border-bottom-color: lighten(@ini_toolbar_background_dark, 10%);
+				box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.7);
 			}
 			a, button {
 				color: @ini_toolbar_text_dark;
@@ -239,8 +237,9 @@ body.loggedIn {
 			}
 			[popover] {
 				background-color: @ini_toolbar_background_dark;
-				border-color: @ini_toolbar_border_dark;
+				border-color: lighten(@ini_toolbar_background_dark, 10%);
 				border-radius: 2px;
+				box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);
 			}
 
 		}
