@@ -34,7 +34,7 @@
 			background-color: @ini_toolbar_background;
 			border: none;
 			border-radius: .25rem;
-			padding: .35em 3pt;
+			padding: .45em 3pt;
 			margin: 2px;
 			color: @ini_toolbar_text;
 			cursor: pointer;
@@ -42,7 +42,7 @@
 			justify-content: flex-start;
 			align-items: center;
 			text-decoration: none;
-			column-gap: .5em;
+			column-gap: 0.35em;
 		}
 		& > * {
 			display: inline-block;
@@ -60,6 +60,9 @@
 		height: 1em;
 		display: inline-block;
 	}
+	svg text {
+		fill: @ini_toolbar_background;
+	}
 	li {
 		& {
 			display: inline-block;
@@ -69,13 +72,12 @@
 			justify-content: flex-start;
 			align-items: center;
 			text-decoration: none;
-			column-gap: .5em;
 		}
 	}
-	[popup] {
+	[popover] {
 		& {
-			position: absolute;
-			top: 2.25em;
+			position: relative;
+			inset: unset;
 			background-color: @ini_toolbar_background;
 			width: max-content;
 			border: @ini_toolbar_border solid 1px;
@@ -86,7 +88,6 @@
 		}
 		&.align-right {
 			right: .5em;
-			margin: 0 0 0 auto;
 		}
 		ul {
 			list-style: none inside;
@@ -120,7 +121,7 @@
 			flex-wrap: nowrap;
 			overflow: hidden;
 		}
-		&.style_compact {
+		&.compact {
 			max-width: 0 !important;
 		}
 	}
@@ -134,7 +135,8 @@ body.mode_media #toolbar__layout li[data-type="media"] a,
 body.mode_index #toolbar__layout li[data-type="index"] a,
 body.mode_admin #toolbar__layout li[data-type="admin"] a,
 body.mode_profile #toolbar__layout li[data-type="profile"] a,
-body.mode_login #toolbar__layout li[data-type="login"] a {
+body.mode_login #toolbar__layout li[data-type="login"] a,
+body #toolbar__layout [popover] li a[aria-current="true"] {
 	filter: brightness(.9);
 	box-shadow: inset #00000033 1px 1px 1px;
 }
@@ -147,8 +149,8 @@ body.mode_login #toolbar__layout li[data-type="login"] a {
 	}
 	#pagetools__btn {
 		& {
-			padding: 0;
-			border-radius: 1.5pt;
+			padding: .1em;
+			border-radius: 50%;
 			margin: 2px 2px 2px 0;
 		}
 		svg {
@@ -161,8 +163,32 @@ body.mode_login #toolbar__layout li[data-type="login"] a {
 			transition: all .25s;
 			padding: .1em;
 		}
+		&[data-isopen="true"] svg {
+			transform: rotate(90deg);
+		}
 		span {
 			display: none;
+		}
+	}
+}
+
+/* special cases for the languages menu: */
+#languages__menu {
+	& {
+
+	}
+	ul li a {
+		&.wikilink2 bdi {
+			font-style: italic;
+			border-bottom: @ini_toolbar_text dotted 1.5px;
+		}
+		&::before {
+			content: attr(hreflang);
+			display: inline-block;
+			font-size: smaller;
+			width: 1.25em; height: 1.25em;
+			border: @ini_toolbar_text solid 1px;
+			text-align: center;
 		}
 	}
 }
@@ -208,19 +234,31 @@ body.loggedIn {
 			svg {
 				fill: @ini_toolbar_text_dark;
 			}
-			.popup {
+			svg text {
+				fill: @ini_toolbar_background_dark;
+			}
+			[popover] {
 				background-color: @ini_toolbar_background_dark;
 				border-color: @ini_toolbar_border_dark;
 				border-radius: 2px;
 			}
+
 		}
 		&.mode_revisions #tb__tools__menu li[data-type="revs"] a,
 		&.mode_backlink #tb__tools__menu li[data-type="backlink"] a,
 		&.mode_recent #tb__tools__menu li[data-type="recent"] a,
 		&.mode_media #tb__tools__menu li[data-type="media"] a,
 		&.mode_index #tb__tools__menu li[data-type="index"] a,
-		&.mode_admin #tb__tools__menu li[data-type="admin"] a {
+		&.mode_admin #tb__tools__menu li[data-type="admin"] a,
+		#toolbar__layout [popover] li[role="menuitem"] a[aria-current="true"] {
 			box-shadow: inset #FFFFFF44 -1px -1px 1px;
 		}
+		#languages__menu a.wikilink2 bdi {
+			border-bottom-color: @ini_toolbar_text_dark;
+		}
+		#languages__menu a::before {
+			border-color: @ini_toolbar_text_dark;
+		}
+		
 	}
 }

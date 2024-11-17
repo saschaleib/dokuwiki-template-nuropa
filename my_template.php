@@ -54,7 +54,7 @@ function my_homelink() {
  *
  * @return void
  */
-function my_userinfo($prefix = '') {
+function my_userinfo($prefix = '', $id) {
     global $lang;
     global $INPUT;
     global $INFO;
@@ -71,13 +71,13 @@ function my_userinfo($prefix = '') {
 		$userIcon = '<svg class="icon" viewBox="0 0 24 24"><path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" /></svg>';
 
         // output the button:
-        echo $prefix . '<button id="user__button" popovertarget="user__action__menu">' . NL;
+        echo $prefix . "<button id=\"{$id}\" popovertarget=\"{$id}__menu\">" . NL;
         echo $prefix . DOKU_TAB . $userIcon . NL;
         echo $prefix . DOKU_TAB . '<span class="label"><span class="sr-only">' . htmlentities($lang['loggedinas']) . ' </span><span class="name">' . htmlentities($USERINFO['name']) . '</span></span>' . NL;
         echo $prefix . '</button>' . NL;
 
         // add the menu:
-        echo $prefix . '<div id="user__action__menu" popover>' . NL;
+        echo $prefix . "<div id=\"{$id}__menu\" popover>" . NL;
         my_actionlist($prefix . DOKU_TAB, null, $items, ['admin'], '', 'menu');
         echo $prefix . '</div>' . NL;
 

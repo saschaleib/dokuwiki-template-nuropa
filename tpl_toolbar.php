@@ -20,7 +20,7 @@
 
 	switch ($tbOption) {
 		case 'user':
-			my_userinfo(str_repeat(DOKU_TAB,4));
+			my_userinfo(str_repeat(DOKU_TAB,4), 'tb__userinfo');
 			break;
 		case 'langs':
 			my_langmenu(str_repeat(DOKU_TAB,4));
@@ -52,7 +52,7 @@
 	$rightChevronsIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.59,6.84L12.25,12.5L6.59,18.16L5.89,17.45L10.84,12.5L5.89,7.55L6.59,6.84M10.59,6.84L16.25,12.5L10.59,18.16L9.89,17.45L14.84,12.5L9.89,7.55L10.59,6.84Z" /></svg>';
 
  ?>
-				<div id="tb__menu__group"><button id="pagetools__btn" aria-haspopup="menu" aria-controls="pagetools__popup" title="<?php echo htmlentities($lang['tools']); ?>" data-align_menu="right" popovertarget="pagetools__popup">
+				<div id="tb__menu__group"><button id="pagetools__btn" aria-haspopup="menu" aria-controls="pagetools__popup" title="<?php echo htmlentities($lang['tools']); ?>" data-alignmenu="right" popovertarget="pagetools__popup">
 						<?php echo $rightChevronsIcon; ?>
 						<span class="label sr-only"><?php echo htmlentities($lang['tools']); ?></span>
 					</button>

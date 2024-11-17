@@ -12,7 +12,7 @@
 						<div id="user__menu__group">
 <?php
 							if (tpl_getConf('userinfo') == 'header') {
-								my_userinfo(str_repeat(DOKU_TAB,7));
+								my_userinfo(str_repeat(DOKU_TAB,7), 'sb__userinfo');
 							} else {
 								tpl_includeFile('userinfo.html');
 							}

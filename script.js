@@ -122,8 +122,77 @@ $p = {
             //console.info('gui.init()')
 
             $p.gui.toolbar.init();
+            $p.gui.popups.init();
 
         },
+
+		popups: {
+			init: function() {
+				// add callback function:
+				jQuery('button[popovertarget]')
+					.click($p.gui.popups._onBtnClick);
+			},
+			
+			alignPopup: function(popup, button, align = 'left') {
+				// console.info('$p.gui.popups.alignPopup()');
+				
+				const kOffsetX = 5;
+				const kOffsetY = 7;
+
+				// get the menu dimensions:
+				const mnu = jQuery(popup).position();
+				mnu.width = jQuery(popup).outerWidth();
+				
+				// try to align the menu to the left of the button:
+				let mLeft = jQuery(button).position().left; 
+				switch (align) {
+					case 'right':
+						mLeft = mLeft + jQuery(button).outerWidth() - jQuery(popup).outerWidth();
+						break;
+					case 'center':
+						mLeft = mLeft + ( jQuery(button).outerWidth() / 2) - ( jQuery(popup).outerWidth() / 2);
+					default: // = 'left'
+						// already set.
+				}
+				
+				// but make sure it is fully visible:
+				if (mLeft < kOffsetX) mLeft = kOffsetX;
+				if ((mLeft + mnu.width) > (window.innerWidth - kOffsetX))
+					mLeft = window.innerWidth - mnu.width - kOffsetX;
+				
+				jQuery(popup).css('left', mLeft);
+				
+				/* make sure the menu is under the button:*/
+				let mTop = jQuery(button).position().top + jQuery(button).outerHeight() + kOffsetY;
+				jQuery(popup).css('top', mTop);
+
+			},
+			
+			_onBtnClick: function(e) {
+				//console.info('$p.gui.popups._onBtnClick()');
+
+				try {
+					// which button has been clicked? 
+					const button = e.currentTarget;
+
+					// find the popover target:
+					const popup = document.getElementById(button.getAttribute('popovertarget'));
+					
+					// align the menu:
+					let mAlign = button.getAttribute('data-alignmenu');
+					if (!mAlign) mAlign = 'left';
+					
+					// align the popup under the button:
+					$p.gui.popups.alignPopup(popup, button, mAlign);
+					
+					// set a class to the button (match is before the change!):
+					button.setAttribute('data-isopen', !popup.matches(':popover-open'));
+					
+				} catch(err) {
+					console.log(err);
+				}
+			}
+		},
 
         toolbar: {
 
