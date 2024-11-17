@@ -16,26 +16,21 @@ require_once('my_template.php');
 	<head>
 		<meta charset="utf-8">
 		<title><?php tpl_pagetitle() ?> - <?php echo strip_tags($conf['title']) ?></title>
-		<?php tpl_metaheaders() ?>
 		<meta name="viewport" content="width=device-width,initial-scale=1">
-		<?php echo tpl_favicon(array('favicon', 'mobile')) ?>
-		<?php tpl_includeFile('meta.html') ?>
-
+<?php tpl_metaheaders() ?>
+<?php echo tpl_favicon(array('favicon', 'mobile')) ?>
+<?php tpl_includeFile('meta.html') ?>
 	</head>
 	<body class="site <?php echo my_bodyclasses(); ?>" data-pageid="<?php echo htmlentities($ID); ?>">
 		<div id="skip__link">
 			<a href="#main-content"><?php echo htmlentities($lang['skip_to_content']); ?></a>
 		</div>
-		<div id="toolbar__layout">
-			<!-- BEGIN TOOLBAR -->
+		<!-- BEGIN TOOLBAR -->
 <?php include('tpl_toolbar.php') ?>
-			<!-- END OF TOOLBAR -->
-		</div>
-        <div id="header-layout">
-			<!-- BEGIN HEADER -->
+		<!-- END TOOLBAR -->
+		<!-- BEGIN HEADER -->
 <?php include('tpl_header.php') ?>
-			<!-- END HEADER -->
-		</div>
+		<!-- END HEADER -->
 		<div id="main-layout">
 <?php $hasSidebar = page_findnearest($conf['sidebar']);
  ?>			<div id="main-sidebar-layout" class="toggle_<?php echo ( ($hasSidebar && ($ACT=='show')) ? 'auto' : 'hide' ); ?>">

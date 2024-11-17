@@ -68,17 +68,21 @@ function my_userinfo($prefix = '') {
 
     if (isset($USERINFO['name'])) { // user is loggd in:
 
+		$userIcon = '<svg class="icon" viewBox="0 0 24 24"><path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" /></svg>';
+
         // output the button:
-        echo $prefix . "<button id=\"user-button\" aria-haspopup=\"menu\" aria-controls=\"user-action-menu\">\n";
-        echo $prefix . "\t<svg class=\"icon\" viewBox=\"0 0 24 24\"><path d=\"M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z\" /></svg>\n";
-        echo $prefix . "\t<span class=\"label\"><span class=\"sr-only\">" . htmlentities($lang['loggedinas']) . ' </span>' . htmlentities($USERINFO['name']) . "</span>\n";
-        echo $prefix . "</button>\n";
+        echo $prefix . '<button id="user__button" popovertarget="user__action__menu">' . NL;
+        echo $prefix . DOKU_TAB . $userIcon . NL;
+        echo $prefix . DOKU_TAB . '<span class="label"><span class="sr-only">' . htmlentities($lang['loggedinas']) . ' </span><span class="name">' . htmlentities($USERINFO['name']) . '</span></span>' . NL;
+        echo $prefix . '</button>' . NL;
 
         // add the menu:
-        my_actionlist($prefix, 'user-action-menu', $items, ['admin'], '', true);
+        echo $prefix . '<div id="user__action__menu" popover>' . NL;
+        my_actionlist($prefix . DOKU_TAB, null, $items, ['admin'], '', 'menu');
+        echo $prefix . '</div>' . NL;
 
     } else {
-        my_actionlist($prefix, 'user-action-buttons', $items, ['admin']);
+        my_actionlist($prefix, 'user-action-buttons', $items, ['admin'], '');
     }
 
 }
@@ -438,35 +442,48 @@ function my_bodyclasses() {
 }
 
 /* private helper function to putput a list of action items: */
-function my_actionlist($prefix, $id, $list, $exclude, $type = '', $hidden = false) {
+function my_actionlist($prefix, $id, $list, $exclude, $class = null, $role = null) {
 
 	/* build menu */
-	echo $prefix . '<ul id="' . $id . '" class="' . htmlentities($type) . '"'  . ($hidden ? ' style="display:none"' : '') . ">\n";
+	echo $prefix . '<ul'  . ($id ? " id=\"{$id}\"" : '') . ($class ? " class=\"{$class}\"" : ''). ($role ? " role=\"{$role}\"" : '') . ">" . NL;
+	
+	/* specific roles for items? */
+	$itemRole = null;
+	if ($role == 'menu') $itemRole = 'menuitem';
+	
+	/* add the items: */
 	foreach($list as $it) {
-		//echo '<!-- ' . print_r($it, true) . ' -->';
+
 		$typ = htmlentities($it->getType());
 		if (!in_array($typ, $exclude)) {
 			
-		echo $prefix . "\t<li data-type=\"" . $typ . '">'
+		echo $prefix . DOKU_TAB . "<li data-type=\"{$typ}\"" . ($itemRole ? " role=\"{$itemRole}\"" : '') . '>'
 					 . my_HtmlLink($it, false, true)
-					 . "</li>\n";
+					 . '</li>' . NL;
 		}
 	}
-	echo $prefix . "</ul>\n";
+	echo $prefix . '</ul>' . NL;
 };
 
 /* overwrite the asHtmlLink function for my purposes */
 function my_HtmlLink($item, $classprefix = 'menuitem ', $svg = true) {
 
-	$attr = buildAttributes($item->getLinkAttributes($classprefix));
-	$html = "<a $attr>";
+	$attList = $item->getLinkAttributes($classprefix);
+	
+	// remove the attributes that can cause accessiblity issues:
+	unset($attList['title']);
+	unset($attList['accesskey']);
+	
+	// build the HTML:
+	$attr = buildAttributes($attList);
+	$html = "<a {$attr}>";
 	if ($svg) {
 		$html .= inlineSVG($item->getSvg());
 		$html .= '<span>' . hsc($item->getLabel()) . '</span>';
 	} else {
 		$html .= hsc($item->getLabel());
 	}
-	$html .= "</a>";
+	$html .= '</a>';
 	return $html;
 }
 
@@ -505,10 +522,91 @@ function my_topbtn($prefix)
 
 	$iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z" style="fill:#166DDF" /></svg>';
 
-	$html = $prefix . "<div id=\"to-top-block\">\n"
-					. "\t<a href=\"#main-content\" title=\"" . $lang['btn_top'] ." [t]\" rel=\"nofollow\" accesskey=\"t\">\n"
-					. "\t<span class=\"sr-only\">" . $lang['btn_top'] ." </span>\n"
-					. "\t\t" . $iconSvg . "</a></div>\n";
+	$html = $prefix . '<div id="to-top-block">' . NL .
+			$prefix . DOKU_TAB . '<a href="#main-content" title="' . $lang['btn_top'] .'">' . NL .
+			$prefix . DOKU_TAB . '<span class="sr-only">' . $lang['btn_top'] .' </span>' . NL .
+			$prefix . DOKU_TAB . DOKU_TAB . $iconSvg . NL .
+			$prefix . DOKU_TAB . '</a>' . NL .
+			$prefix . '</div>' . NL;
 
     return $html;
+}
+
+/**
+ * inserts the Languages menu, if appropriate.
+ *
+ * @author Sascha Leib <sascha@leib.be>
+ * @author Andreas Gohr <andi@splitbrain.org>
+ *
+ * @param  string $prefix to be added before each line
+ * @param  string $place the location from where it is called
+ * @param  string $checkage should the age of the translation be checked?
+ */
+function my_langmenu($prefix, $checkage = true) {
+
+	global $INFO;
+	global $conf;
+
+	// the current page language: 
+	$lang = $conf['lang'];
+
+	/* collect the output: */
+	$out = '';
+
+	/* try to load the plugin: */
+	$trans = plugin_load('helper','translation');
+	
+	/* plugin available? */
+	if ($trans) {
+		
+		if (!$trans->istranslatable($INFO['id'])) return '';
+		if ($checkage) $trans->checkage();
+
+		[, $idpart] = $trans->getTransParts($INFO['id']);
+
+		// get the current language name (in the local language)
+		$langName = htmlentities($trans->getLocalName($lang));
+	
+		/* prepare the menu icon (note that the language code and name are embedded! */
+		$svg = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><title>{$langName}</title><path d='M20,2H4A2,2 0 0,0 2,4V22L6,18H20A2,2 0 0,0 22,16V4C22,2.89 21.1,2 20,2Z' /><text lengthAdjust='spacingAndGlyphs' x='50%' y='47%' dominant-baseline='middle' text-anchor='middle'>{$lang}</text></svg>";
+		
+		// prepare the menu button:
+		$out .= $prefix . DOKU_TAB . "<button aria-haspopup=\"menu\" popovertarget=\"languages__menu\" aria-controls=\"languages__menu\" title=\"{$trans->getLang('translations')}\">".NL;
+		$out .= $prefix . DOKU_TAB . DOKU_TAB . $svg . NL;
+		$out .= $prefix . DOKU_TAB . DOKU_TAB . '<span class="label">' . $langName . '</span>'.NL;
+		$out .= $prefix . DOKU_TAB . '</button>'.NL;
+
+		/* build the menu content */
+		$out .= $prefix . DOKU_TAB . '<div id="languages__menu" role="menu" popover>'.NL;
+		$out .= $prefix . DOKU_TAB . DOKU_TAB . '<ul role="menu">'.NL;
+
+		// loop over each language and add it to the menu:
+		$filter = tpl_getConf('langfilter', 'all');
+		foreach ($trans->translations as $t) {
+			$l = ( $t !== '' ? $t : $lang );
+			
+			[$trg, $lng] = $trans->buildTransID($t, $idpart);
+			$trg = cleanID($trg);
+			$exists = page_exists($trg, '', false);
+			
+			/* only show if translation exists? */
+			if ($exists || $filter === 'all') {
+				$class = 'wikilink' . ( $exists ? '1' : '2');
+				$link = wl($trg);
+				$current = ($lng == $lang);
+				
+				$out .= $prefix . DOKU_TAB . DOKU_TAB . DOKU_TAB .'<li>'.NL;
+				$out .= $prefix . DOKU_TAB . DOKU_TAB . DOKU_TAB . DOKU_TAB . "<a href=\"{$link}\" lang=\"{$lng}\" hreflang=\"{$lng}\" class=\"{$class}\" role=\"menuitem\"" . ( $current ? ' aria-current="true"' : '' ) . ">".NL;
+				$out .= $prefix . DOKU_TAB . DOKU_TAB . DOKU_TAB . DOKU_TAB . DOKU_TAB . "<bdi>". $trans->getLocalName($lng) . '</bdi>' . NL;
+				$out .= $prefix . DOKU_TAB . DOKU_TAB . DOKU_TAB . DOKU_TAB . '</a>'.NL;
+				$out .= $prefix . DOKU_TAB . DOKU_TAB . DOKU_TAB . '</li>'.NL;
+			}
+		}
+
+		// close all open elements:
+		$out .= $prefix . DOKU_TAB . DOKU_TAB . '</ul>'.NL
+			 .	$prefix . DOKU_TAB . '</div>'.NL;
+
+	echo $out; // done.
+	}
 }

@@ -55,7 +55,6 @@ body {
 }
 
 /* DEBUG: Hide elements we're not looking at yet */
-#header-layout,
 #main-layout,
 #footer-layout {
 	display: none;
@@ -69,7 +68,8 @@ body {
 		& {
 			color: @ini_text_dark;
 			background-color: @ini_background_dark;
-			/*scrollbar-color: @ini_background_alt @ini_background;*/
+			/*scrollbar-color: @ini_background_alt_dark @ini_background_dark;*/
+			color-scheme: dark;
 		}
 
 		#skip__link a {
@@ -77,6 +77,6 @@ body {
 			color: @ini_link_dark;
 		}
 
-		
 	}
 }
+

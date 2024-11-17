@@ -5,6 +5,13 @@
  * @author     Sascha Leib <sascha@leib.be>
  */
 
+/* what should be displayed in the left corner of the toolbar? ('static', 'user' or 'langs') */
+$conf['toolbaropt'] = 'static';
+
+/* what should be displayed to the right of the search field? ('static', 'user' or 'langs') */
+$conf['searchbaropt'] = 'static';
+
+
 /* position of the breadcrumbs and 'you are here' lists ('header' or 'post') */
 $conf['breadcrumbpos'] = 'banner';
 $conf['youareherepos'] = 'banner';
@@ -28,5 +35,12 @@ $conf['showtoc'] = 'show';
 /* allow overriding the home link */
 $conf['homelink'] = '';
 
+/* show a languages menu? */
+$conf['langmenu']		= 'sb';
+$conf['langfilter']		= 'existing';
+
 /* allow dark mode styling ('off' or 'auto') */
 $conf['darkmode'] = 'off';
+
+/* show all or only existing translations? */
+$conf['langfilter']		= 'all';
