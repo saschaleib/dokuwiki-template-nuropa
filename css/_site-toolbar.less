@@ -35,11 +35,11 @@
 			margin: 2px;
 			color: @ini_toolbar_text;
 			cursor: pointer;
-			display: inline-flex;
-			justify-content: flex-start;
+			display: grid;
+			grid-template-columns: 1em auto;
 			align-items: center;
 			text-decoration: none;
-			column-gap: 0.35em;
+			column-gap: .3em;
 		}
 		& > * {
 			display: inline-block;
@@ -52,7 +52,7 @@
 		outline: @ini_toolbar_focus solid 2px;
 	}
 	svg {
-		fill: @ini_toolbar_text;
+		fill: @ini_toolbar_icon;
 		width: 1em;
 		height: 1em;
 		display: inline-block;
@@ -63,12 +63,6 @@
 	li {
 		& {
 			display: inline-block;
-		}
-		a, button {
-			display: inline-flex;
-			justify-content: flex-start;
-			align-items: center;
-			text-decoration: none;
 		}
 	}
 	[popover] {
@@ -82,9 +76,6 @@
 			box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.1);
 			padding: 2px 5px 2px 2px;
 			z-index: 101;
-		}
-		&.align-right {
-			right: .5em;
 		}
 		ul {
 			list-style: none inside;
@@ -170,11 +161,14 @@ body #toolbar__layout [popover] li a[aria-current="true"] {
 }
 
 /* special cases for the languages menu: */
-#languages__menu {
+#tb__langmenu {
 	& {
 
 	}
 	ul li a {
+		& {
+			
+		}
 		&.wikilink2 bdi {
 			font-style: italic;
 			border-bottom: @ini_toolbar_text dotted 1.5px;
@@ -184,8 +178,8 @@ body #toolbar__layout [popover] li a[aria-current="true"] {
 			display: inline-block;
 			font-size: smaller;
 			width: 1.25em; height: 1.25em;
-			border: @ini_toolbar_text solid 1px;
 			text-align: center;
+			text-transform: uppercase;
 		}
 	}
 }
@@ -201,8 +195,8 @@ body.loggedIn {
 		left: 0;
 		right: 0;
 		opacity: .93;
-		-webkit-box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);
-		box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);
+		-webkit-box-shadow: 1px 1px 1px .5px rgba(0,0,0,0.25);
+		box-shadow: 1px 1px 1px .5px rgba(0,0,0,0.25);
 		z-index: 101;
 	}
 }
@@ -230,10 +224,11 @@ body.loggedIn {
 				outline-color: @ini_toolbar_focus_dark;
 			}
 			svg {
-				fill: @ini_toolbar_text_dark;
+				fill: @ini_toolbar_icon_dark;
 			}
 			svg text {
 				fill: @ini_toolbar_background_dark;
+				text-transform: uppercase;
 			}
 			[popover] {
 				background-color: @ini_toolbar_background_dark;

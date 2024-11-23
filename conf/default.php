@@ -11,8 +11,12 @@ $conf['toolbaropt'] = 'user';
 /* appearance of the toolbar ('auto' or 'compact') */
 $conf['toolbarstyle'] = 'auto';
 
-/* what should be displayed to the right of the search field? ('static', 'user' or 'langs') */
-$conf['searchbaropt'] = 'static';
+/* How should the site logo be displayed ('image' or 'file') */
+$conf['sitelogo'] = 'image';
+
+
+/* what should be displayed to the right of the search field? ('user', 'langs' or 'none') */
+$conf['searchbaropt'] = 'user';
 
 /* what to show in place of a page headline */
 $conf['pageheadline'] = 'sitename';
@@ -33,7 +37,7 @@ $conf['langmenu']		= 'sb';
 $conf['langfilter']		= 'all';
 
 /* allow dark mode styling ('off' or 'auto') */
-$conf['darkmode'] = 'off';
+$conf['darkmode'] = 'auto';
 
 /* TODO: Delete me! */
 $conf['breadcrumbpos'] = 'banner';

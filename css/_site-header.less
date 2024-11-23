@@ -8,78 +8,92 @@
 		clear: both;
 		width: 100%;
 		background-color: @ini_searchbar_background;
-		color: @ini_searchbar_text;
 		font-size: @ini_base_fontsize;
-		height: @ini_searchbar_height;
 		box-sizing: border-box;
 	}
 	& > .content {
 		width: 100%;
 		max-width: @ini_site_width;
+		height: @ini_searchbar_height;
 		margin: 0 auto;
 		padding: .5rem;
 		display: grid;
 		grid-template-columns: 1fr auto 1fr;
 	}
-	ul, ol {
-		list-style: none inside;
-	}
-	a, button {
+	[popover] {
 		& {
-			display: inline-flex;
-			align-items: center;
-			column-gap: .5em;
-			
-			border: transparent 0 none;
-			border-radius: .25rem;
-			padding: .35em 3pt;
-			margin: 2px;
-			background-color: transparent;
-			
-			color: @ini_searchbar_link;
-			text-decoration: none;
-			cursor: pointer;
+			position: relative;
+			inset: unset;
+			background-color: @ini_searchbar_background;
+			width: max-content;
+			border: darken(@ini_searchbar_background, 15%) solid 1px;
+			border-radius: .35em;
+			box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.1);
+			padding: 2px	;
+			z-index: 101;
+			overflow: hidden;
 		}
-		& > * {
-			display: inline-block;
+		ul {
+			list-style: none inside;
+			display: flex;
+			flex-flow: column nowrap;
+		}
+		li, li a {
+			font-size: .8rem;
+			box-sizing: border-box;
+			width: 100%;
+		}
+		a {
+			padding: .5em .5em .5em .25em;
+			text-decoration: none;
+			color: @ini_searchbar_link;
+			border-radius: .25em;
+		}
+		a span {
+			color: @ini_searchbar_link;
 		}
 		svg {
-			fill: @ini_searchbar_link;
-			width: 1em; height: 1em;
-			display: inline-block;
+			fill: @ini_searchbar_icon;
 		}
-	}
-	a:hover, button:hover {
-		filter: brightness(.9);
-	}
-	a:focus, button:focus {
-		outline: @ini_focus solid 2px;
-	}
-	li {
-		& {
-			display: inline-block;
-		}
-		a, button {
-			display: inline-flex;
-			justify-content: flex-start;
+		a:has(svg) {
+			display: grid;
+			grid-template-columns: 1.5em auto;
 			align-items: center;
-			text-decoration: none;
-			column-gap: .5em;
+			column-gap: .25em;
 		}
 	}
-
+	#sb__languages {
+		a {
+			display: grid;
+			grid-template-columns: 1.5em auto;
+			align-items: center;
+			column-gap: .25em;
+		}
+		a::before {
+			content: attr(lang);
+			text-transform: uppercase;
+			display: inline-block;
+			width: 1.25em;
+			text-align: center;
+			color: @ini_searchbar_icon;
+			font-size: .8em;
+		}
+	}
 }
 
 #site__logo {
 	& {
+		height: @ini_searchbar_height;
+		display: flex;
+		align-items: center;
 	}
-	a.logo {
-		display: contents;
-		margin: 0 auto;
-	}
-	img {
+	& > * {
 		display: inline-block;
-		max-height: calc(@ini_searchbar_height - 1rem);
+		box-sizing: border-box;
+		height: 100%;
+		width: auto;
+	}
+	a.logo img {
 		height: 100%;
 		width: auto;
 	}
@@ -90,26 +104,74 @@
 		border: green dotted 1px;
 	}
 }
+
 #sitetools__group {
 	& {
-		border: cyan dotted 1px;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		
 	}
-	button {
+	ul {
+		list-style: none inside;
+	}
+	& > ul {
 		& {
-			font-size: 1.25rem;
+			display: grid;
+			grid-template-columns: auto auto auto;
 		}
-		.label {
-			display: none;
-		}
-		svg text {
-			font-size: 33%;
-			fill: @ini_searchbar_background;
-			text-transform: uppercase;
-		}
+		& > li {
+			& {
+				display: inline-block;
+			}
+			& > button, & > a,
+			#user-action-buttons li a {
+				& {
+					display: grid;
+					grid-template-columns: auto auto;
+					align-items: center;
+					column-gap: .25em;
+					
+					border: transparent 0 none;
+					border-radius: .25rem;
+					padding: .35em 3pt;
+					margin: 2px;
+					
+					background-color: transparent;
+					color: @ini_searchbar_link;
+					text-decoration: none;
+					font-size: .86rem;
+					cursor: pointer;
+				}
+				&:hover {
+					filter: brightness(.9);
+				}
+				&:focus {
+					outline: @ini_focus solid 2px;
+				}
+				& > * {
+					display: inline-block;
+				}
+				svg {
+					& {
+						display: inline-block;
+						fill: @ini_searchbar_icon;
+						width: 1.5rem;
+						height: 1.5rem;
+						font-size: .8rem;
+					}
+					text {
+						font-size: .8em;
+						fill: @ini_searchbar_background;
+						text-transform: uppercase;
+					}
+				}
+				& > span {
+					color: @ini_searchbar_link;
+					white-space: nowrap;
+				}
+			}
+		}	
 	}
 }
 
@@ -117,12 +179,19 @@
 
     /* general colour settings: */
     body.darkmode {
-		#site__logo img {
-			filter: drop-shadow(0 0 5pt rgba(255,255,255,0.3));
-		}
+
 		#searchbar__layout {
-			background-color: @ini_searchbar_background_dark;
-			color: @ini_searchbar_text_dark;
+			& {
+				background-color: @ini_searchbar_background_dark;
+			}
+			svg {
+				& {
+					fill: @ini_searchbar_icon_dark;
+				}
+				text {
+					fill: @ini_searchbar_background_dark;
+				}
+			}
 		}
 	}
 }

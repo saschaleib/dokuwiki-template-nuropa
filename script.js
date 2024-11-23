@@ -133,8 +133,9 @@ $p = {
 					.click($p.gui.popups._onBtnClick);
 			},
 			
-			alignPopup: function(popup, button, align = 'left') {
-				// console.info('$p.gui.popups.alignPopup()');
+			alignPopup: function(popup, button, align = 'center') {
+				console.info('$p.gui.popups.alignPopup(' + align + ')');
+				console.log(popup);
 				
 				const kOffsetX = 5;
 				const kOffsetY = 7;
@@ -180,7 +181,7 @@ $p = {
 					
 					// align the menu:
 					let mAlign = button.getAttribute('data-alignmenu');
-					if (!mAlign) mAlign = 'left';
+					if (!mAlign) mAlign = 'center';
 					
 					// align the popup under the button:
 					$p.gui.popups.alignPopup(popup, button, mAlign);

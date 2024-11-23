@@ -13,14 +13,24 @@ use dokuwiki\File\PageResolver;
  * Creates the Site logo image link
  *
  */
-function my_sitelogo() {
+function my_sitelogo($prefix) {
     global $conf;
 
-	// get logo either out of the template images folder or data/media folder
-	$logoSize = array();
-	$logo = tpl_getMediaFile(array(':logo.svg', ':wiki:logo.svg', ':logo.png', ':wiki:logo.png', 'images/sitelogo.svg'), false, $logoSize);
-	tpl_link( my_homelink(),
-		'<img src="'.$logo.'" ' . (is_array($logoSize) && array_key_exists(3, $logoSize) ? $logoSize[3] : '') . ' alt="' . htmlentities($conf['title']) . '">', 'class="logo"');
+	// get the user config:
+	$style = tpl_getConf('sitelogo');
+	
+	if ($style == 'file') {
+		
+		tpl_includeFile('sitelogo.html');
+		
+	} else { // $style = 'image'
+
+		// get logo either out of the template images folder or data/media folder
+		$logoSize = array();
+		$logo = tpl_getMediaFile(array(':logo.svg', ':wiki:logo.svg', ':logo.png', ':wiki:logo.png', 'images/sitelogo.svg'), false, $logoSize);
+		echo $prefix . tpl_link( my_homelink(),
+			'<img src="'.$logo.'" ' . (is_array($logoSize) && array_key_exists(3, $logoSize) ? $logoSize[3] : '') . ' alt="' . htmlentities($conf['title']) . '">', 'class="logo"', true).TPL_NL;
+	}
 }
 
 /**
@@ -71,15 +81,15 @@ function my_userinfo($prefix = '', $id) {
 		$userIcon = '<svg class="icon" viewBox="0 0 24 24"><path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" /></svg>';
 
         // output the button:
-        echo $prefix . "<button id=\"{$id}\" popovertarget=\"{$id}__menu\">" . NL;
-        echo $prefix . DOKU_TAB . $userIcon . NL;
-        echo $prefix . DOKU_TAB . '<span class="label"><span class="sr-only">' . htmlentities($lang['loggedinas']) . ' </span><span class="name">' . htmlentities($USERINFO['name']) . '</span></span>' . NL;
-        echo $prefix . '</button>' . NL;
+        echo $prefix . "<button id=\"{$id}\" popovertarget=\"{$id}__menu\">" . TPL_NL;
+        echo $prefix . TPL_TAB . $userIcon . TPL_NL;
+        echo $prefix . TPL_TAB . '<span class="label"><span class="sr-only">' . htmlentities($lang['loggedinas']) . ' </span><span class="name">' . htmlentities($USERINFO['name']) . '</span></span>' . TPL_NL;
+        echo $prefix . '</button>' . TPL_NL;
 
         // add the menu:
-        echo $prefix . "<div id=\"{$id}__menu\" popover>" . NL;
-        my_actionlist($prefix . DOKU_TAB, null, $items, ['admin'], '', 'menu');
-        echo $prefix . '</div>' . NL;
+        echo $prefix . "<div id=\"{$id}__menu\" popover>" . TPL_NL;
+        my_actionlist($prefix . TPL_TAB, null, $items, ['admin'], '', 'menu');
+        echo $prefix . '</div>' . TPL_NL;
 
     } else {
         my_actionlist($prefix, 'user-action-buttons', $items, ['admin'], '');
@@ -445,7 +455,7 @@ function my_bodyclasses() {
 function my_actionlist($prefix, $id, $list, $exclude, $class = null, $role = null) {
 
 	/* build menu */
-	echo $prefix . '<ul'  . ($id ? " id=\"{$id}\"" : '') . ($class ? " class=\"{$class}\"" : ''). ($role ? " role=\"{$role}\"" : '') . ">" . NL;
+	echo $prefix . '<ul'  . ($id ? " id=\"{$id}\"" : '') . ($class ? " class=\"{$class}\"" : ''). ($role ? " role=\"{$role}\"" : '') . ">" . TPL_NL;
 	
 	/* specific roles for items? */
 	$itemRole = null;
@@ -457,12 +467,12 @@ function my_actionlist($prefix, $id, $list, $exclude, $class = null, $role = nul
 		$typ = htmlentities($it->getType());
 		if (!in_array($typ, $exclude)) {
 			
-		echo $prefix . DOKU_TAB . "<li data-type=\"{$typ}\"" . ($itemRole ? " role=\"{$itemRole}\"" : '') . '>'
+		echo $prefix . TPL_TAB . "<li data-type=\"{$typ}\"" . ($itemRole ? " role=\"{$itemRole}\"" : '') . '>'
 					 . my_HtmlLink($it, false, true)
-					 . '</li>' . NL;
+					 . '</li>' . TPL_NL;
 		}
 	}
-	echo $prefix . '</ul>' . NL;
+	echo $prefix . '</ul>' . TPL_NL;
 };
 
 /* overwrite the asHtmlLink function for my purposes */
@@ -522,12 +532,12 @@ function my_topbtn($prefix)
 
 	$iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z" style="fill:#166DDF" /></svg>';
 
-	$html = $prefix . '<div id="to-top-block">' . NL .
-			$prefix . DOKU_TAB . '<a href="#main-content" title="' . $lang['btn_top'] .'">' . NL .
-			$prefix . DOKU_TAB . '<span class="sr-only">' . $lang['btn_top'] .' </span>' . NL .
-			$prefix . DOKU_TAB . DOKU_TAB . $iconSvg . NL .
-			$prefix . DOKU_TAB . '</a>' . NL .
-			$prefix . '</div>' . NL;
+	$html = $prefix . '<div id="to-top-block">' . TPL_NL .
+			$prefix . TPL_TAB . '<a href="#main-content" title="' . $lang['btn_top'] .'">' . TPL_NL .
+			$prefix . TPL_TAB . '<span class="sr-only">' . $lang['btn_top'] .' </span>' . TPL_NL .
+			$prefix . TPL_TAB . TPL_TAB . $iconSvg . TPL_NL .
+			$prefix . TPL_TAB . '</a>' . TPL_NL .
+			$prefix . '</div>' . TPL_NL;
 
     return $html;
 }
@@ -542,7 +552,7 @@ function my_topbtn($prefix)
  * @param  string $place the location from where it is called
  * @param  string $checkage should the age of the translation be checked?
  */
-function my_langmenu($prefix, $checkage = true) {
+function my_langmenu($prefix, $menuId, $checkage = true) {
 
 	global $INFO;
 	global $conf;
@@ -571,14 +581,14 @@ function my_langmenu($prefix, $checkage = true) {
 		$svg = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><title>{$langName}</title><path d='M20,2H4A2,2 0 0,0 2,4V22L6,18H20A2,2 0 0,0 22,16V4C22,2.89 21.1,2 20,2Z' /><text lengthAdjust='spacingAndGlyphs' x='50%' y='47%' dominant-baseline='middle' text-anchor='middle'>{$lang}</text></svg>";
 		
 		// prepare the menu button:
-		$out .= $prefix . DOKU_TAB . "<button aria-haspopup=\"menu\" popovertarget=\"languages__menu\" aria-controls=\"languages__menu\" title=\"{$trans->getLang('translations')}\">".NL;
-		$out .= $prefix . DOKU_TAB . DOKU_TAB . $svg . NL;
-		$out .= $prefix . DOKU_TAB . DOKU_TAB . '<span class="label">' . $langName . '</span>'.NL;
-		$out .= $prefix . DOKU_TAB . '</button>'.NL;
+		$out .= $prefix . TPL_TAB . "<button aria-haspopup=\"menu\" popovertarget=\"{$menuId}\" title=\"{$trans->getLang('translations')}\">".TPL_NL;
+		$out .= $prefix . TPL_TAB . TPL_TAB . $svg . TPL_NL;
+		$out .= $prefix . TPL_TAB . TPL_TAB . '<span class="label">' . $langName . '</span>'.TPL_NL;
+		$out .= $prefix . TPL_TAB . '</button>'.TPL_NL;
 
 		/* build the menu content */
-		$out .= $prefix . DOKU_TAB . '<div id="languages__menu" role="menu" popover>'.NL;
-		$out .= $prefix . DOKU_TAB . DOKU_TAB . '<ul role="menu">'.NL;
+		$out .= $prefix . TPL_TAB . "<div id=\"{$menuId}\" role=\"menu\" popover>".TPL_NL;
+		$out .= $prefix . TPL_TAB . TPL_TAB . '<ul>'.TPL_NL;
 
 		// loop over each language and add it to the menu:
 		$filter = tpl_getConf('langfilter', 'all');
@@ -595,17 +605,17 @@ function my_langmenu($prefix, $checkage = true) {
 				$link = wl($trg);
 				$current = ($lng == $lang);
 				
-				$out .= $prefix . DOKU_TAB . DOKU_TAB . DOKU_TAB .'<li>'.NL;
-				$out .= $prefix . DOKU_TAB . DOKU_TAB . DOKU_TAB . DOKU_TAB . "<a href=\"{$link}\" lang=\"{$lng}\" hreflang=\"{$lng}\" class=\"{$class}\" role=\"menuitem\"" . ( $current ? ' aria-current="true"' : '' ) . ">".NL;
-				$out .= $prefix . DOKU_TAB . DOKU_TAB . DOKU_TAB . DOKU_TAB . DOKU_TAB . "<bdi>". $trans->getLocalName($lng) . '</bdi>' . NL;
-				$out .= $prefix . DOKU_TAB . DOKU_TAB . DOKU_TAB . DOKU_TAB . '</a>'.NL;
-				$out .= $prefix . DOKU_TAB . DOKU_TAB . DOKU_TAB . '</li>'.NL;
+				$out .= $prefix . TPL_TAB . TPL_TAB . TPL_TAB .'<li>'.TPL_NL;
+				$out .= $prefix . TPL_TAB . TPL_TAB . TPL_TAB . TPL_TAB . "<a href=\"{$link}\" lang=\"{$lng}\" hreflang=\"{$lng}\" class=\"{$class}\" role=\"menuitem\"" . ( $current ? ' aria-current="true"' : '' ) . ">".TPL_NL;
+				$out .= $prefix . TPL_TAB . TPL_TAB . TPL_TAB . TPL_TAB . TPL_TAB . "<bdi>". $trans->getLocalName($lng) . '</bdi>' . TPL_NL;
+				$out .= $prefix . TPL_TAB . TPL_TAB . TPL_TAB . TPL_TAB . '</a>'.TPL_NL;
+				$out .= $prefix . TPL_TAB . TPL_TAB . TPL_TAB . '</li>'.TPL_NL;
 			}
 		}
 
 		// close all open elements:
-		$out .= $prefix . DOKU_TAB . DOKU_TAB . '</ul>'.NL
-			 .	$prefix . DOKU_TAB . '</div>'.NL;
+		$out .= $prefix . TPL_TAB . TPL_TAB . '</ul>'.TPL_NL
+			 .	$prefix . TPL_TAB . '</div>'.TPL_NL;
 
 	echo $out; // done.
 	}
