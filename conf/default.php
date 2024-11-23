@@ -16,7 +16,7 @@ $conf['sitelogo'] = 'image';
 
 
 /* what should be displayed to the right of the search field? ('user', 'langs' or 'none') */
-$conf['searchbaropt'] = 'user';
+$conf['searchbaropt'] = 'langs';
 
 /* what to show in place of a page headline */
 $conf['pageheadline'] = 'sitename';

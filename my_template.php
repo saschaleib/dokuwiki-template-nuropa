@@ -7,6 +7,7 @@
  */
 
 use dokuwiki\Extension\Event;
+use dokuwiki\Form\Form;
 use dokuwiki\File\PageResolver;
 
 /**
@@ -541,6 +542,98 @@ function my_topbtn($prefix)
 
     return $html;
 }
+
+/**
+ * inserts the custom search form
+ *
+ * modification of "tpl_searchform" from the "template.php" file
+ *
+ * @param bool $ajax
+ * @param bool $autocomplete
+ * @return bool
+ *
+ * @author Andreas Gohr <andi@splitbrain.org>
+ * @author Sascha Leib <sascha@leib.be>
+ */
+function my_searchform($ajax = true, $autocomplete = false)
+{
+    global $lang;
+    global $ACT;
+    global $QUERY;
+    global $ID;
+
+	/* SVG icons to include: */
+	$SearchIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" /></svg>';
+
+	$cancelIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>close</title><path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" /></svg>';
+
+    // don't print the search form if search action has been disabled
+    if (!actionOK('search')) return false;
+
+    $searchForm = new Form([
+        'action' => wl(),
+        'method' => 'get',
+        'role' => 'search',
+        'class' => 'search',
+        'id' => 'dw__search',
+    ], true);
+	
+	// begin the search field combo:
+    $searchForm->addTagOpen('div')->addClass('field');
+	
+	// hidden items:
+    $searchForm->setHiddenField('do', 'search');
+    $searchForm->setHiddenField('id', $ID);
+	
+	// add an accessible label:
+	$searchForm->addHTML('<label for="qsearch__in" class="sr-only">' . $lang['btn_search'] . '</label>');
+
+	
+	// the actual search field:
+    $searchForm->addTextInput('q')
+        ->addClass('edit')
+        ->attrs([
+            'placeholder' => $lang['btn_search'],
+            'autocomplete' => $autocomplete ? 'on' : 'off'
+        ])
+        ->id('qsearch__in')
+        ->val($ACT === 'search' ? $QUERY : '')
+        ->useInput(false);
+
+	// cancel button:
+    /*$searchForm->addTagOpen('button')
+		->attrs([
+            'type' => 'reset',
+            'title' => $lang['btn_cancel']
+        ]);
+	$searchForm->addHTML($cancelIcon);
+	$searchForm->addHTML('<span>' . $lang['btn_cancel'] . '</span>');
+	$searchForm->addTagClose('button');*/
+
+	// search button:
+    $searchForm->addTagOpen('button')
+		->attrs([
+            'type' => 'submit',
+            'title' => $lang['btn_search']
+        ]);
+	$searchForm->addHTML($SearchIcon);
+	$searchForm->addHTML('<span>' . $lang['btn_search'] . '</span>');
+	$searchForm->addTagClose('button');
+	
+	// end of search area
+    $searchForm->addTagClose('div');
+	
+	// the results list is moved outside of the field:
+    if ($ajax) {
+        $searchForm->addTagOpen('div')->id('qsearch__out');
+        $searchForm->addTagClose('div');
+    }
+
+    echo $searchForm->toHTML('QuickSearch') . TPL_NL;
+
+    return true;
+}
+
 
 /**
  * inserts the Languages menu, if appropriate.

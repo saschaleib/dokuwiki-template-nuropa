@@ -16,7 +16,7 @@ html {
 body {
 	color: @ini_text;
 	background-color: @ini_background;
-	max-width: 100%;
+	width: 100%;
 	text-rendering: optimizeLegibility;
 	margin: 0; padding: 0;
 	scrollbar-gutter: auto;
@@ -26,7 +26,19 @@ body {
 }
 
 /* utility classes: */
-.sr-only { display: none; }
+.sr-only { 
+	border: 0 !important;
+	clip: rect(0, 0, 0, 0) !important;
+	-webkit-clip-path: inset(50%) !important;
+	clip-path: inset(50%) !important;
+	height: 1px !important;
+	margin: -1px !important;
+	overflow: hidden !important;
+	padding: 0 !important;
+	position: absolute !important;
+	white-space: nowrap !important;
+	width: 1px !important;
+}
 
 /* Skip Link */
 #skip__link {
@@ -79,7 +91,7 @@ body {
 		& {
 			color: @ini_text_dark;
 			background-color: @ini_background_dark;
-			/*scrollbar-color: @ini_background_alt_dark @ini_background_dark;*/
+			scrollbar-color: @ini_background_alt_dark @ini_background_dark;
 			color-scheme: dark;
 		}
 
@@ -90,4 +102,3 @@ body {
 
 	}
 }
-

@@ -9,7 +9,10 @@
 <?php my_sitelogo(str_repeat(TPL_TAB,5)); ?>
 				</div>
 				<div id="search__group">
-<?php tpl_searchform(true, false); ?>
+					<div id="search__box">
+						<?php my_searchform(true, false); ?>
+
+					</div>
 				</div>
 				<div id="sitetools__group">
 					<!-- BEGIN SITETOOLS BLOCK -->
