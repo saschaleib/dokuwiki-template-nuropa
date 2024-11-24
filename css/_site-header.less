@@ -19,6 +19,7 @@
 		padding: .5rem;
 		display: grid;
 		grid-template-columns: 2fr 3fr 2fr;
+		place-items: start;
 	}
 	[popover] {
 		& {
@@ -84,8 +85,8 @@
 #site__logo {
 	& {
 		height: @ini_searchbar_height;
-		display: flex;
-		align-items: center;
+		/*display: flex;
+		align-items: center;*/
 	}
 	& > * {
 		display: inline-block;
@@ -100,6 +101,9 @@
 }
 
 #search__group {
+	& {
+		justify-self: center;
+	}
 	form {
 		display: block;
 		margin-top: .5rem;
@@ -109,7 +113,7 @@
 	}
 	form:focus-within {
 		& {
-			background-color: @ini_searchbar_background;
+			background-color: fadeout(@ini_searchbar_background, 15%);
 			border: @ini_searchfield_border solid 1pt;
 			-webkit-box-shadow: 1px 1px 1px .5px rgba(0,0,0,0.25);
 			box-shadow: 1px 1px 1px .5px rgba(0,0,0,0.25);
@@ -148,7 +152,7 @@
 					padding: 2pt 2pt 4pt 2pt;
 				}
 				&:nth-of-type(odd) {
-					background-color: darken(@ini_searchbar_background, 3%);
+					background-color: rgba(0,0,0,0.03);
 				}
 				a {
 					display: block;
@@ -156,6 +160,8 @@
 					padding: .25em;
 					text-decoration: none;
 					border-radius: .25em;
+					text-shadow: 1.5pt 1.5pt 1px #1363CD33;
+					backdrop-filter: blur(3pt);
 				}
 				a:hover {
 					text-decoration: underline;
@@ -236,10 +242,11 @@
 
 #sitetools__group {
 	& {
-		display: flex;
+		/*display: flex;
 		justify-content: center;
-		align-items: center;
-		
+		align-items: center;*/
+		max-height: @ini_searchbar_height;
+		place-self: start end;
 	}
 	ul {
 		list-style: none inside;
