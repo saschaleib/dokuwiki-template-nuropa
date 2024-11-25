@@ -14,12 +14,14 @@
 	& > .content {
 		width: 100%;
 		max-width: @ini_site_width;
+		box-sizing: border-box;
 		height: @ini_searchbar_height;
 		margin: 0 auto;
 		padding: .5rem;
 		display: grid;
-		grid-template-columns: 2fr 3fr 2fr;
+		grid-template-columns: max-content 3fr max-content;
 		place-items: start;
+		column-gap: 1.5rem;
 	}
 	[popover] {
 		& {
@@ -85,8 +87,6 @@
 #site__logo {
 	& {
 		height: @ini_searchbar_height;
-		/*display: flex;
-		align-items: center;*/
 	}
 	& > * {
 		display: inline-block;
@@ -102,7 +102,7 @@
 
 #search__group {
 	& {
-		justify-self: center;
+		justify-self: stretch;
 	}
 	form {
 		display: block;
@@ -160,7 +160,7 @@
 					padding: .25em;
 					text-decoration: none;
 					border-radius: .25em;
-					text-shadow: 1.5pt 1.5pt 1px #1363CD33;
+					text-shadow: 1.5pt 1.5pt 1px #00000033;
 					backdrop-filter: blur(3pt);
 				}
 				a:hover {
@@ -181,6 +181,7 @@
 		input[type="text"] {
 			font-family: @ini_searchfield_fonts;
 			font-size: 1rem;
+			color: @ini_searchfield_text;
 			padding: .25em 0 .25em .5em;
 			border: none;
 			background-color: @ini_searchfield_background;
@@ -242,9 +243,6 @@
 
 #sitetools__group {
 	& {
-		/*display: flex;
-		justify-content: center;
-		align-items: center;*/
 		max-height: @ini_searchbar_height;
 		place-self: start end;
 	}
@@ -322,7 +320,7 @@
 		#searchbar__layout [popover] {
 			& {
 				background-color: @ini_searchbar_background_dark;
-				border: lighten(@ini_searchbar_background, 15%) solid 1px;
+				border: lighten(@ini_searchbar_background_dark, 15%) solid 1px;
 			}
 			a, a span {
 				color: @ini_searchbar_link_dark;
@@ -341,7 +339,7 @@
 			}
 			form:focus-within {
 				& {
-					background-color: @ini_searchbar_background_dark;
+					background-color: fadeout(@ini_searchbar_background_dark, 10%);
 					border-color: @ini_searchfield_border_dark;
 				}
 			}
@@ -351,7 +349,7 @@
 				}
 				ul {
 					li:nth-of-type(odd) {
-						background-color: lighten(@ini_searchbar_background_dark, 3%);
+						background-color: rgba(255,255,255,3%);
 					}
 					li a {
 						color: @ini_searchbar_link_dark;
@@ -368,6 +366,7 @@
 				}
 				input[type="text"] {
 					background-color: @ini_searchfield_background_dark;
+					color: @ini_searchfield_text_dark;
 				}
 				button {
 					color: @ini_searchbar_link_dark;
@@ -403,3 +402,17 @@
 	}
 }
 
+@media (max-width: @ini_site_width) {
+
+	#searchbar__layout #sitetools__group button > span {
+		width: 0;
+		overflow: hidden;
+	}
+}
+
+@media (max-width: @ini_site_tablet_width) {
+
+	#site__logo {
+		height: (@ini_searchbar_height * 0.8);
+	}
+}
