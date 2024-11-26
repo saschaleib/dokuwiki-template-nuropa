@@ -404,6 +404,9 @@
 
 @media (max-width: @ini_site_width) {
 
+	#searchbar__layout > .content {
+		column-gap: .75rem;
+	}
 	#searchbar__layout #sitetools__group button > span {
 		width: 0;
 		overflow: hidden;
@@ -412,7 +415,19 @@
 
 @media (max-width: @ini_site_tablet_width) {
 
+	#searchbar__layout > .content {
+		column-gap: .25rem;
+	}
+	
 	#site__logo {
 		height: (@ini_searchbar_height * 0.8);
+	}
+	#search__group #dw__search button[type="submit"] span {
+		display: none;
+	}
+}
+@media (max-width: @ini_site_phone_width) {
+	 #search__group #dw__search input[type="text"] {
+		display: none
 	}
 }

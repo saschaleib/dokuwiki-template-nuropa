@@ -4,4 +4,4 @@ email    ad@hominem.info
 date     2024-08-22
 name     Nuropa Template
 desc     Nu style DokuWiki template (experimental)
-url      https://github.com/saschaleib/dokuwiki-template-nuropa/archive/refs/heads/dev.zip
+url      https://github.com/saschaleib/dokuwiki-template-nuropa/
