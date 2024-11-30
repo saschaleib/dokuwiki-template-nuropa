@@ -67,15 +67,8 @@
 	}
 	[popover] {
 		& {
-			position: relative;
-			inset: unset;
 			background-color: @ini_toolbar_background;
-			width: max-content;
 			border: darken(@ini_toolbar_background, 15%) solid 1px;
-			border-radius: .5em;
-			box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.1);
-			padding: 2px 5px 2px 2px;
-			z-index: 101;
 		}
 		ul {
 			list-style: none inside;
@@ -125,8 +118,8 @@ body.mode_admin #toolbar__layout li[data-type="admin"] a,
 body.mode_profile #toolbar__layout li[data-type="profile"] a,
 body.mode_login #toolbar__layout li[data-type="login"] a,
 body #toolbar__layout [popover] li a[aria-current="true"] {
-	filter: brightness(.9);
-	box-shadow: inset #00000033 1px 1px 1px;
+	filter: brightness(0.9);
+	box-shadow: inset rgba(0,0,0,.3) 1px 1px 1px;
 }
 
 /* toolbar menu */
@@ -162,7 +155,7 @@ body #toolbar__layout [popover] li a[aria-current="true"] {
 }
 
 /* special cases for the languages menu: */
-#tb__langmenu {
+#tb__languages__menu {
 	& {
 
 	}
@@ -198,7 +191,7 @@ body.loggedIn {
 		opacity: .93;
 		-webkit-box-shadow: 1px 1px 1px .5px rgba(0,0,0,0.25);
 		box-shadow: 1px 1px 1px .5px rgba(0,0,0,0.25);
-		z-index: 101;
+		z-index: 95;
 	}
 }
 
@@ -245,8 +238,10 @@ body.loggedIn {
 		&.mode_media #tb__tools__menu li[data-type="media"] a,
 		&.mode_index #tb__tools__menu li[data-type="index"] a,
 		&.mode_admin #tb__tools__menu li[data-type="admin"] a,
-		#toolbar__layout [popover] li[role="menuitem"] a[aria-current="true"] {
-			box-shadow: inset #FFFFFF44 -1px -1px 1px;
+		&.mode_profile #toolbar__layout li[data-type="profile"] a,
+		&.mode_login #toolbar__layout li[data-type="login"] a,
+		#toolbar__layout [popover] li a[aria-current="true"] {
+			filter: brightness(1.5);
 		}
 		#languages__menu a.wikilink2 bdi {
 			border-bottom-color: @ini_toolbar_text_dark;

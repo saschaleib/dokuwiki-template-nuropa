@@ -82,13 +82,13 @@ function my_userinfo($prefix = '', $id) {
 		$userIcon = '<svg class="icon" viewBox="0 0 24 24"><path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" /></svg>';
 
         // output the button:
-        echo $prefix . "<button id=\"{$id}\" popovertarget=\"{$id}__menu\">" . TPL_NL;
+        echo $prefix . "<button id=\"{$id}\" popovertarget=\"{$id}__menu\" data-isopen=\"false\">" . TPL_NL;
         echo $prefix . TPL_TAB . $userIcon . TPL_NL;
         echo $prefix . TPL_TAB . '<span class="label"><span class="sr-only">' . htmlentities($lang['loggedinas']) . ' </span><span class="name">' . htmlentities($USERINFO['name']) . '</span></span>' . TPL_NL;
         echo $prefix . '</button>' . TPL_NL;
 
         // add the menu:
-        echo $prefix . "<div id=\"{$id}__menu\" popover>" . TPL_NL;
+        echo $prefix . "<div id=\"{$id}__menu\" popover data-controlledby=\"{$id}\">" . TPL_NL;
         my_actionlist($prefix . TPL_TAB, null, $items, ['admin'], '', 'menu');
         echo $prefix . '</div>' . TPL_NL;
 
@@ -634,7 +634,6 @@ function my_searchform($ajax = true, $autocomplete = false)
     return true;
 }
 
-
 /**
  * inserts the Languages menu, if appropriate.
  *
@@ -645,7 +644,7 @@ function my_searchform($ajax = true, $autocomplete = false)
  * @param  string $place the location from where it is called
  * @param  string $checkage should the age of the translation be checked?
  */
-function my_langmenu($prefix, $menuId, $checkage = true) {
+function my_langmenu($prefix, $btnId, $checkage = true) {
 
 	global $INFO;
 	global $conf;
@@ -662,7 +661,9 @@ function my_langmenu($prefix, $menuId, $checkage = true) {
 	/* plugin available? */
 	if ($trans) {
 		
-		if (!$trans->istranslatable($INFO['id'])) return '';
+		if (!$trans->istranslatable($INFO['id'])) {
+			return;
+		}
 		if ($checkage) $trans->checkage();
 
 		[, $idpart] = $trans->getTransParts($INFO['id']);
@@ -674,13 +675,13 @@ function my_langmenu($prefix, $menuId, $checkage = true) {
 		$svg = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><title>{$langName}</title><path d='M20,2H4A2,2 0 0,0 2,4V22L6,18H20A2,2 0 0,0 22,16V4C22,2.89 21.1,2 20,2Z' /><text lengthAdjust='spacingAndGlyphs' x='50%' y='47%' dominant-baseline='middle' text-anchor='middle'>{$lang}</text></svg>";
 		
 		// prepare the menu button:
-		$out .= $prefix . TPL_TAB . "<button aria-haspopup=\"menu\" popovertarget=\"{$menuId}\" title=\"{$trans->getLang('translations')}\">".TPL_NL;
+		$out .= $prefix . TPL_TAB . "<button id=\"{$btnId}\" aria-haspopup=\"menu\" popovertarget=\"{$btnId}__menu\" data-isopen=\"false\" title=\"{$trans->getLang('translations')}\">".TPL_NL;
 		$out .= $prefix . TPL_TAB . TPL_TAB . $svg . TPL_NL;
 		$out .= $prefix . TPL_TAB . TPL_TAB . '<span class="label">' . $langName . '</span>'.TPL_NL;
 		$out .= $prefix . TPL_TAB . '</button>'.TPL_NL;
 
 		/* build the menu content */
-		$out .= $prefix . TPL_TAB . "<div id=\"{$menuId}\" role=\"menu\" popover>".TPL_NL;
+		$out .= $prefix . TPL_TAB . "<div id=\"{$btnId}__menu\" role=\"menu\" popover data-controlledby=\"{$btnId}\">".TPL_NL;
 		$out .= $prefix . TPL_TAB . TPL_TAB . '<ul>'.TPL_NL;
 
 		// loop over each language and add it to the menu:
@@ -710,6 +711,10 @@ function my_langmenu($prefix, $menuId, $checkage = true) {
 		$out .= $prefix . TPL_TAB . TPL_TAB . '</ul>'.TPL_NL
 			 .	$prefix . TPL_TAB . '</div>'.TPL_NL;
 
-	echo $out; // done.
 	}
+	else {
+		$out .= '<!-- no translation plugin loaded -->';
+	}
+	
+	echo $out; // done.
 }

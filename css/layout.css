@@ -70,12 +70,12 @@ body {
 *[popover] {
 	position: relative;
 	inset: unset;
+	width: max-content;
 	border-radius: .5em;
 	box-shadow: 1.5px 1.5px 1px .5px rgba(0, 0, 0, 0.4);
 	padding: 2px 5px 2px 2px;
-	z-index: 101;
+	z-index: 100;
 }
-
 
 /* DEBUG: Hide elements we're not looking at yet */
 #main-layout,

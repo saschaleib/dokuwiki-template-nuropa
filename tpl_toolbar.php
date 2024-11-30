@@ -23,10 +23,10 @@
 			my_userinfo(str_repeat(TPL_TAB,4), 'tb__userinfo');
 			break;
 		case 'langs':
-			my_langmenu(str_repeat(TPL_TAB,4), 'tb__langmenu');
+			my_langmenu(str_repeat(TPL_TAB,4), 'tb__languages');
 			break;
 		default:
-			/* do nothing */
+			echo '<!-- option: ' . $tbOption . ' -->';
 	}
 	
     /* collect all toolbar items from various DW menus: */
@@ -53,11 +53,11 @@
 
  ?>
 			<div id="tb__menu__group">
-				<button id="pagetools__btn" aria-haspopup="menu" aria-controls="pagetools__popup" title="<?php echo htmlentities($lang['tools']); ?>" data-alignmenu="right" popovertarget="pagetools__popup">
+				<button id="pagetools__btn" aria-haspopup="menu" aria-controls="pagetools__popup" title="<?php echo htmlentities($lang['tools']); ?>" data-alignmenu="right" popovertarget="pagetools__popup" data-isopen="false">
 					<?php echo $rightChevronsIcon; ?>
 					<span class="label sr-only"><?php echo htmlentities($lang['tools']); ?></span>
 				</button>
-				<nav id="pagetools__popup" class="popup align-right" popover>
+				<nav id="pagetools__popup" class="popup align-right" popover data-controlledby="pagetools__btn">
 <?php
 	my_actionlist(str_repeat(TPL_TAB,5), null, $list, $exPop, null, 'menu');
  ?>

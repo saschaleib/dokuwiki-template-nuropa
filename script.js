@@ -122,20 +122,25 @@ $p = {
             //console.info('gui.init()')
 
             $p.gui.toolbar.init();
-            $p.gui.popups.init();
+            $p.gui.popover.init();
 
         },
 
-		popups: {
+		popover: {
 			init: function() {
-				// add callback function:
+				// add callback function to buttons using jQuery:
 				jQuery('button[popovertarget]')
-					.click($p.gui.popups._onBtnClick);
+					.click($p.gui.popover._onBtnClick);
+					
+				// event on popover avoids jQuery to no have to deal with jQuery event wrappers
+				jQuery('[popover]').each( (n, it) => {
+					it.addEventListener('toggle', $p.gui.popover._onPopoverToggle);
+				});
 			},
 			
 			alignPopup: function(popup, button, align = 'center') {
-				console.info('$p.gui.popups.alignPopup(' + align + ')');
-				console.log(popup);
+				//console.info('$p.gui.popover.alignPopup(' + align + ')');
+				//console.log(popup);
 				
 				const kOffsetX = 5;
 				const kOffsetY = 7;
@@ -170,29 +175,44 @@ $p = {
 			},
 			
 			_onBtnClick: function(e) {
-				//console.info('$p.gui.popups._onBtnClick()');
+				//console.info('$p.gui.popover._onBtnClick()');
 
 				try {
 					// which button has been clicked? 
-					const button = e.currentTarget;
+					const btn = e.currentTarget;
 
 					// find the popover target:
-					const popup = document.getElementById(button.getAttribute('popovertarget'));
+					const popup = document.getElementById(btn.getAttribute('popovertarget'));
+					//console.log(' -> open: ' + popup.matches(':popover-open'));
 					
 					// align the menu:
-					let mAlign = button.getAttribute('data-alignmenu');
+					let mAlign = btn.getAttribute('data-alignmenu');
 					if (!mAlign) mAlign = 'center';
 					
 					// align the popup under the button:
-					$p.gui.popups.alignPopup(popup, button, mAlign);
+					$p.gui.popover.alignPopup(popup, btn, mAlign);
 					
-					// set a class to the button (match is before the change!):
-					button.setAttribute('data-isopen', !popup.matches(':popover-open'));
-					
+					// modify the button to reflect the state change
+					// (this needs to be inverted, because it happens *before* the state change!):
+					btn.setAttribute('data-isopen', !popup.matches(':popover-open'));
+
 				} catch(err) {
 					console.log(err);
 				}
+			},
+			
+			_onPopoverToggle: function(e) {
+				//console.info('$p.gui.popover._onPopoverToggle()');
+				
+				try {
+					// set the 'isopen' attribute in the opener (button) of the menu:
+					document.getElementById(e.target.getAttribute('data-controlledby'))
+						.setAttribute('data-isopen', ( e.newState == 'open' ) );
+				} catch(err) {
+					console.warn('Could not find opener element.');
+				}
 			}
+
 		},
 
         toolbar: {
