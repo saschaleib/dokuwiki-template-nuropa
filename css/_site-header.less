@@ -171,8 +171,6 @@
 				outline: transparent none 0;
 			}
 		}
-
-		
 	}
 	
 	#qsearch__out {
@@ -181,37 +179,91 @@
 		}
 	}
 
-	
-	#search__backdrop:focus-within {
+	#search__backdrop {
 		& {
-			position: absolute;
-			top: 0; left: 0;
-			width: 100vw; height: calc(~"100vh - " @ini_toolbar_font_size * 2.4);
-			margin-top: @ini_toolbar_font_size * 2.4;
-			padding: .5rem .25rem .25rem .25rem;
-			backdrop-filter: ~"blur(0.67px) saturate(.4)";
-			z-index: 998;
-			/*background-color: rgba(0,0,0,.1);*/
+			overflow: hidden;
 		}
-		form {
-			position: relative;
-			width: 100%; max-width: 32rem;
-			margin: 0 auto;
-			padding: 1rem;
-			background-color: fadeout(@ini_searchbar_background, 10%);
-			border: @ini_searchfield_border solid 1px;
-			border-radius: .5rem;
-			-webkit-box-shadow: 1.5pt 1.5pt 2pt rgba(0,0,0,0.25);
-			box-shadow: 1.5pt 1.5pt 2pt rgba(0,0,0,0.25);
-			z-index: 999;
-			box-sizing: border-box;
-		}
-		button[type="reset"] {
-			display: grid;
-		}
+		&:focus-within {
+			& {
+				position: absolute;
+				top: 0; left: 0;
+				width: 100vw; height: calc(~"100vh - " @ini_toolbar_font_size * 2.4);
+				margin-top: @ini_toolbar_font_size * 2;
+				padding: .25rem .5rem .25rem 0;
+				backdrop-filter: ~"blur(0.67px) saturate(.4)";
+				z-index: 998;
+			}
+			form {
+				position: relative;
+				width: ~"calc(100% - 1.5rem)";
+				max-width: 38rem;
+				margin: .3rem auto;
+				padding: .5rem;
+				background-color: fadeout(@ini_searchbar_background, 10%);
+				border: @ini_searchfield_border solid 1pt;
+				border-radius: .75rem;
+				-webkit-box-shadow: 1.5pt 1.5pt .25em rgba(0,0,0,.5);
+				box-shadow: 1.5pt 1.5pt .25em rgba(0,0,0,.5);
+				z-index: 999;
+				box-sizing: border-box;
+			}
+			button[type="reset"] {
+				display: grid;
+			}
 
-		#qsearch__out {
-			display: block;
+			#qsearch__out {
+				& {
+					display: block;
+				}
+				& > strong {
+					display: block;
+					margin: .5em 0;
+					border-top: @ini_searchfield_border solid 1pt;
+					height: 1.5pt;
+					overflow: hidden;
+				}
+				ul {
+					& {
+						max-height: 70vh;
+						overflow-y: auto;
+					}
+					li {
+						& {
+							display: block;
+							height: 1.5em;
+							overflow: hidden;
+							text-overflow: ellipsis;
+							border-radius: .25em;
+							padding: 2pt 2pt 4pt 2pt;
+						}
+						&:nth-of-type(odd) {
+							background-color: rgba(0,0,0,0.03);
+						}
+						a {
+							display: block;
+							color: @ini_searchbar_link;
+							padding: .25em;
+							text-decoration: none;
+							border-radius: .25em;
+							/*text-shadow: 1.5pt 1.5pt 1px fadeout(@ini_searchbar_link, 60%);*/
+						}
+						/*a::before {
+							content: '';
+							background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' style='fill:%23575757'%3E%3Cpath d='M6,2A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2H6M6,4H13V9H18V20H6V4M8,12V14H16V12H8M8,16V18H13V16H8Z' /%3E%3C/svg%3E") center no-repeat;
+							background-size: 1em;
+							display: inline-block;
+							width: 1em; height: 1em;
+						}*/
+						a:hover {
+							text-decoration: underline;
+						}
+						a:focus {
+							outline: @ini_focus solid 2px;
+						}
+					}
+				}
+
+			}
 		}
 	}
 }
@@ -278,21 +330,20 @@
 					white-space: nowrap;
 				}
 			}
+			&.search {
+				display: none;
+			}
 		}	
 	}
 }
 
-@media (prefers-color-scheme: dark) {
-}
+/*@media (prefers-color-scheme: dark) {
+}*/
 
 @media (max-width: @ini_site_width) {
 
 	#searchbar__layout > .content {
 		column-gap: .75rem;
-	}
-	#searchbar__layout #sitetools__group button > span {
-		width: 0;
-		overflow: hidden;
 	}
 }
 
@@ -305,6 +356,21 @@
 	#site__logo {
 		height: (@ini_searchbar_height * 0.8);
 	}
+
+	#sitetools__group > ul > li.search {
+		display: inline-block;
+	}
+	#search__backdrop { width: 0; }
+	#search__backdrop:focus-within { width: 100vw; }
+
 }
 @media (max-width: @ini_site_phone_width) {
+	#searchbar__layout #sitetools__group > ul > li {
+		& > button, & > a, & > label {
+			& > span {
+				width: 0;
+				overflow: hidden;
+			}
+		}
+	}
 }

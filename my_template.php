@@ -82,7 +82,7 @@ function my_userinfo($prefix = '', $id) {
 		$userIcon = '<svg class="icon" viewBox="0 0 24 24"><path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" /></svg>';
 
         // output the button:
-        echo $prefix . "<button id=\"{$id}\" popovertarget=\"{$id}__menu\" data-isopen=\"false\">" . TPL_NL;
+        echo $prefix . "<button id=\"{$id}\" popovertarget=\"{$id}__menu\" data-isopen=\"false\" title=\"" . htmlentities($lang['profile']) . '">' . TPL_NL;
         echo $prefix . TPL_TAB . $userIcon . TPL_NL;
         echo $prefix . TPL_TAB . '<span class="label"><span class="sr-only">' . htmlentities($lang['loggedinas']) . ' </span><span class="name">' . htmlentities($USERINFO['name']) . '</span></span>' . TPL_NL;
         echo $prefix . '</button>' . TPL_NL;
@@ -640,7 +640,8 @@ function my_searchform($ajax = true, $autocomplete = false)
  * @param  string $place the location from where it is called
  * @param  string $checkage should the age of the translation be checked?
  */
-function my_langmenu($prefix, $btnId, $checkage = true) {
+function my_langmenu($prefix, $btnId, $checkage = true)
+{
 
 	global $INFO;
 	global $conf;
