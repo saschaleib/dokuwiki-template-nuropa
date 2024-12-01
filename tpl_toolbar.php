@@ -47,14 +47,10 @@
 <?php
 		$tbStyle = tpl_getConf('toolbarstyle', 'auto');
 		my_actionlist(str_repeat(TPL_TAB,3), 'tb__tools__menu', $list, $exTB, $tbStyle, 'menu');
-
-		/* icons to inline in the code: */
-		$rightChevronsIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.59,6.84L12.25,12.5L6.59,18.16L5.89,17.45L10.84,12.5L5.89,7.55L6.59,6.84M10.59,6.84L16.25,12.5L10.59,18.16L9.89,17.45L14.84,12.5L9.89,7.55L10.59,6.84Z" /></svg>';
-
  ?>
 			<div id="tb__menu__group">
 				<button id="pagetools__btn" aria-haspopup="menu" aria-controls="pagetools__popup" title="<?php echo htmlentities($lang['tools']); ?>" data-alignmenu="right" popovertarget="pagetools__popup" data-isopen="false">
-					<?php echo $rightChevronsIcon; ?>
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.59,6.84L12.25,12.5L6.59,18.16L5.89,17.45L10.84,12.5L5.89,7.55L6.59,6.84M10.59,6.84L16.25,12.5L10.59,18.16L9.89,17.45L14.84,12.5L9.89,7.55L10.59,6.84Z" /></svg>
 					<span class="label sr-only"><?php echo htmlentities($lang['tools']); ?></span>
 				</button>
 				<nav id="pagetools__popup" class="popup align-right" popover data-controlledby="pagetools__btn">

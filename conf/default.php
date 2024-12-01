@@ -5,18 +5,23 @@
  * @author     Sascha Leib <sascha@leib.be>
  */
 
+/* TOOLBAR */
+
 /* what should be displayed in the left corner of the toolbar? ('user', 'langs' or 'none') */
 $conf['toolbaropt'] = 'user';
 
 /* appearance of the toolbar ('auto' or 'compact') */
 $conf['toolbarstyle'] = 'auto';
 
+/* SEARCHBAR */
+
 /* How should the site logo be displayed ('image' or 'file') */
 $conf['sitelogo'] = 'image';
 
-
 /* what should be displayed to the right of the search field? ('user', 'langs' or 'none') */
 $conf['searchbaropt'] = 'langs';
+
+
 
 /* what to show in place of a page headline */
 $conf['pageheadline'] = 'sitename';
@@ -26,7 +31,7 @@ $conf['bannerimg'] = 'banner'; /* empty = no banner bar */
 $conf['bannersize'] = '48px'; /* any CSS length, or 'auto' */
 
 
-/* allow dark mode styling ('off' or 'auto') */
+/* show the TOC by default */
 $conf['showtoc'] = 'show';
 
 /* allow overriding the home link */

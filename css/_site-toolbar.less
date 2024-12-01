@@ -138,10 +138,6 @@ body #toolbar__layout [popover] li a[aria-current="true"] {
 		svg {
 			width: 1.5em;
 			height: 1.5em;
-			-webkit-transition: all .25s;
-			-moz-transition: all .25s;
-			-o-transition: all .25s;
-			-ms-transition: all .25s;
 			transition: all .25s;
 			padding: 0 .1em 0 .2em;
 		}
@@ -181,7 +177,7 @@ body #toolbar__layout [popover] li a[aria-current="true"] {
 /* when logged in, the toolbar floats: */
 body.loggedIn {
 	& {
-		margin-top: calc(@ini_toolbar_font_size * 2);
+		margin-top: @ini_toolbar_font_size * 2.4;
 	}
 	#toolbar__layout {
 		position: fixed;

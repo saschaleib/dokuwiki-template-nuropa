@@ -565,7 +565,7 @@ function my_searchform($ajax = true, $autocomplete = false)
 	/* SVG icons to include: */
 	$SearchIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" /></svg>';
 
-	$cancelIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>close</title><path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" /></svg>';
+	$clearIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19,15.59L17.59,17L14,13.41L10.41,17L9,15.59L12.59,12L9,8.41L10.41,7L14,10.59L17.59,7L19,8.41L15.41,12L19,15.59M22,3A2,2 0 0,1 24,5V19A2,2 0 0,1 22,21H7C6.31,21 5.77,20.64 5.41,20.11L0,12L5.41,3.88C5.77,3.35 6.31,3 7,3H22M22,5H7L2.28,12L7,19H22V5Z" /></svg>';
 
     // don't print the search form if search action has been disabled
     if (!actionOK('search')) return false;
@@ -584,11 +584,7 @@ function my_searchform($ajax = true, $autocomplete = false)
 	// hidden items:
     $searchForm->setHiddenField('do', 'search');
     $searchForm->setHiddenField('id', $ID);
-	
-	// add an accessible label:
-	$searchForm->addHTML('<label for="qsearch__in" class="sr-only">' . $lang['btn_search'] . '</label>');
 
-	
 	// the actual search field:
     $searchForm->addTextInput('q')
         ->addClass('edit')
@@ -601,28 +597,28 @@ function my_searchform($ajax = true, $autocomplete = false)
         ->useInput(false);
 
 	// cancel button:
-    /*$searchForm->addTagOpen('button')
+    $searchForm->addTagOpen('button')
 		->attrs([
             'type' => 'reset',
-            'title' => $lang['btn_cancel']
+            'aria-label' => $lang['btn_delete']
         ]);
-	$searchForm->addHTML($cancelIcon);
-	$searchForm->addHTML('<span>' . $lang['btn_cancel'] . '</span>');
-	$searchForm->addTagClose('button');*/
+	$searchForm->addHTML($clearIcon);
+	$searchForm->addHTML('<span class="label">' . $lang['btn_delete'] . '</span>');
+	$searchForm->addTagClose('button');
 
 	// search button:
     $searchForm->addTagOpen('button')
 		->attrs([
             'type' => 'submit',
-            'title' => $lang['btn_search']
+            'aria-label' => $lang['btn_search']
         ]);
 	$searchForm->addHTML($SearchIcon);
-	$searchForm->addHTML('<span>' . $lang['btn_search'] . '</span>');
+	$searchForm->addHTML('<span class="label">' . $lang['btn_search'] . '</span>');
 	$searchForm->addTagClose('button');
 	
 	// end of search area
     $searchForm->addTagClose('div');
-	
+
 	// the results list is moved outside of the field:
     if ($ajax) {
         $searchForm->addTagOpen('div')->id('qsearch__out');

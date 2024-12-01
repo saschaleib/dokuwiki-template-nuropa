@@ -134,7 +134,7 @@ $p = {
 					
 				// event on popover avoids jQuery to no have to deal with jQuery event wrappers
 				jQuery('[popover]').each( (n, it) => {
-					it.addEventListener('toggle', $p.gui.popover._onPopoverToggle);
+					it.addEventListener('toggle', $p.gui.popover._onToggle);
 				});
 			},
 			
@@ -201,8 +201,8 @@ $p = {
 				}
 			},
 			
-			_onPopoverToggle: function(e) {
-				//console.info('$p.gui.popover._onPopoverToggle()');
+			_onToggle: function(e) {
+				//console.info('$p.gui.popover._onToggle()');
 				
 				try {
 					// set the 'isopen' attribute in the opener (button) of the menu:
