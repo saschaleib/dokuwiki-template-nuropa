@@ -587,6 +587,17 @@ function my_searchform($ajax = true, $autocomplete = false)
     $searchForm->setHiddenField('do', 'search');
     $searchForm->setHiddenField('id', $ID);
 
+	// Close button:
+    $searchForm->addTagOpen('button')
+		->attrs([
+            'type' => 'button',
+			'id' => 'search__close',
+            'aria-label' => $lang['js']['mediaclose']
+        ]);
+	$searchForm->addHTML('<span class="label">' . $lang['js']['mediaclose'] . '</span>');
+	$searchForm->addHTML($closeIcon);
+	$searchForm->addTagClose('button');
+
 	// begin the search field combo:
     $searchForm->addTagOpen('div')->addClass('field');
 
@@ -601,7 +612,7 @@ function my_searchform($ajax = true, $autocomplete = false)
         ->val($ACT === 'search' ? $QUERY : '')
         ->useInput(false);
 
-	// cancel button:
+	/* cancel button:
     $searchForm->addTagOpen('button')
 		->attrs([
             'type' => 'reset',
@@ -609,7 +620,7 @@ function my_searchform($ajax = true, $autocomplete = false)
         ]);
 	$searchForm->addHTML($clearIcon);
 	$searchForm->addHTML('<span class="label">' . $lang['btn_delete'] . '</span>');
-	$searchForm->addTagClose('button');
+	$searchForm->addTagClose('button'); */
 
 	// search button:
     $searchForm->addTagOpen('button')
@@ -623,19 +634,7 @@ function my_searchform($ajax = true, $autocomplete = false)
 	
 	// end of search area
     $searchForm->addTagClose('div');
-	
-	// Close button:
-    $searchForm->addTagOpen('button')
-		->attrs([
-            'type' => 'button',
-			'data-action' => 'search:close',
-            'aria-label' => $lang['js']['mediaclose']
-        ]);
-	$searchForm->addHTML('<span class="label">' . $lang['js']['mediaclose'] . '</span>');
-	$searchForm->addHTML($closeIcon);
-	$searchForm->addTagClose('button');
-	
-	
+
 	// end of header area
     $searchForm->addTagClose('header');
 

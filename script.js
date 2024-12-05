@@ -24,8 +24,8 @@ $p = {
 		/* ask to be informed about a specific key press event.
 		 * parameters:
 		 *   element: String - selector for the element to attach to (e.g. 'body', '#search')
-		 *   key: String - name of the key to look for (e.g. 'escape', 's', etc.)
-		 *   modifiers: Array - list of modifiers that are required to trigger the event (see docs)
+		 *   key: String - name of the key to look for (e.g. 'Escape', 's', etc.)
+		 *   modifiers: Array - list of modifiers that are required to trigger the event
 		 *   callback: Function - to be called when the event happens
 		 * Returns: String ID of the stored reference
 		 */
@@ -98,6 +98,8 @@ $p = {
 					'shift': evt.shiftKey
 				};
 				
+				//console.log(key);
+				
 				/* check if any registered callback matches: */
 				var match = null;
 				$p.keyboard._list.forEach( it => {
@@ -123,6 +125,7 @@ $p = {
 
             $p.gui.toolbar.init();
             $p.gui.popover.init();
+            $p.gui.search.init();
 
         },
 
@@ -265,7 +268,29 @@ $p = {
 					}
 				});
             }
-        }
+        },
+		
+		search: {
+			init: function() {
+                // console.info('$p.gui.search.init()');
+
+				// use Escape key to exit the search field:
+				$p.keyboard.waitForKey(
+					document.getElementById('search__backdrop'),
+					'Escape', null,
+					$p.gui.search.closeSearch);
+					
+				// or click the Close-button:
+				document.getElementById('search__close')
+					.addEventListener('click', $p.gui.search.closeSearch);
+				
+			},
+			
+			closeSearch: function() {
+                //console.info('$p.gui.search.closeSearch()');
+				document.activeElement.blur();
+			}
+		}
 	}
 };
 
