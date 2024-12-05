@@ -43,9 +43,3 @@ $conf['langfilter']		= 'all';
 
 /* allow dark mode styling ('off' or 'auto') */
 $conf['darkmode'] = 'auto';
-
-/* TODO: Delete me! */
-$conf['breadcrumbpos'] = 'banner';
-$conf['youareherepos'] = 'banner';
-/* placement of the user info item */
-$conf['userinfo'] = 'toolbar';

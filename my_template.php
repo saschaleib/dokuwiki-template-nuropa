@@ -445,7 +445,7 @@ function my_bodyclasses() {
 	$cls = tpl_classes();
 	
 	/* enable darkmode? */
-	if (tpl_getConf('darkmode') === 'auto') {
+	if (tpl_getConf('darkmode') !== 'off') {
 		$cls .= ' darkmode';
 	}
 	
