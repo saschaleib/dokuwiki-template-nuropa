@@ -15,7 +15,7 @@ use dokuwiki\File\PageResolver;
  *
  */
 function my_sitelogo($prefix) {
-    global $conf;
+	global $conf;
 
 	// get the user config:
 	$style = tpl_getConf('sitelogo');
@@ -44,7 +44,7 @@ function my_sitelogo($prefix) {
  * @returns string (link)
  */
 function my_homelink() {
-    global $conf;
+	global $conf;
 
 	$hl = trim(tpl_getConf('homelink'));
 
@@ -66,35 +66,35 @@ function my_homelink() {
  * @return void
  */
 function my_userinfo($prefix = '', $id) {
-    global $lang;
-    global $INPUT;
-    global $INFO;
-    global $USERINFO;
-
-    // is there a user logged in?
-    $userid = $INPUT->server->str('REMOTE_USER');
-
-    // get the user menu items:
-    $items = (new \dokuwiki\Menu\UserMenu())->getItems();
-
-    if (isset($USERINFO['name'])) { // user is loggd in:
-
+	global $lang;
+	global $INPUT;
+	global $INFO;
+	global $USERINFO;
+	
+	// is there a user logged in?
+	$userid = $INPUT->server->str('REMOTE_USER');
+	
+	// get the user menu items:
+	$items = (new \dokuwiki\Menu\UserMenu())->getItems();
+	
+	if (isset($USERINFO['name'])) { // user is loggd in:
+	
 		$userIcon = '<svg class="icon" viewBox="0 0 24 24"><path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" /></svg>';
-
-        // output the button:
-        echo $prefix . "<button id=\"{$id}\" popovertarget=\"{$id}__menu\" data-isopen=\"false\" title=\"" . htmlentities($lang['profile']) . '">' . TPL_NL;
-        echo $prefix . TPL_TAB . $userIcon . TPL_NL;
-        echo $prefix . TPL_TAB . '<span class="label"><span class="sr-only">' . htmlentities($lang['loggedinas']) . ' </span><span class="name">' . htmlentities($USERINFO['name']) . '</span></span>' . TPL_NL;
-        echo $prefix . '</button>' . TPL_NL;
-
-        // add the menu:
-        echo $prefix . "<div id=\"{$id}__menu\" popover data-controlledby=\"{$id}\">" . TPL_NL;
-        my_actionlist($prefix . TPL_TAB, null, $items, ['admin'], '', 'menu');
-        echo $prefix . '</div>' . TPL_NL;
-
-    } else {
-        my_actionlist($prefix, 'user-action-buttons', $items, ['admin'], '');
-    }
+	
+		// output the button:
+		echo $prefix . "<button id=\"{$id}\" popovertarget=\"{$id}__menu\" data-isopen=\"false\" title=\"" . htmlentities($lang['profile']) . '">' . TPL_NL;
+		echo $prefix . TPL_TAB . $userIcon . TPL_NL;
+		echo $prefix . TPL_TAB . '<span class="label"><span class="sr-only">' . htmlentities($lang['loggedinas']) . ' </span><span class="name">' . htmlentities($USERINFO['name']) . '</span></span>' . TPL_NL;
+		echo $prefix . '</button>' . TPL_NL;
+	
+		// add the menu:
+		echo $prefix . "<div id=\"{$id}__menu\" popover data-controlledby=\"{$id}\">" . TPL_NL;
+		my_actionlist($prefix . TPL_TAB, null, $items, ['admin'], '', 'menu');
+		echo $prefix . '</div>' . TPL_NL;
+	
+	} else {
+		my_actionlist($prefix, 'user-action-buttons', $items, ['admin'], '');
+	}
 
 }
 
@@ -120,8 +120,8 @@ function my_youarehere($prefix, $position, $return = false) {
 	// check if enabled
 	if (!$conf['youarehere']) return false;
 	
-    // check if right position:
-    if(tpl_getConf('youareherepos') !== $position) return false;
+	// check if right position:
+	if(tpl_getConf('youareherepos') !== $position) return false;
 	
 	// prepare output string:
 	$out =  $prefix . '<h2 class="sr-only">' . $lang['youarehere'] . "</h2>\n";
@@ -195,27 +195,27 @@ function my_youarehere($prefix, $position, $return = false) {
  * @return void
  */
 function my_breadcrumbs($prefix, $position) {
-    global $lang;
-    global $conf;
-
-    //check if enabled
-    if(!$conf['breadcrumbs']) return false;
-
-    // check if right position:
-    if(tpl_getConf('breadcrumbpos', 'none') !== $position) return false;
-
-    $crumbs = breadcrumbs(); //setup crumb trace
-
+	global $lang;
+	global $conf;
+	
+	//check if enabled
+	if(!$conf['breadcrumbs']) return false;
+	
+	// check if right position:
+	if(tpl_getConf('breadcrumbpos', 'none') !== $position) return false;
+	
+	$crumbs = breadcrumbs(); //setup crumb trace
+	
 	/* begin listing */
 	echo $prefix . '<p class="sr-only">' . $lang['breadcrumb'] . "</p>\n";
 	echo $prefix . "<ol class=\"trace\" reversed>";
-
-    $last = count($crumbs);
-    $i    = 0;
-    foreach($crumbs as $id => $name) {
-        $i++;
+	
+	$last = count($crumbs);
+	$i    = 0;
+	foreach($crumbs as $id => $name) {
+		$i++;
 		echo '<li' . ($i == $last ? ' class="current"' : '') . '><bdi>' . tpl_link(wl($id), hsc($name), '', true) .  '</bdi></li>';
-    }
+	}
 	echo "</ol>\n";
 }
 
@@ -232,38 +232,38 @@ function my_breadcrumbs($prefix, $position) {
  * @return void
  */
 function my_toc($prefix = '') {
-    global $TOC;
-    global $ACT;
-    global $ID;
-    global $REV;
-    global $INFO;
-    global $conf;
-    global $lang;
-    $toc = array();
-
-    if(is_array($TOC)) {
-        // if a TOC was prepared in global scope, always use it
-        $toc = $TOC;
-    } elseif(($ACT == 'show' || substr($ACT, 0, 6) == 'export') && !$REV && $INFO['exists']) {
-        // get TOC from metadata, render if neccessary
-        $meta = p_get_metadata($ID, '', METADATA_RENDER_USING_CACHE);
-        if(isset($meta['internal']['toc'])) {
-            $tocok = $meta['internal']['toc'];
-        } else {
-            $tocok = true;
-        }
-        $toc = isset($meta['description']['tableofcontents']) ? $meta['description']['tableofcontents'] : null;
-        if(!$tocok || !is_array($toc) || !$conf['tocminheads'] || count($toc) < $conf['tocminheads']) {
-            $toc = array();
-        }
-    } elseif($ACT == 'admin') {
-        // try to load admin plugin TOC
-        /** @var $plugin AdminPlugin */
-        if ($plugin = plugin_getRequestAdminPlugin()) {
-            $toc = $plugin->getTOC();
-            $TOC = $toc; // avoid later rebuild
-        }
-    }
+	global $TOC;
+	global $ACT;
+	global $ID;
+	global $REV;
+	global $INFO;
+	global $conf;
+	global $lang;
+	$toc = array();
+	
+	if(is_array($TOC)) {
+		// if a TOC was prepared in global scope, always use it
+		$toc = $TOC;
+	} elseif(($ACT == 'show' || substr($ACT, 0, 6) == 'export') && !$REV && $INFO['exists']) {
+		// get TOC from metadata, render if neccessary
+		$meta = p_get_metadata($ID, '', METADATA_RENDER_USING_CACHE);
+		if(isset($meta['internal']['toc'])) {
+			$tocok = $meta['internal']['toc'];
+		} else {
+			$tocok = true;
+		}
+		$toc = isset($meta['description']['tableofcontents']) ? $meta['description']['tableofcontents'] : null;
+		if(!$tocok || !is_array($toc) || !$conf['tocminheads'] || count($toc) < $conf['tocminheads']) {
+			$toc = array();
+		}
+	} elseif($ACT == 'admin') {
+		// try to load admin plugin TOC
+		/** @var $plugin AdminPlugin */
+		if ($plugin = plugin_getRequestAdminPlugin()) {
+			$toc = $plugin->getTOC();
+			$TOC = $toc; // avoid later rebuild
+		}
+	}
 
 	/* inline icons: */
 	$iconSvg = "<svg width='100%' height='100%' viewBox='0 0 24 24' version='1.1' xmlns='http://www.w3.org/2000/svg'><rect class='top-bar' x='5' y='6' width='14' height='2'></rect><rect class='middle-bar' x='5' y='11' width='14' height='2'></rect><rect class='bottom-bar' x='5' y='16' width='14' height='2'></rect></svg>";
@@ -325,8 +325,8 @@ function my_toc($prefix = '') {
  * @return void
  */
 function my_pagetitle($prefix) {
-    global $ID;
-    global $conf;
+	global $ID;
+	global $conf;
 	
 	/* get the header style */
 	$type = my_headerstyle();
@@ -351,11 +351,10 @@ function my_pagetitle($prefix) {
 			break;
 	}
 	echo $prefix . "</div>\n";
-
 }
 
 /**
- * Print the breadcrumbs trace
+ * Output the page banner image
  *
  * Cleanup of the original code to create neater and more accessible HTML
  *
@@ -367,48 +366,48 @@ function my_pagetitle($prefix) {
  * @return void
  */
 function my_banner_style() {
-    global $ID;
-    global $conf;
-
-    /* don't run if banner image is disabled */
-    if (trim(tpl_getConf('bannerimg')) == '') return;
-
-    $background = null;
-
-    /* list of extensions to look for (in reverse order) */
-    $exts = array('jpg','jpeg','png','svg');
-
-    /* build a list of paths to look at: */
-    $cpath = '';
-    $paths = array();
-    foreach (explode(':', $ID) as $it) {
-        foreach ($exts as $ext) {
-            array_push($paths, $cpath . trim(tpl_getConf('bannerimg')) . '.' . $ext);
-        }
-        $cpath .= $it . ':';
-    }
-    $paths = array_reverse($paths); /* reverse the order */
-
-    /* check if an image exists in one of the paths: */
-    foreach ($paths as $rpath) {
-        $lpath = mediaFN($rpath);
-        if (file_exists($lpath)) {
-            $background = ml($rpath, '', true, '', false);
-            break;
-        }
-    }
+	global $ID;
+	global $conf;
+	
+	/* don't run if banner image is disabled */
+	if (trim(tpl_getConf('bannerimg')) == '') return;
+	
+	$background = null;
+	
+	/* list of extensions to look for (in reverse order) */
+	$exts = array('jpg','jpeg','png','svg');
+	
+	/* build a list of paths to look at: */
+	$cpath = '';
+	$paths = array();
+	foreach (explode(':', $ID) as $it) {
+		foreach ($exts as $ext) {
+			array_push($paths, $cpath . trim(tpl_getConf('bannerimg')) . '.' . $ext);
+		}
+		$cpath .= $it . ':';
+	}
+	$paths = array_reverse($paths); /* reverse the order */
+	
+	/* check if an image exists in one of the paths: */
+	foreach ($paths as $rpath) {
+		$lpath = mediaFN($rpath);
+		if (file_exists($lpath)) {
+			$background = ml($rpath, '', true, '', false);
+			break;
+		}
+	}
 	/* if not found, use the template banner: */
 	if (!$background) {
-		$background = tpl_basedir() . 'images/banner.jpg';
+		$background = tpl_basedir() . 'images/banner.svg';
 	}
-
-    /* find the element height */
-    $height = tpl_getConf('bannersize', 'inherit');
-
-
-    if ($background) {
-        echo "background-image: url('" . $background . "');min-height: " . $height . ';';
-    }
+	
+	/* find the element height */
+	$height = tpl_getConf('bannersize', 'inherit');
+	
+	
+	if ($background) {
+		echo "background-image: url('" . $background . "');min-height: " . $height . ';';
+	}
 }
 
 /**

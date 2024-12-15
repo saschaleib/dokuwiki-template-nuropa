@@ -68,7 +68,7 @@ body {
 
 /* modify the popover items */
 *[popover] {
-	position: relative;
+	position: absolute;
 	inset: unset;
 	width: max-content;
 	border-radius: .5em;
@@ -76,6 +76,7 @@ body {
 	padding: 2px 5px 2px 2px;
 	z-index: 100;
 }
+
 
 /* DEBUG: Hide elements we're not looking at yet */
 #main-layout,

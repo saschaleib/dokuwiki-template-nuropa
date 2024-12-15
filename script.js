@@ -10,9 +10,9 @@ $p = {
 
 	/* called to initialize the entire script */
 	init:	function() {
-        //console.info('init()')
-	    $p.gui.init();
-	    $p.keyboard.init();
+		//console.info('init()')
+		$p.gui.init();
+		$p.keyboard.init();
 	},
 
 	/* all functions that are related to the keyboard control */
@@ -119,15 +119,15 @@ $p = {
 
 	gui: {
 
-        init: function() {
+		init: function() {
 
-            //console.info('gui.init()')
+			//console.info('gui.init()')
 
-            $p.gui.toolbar.init();
-            $p.gui.popover.init();
-            $p.gui.search.init();
+			$p.gui.toolbar.init();
+			$p.gui.popover.init();
+			$p.gui.search.init();
 
-        },
+		},
 
 		popover: {
 			init: function() {
@@ -218,20 +218,20 @@ $p = {
 
 		},
 
-        toolbar: {
+		toolbar: {
 
-            init: function() {
-                //console.info('gui.toolbar.init()');
-
-                jQuery(window).on('resize', function() {
-                    $p.gui.toolbar._resized();
-                });
-
-                $p.gui.toolbar._resized();
-            },
+			init: function() {
+				//console.info('gui.toolbar.init()');
+	
+				jQuery(window).on('resize', function() {
+					$p.gui.toolbar._resized();
+				});
+	
+				$p.gui.toolbar._resized();
+			},
 
 			/* callback for the resize event: */
-            _resized: function() {
+			_resized: function() {
 				//console.info('gui.toolbar._callback.resized()');
 
 				/* recalculate the overflow menu */
@@ -267,12 +267,12 @@ $p = {
 						}
 					}
 				});
-            }
-        },
+			}
+		},
 		
 		search: {
 			init: function() {
-                // console.info('$p.gui.search.init()');
+				console.info('$p.gui.search.init()');
 
 				// use Escape key to exit the search field:
 				$p.keyboard.waitForKey(
@@ -284,11 +284,19 @@ $p = {
 				document.getElementById('search__close')
 					.addEventListener('click', $p.gui.search.closeSearch);
 				
+				// attach to keyup event in search field:
+				document.getElementById('qsearch__in')
+					.addEventListener('keyup', $p.gui.search._SearchFieldOnKeyUp);
 			},
 			
 			closeSearch: function() {
-                //console.info('$p.gui.search.closeSearch()');
+				//console.info('$p.gui.search.closeSearch()');
 				document.activeElement.blur();
+			},
+			
+			_SearchFieldOnKeyUp: function(e) {
+				console.info('$p.gui.search._SearchFieldOnKeyUp()');
+				console.log(e);
 			}
 		}
 	}
@@ -296,3 +304,8 @@ $p = {
 
 // init when document is ready:
 jQuery(function() { $p.init(); });
+
+// disable DW search scripts:
+jQuery.fn.dw_qsearch = function (overrides) {
+	// do nothing
+}

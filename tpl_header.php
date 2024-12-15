@@ -42,13 +42,13 @@
 				<nav id="menubar-breadcrumbs">
 					<!-- - - - - - - - - MENUBAR BREADCRUMBS - - - - - - - -->
 <?php
-                            //tpl_flush();
-                            my_youarehere(str_repeat(TPL_TAB,6), 'header');
-                            my_breadcrumbs(str_repeat(TPL_TAB,6), 'header');
+					//tpl_flush();
+					my_youarehere(str_repeat(TPL_TAB,6), 'header');
+					my_breadcrumbs(str_repeat(TPL_TAB,6), 'header');
 ?>					<!-- - - - - - - - - END OF MENUBAR BREADCRUMBS  - - - - - - - -->
 				</nav>
 				<div id="page-headline-layout">
-<?php						my_pagetitle(str_repeat(TPL_TAB,5));
+<?php					my_pagetitle(str_repeat(TPL_TAB,5));
 ?>					</div>
 				<div id="horizontal-menu">
 					<!-- - - - - - - - - MENU BAR - - - - - - - -->
