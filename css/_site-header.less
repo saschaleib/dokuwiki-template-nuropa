@@ -19,7 +19,7 @@
 		margin: 0 auto;
 		padding: .5rem;
 		display: grid;
-		grid-template-columns: max-content 3fr max-content;
+		grid-template-columns: auto auto auto;
 		place-items: center;
 		column-gap: 1.5rem;
 	}
@@ -146,54 +146,64 @@
 					display: none;
 					height: 1.75rem;
 					padding: .25rem;
-					margin: 0 .25rem 0 .5rem;
+					margin: 0 .35rem 0 .25rem;
 				}
-				&:focus span {
-					display: inline-block;
-				}
+				&:focus {
+				    & {
+						background-color: @ini_searchbar_background;
+					}
+    				span {
+    					display: inline-block;
+    				}
+			    }
 			}
 		}
-		
+		#search__busy__anim {
+		    display: none;
+			padding-top: .25em;
+			width: 110px; height: 10px;
+			grid-column: 2;
+			fill: @ini_focus;
+		}
+
 		div.field {
 			& {
 				display: grid;
 				border: @ini_searchfield_border solid 1px;
-				grid-template-columns: auto min-content min-content;
+				grid-template-columns: min-content auto;
+				align-items: center;
 				background-color: @ini_searchfield_background;
 				border-radius: .5rem;
 				padding: .25rem;
-				grid-column: 1;
 			}
 			&:focus-within {
 				outline: @ini_focus solid 2pt;
 				-webkit-box-shadow: inset 1.5pt 1.5pt 2pt rgba(0,0,0,0.25);
 				box-shadow: inset 1.5pt 1.5pt 2pt rgba(0,0,0,0.25);
 			}
-			
+
 			input[type="text"]:focus, button:focus {
 				outline: transparent none 0;
 			}
 			button:focus, button:active {
 				& {
 					grid-template-columns: 1em auto;
-					background-color: @ini_focus;
+					border-color: @ini_focus;
 					padding-right: .5rem;
 				}
 				span {
 					display: inline-block;
-					color: @ini_searchfield_background;
+					color: @ini_focus;
 				}
 				svg {
-					fill: @ini_searchfield_background;
+					fill: @ini_focus;
 				}
 			}
 		}
 	}
-	
+
 	#qsearch__out {
-		& {
-			display: none;
-		}
+		display: none;
 	}
 
 	#search__backdrop {
@@ -208,22 +218,24 @@
 			margin-top: @ini_toolbar_font_size * 2.4;
 			padding: .25rem .5rem .25rem 0;
 			box-sizing: border-box;
-			backdrop-filter: ~"blur(0.67px) saturate(.4)";
+			backdrop-filter: ~"blur(0.67px) saturate(.33) brightness(.9)";
 			z-index: 95;
 		}
 		header {
-			grid-template-columns: auto min-content;
+			grid-template-columns: min-content auto;
 			place-items: center stretch;
 		}
-		div.field {
-			grid-row: 1; grid-column: 1;
+
+		#dw__search.busy #search__busy__anim {
+			display: block;
 		}
+
 		form {
 			position: relative;
 			width: ~"calc(100vw - 1.5rem)";
 			max-width: 38rem;
 			margin: .3rem auto;
-			padding: .5rem;
+			padding: .5rem .5rem .5rem 0;
 			background-color: fadeout(@ini_searchbar_background, 10%);
 			border: @ini_searchfield_border solid 1pt;
 			border-radius: .75rem;
@@ -239,7 +251,6 @@
 			& {
 				display: grid;
 				grid-template-columns: auto;
-				grid-row: 1; grid-column: 2;
 			}
 			&:focus {
 				grid-template-columns: auto 1em;
@@ -279,10 +290,10 @@
 						display: grid;
 						grid-template-columns: 1rem max-content;
 						color: @ini_searchbar_link;
-						padding: .25em;
+						padding: .125em .25em .125em .5em;
 						text-decoration: none;
 						border-radius: .25em;
-						column-gap: .25em;
+						column-gap: .75em;
 						place-items: center stretch;
 					}
 					a::before {
@@ -326,12 +337,12 @@
 					grid-template-columns: auto auto;
 					align-items: center;
 					column-gap: .25em;
-					
+
 					border: transparent 0 none;
 					border-radius: .25rem;
 					padding: .35em 3pt;
 					margin: 2px;
-					
+
 					background-color: transparent;
 					color: @ini_searchbar_link;
 					text-decoration: none;
@@ -369,12 +380,12 @@
 			&.search {
 				display: none;
 			}
-		}	
+		}
 	}
 }
 
 @media (prefers-color-scheme: dark) {
-	
+
 	#searchbar__layout { background-color: @ini_searchbar_background_dark; }
 	[popover] {
 		background-color: @ini_searchbar_background_dark;
@@ -398,8 +409,10 @@
 			button {
 				& { color: @ini_searchbar_link_dark; }
 				&:hover, &:focus, &:active { outline-color: @ini_focus_dark; }
+				&#search__close:focus {
+					background-color: @ini_searchbar_background_dark;
+				}
 			}
-			
 			div.field {
 				& {
 					border-color: @ini_searchfield_border_dark;
@@ -410,18 +423,16 @@
 					-webkit-box-shadow: inset 1.5pt 1.5pt 2pt rgba(0,0,0,0.25);
 					box-shadow: inset 1.5pt 1.5pt 2pt rgba(0,0,0,0.25);
 				}
-				
 				button:focus, button:active {
-					& { background-color: @ini_focus_dark; }
-					span { color: @ini_searchfield_background_dark; }
-					svg { fill: @ini_searchfield_background_dark; }
+					background-color: @ini_searchfield_background_dark;
+					border-color: @ini_focus_dark;
 				}
 			}
 		}
 
 		#search__backdrop:focus-within {
 			& {
-				backdrop-filter: ~"blur(0.67px) saturate(.4)";
+				backdrop-filter: ~"blur(0.67px) saturate(.33) brightness(.5)";
 			}
 			form {
 				background-color: fadeout(@ini_searchbar_background_dark, 10%);
@@ -452,35 +463,32 @@
 	}
 
 	#sitetools__group {
-		& > ul {
-			& > li {
-				& > button, & > a, & > label,
-				#user-action-buttons li a {
+		& > ul  > li {
+			& > button, & > a, & > label,
+			#user-action-buttons li a {
+				& {
+					color: @ini_searchbar_link_dark;
+				}
+				&:hover {
+					filter: brightness(.9);
+				}
+				&:focus {
+					outline-color: @ini_focus_dark;
+				}
+				svg {
 					& {
-						color: @ini_searchbar_link_dark;
+						fill: @ini_searchbar_icon_dark;
 					}
-					&:hover {
-						filter: brightness(.9);
-					}
-					&:focus {
-						outline-color: @ini_focus_dark;
-					}
-					svg {
-						& {
-							fill: @ini_searchbar_icon_dark;
-						}
-						text {
-							fill: @ini_searchbar_background_dark;
-						}
-					}
-					& > span {
-						color: @ini_searchbar_link_dark;
+					text {
+						fill: @ini_searchbar_background_dark;
 					}
 				}
-			}	
+				& > span {
+					color: @ini_searchbar_link_dark;
+				}
+			}
 		}
 	}
-	
 }
 
 @media (max-width: @ini_site_width) {
@@ -495,7 +503,7 @@
 	#searchbar__layout > .content {
 		column-gap: .25rem;
 	}
-	
+
 	#site__logo {
 		height: (@ini_searchbar_height * 0.8);
 	}
@@ -505,8 +513,8 @@
 	}
 	#search__backdrop { width: 0; }
 	#search__backdrop:focus-within { width: 100vw; }
-
 }
+
 @media (max-width: @ini_site_phone_width) {
 	#searchbar__layout {
 		#search__backdrop:focus-within {
