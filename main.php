@@ -11,8 +11,8 @@ if (!defined('DOKU_INC')) die(); /* must be run from within DokuWiki */
 
 require_once('my_template.php');
 
-define('TPL_TAB', chr(9));
-define('TPL_NL', chr(10));
+define('TPL_TAB', ( tpl_getConf('neatnik') == 'true' ? chr(9) : '' ));
+define('TPL_NL', ( tpl_getConf('neatnik') == 'true' ? chr(10) : '' ));
 
 ?><!DOCTYPE html>
 <html lang="<?php echo $conf['lang'] ?>"><head>
@@ -24,7 +24,6 @@ define('TPL_NL', chr(10));
 <?php tpl_includeFile('meta.html') ?>
 </head>
 <body class="site <?php echo my_bodyclasses(); ?>" data-pageid="<?php echo htmlentities($ID); ?>">
-	<!-- darkmode: <?php echo tpl_getConf('darkmode'); ?> -->
 	<div id="skip__link">
 		<a href="#main-content"><?php echo htmlentities($lang['skip_to_content']); ?></a>
 	</div>

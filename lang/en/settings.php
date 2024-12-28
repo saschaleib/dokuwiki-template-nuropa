@@ -5,26 +5,42 @@
  * @author     Sascha Leib <ad@hominem.info>
  */
 
+/* TOOLBAR */
+
 $lang['toolbarstyle'] = 'How should the <strong>toolbar menu</strong> be displayed?';
-	$lang['toolbarstyle_o_auto']	= 'Automatic';
-	$lang['toolbarstyle_o_compact']	= 'Menu only';
+	$lang['toolbarstyle_o_auto']    = 'Automatic';
+	$lang['toolbarstyle_o_compact'] = 'Menu only';
 
-$lang['breadcrumbpos'] = 'Where should the <strong>page history trail</strong> be displayed?';
-	$lang['breadcrumbpos_o_header']	= 'In the header';
-	$lang['breadcrumbpos_o_banner']	= 'In the banner';
+$lang['toolbaropt'] = 'What should be displayed in the left corner of the toolbar?';
+	$lang['toolbaropt_o_user']  = 'User information';
+	$lang['toolbaropt_o_langs'] = 'Languages menu';
+	$lang['toolbaropt_o_none']  = 'Nothing';
 
-$lang['youareherepos']			= 'Where should the <strong>hierarchical breadcrumbs</strong> appear?';
-	$lang['youareherepos_o_header']	= 'In the header';
-	$lang['youareherepos_o_banner']	= 'In the banner';
+/* SEARCHBAR */
 
-$lang['pageheadline'] = 'What <strong>title</strong> shoud be displayed in the page header?';
-	$lang['pageheadline_o_sitename']	= 'Site name';
-	$lang['pageheadline_o_pagename']	= 'Page name';
-	$lang['pageheadline_o_file']	= 'Static file';
+$lang['sitelogo'] = 'How should the site logo be displayed?';
+	$lang['sitelogo_o_image'] = 'Logo image';
+	$lang['sitelogo_o_file']  = 'Static file';
 
-$lang['userinfo'] = 'Where should the <strong>user information</strong> be displayed?';
-	$lang['userinfo_o_toolbar']	= 'In the toolbar';
-	$lang['userinfo_o_header']	= 'In the header area';
+$lang['searchbaropt'] = 'What should be displayed to the right of the search field?';
+	$lang['searchbaropt_o_user']  = 'User information';
+	$lang['searchbaropt_o_langs'] = 'Languages menu';
+	$lang['searchbaropt_o_none']  = 'Nothing';
+
+/* HEADLINE BAR */
+
+$lang['pageheadline'] = 'What to show in the headline bar of each page?';
+	$lang['pageheadline_o_sitename']  = 'Site name';
+	$lang['pageheadline_o_pagename']  = 'Page name (first title)';
+	$lang['pageheadline_o_file']      = 'Static file';
+
+/* MENU BAR */
+
+$lang['sitemenu'] = 'Show a site-wide horizontal menu?<br><small>(the menu is defined by a JSON file in the config directory. See the docs!</small>';
+	$lang['sitemenu_o_true']  = 'Show menu';
+	$lang['sitemenu_o_false']  = 'Disabled';
+
+/* BREADCRUMBS/BANNER BAR */
 
 $lang['bannerimg'] = 'Name of the image file to use as <strong>banner image</strong>:<br><small>(without file extension, leave empty to disable banner images)</small>';
 

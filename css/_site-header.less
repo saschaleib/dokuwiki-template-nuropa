@@ -9,7 +9,6 @@
 		width: 100%;
 		background-color: @ini_searchbar_background;
 		font-size: @ini_base_fontsize;
-		box-sizing: border-box;
 	}
 	& > .content {
 		width: 100%;
@@ -17,11 +16,12 @@
 		box-sizing: border-box;
 		height: @ini_searchbar_height;
 		margin: 0 auto;
-		padding: .5rem;
+		padding: .5rem .25rem;
 		display: grid;
 		grid-template-columns: auto auto auto;
 		place-items: center;
 		column-gap: 1.5rem;
+		box-sizing: border-box;
 	}
 	[popover] {
 		& {
@@ -33,7 +33,7 @@
 			border-radius: .35em;
 			box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.1);
 			padding: 2px	;
-			z-index: 101;
+			z-index: 94;
 			overflow: hidden;
 		}
 		ul {
@@ -87,6 +87,7 @@
 #site__logo {
 	& {
 		height: @ini_searchbar_height - 1rem;
+		justify-self: start;
 	}
 	& > * {
 		display: inline-block;
@@ -212,7 +213,7 @@
 
 	#search__backdrop:focus-within {
 		& {
-			position: absolute;
+			position: fixed;
 			top: 0; left: 0;
 			width: 100vw; height: calc(~"100vh - " @ini_toolbar_font_size * 2.5);
 			margin-top: @ini_toolbar_font_size * 2.4;
@@ -281,7 +282,7 @@
 						overflow: hidden;
 						text-overflow: ellipsis;
 						border-radius: .25em;
-						padding: 2pt 2pt 4pt 2pt;
+						padding: 2px 2pt 6px 1em;
 					}
 					&:nth-of-type(even) {
 						background-color: rgba(0,0,0,0.03);
@@ -290,10 +291,10 @@
 						display: grid;
 						grid-template-columns: 1rem max-content;
 						color: @ini_searchbar_link;
-						padding: .125em .25em .125em .5em;
+						padding: .25em;
 						text-decoration: none;
 						border-radius: .25em;
-						column-gap: .75em;
+						column-gap: .5em;
 						place-items: center stretch;
 					}
 					a::before {
@@ -386,46 +387,56 @@
 
 @media (prefers-color-scheme: dark) {
 
-	#searchbar__layout { background-color: @ini_searchbar_background_dark; }
-	[popover] {
-		background-color: @ini_searchbar_background_dark;
-		border-color: lighten(@ini_searchbar_background, 15%);
-		box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.1);
-	}
-	[popover] a, [popover] a span { color: @ini_searchbar_link_dark; }
-	[popover] svg { fill: @ini_searchbar_icon_dark; }
-
-	#sb__languages__menu a::before { color: @ini_searchbar_icon_dark; }
-
-	#search__group {
-		#dw__search {
-			svg {
-				fill: @ini_searchbar_icon_dark;
+	body.darkmode {
+		#searchbar__layout { 
+			& {
+				background-color: @ini_searchbar_background_dark;
 			}
-			input[type="text"] {
-				color: @ini_searchfield_text_dark;
-				background-color: @ini_searchfield_background_dark;
-			}
-			button {
-				& { color: @ini_searchbar_link_dark; }
-				&:hover, &:focus, &:active { outline-color: @ini_focus_dark; }
-				&#search__close:focus {
-					background-color: @ini_searchbar_background_dark;
-				}
-			}
-			div.field {
+			[popover] {
 				& {
-					border-color: @ini_searchfield_border_dark;
+					background-color: @ini_searchbar_background_dark;
+					border-color: lighten(@ini_searchbar_background_dark, 15%);
+					box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.1);
+				}
+				a, a span { color: @ini_searchbar_link_dark; }
+				svg { fill: @ini_searchbar_icon_dark; }
+			}
+		}
+
+		#sb__languages__menu {
+			a::before { color: @ini_searchbar_icon_dark; }
+		}
+
+		#search__group {
+			#dw__search {
+				svg {
+					fill: @ini_searchbar_icon_dark;
+				}
+				input[type="text"] {
+					color: @ini_searchfield_text_dark;
 					background-color: @ini_searchfield_background_dark;
 				}
-				&:focus-within {
-					outline-color: @ini_focus_dark;
-					-webkit-box-shadow: inset 1.5pt 1.5pt 2pt rgba(0,0,0,0.25);
-					box-shadow: inset 1.5pt 1.5pt 2pt rgba(0,0,0,0.25);
+				button {
+					& { color: @ini_searchbar_link_dark; }
+					&:hover, &:focus, &:active { outline-color: @ini_focus_dark; }
+					&#search__close:focus {
+						background-color: @ini_searchbar_background_dark;
+					}
 				}
-				button:focus, button:active {
-					background-color: @ini_searchfield_background_dark;
-					border-color: @ini_focus_dark;
+				div.field {
+					& {
+						border-color: @ini_searchfield_border_dark;
+						background-color: @ini_searchfield_background_dark;
+					}
+					&:focus-within {
+						outline-color: @ini_focus_dark;
+						-webkit-box-shadow: inset 1.5pt 1.5pt 2pt rgba(0,0,0,0.25);
+						box-shadow: inset 1.5pt 1.5pt 2pt rgba(0,0,0,0.25);
+					}
+					button:focus, button:active {
+						background-color: @ini_searchfield_background_dark;
+						border-color: @ini_focus_dark;
+					}
 				}
 			}
 		}
@@ -451,7 +462,7 @@
 						}
 						a { color: @ini_searchbar_link_dark; }
 						a::before {
-							background-image: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' style='fill:%23575757'%3E%3Cpath d='M6,2A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2H6M6,4H13V9H18V20H6V4M8,12V14H16V12H8M8,16V18H13V16H8Z' /%3E%3C/svg%3E");
+							background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' style='fill:%23575757'%3E%3Cpath d='M6,2A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2H6M6,4H13V9H18V20H6V4M8,12V14H16V12H8M8,16V18H13V16H8Z' /%3E%3C/svg%3E");
 						}
 						a:focus {
 							outline-color: @ini_focus_dark;
@@ -537,5 +548,10 @@
 				}
 			}
 		}
+	}
+}
+@media (max-width: @ini_site_phone_width) and (prefers-color-scheme: dark) {
+	#searchbar__layout #search__backdrop:focus-within form {
+		background-color: @ini_toolbar_background_dark;
 	}
 }

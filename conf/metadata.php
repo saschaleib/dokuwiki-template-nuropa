@@ -11,14 +11,16 @@ $meta['toolbarstyle'] = array('multichoice',
 $meta['toolbaropt'] = array('multichoice',
 						'_choices' => array('user', 'langs', 'none'));
 
+$meta['sitelogo'] = array('multichoice',
+						'_choices' => array('image', 'file'));
+
 $meta['searchbaropt'] = array('multichoice',
 						'_choices' => array('user', 'langs', 'none'));
 
 $meta['pageheadline'] = array('multichoice',
 						'_choices' => array('sitename', 'pagename', 'file'));
 
-$meta['userinfo'] = array('multichoice',
-						'_choices' => array('toolbar', 'header'));
+$meta['sitemenu'] = array('string');
 
 $meta['bannerimg'] = array('string');
 
@@ -31,3 +33,6 @@ $meta['homelink'] = array('string');
 
 $meta['darkmode'] = array('multichoice',
 						'_choices' => array('off', 'auto'));
+
+$meta['neatnik'] = array('multichoice',
+						'_choices' => array('true', 'false'));

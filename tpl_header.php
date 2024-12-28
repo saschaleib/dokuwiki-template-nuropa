@@ -37,42 +37,19 @@
 				</div>
 			</div>
 		</div>
-		<div id="menu-layout">
-			<div id="menu-block">
-				<nav id="menubar-breadcrumbs">
-					<!-- - - - - - - - - MENUBAR BREADCRUMBS - - - - - - - -->
-<?php
-					//tpl_flush();
-					my_youarehere(str_repeat(TPL_TAB,6), 'header');
-					my_breadcrumbs(str_repeat(TPL_TAB,6), 'header');
-?>					<!-- - - - - - - - - END OF MENUBAR BREADCRUMBS  - - - - - - - -->
-				</nav>
-				<div id="page-headline-layout">
-<?php					my_pagetitle(str_repeat(TPL_TAB,5));
-?>					</div>
-				<div id="horizontal-menu">
-					<!-- - - - - - - - - MENU BAR - - - - - - - -->
-					<?php
-						tpl_flush();
-						tpl_include_page('menu', true, true); ?>
-
-					<!-- - - - - - - - - END OF MENU BAR - - - - - - - -->
-				</div>
-			</div>
+		<div id="pagetitle__layout">
+<?php 		my_pagetitle(str_repeat(TPL_TAB,3)); ?>
 		</div>
-		<div id="post-header-layout" style="<?php my_banner_style(); ?>">
-			<div id="post-header">
-				<div id="post-header-breadcrumbs">
-					<nav class="breadcrumbs-nav">
-						<!-- - - - - - - - - BREADCRUMBS CONTENT - - - - - - - -->
+		<div id="sitemenu__layout">
+<?php		my_sitemenu(str_repeat(TPL_TAB,3)); ?>
+		</div>
+		<div id="banner__layout" style="<?php my_banner_style(); ?>">
+			<div class="content">
 <?php
-							//tpl_flush();
-							my_youarehere(str_repeat(TPL_TAB,7),'banner');
-							my_breadcrumbs(str_repeat(TPL_TAB,7),'banner');
-
-?>						<!-- - - - - - - - - END OF BREADCRUMBS CONTENT  - - - - - - - -->
-					</nav>
-				</div>
+				//tpl_flush();
+				my_youarehere(str_repeat(TPL_TAB,5),'banner');
+				my_breadcrumbs(str_repeat(TPL_TAB,5),'banner');
+?>
 			</div>
 		</div>
 	</header>

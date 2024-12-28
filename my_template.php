@@ -14,8 +14,7 @@ use dokuwiki\File\PageResolver;
  * Creates the Site logo image link
  *
  */
-function my_sitelogo($prefix)
-{
+function my_sitelogo($prefix = "") {
     global $conf;
 
     // get the user config:
@@ -67,8 +66,7 @@ function my_sitelogo($prefix)
  *
  * @returns string (link)
  */
-function my_homelink()
-{
+function my_homelink() {
     global $conf;
 
     $hl = trim(tpl_getConf("homelink"));
@@ -90,8 +88,7 @@ function my_homelink()
  *
  * @return void
  */
-function my_userinfo($prefix = "", $id)
-{
+function my_userinfo($prefix = "", $id) {
     global $lang;
     global $INPUT;
     global $INFO;
@@ -151,8 +148,7 @@ function my_userinfo($prefix = "", $id)
  * @param  string $prefix to be added before each line
  *
  */
-function my_youarehere($prefix, $position, $return = false)
-{
+function my_youarehere($prefix = "", $position, $return = false) {
     global $conf;
     global $ID;
     global $lang;
@@ -265,8 +261,7 @@ function my_youarehere($prefix, $position, $return = false)
  *
  * @return void
  */
-function my_breadcrumbs($prefix, $position)
-{
+function my_breadcrumbs($prefix = "", $position) {
     global $lang;
     global $conf;
 
@@ -311,8 +306,7 @@ function my_breadcrumbs($prefix, $position)
  *
  * @return void
  */
-function my_toc($prefix = "")
-{
+function my_toc($prefix = "") {
     global $TOC;
     global $ACT;
     global $ID;
@@ -451,8 +445,7 @@ function my_toc($prefix = "")
  *
  * @return void
  */
-function my_pagetitle($prefix)
-{
+function my_pagetitle($prefix = "") {
     global $ID;
     global $conf;
 
@@ -460,31 +453,30 @@ function my_pagetitle($prefix)
     $type = my_headerstyle();
 
     /* build the headline section */
-    echo $prefix . '<div class="type-' . $type . "\">\n";
+    echo $prefix . "<div class=\"content type-{$type}\">" . TPL_NL;
     switch ($type) {
         case "file":
             tpl_includeFile("title.html");
             break;
         case "sitename":
             echo $prefix .
-                "\t<h2 class=\"title\">" .
-                $conf["title"] .
-                "</h2>\n";
-            if ($conf["tagline"] && $conf["tagline"] !== "") {
-                echo $prefix .
-                    "\t<p class=\"tagline\">" .
-                    $conf["tagline"] .
-                    "</p>\n";
-            }
+                TPL_TAB . "<h2 class=\"sitename\">{$conf["title"]}</h2>" . TPL_NL;
+                if ($conf["tagline"] && $conf["tagline"] !== "") {
+                    echo $prefix . TPL_TAB . "<p class=\"tagline\">{$conf["tagline"]}</p>" . TPL_NL;
+                }
             break;
         case "pagename":
-            echo $prefix . "\t<h1>" . tpl_pagetitle($ID, true) . "</h1>\n";
+            echo $prefix . TPL_TAB . '<h1>' . tpl_pagetitle($ID, true) . '</h1>' . TPL_NL;
+            if ($conf["tagline"] && $conf["tagline"] !== "") {
+                echo $prefix . TPL_TAB . "<p class=\"tagline\">{$conf["tagline"]}</p>" . TPL_NL;
+            }
             break;
         default:
             echo "<pre>UNKNOWN:" . tpl_getConf("pageheadline") . "</pre>";
             break;
     }
-    echo $prefix . "</div>\n";
+
+    echo $prefix . "</div>" . TPL_NL;
 }
 
 /**
@@ -499,8 +491,7 @@ function my_pagetitle($prefix)
  *
  * @return void
  */
-function my_banner_style()
-{
+function my_banner_style() {
     global $ID;
     global $conf;
 
@@ -561,8 +552,7 @@ function my_banner_style()
  *
  * @param string $target open link in new tab?
  */
-function my_license_button($target)
-{
+function my_license_button($target) {
     global $license;
     global $conf;
     global $lang;
@@ -594,8 +584,7 @@ function my_license_button($target)
  *
  * @author Sascha Leib <ad@hominem.info>
  */
-function my_bodyclasses()
-{
+function my_bodyclasses() {
     global $conf;
 
     $cls = tpl_classes();
@@ -608,15 +597,8 @@ function my_bodyclasses()
     return $cls;
 }
 
-/* private helper function to putput a list of action items: */
-function my_actionlist(
-    $prefix,
-    $id,
-    $list,
-    $exclude,
-    $class = null,
-    $role = null
-) {
+/* private helper function to output a list of action items: */
+function my_actionlist($prefix, $id, $list, $exclude, $class = null, $role = null) {
     /* build menu */
     echo $prefix .
         "<ul" .
@@ -650,8 +632,7 @@ function my_actionlist(
 }
 
 /* overwrite the asHtmlLink function for the template */
-function my_HtmlLink($item, $classprefix = "menuitem ", $svg = true)
-{
+function my_HtmlLink($item, $classprefix = "menuitem ", $svg = true) {
     $attList = $item->getLinkAttributes($classprefix);
 
     // remove the attributes that can cause accessiblity issues:
@@ -672,8 +653,7 @@ function my_HtmlLink($item, $classprefix = "menuitem ", $svg = true)
 }
 
 /* helper function to determine the headline style: */
-function my_headerstyle()
-{
+function my_headerstyle() {
     global $ID;
     global $conf;
 
@@ -701,8 +681,7 @@ function my_headerstyle()
  *
  * @return string html
  */
-function my_topbtn($prefix)
-{
+function my_topbtn($prefix) {
     global $lang;
 
     $iconSvg =
@@ -871,13 +850,39 @@ function my_searchform($ajax = true, $autocomplete = false) {
  * @param  string $place the location from where it is called
  * @param  string $checkage should the age of the translation be checked?
  */
-function my_langmenu($prefix, $btnId, $checkage = true)
-{
+function my_sitemenu($prefix) {
+    global $INFO;
+    global $conf;
+
+    $menu = tpl_getConf('sitemenu', '');
+    if ($menu !== '') {
+        echo $prefix . "<nav class=\"content\">" . TPL_NL;
+        echo $prefix . "<!-- sitemenu: '{$menu}' -->" . TPL_NL;
+        $menuId = page_findnearest($menu);
+        if ($menuId) {
+            $html = p_wiki_xhtml($menuId, '', false);
+            echo $html;
+        }
+        echo $prefix . "</nav>" . TPL_NL;
+    }
+}
+
+/**
+ * inserts the Languages menu, if appropriate.
+ *
+ * @author Sascha Leib <sascha@leib.be>
+ * @author Andreas Gohr <andi@splitbrain.org>
+ *
+ * @param  string $prefix to be added before each line
+ * @param  string $place the location from where it is called
+ * @param  string $checkage should the age of the translation be checked?
+ */
+function my_langmenu($prefix, $btnId, $checkage = true) {
     global $INFO;
     global $conf;
 
     // the current page language:
-    $lang = $conf["lang"];
+    $lang = substr($conf["lang"], 0, 2);
 
     /* collect the output: */
     $out = "";
@@ -944,38 +949,14 @@ function my_langmenu($prefix, $btnId, $checkage = true)
                 $link = wl($trg);
                 $current = $lng == $lang;
 
-                $out .= $prefix . TPL_TAB . TPL_TAB . TPL_TAB . "<li>" . TPL_NL;
-                $out .=
-                    $prefix .
-                    TPL_TAB .
-                    TPL_TAB .
-                    TPL_TAB .
-                    TPL_TAB .
-                    "<a href=\"{$link}\" lang=\"{$lng}\" hreflang=\"{$lng}\" class=\"{$class}\" role=\"menuitem\"" .
-                    ($current ? ' aria-current="true"' : "") .
-                    ">" .
-                    TPL_NL;
-                $out .=
-                    $prefix .
-                    TPL_TAB .
-                    TPL_TAB .
-                    TPL_TAB .
-                    TPL_TAB .
-                    TPL_TAB .
-                    "<bdi>" .
-                    $trans->getLocalName($lng) .
-                    "</bdi>" .
-                    TPL_NL;
-                $out .=
-                    $prefix .
-                    TPL_TAB .
-                    TPL_TAB .
-                    TPL_TAB .
-                    TPL_TAB .
-                    "</a>" .
-                    TPL_NL;
-                $out .=
-                    $prefix . TPL_TAB . TPL_TAB . TPL_TAB . "</li>" . TPL_NL;
+                $out .= $prefix . str_repeat(TPL_TAB,3) . "<li>" . TPL_NL;
+                $out .= $prefix . str_repeat(TPL_TAB,4) . "<a href=\"{$link}\" lang=\""
+                      . substr($lng, 0, 2)
+                      . "\" hreflang=\"{$lng}\" class=\"{$class}\" role=\"menuitem\""
+                      . ($current ? ' aria-current="true"' : "") . ">" . TPL_NL;
+                $out .= $prefix . str_repeat(TPL_TAB,5) . "<bdi>" . $trans->getLocalName($lng) . "</bdi>" . TPL_NL;
+                $out .= $prefix . str_repeat(TPL_TAB,4) . "</a>" . TPL_NL;
+                $out .= $prefix . str_repeat(TPL_TAB,3) . "</li>" . TPL_NL;
             }
         }
 

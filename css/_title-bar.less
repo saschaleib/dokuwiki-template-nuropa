@@ -1,0 +1,105 @@
+/* Stylesheet for DokuWiki Nuropa template
+ * by Sascha Leib
+ * File name: css/_title-bar.less
+ */
+
+ #pagetitle__layout ,
+ #sitemenu__layout,
+ #banner__layout {
+	& {
+		clear: both;
+		width: 100%;
+		background-color: @ini_titlebar_background;
+		font-size: @ini_base_fontsize;
+	}
+	& > .content {
+		width: 100%;
+		max-width: @ini_site_width;
+		margin: 0 auto;
+		padding: 0;
+		box-sizing: border-box;
+	}
+ }
+
+#pagetitle__layout {
+	
+	& > .content {
+		padding: 1em .25rem;
+		background-color: @ini_titlebar_background;
+	}
+	h1, h2 {
+		font-family: @ini_maintitle_fonts;
+		color: @ini_titlebar_fontcolor;
+		font-size: 1.75rem;
+		line-height: 1;
+		margin: 0;
+		padding: 0;
+	}
+	p.tagline {
+		margin-top: .25em;
+		font-size: .9rem;
+		color: @ini_titlebar_fontcolor;
+	}
+}
+
+#sitemenu__layout {
+	& {
+		min-height: 2em;
+		background-color: @ini_menubar_background;
+		font-size: @ini_menubar_fontsize;
+	}
+	& > .content {
+	}
+	ul {
+		& {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+			display: flex;
+			max-width: 100%;
+			overflow: hidden;
+		}
+		li.level1 {
+			& {
+				margin: 0;
+				padding: .25em 0;
+				display: inline-block;
+				white-space: nowrap;
+			}
+			a {
+				display: block;
+				padding: .25em .75em;
+				color: @ini_menubar_fontcolor;
+				text-decoration: none;
+				border-left: #FFF solid 1px;
+			}
+			&:first-child a {
+				border-left: none;
+				padding-left: .25rem
+			}
+			&.active {
+				background-color: lighten(@ini_menubar_background, 5%);
+			}
+		}
+	}
+}
+
+#banner__layout {
+
+}
+
+@media (prefers-color-scheme: dark) {
+
+	body.darkmode #pagetitle__layout,
+	body.darkmode #sitemenu__layout {
+		& {
+			background-color: @ini_titlebar_background_dark;
+		}
+	}
+	body.darkmode #pagetitle__layout {
+		h1, h2, p.tagline {
+			color: @ini_titlebar_fontcolor_dark;
+		}
+	}
+
+}

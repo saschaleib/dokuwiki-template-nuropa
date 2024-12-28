@@ -28,7 +28,7 @@
 			font-family: @ini_toolbar_fonts;
 			font-size: @ini_toolbar_font_size;
 			line-height: @ini_toolbar_font_size;
-			background-color: @ini_toolbar_background;
+			background-color: transparent;
 			border: none;
 			border-radius: .25rem;
 			padding: .45em 3pt;
@@ -46,7 +46,7 @@
 		}
 	}
 	a:hover, button:hover {
-		filter: brightness(.9);
+		backdrop-filter: brightness(.9);
 	}
 	a:focus, button:focus {
 		outline: @ini_toolbar_focus solid 2px;
@@ -69,6 +69,7 @@
 		& {
 			background-color: @ini_toolbar_background;
 			border: darken(@ini_toolbar_background, 15%) solid 1px;
+			backdrop-filter: blur(2.5px);
 		}
 		ul {
 			list-style: none inside;
@@ -118,7 +119,7 @@ body.mode_admin #toolbar__layout li[data-type="admin"] a,
 body.mode_profile #toolbar__layout li[data-type="profile"] a,
 body.mode_login #toolbar__layout li[data-type="login"] a,
 body #toolbar__layout [popover] li a[aria-current="true"] {
-	filter: brightness(0.9);
+	backdrop-filter: brightness(0.9);
 	box-shadow: inset rgba(0,0,0,.3) 1px 1px 1px;
 }
 
@@ -184,10 +185,22 @@ body.loggedIn {
 		top: 0;
 		left: 0;
 		right: 0;
-		opacity: .93;
+		background-color: fadeout(@ini_toolbar_background, 7%);
+		backdrop-filter: blur(2.5px);
 		-webkit-box-shadow: 1px 1px 1px .5px rgba(0,0,0,0.25);
 		box-shadow: 1px 1px 1px .5px rgba(0,0,0,0.25);
 		z-index: 95;
+	}
+	#toolbar__layout [popover] {
+		position: fixed;
+		background-color: fadeout(@ini_toolbar_background, 7%);
+	}
+	#toolbar__layout a > span, #toolbar__layout button > span {
+		text-shadow: 1pt 1pt 1.5pt #00000011;
+	}
+	#toolbar__layout a > svg, #toolbar__layout button > svg {
+		-webkit-filter: drop-shadow(1pt 1pt 1.5pt #00000011);
+		filter: drop-shadow(1pt 1pt 1.5pt #00000011);
 	}
 }
 
@@ -195,20 +208,19 @@ body.loggedIn {
 
     /* general colour settings: */
     body.darkmode {
-		
+
 		#toolbar__layout {
 			& {
-				background-color: @ini_toolbar_background_dark;
+				background-color: fadeout(@ini_toolbar_background_dark, 7%);
 				color: @ini_toolbar_text_dark;
 				border-bottom-color: lighten(@ini_toolbar_background_dark, 10%);
-				box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.7);
+				box-shadow: 1pt 1pt 1pt 0 rgba(0,0,0,0.2);
 			}
 			a, button {
 				color: @ini_toolbar_text_dark;
-				background-color: @ini_toolbar_background_dark;
 			}
 			a:hover, button:hover {
-				filter: brightness(1.25);
+				backdrop-filter: brightness(1.25);
 			}
 			a:focus, button:focus {
 				outline-color: @ini_toolbar_focus_dark;
@@ -237,7 +249,7 @@ body.loggedIn {
 		&.mode_profile #toolbar__layout li[data-type="profile"] a,
 		&.mode_login #toolbar__layout li[data-type="login"] a,
 		#toolbar__layout [popover] li a[aria-current="true"] {
-			filter: brightness(1.5);
+			backdrop-filter: brightness(1.5);
 		}
 		#languages__menu a.wikilink2 bdi {
 			border-bottom-color: @ini_toolbar_text_dark;
@@ -245,6 +257,12 @@ body.loggedIn {
 		#languages__menu a::before {
 			border-color: @ini_toolbar_text_dark;
 		}
-		
+		#toolbar__layout a > span, #toolbar__layout button > span {
+			text-shadow: 1pt 1pt 1.5pt #00000055;
+		}
+		#toolbar__layout a > svg, #toolbar__layout button > svg {
+			-webkit-filter: drop-shadow(1pt 1pt 1.5pt #00000055);
+			filter: drop-shadow(1pt 1pt 1.5pt #00000055);
+		}
 	}
 }

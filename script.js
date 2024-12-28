@@ -117,6 +117,7 @@ $p = {
 		init: function () {
 			//console.info('gui.init()')
 
+			$p.gui.menu.init();
 			$p.gui.toolbar.init();
 			$p.gui.popover.init();
 			$p.gui.search.init();
@@ -352,7 +353,25 @@ $p = {
 			__timeoutHandle: null,
 			__lastSearch: ""
 		},
-	},
+
+		menu: {
+			init: function () {
+				console.info('$p.gui.menu.init()');
+
+				// find the menu element:
+				const menu = document.getElementById('sitemenu__layout');
+				if (menu) {
+					console.log("Menu element found:");
+					console.log(menu);
+
+					// TODO: add event listeners for the menu
+
+
+
+				}
+			}
+		}
+	}
 };
 
 // init when document is ready:
