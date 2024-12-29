@@ -37,19 +37,21 @@
 				</div>
 			</div>
 		</div>
-		<div id="pagetitle__layout">
-<?php 		my_pagetitle(str_repeat(TPL_TAB,3)); ?>
-		</div>
-		<div id="sitemenu__layout">
-<?php		my_sitemenu(str_repeat(TPL_TAB,3)); ?>
-		</div>
+<?php
+		my_sitemenu(str_repeat(TPL_TAB,2),'before');
+		my_pagetitle(str_repeat(TPL_TAB,2),
+			my_youarehere(str_repeat(TPL_TAB,4),'menu')
+		);
+		my_sitemenu(str_repeat(TPL_TAB,2),'between');
+?>
 		<div id="banner__layout" style="<?php my_banner_style(); ?>">
 			<div class="content">
 <?php
 				//tpl_flush();
-				my_youarehere(str_repeat(TPL_TAB,5),'banner');
-				my_breadcrumbs(str_repeat(TPL_TAB,5),'banner');
+				echo my_youarehere(str_repeat(TPL_TAB,5),'banner');
+				//echo my_breadcrumbs(str_repeat(TPL_TAB,5),'banner');
 ?>
 			</div>
 		</div>
-	</header>
+<?php		my_sitemenu(str_repeat(TPL_TAB,2),'after');
+?>	</header>

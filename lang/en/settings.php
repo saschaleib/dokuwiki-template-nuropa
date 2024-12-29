@@ -44,8 +44,6 @@ $lang['sitemenu'] = 'Show a site-wide horizontal menu?<br><small>(the menu is de
 
 $lang['bannerimg'] = 'Name of the image file to use as <strong>banner image</strong>:<br><small>(without file extension, leave empty to disable banner images)</small>';
 
-$lang['bannersize'] = 'Minimum <strong>banner size</strong>:<br><small>(you can use any <abbr>CSS</abbr> length string, including <tt>auto</tt>)</small>';
-
 $lang['showtoc']			= 'Default view for the <strong>Table of Contents</strong>:';
 	$lang['showtoc_o_show']		= 'Opened';
 	$lang['showtoc_o_hide']	= 'Collapsed';

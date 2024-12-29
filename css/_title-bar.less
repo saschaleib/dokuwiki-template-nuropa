@@ -3,6 +3,82 @@
  * File name: css/_title-bar.less
  */
 
+header {
+	/* you are here list */
+	nav.youarehere {
+		& {
+			font-size: small;
+		}
+		ol {
+			& {
+				list-style: none inside;
+				display: flex;
+				flex-flow: row nowrap;
+				width: fit-content;
+				max-width: 100%;
+				align-items: center;
+				padding: 0 .5em 0 0;
+				margin: 0;
+				max-width: 100%;
+				overflow: hidden;
+				white-space: nowrap;
+			}
+			li {
+				& {
+					display: inline-block;
+					margin: 0;
+					padding: 2pt 2pt 2pt 0;
+					max-width: 20em;
+					min-width: 2.2em;
+					overflow: hidden;
+					text-overflow: '\202F…';
+				}
+				&:first-child {
+					padding-left: 2pt;
+				}
+				&:not(:first-child)::before {
+					content: '\25B8';
+					display: inline-block;
+					width: min-content;
+					text-align: center;
+					margin-right: .25em;
+				}
+				&:nth-last-child(1) { flex-shrink: 0; }
+				&:nth-last-child(2) { flex-shrink: 1; }
+				&:nth-last-child(3) { flex-shrink: 2; }
+				&:nth-last-child(4) { flex-shrink: 3; }
+				&:nth-last-child(5) { flex-shrink: 4; }
+				&:nth-last-child(6) { flex-shrink: 5; }
+				&:nth-last-child(7) { flex-shrink: 6; }
+				a {
+					& {
+						text-decoration: none;
+						border-radius: 1.5pt;
+						padding: 0 .125em;
+					}
+					&:hover {
+						text-decoration: underline;
+					}
+				}
+				&.home {
+					min-width: 14px;
+					flex-shrink: 0 !important;
+				}
+				&.hasicon {
+					a {
+						display: grid;
+						grid-template-columns: 1.2em 0;
+						padding-left: 0;
+					}
+					a span {
+						display: none;
+					}
+				}
+			}
+		}
+	}
+}
+
  #pagetitle__layout ,
  #sitemenu__layout,
  #banner__layout {
@@ -27,6 +103,9 @@
 		padding: 1em .25rem;
 		background-color: @ini_titlebar_background;
 	}
+	& > .content.has-breadcrumbs {
+		padding-top: .5rem;
+	}
 	h1, h2 {
 		font-family: @ini_maintitle_fonts;
 		color: @ini_titlebar_fontcolor;
@@ -40,6 +119,31 @@
 		font-size: .9rem;
 		color: @ini_titlebar_fontcolor;
 	}
+
+	nav.youarehere {
+		& {
+			margin-bottom: .75rem;
+			color: mix(@ini_titlebar_fontcolor, @ini_menubar_background, 67%);
+			font-size: small;
+		}
+		ol {
+			li {
+				a {
+					color: @ini_titlebar_fontcolor;
+				}
+				a:focus {
+					outline: 2px solid @ini_titlebar_fontcolor;
+				}
+				&.hasicon svg {
+					fill: @ini_titlebar_fontcolor;
+				}
+				&[aria-current="page"] a {
+					color: mix(@ini_titlebar_fontcolor, @ini_menubar_background, 80%);
+				}
+			}
+		}
+	}
+
 }
 
 #sitemenu__layout {
@@ -47,8 +151,6 @@
 		min-height: 2em;
 		background-color: @ini_menubar_background;
 		font-size: @ini_menubar_fontsize;
-	}
-	& > .content {
 	}
 	ul {
 		& {
@@ -75,7 +177,7 @@
 			}
 			&:first-child a {
 				border-left: none;
-				padding-left: .25rem
+				padding-left: .25rem;
 			}
 			&.active {
 				background-color: lighten(@ini_menubar_background, 5%);
@@ -85,7 +187,44 @@
 }
 
 #banner__layout {
-
+	& {
+		min-height: @ini_banner_min_height;
+		background-position: center;
+		display: grid;
+		align-items: end;
+	}
+	.content {
+		margin-bottom: .33rem;
+	}
+	nav.youarehere {
+		& {
+			color: mix(@ini_banner_fontcolor, @ini_banner_background, 67%);
+			font-size: smaller;
+		}
+		ol {
+			& {
+				background-color: @ini_banner_background;
+			}
+			li {
+				a {
+					& {
+						color: @ini_banner_fontcolor;
+					}
+					&:focus {
+						outline: 2px solid @ini_banner_fontcolor;
+					}
+				}
+				&.hasicon {
+					svg {
+						fill: @ini_banner_fontcolor;
+					}
+				}
+				&[aria-current="page"] a {
+					color: mix(@ini_banner_fontcolor, @ini_banner_background, 80%);
+				}
+			}
+		}
+	}
 }
 
 @media (prefers-color-scheme: dark) {

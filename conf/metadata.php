@@ -21,10 +21,13 @@ $meta['pageheadline'] = array('multichoice',
 						'_choices' => array('sitename', 'pagename', 'file'));
 
 $meta['sitemenu'] = array('string');
+$meta['menuplace'] = array('multichoice',
+						'_choices' => array('none', 'before', 'between', 'after'));
+
+$meta['youareherepos'] = array('multichoice',
+						'_choices' => array('menu', 'banner'));
 
 $meta['bannerimg'] = array('string');
-
-$meta['bannersize'] = array('string');
 
 $meta['showtoc'] = array('multichoice',
 						'_choices' => array('show', 'hide'));

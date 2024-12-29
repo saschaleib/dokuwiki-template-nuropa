@@ -30,12 +30,14 @@ $conf['pageheadline'] = 'sitename';
 
 /* should a site-wide horizontal menu be added? */
 $conf['sitemenu'] = 'menu';
+$conf['menuplace'] = 'between';
 
-$conf['youareherepos'] = 'banner';
+/* where to show the two hierarchical lists */
+$conf['youareherepos'] = 'menu';
+//$conf['breadcrumbpos'] = 'sidebar';
 
 /* name of the banner file (without extension) and min height of the banner bar */
 $conf['bannerimg'] = 'banner'; /* empty = no banner bar */
-$conf['bannersize'] = '48px'; /* any CSS length, or 'auto' */
 
 /* show the TOC by default */
 $conf['showtoc'] = 'show';

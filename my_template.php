@@ -135,42 +135,42 @@ function my_userinfo($prefix = "", $id) {
 }
 
 /**
- * Hierarchical breadcrumbs
+ * Hierarchical breadcrumbs ("You are here")
  *
  * Cleanup of the original code to create neater and more accessible HTML
  *
- * @author Sascha Leib <sascha@leib.be>
+ * @author Sascha Leib <ad@hominem.info>
  * @author Andreas Gohr <andi@splitbrain.org>
  * @author Nigel McNie <oracle.shinoda@gmail.com>
  * @author Sean Coates <sean@caedmon.net>
  * @author <fredrik@averpil.com>
  *
  * @param  string $prefix to be added before each line
+ * @param  string $position where to insert the breadcrumbs
  *
  */
-function my_youarehere($prefix = "", $position, $return = false) {
+function my_youarehere($prefix = "", $position) {
     global $conf;
     global $ID;
     global $lang;
 
-    // check if enabled
-    if (!$conf["youarehere"]) {
-        return false;
+    // check if enabled (default dokuwiki setting)
+    if (!$conf['youarehere']) {
+        return '';
     }
 
     // check if right position:
-    if (tpl_getConf("youareherepos") !== $position) {
-        return false;
+    if (tpl_getConf('youareherepos') !== $position) {
+        return '';
     }
 
-    // prepare output string:
-    $out = $prefix . '<h2 class="sr-only">' . $lang["youarehere"] . "</h2>\n";
-
-    $parts = explode(":", $ID);
+    $parts = explode(':', $ID);
     $count = count($parts);
+    $label = htmlentities($lang['youarehere']);
+    $out = "<nav class=\"youarehere\" aria-label=\"{$label}\">" . TPL_NL;
 
-    /* start the list: */
-    $out .= $prefix . "<ol class=\"youarehere\">\n";
+    /* start the list: */ ;
+    $out .= $prefix . TPL_TAB . '<ol>' . TPL_NL;
 
     /* is there a higher-level homepage defined? */
     $hl = trim(tpl_getConf("homelink"));
@@ -179,8 +179,7 @@ function my_youarehere($prefix = "", $position, $return = false) {
             '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 5.69L17 10.19V18H15V12H9V18H7V10.19L12 5.69M12 3L2 12H5V20H11V14H13V20H19V12H22" /></svg>';
 
         $out .=
-            $prefix .
-            "\t<li class=\"home hasicon\">" .
+            $prefix . TPL_TAB . TPL_TAB . '<li class="home hasicon">' .
             tpl_link(
                 $hl,
                 $homeIcon .
@@ -190,17 +189,12 @@ function my_youarehere($prefix = "", $position, $return = false) {
                 ' title="' . htmlentities(tpl_getLang("homepage")) . '"',
                 true
             ) .
-            "</li>\n";
+            '</li>' . TPL_NL;
     }
 
     // always print the startpage
-    $out .=
-        $prefix .
-        "\t<li" .
-        ($hl == "" ? ' class="home"' : "") .
-        ">" .
-        tpl_pagelink(":" . $conf["start"], null, true) .
-        "</li>\n";
+    $out .= $prefix . TPL_TAB . TPL_TAB . '<li' . ($hl == "" ? ' class="home"' : "") . '>' .
+            tpl_pagelink(":" . $conf["start"], null, true) . '</li>' . TPL_NL;
 
     // print intermediate namespace links
     $part = "";
@@ -211,16 +205,17 @@ function my_youarehere($prefix = "", $position, $return = false) {
             continue;
         } // Skip startpage
 
+        $flexShrink = $count - $i;
+
         // output
-        $out .=
-            $prefix . "\t<li>" . tpl_pagelink($page, null, true) . "</li>\n";
+        $out .= $prefix . TPL_TAB . TPL_TAB . '<li>' . tpl_pagelink($page, null, true) . '</li>' . TPL_NL;
     }
 
     // print current page, skipping start page, skipping for namespace index
     if (isset($page)) {
         $page = (new PageResolver("root"))->resolveId($page);
         if ($page == $part . $parts[$i]) {
-            $out .= $prefix . "</ol>\n";
+            $out .= $prefix . '</ol>' . TPL_NL;
             if ($return) {
                 return $out;
             }
@@ -230,7 +225,7 @@ function my_youarehere($prefix = "", $position, $return = false) {
     }
     $page = $part . $parts[$i];
     if ($page == $conf["start"]) {
-        $out .= $prefix . "</ol>\n";
+        $out .= $prefix . '</ol>' . TPL_NL;
         if ($return) {
             return $out;
         }
@@ -239,14 +234,11 @@ function my_youarehere($prefix = "", $position, $return = false) {
     }
 
     /* actual page link and end: */
-    $out .= $prefix . "\t<li>" . tpl_pagelink($page, null, true) . "</li>\n";
-    $out .= $prefix . "</ol>\n";
+    $out .= $prefix . TPL_TAB . TPL_TAB . '<li aria-current="page">' . tpl_pagelink($page, null, true) . '</li>' . TPL_NL;
+    $out .= $prefix . TPL_TAB . '</ol>' . TPL_NL;
+    $out .= $prefix . '</nav>' . TPL_NL;
 
-    if ($return) {
-        return $out;
-    }
-    echo $out;
-    return (bool) $out;
+    return $out;
 }
 
 /**
@@ -267,31 +259,34 @@ function my_breadcrumbs($prefix = "", $position) {
 
     //check if enabled
     if (!$conf["breadcrumbs"]) {
-        return false;
+        return '';
     }
 
     // check if right position:
-    if (tpl_getConf("breadcrumbpos", "none") !== $position) {
-        return false;
+    if (tpl_getConf("breadcrumbpos", "sidebar") !== $position) {
+        return '';
     }
 
     $crumbs = breadcrumbs(); //setup crumb trace
+    $out = '';
 
     /* begin listing */
-    echo $prefix . '<p class="sr-only">' . $lang["breadcrumb"] . "</p>\n";
-    echo $prefix . "<ol class=\"trace\" reversed>";
+    $out .= $prefix . '<p class="sr-only">' . $lang["breadcrumb"] . "</p>\n";
+    $out .= $prefix . "<ol class=\"trace\" reversed>";
 
     $last = count($crumbs);
     $i = 0;
     foreach ($crumbs as $id => $name) {
         $i++;
-        echo "<li" .
+        $out .= "<li" .
             ($i == $last ? ' class="current"' : "") .
             "><bdi>" .
             tpl_link(wl($id), hsc($name), "", true) .
             "</bdi></li>";
     }
-    echo "</ol>\n";
+    $out .= "</ol>\n";
+
+    return $out;
 }
 
 /**
@@ -445,7 +440,7 @@ function my_toc($prefix = "") {
  *
  * @return void
  */
-function my_pagetitle($prefix = "") {
+function my_pagetitle($prefix, $breadcrumbs) {
     global $ID;
     global $conf;
 
@@ -453,20 +448,28 @@ function my_pagetitle($prefix = "") {
     $type = my_headerstyle();
 
     /* build the headline section */
-    echo $prefix . "<div class=\"content type-{$type}\">" . TPL_NL;
+    echo $prefix . '<div id="pagetitle__layout">' . TPL_NL;
+    echo $prefix . TPL_TAB . "<div class=\"content type-{$type}" .
+        ( $breadcrumbs !== '' ? ' has-breadcrumbs' : '' ) . '">' . TPL_NL;
+
+    // insert the breadcrumbs:
+    if ($breadcrumbs != '') {
+        echo $breadcrumbs;
+    }
+
+    // insert the headline:
     switch ($type) {
         case "file":
             tpl_includeFile("title.html");
             break;
         case "sitename":
-            echo $prefix .
-                TPL_TAB . "<h2 class=\"sitename\">{$conf["title"]}</h2>" . TPL_NL;
+            echo $prefix . TPL_TAB . "<h2 class=\"sitename\">{$conf["title"]}</h2>" . TPL_NL;
                 if ($conf["tagline"] && $conf["tagline"] !== "") {
                     echo $prefix . TPL_TAB . "<p class=\"tagline\">{$conf["tagline"]}</p>" . TPL_NL;
                 }
             break;
         case "pagename":
-            echo $prefix . TPL_TAB . '<h1>' . tpl_pagetitle($ID, true) . '</h1>' . TPL_NL;
+            echo $prefix . TPL_TAB . TPL_TAB . '<h1>' . tpl_pagetitle($ID, true) . '</h1>' . TPL_NL;
             if ($conf["tagline"] && $conf["tagline"] !== "") {
                 echo $prefix . TPL_TAB . "<p class=\"tagline\">{$conf["tagline"]}</p>" . TPL_NL;
             }
@@ -476,6 +479,7 @@ function my_pagetitle($prefix = "") {
             break;
     }
 
+    echo $prefix . TPL_TAB . "</div>" . TPL_NL;
     echo $prefix . "</div>" . TPL_NL;
 }
 
@@ -532,15 +536,10 @@ function my_banner_style() {
         $background = tpl_basedir() . "images/banner.svg";
     }
 
-    /* find the element height */
-    $height = tpl_getConf("bannersize", "inherit");
-
     if ($background) {
         echo "background-image: url('" .
             $background .
-            "');min-height: " .
-            $height .
-            ";";
+            "');";
     }
 }
 
@@ -841,30 +840,41 @@ function my_searchform($ajax = true, $autocomplete = false) {
 }
 
 /**
- * inserts the Languages menu, if appropriate.
+ * inserts the Site menu, if appropriate.
  *
  * @author Sascha Leib <sascha@leib.be>
- * @author Andreas Gohr <andi@splitbrain.org>
  *
  * @param  string $prefix to be added before each line
  * @param  string $place the location from where it is called
- * @param  string $checkage should the age of the translation be checked?
  */
-function my_sitemenu($prefix) {
+function my_sitemenu($prefix, $place) {
     global $INFO;
     global $conf;
 
-    $menu = tpl_getConf('sitemenu', '');
-    if ($menu !== '') {
-        echo $prefix . "<nav class=\"content\">" . TPL_NL;
-        echo $prefix . "<!-- sitemenu: '{$menu}' -->" . TPL_NL;
-        $menuId = page_findnearest($menu);
-        if ($menuId) {
-            $html = p_wiki_xhtml($menuId, '', false);
-            echo $html;
-        }
-        echo $prefix . "</nav>" . TPL_NL;
+    // should the element be displayed at all?
+    $menuplace = tpl_getConf('menuplace', '');
+    if ($menuplace !== $place) {
+        return;
     }
+
+    // check if the menu page exists:
+    $menu = tpl_getConf('sitemenu', '');
+    if ($menu == '') {
+        return;
+    }
+
+    // output the menu wrappers:
+    echo $prefix . '<div id="sitemenu__layout">' . TPL_NL;
+    echo $prefix . TPL_TAB . '<nav class="content">' . TPL_NL;
+    echo $prefix . TPL_TAB . TPL_TAB . "<!-- sitemenu @ {$place} -->" . TPL_NL;
+
+    $menuId = page_findnearest($menu);
+    if ($menuId) {
+        $html = p_wiki_xhtml($menuId, '', false);
+        echo $html;
+    }
+    echo $prefix . TPL_TAB . '</nav>' . TPL_NL;
+    echo $prefix . '</div>' . TPL_NL;
 }
 
 /**
