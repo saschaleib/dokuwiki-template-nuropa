@@ -38,20 +38,15 @@
 			</div>
 		</div>
 <?php
+		// rundown of the other header elements:
 		my_sitemenu(str_repeat(TPL_TAB,2),'before');
 		my_pagetitle(str_repeat(TPL_TAB,2),
 			my_youarehere(str_repeat(TPL_TAB,4),'menu')
 		);
 		my_sitemenu(str_repeat(TPL_TAB,2),'between');
+		my_banner(str_repeat(TPL_TAB,2),
+			my_youarehere(str_repeat(TPL_TAB,4),'banner')
+		);
+		my_sitemenu(str_repeat(TPL_TAB,2),'after');
 ?>
-		<div id="banner__layout" style="<?php my_banner_style(); ?>">
-			<div class="content">
-<?php
-				//tpl_flush();
-				echo my_youarehere(str_repeat(TPL_TAB,5),'banner');
-				//echo my_breadcrumbs(str_repeat(TPL_TAB,5),'banner');
-?>
-			</div>
-		</div>
-<?php		my_sitemenu(str_repeat(TPL_TAB,2),'after');
-?>	</header>
+	</header>

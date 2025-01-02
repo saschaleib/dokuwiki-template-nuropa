@@ -1,6 +1,6 @@
 /* Stylesheet for DokuWiki Nuropa template
  * by Sascha Leib
- * File name: css/_title-bar.less
+ * File name: css/parts/title-bar.less
  */
 
 header {
@@ -137,9 +137,6 @@ header {
 				&.hasicon svg {
 					fill: @ini_titlebar_fontcolor;
 				}
-				&[aria-current="page"] a {
-					color: mix(@ini_titlebar_fontcolor, @ini_menubar_background, 80%);
-				}
 			}
 		}
 	}
@@ -148,39 +145,124 @@ header {
 
 #sitemenu__layout {
 	& {
-		min-height: 2em;
 		background-color: @ini_menubar_background;
 		font-size: @ini_menubar_fontsize;
 	}
-	ul {
-		& {
-			margin: 0;
-			padding: 0;
-			list-style: none;
-			display: flex;
-			max-width: 100%;
-			overflow: hidden;
-		}
-		li.level1 {
+	.content {
+		button {
 			& {
-				margin: 0;
-				padding: .25em 0;
-				display: inline-block;
-				white-space: nowrap;
+				display: grid;
+				border: none transparent 0;
+				background-color: @ini_menubar_background;
+				border-radius: .25em;
+				color: @ini_menubar_fontcolor;
+				font-size: 1em;
+				line-height: 1em;
+				place-items: center;
+				cursor: pointer;
 			}
-			a {
+			&:hover {
+				text-decoration: underline;
+			}
+			svg {
+				fill: @ini_menubar_fontcolor;
+				transition: all .25s;
+			}
+		}
+		a {
+			& {
 				display: block;
-				padding: .25em .75em;
 				color: @ini_menubar_fontcolor;
 				text-decoration: none;
-				border-left: #FFF solid 1px;
+				padding: .25em 1em;
+				border-radius: .25em;
 			}
-			&:first-child a {
-				border-left: none;
-				padding-left: .25rem;
+			&:hover {
+				text-decoration: underline;
 			}
-			&.active {
-				background-color: lighten(@ini_menubar_background, 5%);
+			&:focus {
+				outline: 2px solid @ini_menubar_fontcolor;
+			}
+		}
+		[popover] {
+			& {
+				background-color: @ini_menubar_background;
+				border: darken(@ini_menubar_background, 15%) solid 1px;
+				border-radius: 1pt;
+    			overflow: hidden;
+			}
+		}
+		.menu-layout {
+			& {
+				display: grid;
+				max-width: 100%;
+				overflow: hidden;
+				grid-template-columns: calc(100% - 2em) 2em;
+			}
+			& > * {
+				display: none;
+			}
+			& > ul {
+				display: flex;
+				list-style: none;
+				overflow: hidden;
+				padding: .5em 0;
+			}
+			li {
+				& {
+					display: block;
+					margin: 0;
+					padding: 0;
+				}
+				& > div.li > a {
+					text-decoration: none;
+					padding: .25em 1em;
+				}
+				&.node > div.li > a {
+					padding-right: .25em;
+				}
+				&.level1 {
+					border-right: mix(@ini_menubar_fontcolor, @ini_menubar_background, 50%) solid 1px;
+				}
+				&.level1:first-of-type div.li > a {
+					padding-left: .35em;
+				}
+				&.level1.node:not(.nolink) {
+					display: grid;
+					grid-template-columns: auto 1em;
+				}
+				&.level1.node button svg {
+					rotate: 90deg;
+				}
+				&.level1.node button[data-isopen="true"] svg {
+					rotate: -90deg;
+				}
+				&.level1.node.nolink button {
+					grid-template-columns: auto 1em;
+					padding: .25em;
+				}
+				&.level1.node button[data-isopen="true"] svg {
+					rotate: -90deg;
+				}
+
+
+			}
+			#menu__button {
+				& {
+					line-height: 1em;
+					padding: .5em;
+					margin: .25em;
+				}
+				&[data-isopen="true"] svg {
+					rotate: 90deg;
+				}
+				svg.menu, span {
+					display: none;
+				}
+			}				
+				
+			& > #menu__overflow__group {
+				display: block;
 			}
 		}
 	}
@@ -219,9 +301,9 @@ header {
 						fill: @ini_banner_fontcolor;
 					}
 				}
-				&[aria-current="page"] a {
+				/*&[aria-current="page"] a {
 					color: mix(@ini_banner_fontcolor, @ini_banner_background, 80%);
-				}
+				} */
 			}
 		}
 	}

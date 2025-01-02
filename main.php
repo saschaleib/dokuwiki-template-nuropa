@@ -25,25 +25,18 @@ define('TPL_NL', ( tpl_getConf('neatnik') == 'true' ? chr(10) : '' ));
 </head>
 <body class="site <?php echo my_bodyclasses(); ?>" data-pageid="<?php echo htmlentities($ID); ?>">
 	<div id="skip__link">
-		<a href="#main-content"><?php echo htmlentities($lang['skip_to_content']); ?></a>
+		<a href="#main__content"><?php echo htmlentities($lang['skip_to_content']); ?></a>
 	</div>
-	<!-- BEGIN TOOLBAR -->
 <?php include('tpl_toolbar.php') ?>
-	<!-- END TOOLBAR / BEGIN HEADER -->
 <?php include('tpl_header.php') ?>
-	<!-- END HEADER -->
-	<div id="main-layout">
+	<div id="main__layout">
 <?php $hasSidebar = page_findnearest($conf['sidebar']);
- ?>		<div id="main-sidebar-layout" class="toggle_<?php echo ( ($hasSidebar && ($ACT=='show')) ? 'auto' : 'hide' ); ?>">
-			<!-- BEGIN SIDEBAR -->
+ ?>		<div id="main__sidebar__layout" class="toggle_<?php echo ( ($hasSidebar && ($ACT=='show')) ? 'auto' : 'hide' ); ?>">
 <?php include('tpl_sidebar.php') ?>
-			<!-- END OF SIDEBAR -->
-			<main id="main-content"<?php echo ( my_headerstyle() == 'pagename' ? ' class="nopageheadline"' : '' ); ?>>
+			<main id="main__content"<?php echo ( my_headerstyle() == 'pagename' ? ' class="nopageheadline"' : '' ); ?>>
 <?php my_toc(str_repeat(TPL_TAB, 4)); 
 ?><!-- - - - - - - - - ARTICLE CONTENT - - - - - - - -->
-
 <?php tpl_content(false) ?>
-
 <!-- - - - - - - - - END OF ARTICLE  - - - - - - - -->
 <?php echo my_topbtn(str_repeat(TPL_TAB, 4)); ?>
 			</main>

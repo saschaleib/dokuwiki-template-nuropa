@@ -77,6 +77,11 @@ body {
 	z-index: 100;
 }
 
+/* general focus styles */
+:focus {
+	outline: 2px solid @ini_link;
+	outline-offset: 2px;
+}
 
 /* DEBUG: Hide elements we're not looking at yet */
 #main-layout,

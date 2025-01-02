@@ -167,7 +167,7 @@ function my_youarehere($prefix = "", $position) {
     $parts = explode(':', $ID);
     $count = count($parts);
     $label = htmlentities($lang['youarehere']);
-    $out = "<nav class=\"youarehere\" aria-label=\"{$label}\">" . TPL_NL;
+    $out = $prefix . "<nav class=\"youarehere\" aria-label=\"{$label}\">" . TPL_NL;
 
     /* start the list: */ ;
     $out .= $prefix . TPL_TAB . '<ol>' . TPL_NL;
@@ -226,11 +226,7 @@ function my_youarehere($prefix = "", $position) {
     $page = $part . $parts[$i];
     if ($page == $conf["start"]) {
         $out .= $prefix . '</ol>' . TPL_NL;
-        if ($return) {
-            return $out;
-        }
-        echo $out;
-        return true;
+        return $out;
     }
 
     /* actual page link and end: */
@@ -484,63 +480,70 @@ function my_pagetitle($prefix, $breadcrumbs) {
 }
 
 /**
- * Output the page banner image
+ * Output the page banner
  *
- * Cleanup of the original code to create neater and more accessible HTML
+ * Based on original code from the DokuWiki template
  *
- * @author Sascha Leib <sascha@leib.be>
+ * @author Sascha Leib <ad@hominem.info>
  * @author Andreas Gohr <andi@splitbrain.org>
  *
  * @param string $prefix inserted before each line
+ * @param string $embed any HTML code to be embedded in the banner
  *
  * @return void
  */
-function my_banner_style() {
+function my_banner($prefix, $embed = '') {
     global $ID;
     global $conf;
 
-    /* don't run if banner image is disabled */
-    if (trim(tpl_getConf("bannerimg")) == "") {
-        return;
-    }
+	$style = ''; // banner style settings
 
-    $background = null;
+    /* Only look for banner if it is defined: */
+    if (trim(tpl_getConf("bannerimg")) !== "") {
+		$background = null;
 
-    /* list of extensions to look for (in reverse order) */
-    $exts = ["jpg", "jpeg", "png", "svg"];
+		/* list of extensions to look for (in reverse order) */
+		$exts = ["jpg", "jpeg", "png", "svg"];
 
-    /* build a list of paths to look at: */
-    $cpath = "";
-    $paths = [];
-    foreach (explode(":", $ID) as $it) {
-        foreach ($exts as $ext) {
-            array_push(
-                $paths,
-                $cpath . trim(tpl_getConf("bannerimg")) . "." . $ext
-            );
-        }
-        $cpath .= $it . ":";
-    }
-    $paths = array_reverse($paths); /* reverse the order */
+		/* build a list of paths to look at: */
+		$cpath = "";
+		$paths = [];
+		foreach (explode(":", $ID) as $it) {
+			foreach ($exts as $ext) {
+				array_push(
+					$paths,
+					$cpath . trim(tpl_getConf("bannerimg")) . "." . $ext
+				);
+			}
+			$cpath .= $it . ":";
+		}
+		$paths = array_reverse($paths); /* reverse the order */
 
-    /* check if an image exists in one of the paths: */
-    foreach ($paths as $rpath) {
-        $lpath = mediaFN($rpath);
-        if (file_exists($lpath)) {
-            $background = ml($rpath, "", true, "", false);
-            break;
-        }
-    }
-    /* if not found, use the template banner: */
-    if (!$background) {
-        $background = tpl_basedir() . "images/banner.svg";
-    }
+		/* check if an image exists in one of the paths: */
+		foreach ($paths as $rpath) {
+			$lpath = mediaFN($rpath);
+			if (file_exists($lpath)) {
+				$background = ml($rpath, "", true, "", false);
+				break;
+			}
+		}
+		/* if not found, use the template banner: */
+		if (!$background) {
+			$background = tpl_basedir() . "images/banner.svg";
+		}
 
-    if ($background) {
-        echo "background-image: url('" .
-            $background .
-            "');";
-    }
+		if ($background) {
+			$style = "background-image: url('{$background}')";
+		}
+	}
+
+	// build the banner HTML code:
+	echo $prefix . '<div id="banner__layout"' . ( $style !== '' ? " style=\"{$style}\"" : '' ) . '>' . TPL_NL;
+	echo $prefix . TPL_TAB . '<div class="content">' . TPL_NL;
+	echo $embed;
+	echo $prefix . TPL_TAB . '</div>' . TPL_NL;
+	echo $prefix . '</div>' . TPL_NL;
+
 }
 
 /**
@@ -804,6 +807,7 @@ function my_searchform($ajax = true, $autocomplete = false) {
         ->attrs([
             "placeholder" => $lang["btn_search"],
             "autocomplete" => $autocomplete ? "on" : "off",
+            "aria-label" => $lang["btn_search"]
         ])
         ->id("qsearch__in")
         ->val($ACT === "search" ? $QUERY : "")
@@ -851,6 +855,11 @@ function my_sitemenu($prefix, $place) {
     global $INFO;
     global $conf;
 
+    // pre-define the menu icon:
+    $menuSvg = '<svg class="menu" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" /></svg>';
+
+	$overflowSvg = '<svg class="overflow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5.59,7.41L7,6L13,12L7,18L5.59,16.59L10.17,12L5.59,7.41M11.59,7.41L13,6L19,12L13,18L11.59,16.59L16.17,12L11.59,7.41Z" /></svg>';
+
     // should the element be displayed at all?
     $menuplace = tpl_getConf('menuplace', '');
     if ($menuplace !== $place) {
@@ -863,18 +872,35 @@ function my_sitemenu($prefix, $place) {
         return;
     }
 
+	$menuTitle = "Menu"; // TODO: get the title from the language settings
+
     // output the menu wrappers:
     echo $prefix . '<div id="sitemenu__layout">' . TPL_NL;
     echo $prefix . TPL_TAB . '<nav class="content">' . TPL_NL;
-    echo $prefix . TPL_TAB . TPL_TAB . "<!-- sitemenu @ {$place} -->" . TPL_NL;
+    echo $prefix . str_repeat(TPL_TAB, 2) . '<div class="menu-layout">' . TPL_NL;
 
     $menuId = page_findnearest($menu);
     if ($menuId) {
         $html = p_wiki_xhtml($menuId, '', false);
         echo $html;
     }
-    echo $prefix . TPL_TAB . '</nav>' . TPL_NL;
-    echo $prefix . '</div>' . TPL_NL;
+
+    // add the menu button:
+	echo $prefix . str_repeat(TPL_TAB, 3) . '<div id="menu__overflow__group">' . TPL_NL;
+	echo $prefix . str_repeat(TPL_TAB, 4) . "<button id=\"menu__button\" aria-haspopup=\"menu\" aria-controls=\"menu__overflow\" title=\"{$menuTitle}\" data-alignment=\"right\" popovertarget=\"menu__overflow\">" . TPL_NL;
+	echo $prefix . str_repeat(TPL_TAB, 5) . $menuSvg . TPL_NL;
+	echo $prefix . str_repeat(TPL_TAB, 5) . $overflowSvg . TPL_NL;
+	echo $prefix . str_repeat(TPL_TAB, 5) . "<span>{$menuTitle}</span>". TPL_NL;
+	echo $prefix . str_repeat(TPL_TAB, 4) . '</button>' . TPL_NL;
+	echo $prefix . str_repeat(TPL_TAB, 4) . "<div id=\"menu__overflow\" popover data-controlledby=\"menu__button\">" . TPL_NL;
+	echo $html;
+	echo $prefix . str_repeat(TPL_TAB, 4) . '</div>' . TPL_NL;
+	echo $prefix . str_repeat(TPL_TAB, 3) . '</div>' . TPL_NL;
+
+	// close the menu wrappers:
+	echo $prefix . str_repeat(TPL_TAB, 2) . '</div>' . TPL_NL;
+	echo $prefix . TPL_TAB . '</nav>' . TPL_NL;
+	echo $prefix . '</div>' . TPL_NL;
 }
 
 /**
@@ -921,9 +947,7 @@ function my_langmenu($prefix, $btnId, $checkage = true) {
         $out .=
             $prefix .
             TPL_TAB .
-            "<button id=\"{$btnId}\" aria-haspopup=\"menu\" popovertarget=\"{$btnId}__menu\" data-isopen=\"false\" title=\"{$trans->getLang(
-                "translations"
-            )}\">" .
+            "<button id=\"{$btnId}\" aria-haspopup=\"menu\" popovertarget=\"{$btnId}__menu\" data-isopen=\"false\" title=\"{$trans->getLang("translations")}\">" .
             TPL_NL;
         $out .= $prefix . TPL_TAB . TPL_TAB . $svg . TPL_NL;
         $out .=

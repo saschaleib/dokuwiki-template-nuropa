@@ -358,18 +358,80 @@ $p = {
 			init: function () {
 				console.info('$p.gui.menu.init()');
 
-				// find the menu element:
-				const menu = document.getElementById('sitemenu__layout');
-				if (menu) {
-					console.log("Menu element found:");
-					console.log(menu);
+				// find the menu bar element:
+				const mbar = document.getElementById('sitemenu__layout');
+				if (mbar) {
 
-					// TODO: add event listeners for the menu
+					// define the expansion SVG (chevron left):
+					$svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z" /></svg>';
+
+					// find the menu list:
+					const menu = jQuery(mbar).find('ul').first()[0];
+					const meli = jQuery(menu).children('li.level1');
+
+					// loop over all main menu items:
+					for (let i = 0; i < meli.length; i++) {
+						const li1 = meli[i];
+						const divli = jQuery(li1).children('div.li').first();
+
+						if (li1.classList.contains('node')) {
+
+							// prep the button element:
+							const btnId = 'menu__button' + i;
+							const popId = 'menu__popup' + i;
+							const btn = jQuery('<button>', {
+								'id': btnId,
+								'aria-haspopup': 'menu',
+								'aria-controls': popId,
+								'title': 'Expand',
+								'popovertarget': popId,
+								'data-isopen': 'false'
+							});
+
+							// insert the popup button:
+							let link = jQuery(divli).children('a').first();
+							if (link.length > 0) {
+								jQuery(btn).html($svg);
+								jQuery(li1).append(btn);
+							} else {
+								// if there is no link, we use a different style:
+								let txt = jQuery(divli).contents().first()[0]
+								btn.html('<span>' + txt.textContent + '</span>');
+								jQuery(btn).append($svg);
+
+								jQuery(divli).replaceWith(btn);
+								li1.classList.add('nolink');
+							}
+
+							// the ul becomes the popup:
+							const sub = jQuery(li1).children('ul').first()[0];
+							console.log(sub);
+							sub.setAttribute('id', popId);
+							sub.setAttribute('popover', '');
+							sub.setAttribute('data-controlledby', btnId);
+						}
+					}
+					// TODO: also prepare the overflow menu:
 
 
+					// TODO: calculate the overflow menu (same as onResize)
+					//$p.gui.menu.__onResizeMenu(menu);
 
 				}
-			}
+			},
+
+			__onResizeMenu: function (mBar) {
+				console.info('$p.gui.menu.__onResizeMenu()');
+
+				// find the menu list:
+				const menu = jQuery(mbar).find('ul').first()[0];
+				const meli = jQuery(menu).children('li.level1');
+
+				// find the overflow list:
+				const overflow = jQuery('#menu__overflow ul').first()[0];
+				const ofli = jQuery(overflow).children('li.level1');
+
+			},
 		}
 	}
 };

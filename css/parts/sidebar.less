@@ -1,0 +1,24 @@
+/* Stylesheet for DokuWiki Nuropa template
+ * by Sascha Leib
+ * File name: css/parts/sidebar.less
+ */
+
+ #main__sidebar__layout {
+	width: 100%;
+	max-width: @ini_site_width;
+	margin: 0 auto;
+	border: red dotted 1px;
+	display: grid;
+	grid-template-columns: 320px auto;
+ }
+ #sidebar {
+	& {
+		display: block;
+		overflow: hidden;
+	}
+	ul, ol {
+		display: block;
+		list-style: none;
+		padding: 0 0 0 1em;
+	}
+ }
