@@ -5,7 +5,8 @@
 
 // must be run from within DokuWiki
 if (!defined('DOKU_INC')) die();
- ?>			<footer><!-- BEGIN FOOTER -->
+ ?>	<div id="footer__layout">
+			<footer><!-- BEGIN FOOTER -->
 				<div id="staticfooter">
 <?php				tpl_includeFile('footer.html'); ?>
 				</div>
@@ -32,3 +33,5 @@ if (!defined('DOKU_INC')) die();
 					</p><?php endif; ?>
 				</div>
 			</footer><!-- END OF FOOTER -->
+			<div class="no"><?php tpl_indexerWebBug() /* provide DokuWiki housekeeping, required in all templates */ ?></div>
+		</div>

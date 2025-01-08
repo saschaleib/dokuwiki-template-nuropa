@@ -15,7 +15,6 @@
 					</div>
 				</div>
 				<div id="sitetools__group">
-					<!-- BEGIN SITETOOLS BLOCK -->
 					<ul>
 						<li class="pre"><?php tpl_includeFile('sitetools-pre.html'); ?></li>
 						<li class="search"><label for="qsearch__in" title="<?php echo $lang['btn_search']; ?>">
@@ -33,7 +32,6 @@
  ?>						</li>
 						<li class="post"><?php tpl_includeFile('sitetools-post.html'); ?></li>
 					</ul>
-					<!-- END SITETOOLS BLOCK -->
 				</div>
 			</div>
 		</div>

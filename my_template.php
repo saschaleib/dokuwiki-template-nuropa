@@ -216,11 +216,7 @@ function my_youarehere($prefix = "", $position) {
         $page = (new PageResolver("root"))->resolveId($page);
         if ($page == $part . $parts[$i]) {
             $out .= $prefix . '</ol>' . TPL_NL;
-            if ($return) {
-                return $out;
-            }
-            echo $out;
-            return true;
+            return $out;
         }
     }
     $page = $part . $parts[$i];
@@ -448,9 +444,9 @@ function my_pagetitle($prefix, $breadcrumbs) {
     echo $prefix . TPL_TAB . "<div class=\"content type-{$type}" .
         ( $breadcrumbs !== '' ? ' has-breadcrumbs' : '' ) . '">' . TPL_NL;
 
-    // insert the breadcrumbs:
-    if ($breadcrumbs != '') {
-        echo $breadcrumbs;
+	// insert the breadcrumbs:
+   if ($breadcrumbs != '') {
+   	echo $breadcrumbs;
     }
 
     // insert the headline:

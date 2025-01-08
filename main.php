@@ -42,9 +42,6 @@ define('TPL_NL', ( tpl_getConf('neatnik') == 'true' ? chr(10) : '' ));
 			</main>
 		</div>
 	</div>
-	<div id="footer-layout">
 <?php include('tpl_footer.php') ?>
-		<div class="no"><?php tpl_indexerWebBug() /* provide DokuWiki housekeeping, required in all templates */ ?></div>
-	</div>
 </body>
 </html>

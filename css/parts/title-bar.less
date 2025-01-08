@@ -146,6 +146,7 @@ header {
 #sitemenu__layout {
 	& {
 		background-color: @ini_menubar_background;
+		color: @ini_menubar_fontcolor;
 		font-size: @ini_menubar_fontsize;
 	}
 	.content {
@@ -155,7 +156,7 @@ header {
 				border: none transparent 0;
 				background-color: @ini_menubar_background;
 				border-radius: .25em;
-				color: @ini_menubar_fontcolor;
+				color: @ini_menubar_linkcolor;
 				font-size: 1em;
 				line-height: 1em;
 				place-items: center;
@@ -172,7 +173,7 @@ header {
 		a {
 			& {
 				display: block;
-				color: @ini_menubar_fontcolor;
+				color: @ini_menubar_linkcolor;
 				text-decoration: none;
 				padding: .25em 1em;
 				border-radius: .25em;
@@ -261,8 +262,20 @@ header {
 				}
 			}				
 				
-			& > #menu__overflow__group {
-				display: block;
+			#menu__overflow__group {
+				& {
+					display: grid;
+					grid-template-columns: 0 auto;
+				}
+				&::before {
+					content: '';
+					display: block;
+					position: relative;
+					width: 0;
+					background: linear-gradient(90deg, transparent 0%, @ini_menubar_background 90%, @ini_menubar_background 100%);;
+					left: -1em;
+					padding: .5em;
+				}
 			}
 		}
 	}
