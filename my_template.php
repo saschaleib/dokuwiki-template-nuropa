@@ -876,9 +876,10 @@ function my_sitemenu($prefix, $place) {
     echo $prefix . str_repeat(TPL_TAB, 2) . '<div class="menu-layout">' . TPL_NL;
 
     $menuId = page_findnearest($menu);
+    $html = null;
     if ($menuId) {
         $html = p_wiki_xhtml($menuId, '', false);
-        echo $html;
+        echo ( $html ? $html : '');
     }
 
     // add the menu button:
@@ -889,7 +890,7 @@ function my_sitemenu($prefix, $place) {
 	echo $prefix . str_repeat(TPL_TAB, 5) . "<span>{$menuTitle}</span>". TPL_NL;
 	echo $prefix . str_repeat(TPL_TAB, 4) . '</button>' . TPL_NL;
 	echo $prefix . str_repeat(TPL_TAB, 4) . "<div id=\"menu__overflow\" popover data-controlledby=\"menu__button\">" . TPL_NL;
-	echo $html;
+	echo ( $html ? $html : '');
 	echo $prefix . str_repeat(TPL_TAB, 4) . '</div>' . TPL_NL;
 	echo $prefix . str_repeat(TPL_TAB, 3) . '</div>' . TPL_NL;
 
@@ -940,28 +941,13 @@ function my_langmenu($prefix, $btnId, $checkage = true) {
         $svg = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><title>{$langName}</title><path d='M20,2H4A2,2 0 0,0 2,4V22L6,18H20A2,2 0 0,0 22,16V4C22,2.89 21.1,2 20,2Z' /><text lengthAdjust='spacingAndGlyphs' x='50%' y='47%' dominant-baseline='middle' text-anchor='middle'>{$lang}</text></svg>";
 
         // prepare the menu button:
-        $out .=
-            $prefix .
-            TPL_TAB .
-            "<button id=\"{$btnId}\" aria-haspopup=\"menu\" popovertarget=\"{$btnId}__menu\" data-isopen=\"false\" title=\"{$trans->getLang("translations")}\">" .
-            TPL_NL;
+        $out .= $prefix . TPL_TAB . "<button id=\"{$btnId}\" aria-haspopup=\"menu\" popovertarget=\"{$btnId}__menu\" data-isopen=\"false\" title=\"{$trans->getLang("translations")}\">" . TPL_NL;
         $out .= $prefix . TPL_TAB . TPL_TAB . $svg . TPL_NL;
-        $out .=
-            $prefix .
-            TPL_TAB .
-            TPL_TAB .
-            '<span class="label">' .
-            $langName .
-            "</span>" .
-            TPL_NL;
+        $out .=$prefix . TPL_TAB . TPL_TAB . '<span class="label">' . $langName . "</span>" . TPL_NL;
         $out .= $prefix . TPL_TAB . "</button>" . TPL_NL;
 
         /* build the menu content */
-        $out .=
-            $prefix .
-            TPL_TAB .
-            "<div id=\"{$btnId}__menu\" role=\"menu\" popover data-controlledby=\"{$btnId}\">" .
-            TPL_NL;
+        $out .= $prefix . TPL_TAB . "<div id=\"{$btnId}__menu\" role=\"menu\" popover data-controlledby=\"{$btnId}\">" . TPL_NL;
         $out .= $prefix . TPL_TAB . TPL_TAB . "<ul>" . TPL_NL;
 
         // loop over each language and add it to the menu:
