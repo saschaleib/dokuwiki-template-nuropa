@@ -354,6 +354,7 @@ $p = {
 			__lastSearch: ""
 		},
 
+		/*
 		menu: {
 			init: function () {
 				console.info('$p.gui.menu.init()');
@@ -433,6 +434,7 @@ $p = {
 
 			},
 		}
+		*/
 	}
 };
 

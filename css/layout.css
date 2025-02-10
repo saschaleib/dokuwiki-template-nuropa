@@ -9,9 +9,11 @@
 	padding: 0;
 }
 html {
-	scroll-behavior: smooth;
 	font-size: @ini_base_fontsize;
 	font-family: @ini_default_fonts;
+	scroll-behavior: smooth;
+	scrollbar-gutter: auto;
+    scrollbar-width: thin;
 }
 body {
 	color: @ini_text;
@@ -79,7 +81,7 @@ body {
 
 /* general focus styles */
 :focus {
-	outline: 2px solid @ini_link;
+	outline: 2px solid @ini_focus;
 	outline-offset: 2px;
 }
 

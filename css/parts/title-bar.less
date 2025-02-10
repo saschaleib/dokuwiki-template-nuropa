@@ -101,7 +101,6 @@ header {
 	
 	& > .content {
 		padding: 1em .25rem;
-		background-color: @ini_titlebar_background;
 	}
 	& > .content.has-breadcrumbs {
 		padding-top: .5rem;
@@ -149,6 +148,63 @@ header {
 		color: @ini_menubar_fontcolor;
 		font-size: @ini_menubar_fontsize;
 	}
+	.menu-layout {
+		& {
+			display: flex;
+			column-gap: .5em;
+			height: fit-content;
+		}
+		a {
+			& {
+				display: block;
+				color: @ini_menubar_linkcolor;
+				text-decoration: none;
+				padding: .5em .75em .5em .25rem;
+				border-right: @ini_menubar_fontcolor solid 1px;
+			}
+			&:focus {
+				outline: transparent none 0;
+			}
+		}
+		ul {
+			& {
+				display: flex;
+				column-gap: .5em;
+				list-style: none inside;
+			}
+			li {
+				border-radius: .25em;
+				padding: .25em 0;
+			}
+			li:focus-within {
+				outline: @ini_focus solid 1.5pt;
+				outline-offset: -1.5pt;
+			}
+			ul {
+				display: none;
+			}
+			ul[popover] {
+				display: block;
+			}
+			&:last-of-type li:last-of-type a {
+				border-right: transparent none 0;
+			}
+		}
+		#menu__overflow__group {
+			display: none; /* TODO */
+		}
+	}
+	
+}
+
+/*
+#sitemenu__layout {
+	& {
+		background-color: @ini_menubar_background;
+		color: @ini_menubar_fontcolor;
+		font-size: @ini_menubar_fontsize;
+		border: red dotted 1px;
+	}
 	.content {
 		button {
 			& {
@@ -193,6 +249,7 @@ header {
     			overflow: hidden;
 			}
 		}
+
 		.menu-layout {
 			& {
 				display: grid;
@@ -280,6 +337,7 @@ header {
 		}
 	}
 }
+*/
 
 #banner__layout {
 	& {
@@ -293,17 +351,17 @@ header {
 	}
 	nav.youarehere {
 		& {
-			color: mix(@ini_banner_fontcolor, @ini_banner_background, 67%);
 			font-size: smaller;
 		}
 		ol {
 			& {
-				background-color: @ini_banner_background;
+				color: @ini_banner_fontcolor;
+				background-color: fadeout(@ini_background, 33%);
 			}
 			li {
 				a {
 					& {
-						color: @ini_banner_fontcolor;
+						color: @ini_link;
 					}
 					&:focus {
 						outline: 2px solid @ini_banner_fontcolor;
@@ -316,7 +374,7 @@ header {
 				}
 				/*&[aria-current="page"] a {
 					color: mix(@ini_banner_fontcolor, @ini_banner_background, 80%);
-				} */
+				}*/
 			}
 		}
 	}
@@ -333,6 +391,15 @@ header {
 	body.darkmode #pagetitle__layout {
 		h1, h2, p.tagline {
 			color: @ini_titlebar_fontcolor_dark;
+		}
+	}
+	body.darkmode #banner__layout ol {
+		& {
+			color: @ini_banner_fontcolor_dark;
+			background-color: fadeout(@ini_background_dark, 5%);
+		}
+		li a {
+			color: @ini_link_dark;
 		}
 	}
 
