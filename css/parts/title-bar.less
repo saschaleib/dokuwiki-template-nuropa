@@ -12,29 +12,29 @@ header {
 		ol {
 			& {
 				list-style: none inside;
-				display: flex;
+				display: inline-flex;
 				flex-flow: row nowrap;
-				width: fit-content;
-				max-width: 100%;
 				align-items: center;
 				padding: 0 .5em 0 0;
 				margin: 0;
-				max-width: 100%;
-				overflow: hidden;
+				max-width: ~"calc(100vw - .5em)";
+				overflow: auto hidden;
 				white-space: nowrap;
 			}
 			li {
 				& {
 					display: inline-block;
+					flex: 0 1 auto;
 					margin: 0;
 					padding: 2pt 2pt 2pt 0;
 					max-width: 20em;
-					min-width: 2.2em;
+					min-width: 0;
 					overflow: hidden;
 					text-overflow: '\202F…';
 				}
 				&:first-child {
 					padding-left: 2pt;
+					flex-shrink: 0;
 				}
 				&:not(:first-child)::before {
 					content: '\25B8';
@@ -43,13 +43,13 @@ header {
 					text-align: center;
 					margin-right: .25em;
 				}
-				&:nth-last-child(1) { flex-shrink: 0; }
-				&:nth-last-child(2) { flex-shrink: 1; }
-				&:nth-last-child(3) { flex-shrink: 2; }
-				&:nth-last-child(4) { flex-shrink: 3; }
-				&:nth-last-child(5) { flex-shrink: 4; }
-				&:nth-last-child(6) { flex-shrink: 5; }
-				&:nth-last-child(7) { flex-shrink: 6; }
+				&:nth-last-child(1) { flex-shrink: 1; }
+				&:nth-last-child(2) { flex-shrink: 0; }
+				&:nth-last-child(3) { flex-shrink: 1; }
+				&:nth-last-child(4) { flex-shrink: 2; }
+				&:nth-last-child(5) { flex-shrink: 3; }
+				&:nth-last-child(6) { flex-shrink: 4; }
+				&:nth-last-child(7) { flex-shrink: 5; }
 				a {
 					& {
 						text-decoration: none;

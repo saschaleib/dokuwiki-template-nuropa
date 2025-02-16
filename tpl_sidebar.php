@@ -4,14 +4,14 @@
 
 	$hasSidebar = page_findnearest($conf['sidebar']);
 	
-	$svgIcon = "<svg width='100%' height='100%' viewBox='0 0 24 24' version='1.1' xmlns='http://www.w3.org/2000/svg'><rect class='top-bar' x='3' y='8' width='14' height='3'/><rect class='bottom-bar' x='3' y='17' width='14' height='3'/></svg>";
+	$svgIcon = "<svg viewBox='0 0 24 24' version='1.1' xmlns='http://www.w3.org/2000/svg'><rect class='top-bar' x='3' y='7' width='14' height='3'/><rect class='middle-bar' x='3' y='12' width='14' height='3'/><rect class='bottom-bar' x='3' y='17' width='14' height='3'/></svg>";
 
-?>				<div id="sidebar">
-					<header id="sb-header">
+?>				<div id="side__bar">
+					<header id="sb__header">
 						<h2 class="sr-only"><?php echo $lang['sidebar'] ?></h2>
-						<button type="button" id="tg_button" title="<?php echo $lang['sidebar'] ?>"><?php echo $svgIcon; ?></button>
+						<button type="button" id="tg__button" title="<?php echo $lang['sidebar'] ?>" data-state="default" aria-controls="sidebar__nav"><?php echo $svgIcon; ?></button>
 					</header>
-					<nav id="sbNavigation">
+					<nav id="sidebar__nav">
 <!-- - - - - - - - - Sidebar header include - - - - - - - -->
 <?php
 			tpl_flush();

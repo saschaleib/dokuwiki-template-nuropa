@@ -691,7 +691,7 @@ function my_topbtn($prefix) {
         TPL_NL .
         $prefix .
         TPL_TAB .
-        '<a href="#main-content" title="' .
+        '<a href="#main__content" title="' .
         $lang["btn_top"] .
         '">' .
         TPL_NL .
