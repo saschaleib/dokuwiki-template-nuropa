@@ -4,5 +4,15 @@
  */
 
  #main__content {
-	border: red dashed 1px;
+	& {
+		/* border: red dashed 1px; */
+		line-height: 1.25em;
+	}
+	h1, h2, h3, h4, h5, h6 {
+		font-family: @ini_headline_fonts;
+		margin: 1em 0 .5em 0;
+	}
+	p, li {
+		margin: .5em 0;
+	}
  }

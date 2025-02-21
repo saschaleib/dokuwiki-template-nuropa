@@ -30,7 +30,7 @@ $conf['pageheadline'] = 'sitename';
 
 /* should a site-wide horizontal menu be added? */
 $conf['sitemenu'] = 'menu';
-$conf['menuplace'] = 'between';
+$conf['menuplace'] = 'after';
 
 /* where to show the two hierarchical lists */
 $conf['youareherepos'] = 'menu';
