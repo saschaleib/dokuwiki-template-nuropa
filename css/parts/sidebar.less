@@ -60,7 +60,7 @@
 			}
 			svg {
 				& {
-					fill: @ini_sidebar_textcolor;
+					fill: @ini_sidebar_iconcolor;
 					width: 1rem; height: 1rem;
 				}
 				&:hover, &:focus {
@@ -136,10 +136,10 @@
 		}
 
 		p {
-			margin-left: 1.5rem;
+			margin-left: .67rem;
 		}
 		p, li {
-			line-height: 1.15em;
+			line-height: 1.25em;
 			padding: .15em 0;
 		}
 		ul, ol {
@@ -147,7 +147,11 @@
 			margin-inline-end: 0px;
 			padding-inline-start: 1.5rem;
 		}
+		ul li::marker {
+			color: @ini_sidebar_iconcolor;
+		}
 		ol li::marker {
+			color: @ini_sidebar_iconcolor;
 			font-variant-numeric: oldstyle-nums;
 		}
 		span.curid {
@@ -156,6 +160,7 @@
 		a {
 			color: @ini_sidebar_linkcolor;
 			text-decoration: none;
+			border-radius: 2pt;
 		}
 		a:hover {
 			text-decoration: underline;
@@ -235,3 +240,59 @@
 		}
 	}
  }
+ 
+ @media (prefers-color-scheme: dark) {
+	  #main__sidebar__layout {
+		#sidebar__nav {
+			background-color: transparent;
+			border-color: transparent;
+		}
+
+		#tg__button {
+			svg {
+				& {
+					fill: @ini_sidebar_iconcolor_dark;
+				}
+				&:hover, &:focus {
+					fill: @ini_sidebar_linkcolor_dark;
+				}
+			}
+		}
+		#side__bar {
+			& {
+			color: @ini_sidebar_textcolor_dark;
+			}
+
+			details > summary {
+				color: @ini_sidebar_linkcolor_dark;
+			}
+			details > summary::before {
+				filter: brightness(78%);
+			}
+
+			ol, ul {
+				li::marker {
+					color: @ini_sidebar_iconcolor_dark;
+				}
+			}
+			
+			a {
+				color: @ini_sidebar_linkcolor_dark;
+			}
+				
+			h2, h3, h4, h5, h6, dt, summary {
+				color: @ini_sidebar_textcolor_dark;
+			}
+			hr {
+				background: transparent linear-gradient(to right,transparent,@ini_sidebar_textcolor_dark,transparent);
+			}
+		}
+	}
+ }
+ 
+@media (prefers-color-scheme: dark) and (max-width: @ini_site_tablet_width) {
+	#main__sidebar__layout #sidebar__nav {
+		background-color: @ini_background_alt_dark;
+		border-color: @ini_border_dark;
+	}
+}
