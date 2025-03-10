@@ -24,6 +24,9 @@
 		& {
 			grid-template-columns: 1.25rem auto;
 		}
+		#side__bar {
+			overflow: hidden !important;
+		}
 		#sidebar__nav {
 			transform: perspective(@ini_sidebar_width) rotateY(-90deg) translateX(-@ini_sidebar_width);
 		}
@@ -32,9 +35,14 @@
 	#side__bar {
 		& {
 			display: block;
+			position: sticky;
 			width: @ini_sidebar_width;
 			max-width: @ini_sidebar_width;
-			overflow: hidden;
+			height: fit-content;
+			max-height: ~"calc(100vh - 2rem)";
+			top: 2rem;
+			scrollbar-width: none;
+			overflow: hidden auto;
 			text-overflow: '\202F\2026';
 			padding: 0 0 0 .25rem;
 			color: @ini_sidebar_textcolor;
@@ -61,7 +69,7 @@
 				}
 				& > * {
 					transition-duration: .5s;
-					transform-origin: center;
+					transform-origin: left center;
 				}
 			}
 			&:focus {
@@ -72,9 +80,11 @@
 					margin: 0 auto;
 				}
 				svg {
-					rect.top-bar { transform: translate(30%,-10%) rotate(-45deg); }
-					rect.middle-bar { transform: rotate(90deg) translate(10%, 25%) scaleX(120%); }
-					rect.bottom-bar { transform: translate(40%,5%) rotate(45deg); }
+					.top { transform: scaleX(70%) translateX(6%); }
+					.mid { transform: scaleX(50%) translateX(13%); }
+					.bottom { transform: scaleX(70%) translateX(6%); }
+					.arrow1 { transform: rotate(-90deg) translate(-85%, 65%); }
+					.arrow2 { transform: rotate(90deg) translate(-85%, -65%); }
 				}
 			}
 			&[data-state="alternative"] {
@@ -82,11 +92,12 @@
 					
 				}
 				svg {
-					rect.top-bar { transform: translate(-20%,0%) rotate(45deg); }
-					rect.middle-bar { transform: rotate(90deg) translate(10%,-40%) scaleX(120%); }
-					rect.bottom-bar { transform: translate(-28%,-8%) rotate(-45deg); }
+					.top { transform: scaleX(65%) translateX(40%); }
+					.mid { transform: scaleX(45%) translateX(95%) }
+					.bottom { transform: scaleX(65%) translateX(40%); }
+					.arrow1 { transform: translateX(-53%); }
+					.arrow2 { transform: translateX(-53%); }
 				}
-
 			}
 		}
 
@@ -201,19 +212,23 @@
 						margin: .25rem 0 0 -.25rem;
 					}
 					svg {
-						rect.top-bar { transform: translate(-20%,0%) rotate(45deg); }
-						rect.middle-bar { transform: rotate(90deg) translate(10%,-40%) scaleX(120%); }
-						rect.bottom-bar { transform: translate(-28%,-8%) rotate(-45deg); }
-						}
+						.top { transform: scaleX(65%) translateX(40%); }
+						.mid { transform: scaleX(45%) translateX(95%) }
+						.bottom { transform: scaleX(65%) translateX(40%); }
+						.arrow1 { transform: translateX(-53%); }
+						.arrow2 { transform: translateX(-53%); }
+					}
 				}
 				&[data-state="alternative"] {
 					& {
 						margin: .25rem 0 0 -.25rem;
 					}
 					svg {
-						rect.top-bar { transform: translate(30%,-10%) rotate(-45deg); }
-						rect.middle-bar { transform: rotate(90deg) translate(10%, 25%) scaleX(120%); }
-						rect.bottom-bar { transform: translate(40%,5%) rotate(45deg); }
+						.top { transform: scaleX(70%) translateX(6%); }
+						.mid { transform: scaleX(50%) translateX(13%); }
+						.bottom { transform: scaleX(70%) translateX(6%); }
+						.arrow1 { transform: rotate(-90deg) translate(-85%, 65%); }
+						.arrow2 { transform: rotate(90deg) translate(-85%, -65%); }
 					}
 				}
 			}
