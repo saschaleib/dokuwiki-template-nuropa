@@ -39,7 +39,6 @@
 			grid-template-columns: 1em min-content;
 			align-items: center;
 			text-decoration: none;
-			column-gap: .3em;
 		}
 		& > * {
 			display: inline-block;
@@ -51,6 +50,12 @@
 	a:focus, button:focus {
 		outline: @ini_toolbar_focus solid 2px;
 		outline-offset: 0;
+	}
+	a {
+		column-gap: .5em;
+	}
+	button {
+		column-gap: .3em;
 	}
 	svg {
 		fill: @ini_toolbar_icon;
@@ -71,6 +76,12 @@
 			background-color: @ini_toolbar_background;
 			border: darken(@ini_toolbar_background, 15%) solid 1px;
 			backdrop-filter: blur(2.5px);
+			transform-origin: top center;
+			transition: transform .5s, display .5s allow-discrete;
+			transform: perspective(40cm) rotateX(90deg);
+		}
+		&:popover-open {
+			transform: rotateX(0deg);
 		}
 		ul {
 			list-style: none inside;
@@ -210,7 +221,6 @@ body.loggedIn {
 
     /* general colour settings: */
     body.darkmode {
-
 		#toolbar__layout {
 			& {
 				background-color: fadeout(@ini_toolbar_background_dark, 7%);
@@ -240,7 +250,6 @@ body.loggedIn {
 				border-radius: 2px;
 				box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);
 			}
-
 		}
 		&.mode_revisions #tb__tools__menu li[data-type="revs"] a,
 		&.mode_backlink #tb__tools__menu li[data-type="backlink"] a,

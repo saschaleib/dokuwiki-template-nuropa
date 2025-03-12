@@ -8,9 +8,11 @@
 	margin: 0;
 	padding: 0;
 }
-html {
+:root, html {
 	font-size: @ini_base_fontsize;
 	font-family: @ini_default_fonts;
+	color-scheme: light;
+	background-color: @ini_toolbar_background;
 	scroll-behavior: smooth;
 	scrollbar-gutter: auto;
     scrollbar-width: thin;
@@ -93,6 +95,11 @@ body {
 
 @media (prefers-color-scheme: dark) {
 
+	:root, html {
+		color-scheme: dark;
+		background-color: @ini_toolbar_background_dark;
+	}
+
     /* general colour settings: */
     body.darkmode {
 		
@@ -100,7 +107,6 @@ body {
 			color: @ini_text_dark;
 			background-color: @ini_background_dark;
 			scrollbar-color: @ini_background_alt_dark @ini_background_dark;
-			color-scheme: dark;
 		}
 
 		#skip__link a {
