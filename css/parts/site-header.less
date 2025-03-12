@@ -273,8 +273,10 @@
 			background-color: fadeout(@ini_searchpopup_background, 10%);
 			border: @ini_searchfield_border solid 1pt;
 			border-radius: 1rem;
-			-webkit-box-shadow: 1.5pt 1.5pt .25em rgba(0,0,0,.5);
-			box-shadow: 1.5pt 1.5pt .25em rgba(0,0,0,.5);
+			box-shadow: .5pt 1.5pt .25em rgba(0,0,0,0.5),
+				inset 1.5pt 1.5pt 1.5pt rgba(0,0,0,0.2),
+				inset 2pt 2pt 2pt rgba(255,255,255,0.5);
+			backdrop-filter: blur(2px);
 			z-index: 999;
 			box-sizing: border-box;
 		}

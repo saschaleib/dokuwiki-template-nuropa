@@ -3,9 +3,28 @@
  * File name: css/parts/footer.less
  */
 
- #footer__layout footer {
-	  width: 100%;
-	  max-width: @ini_site_width;
-	  margin: 0 auto;
-	  border: blue dashed 1px;
+ #footer__layout {
+	& {
+		background-color: @ini_footer_background;
+		color: @ini_footer_textcolor;
+		padding-top: 1rem;
+	}
+	footer {
+		width: 100%;
+		max-width: @ini_site_width;
+		margin: 0 auto;
+		/* border: blue dashed 1px; */
+	}
+	#ftLicenseButtons {
+		text-align: center;
+	}
  }
+ 
+ @media (prefers-color-scheme: dark) {
+	#footer__layout {
+		& {
+			background-color: @ini_footer_background_dark;
+			color: @ini_footer_textcolor_dark;
+		}
+	}
+}

@@ -73,15 +73,19 @@
 	}
 	[popover] {
 		& {
-			background-color: @ini_toolbar_background;
-			border: darken(@ini_toolbar_background, 15%) solid 1px;
+			background-color: fadeout(@ini_toolbar_background, 8%);
+			border: none transparent 0;
 			backdrop-filter: blur(2.5px);
 			transform-origin: top center;
-			transition: transform .5s, display .5s allow-discrete;
-			transform: perspective(40cm) rotateX(90deg);
+			transition: transform .3s ease-in, display .3s linear allow-discrete;
+			transform: perspective(40cm) rotateX(90deg) scaleY(.1);
+			box-shadow: 1px 1px 1px .5px rgba(0,0,0,0.25),
+				inset 1pt 1pt 1pt rgba(0,0,0,.2),
+				inset -1pt -1pt 1pt rgba(255,255,255,.4);
+			padding: .25em;
 		}
 		&:popover-open {
-			transform: rotateX(0deg);
+			transform: rotateX(0deg) scaleY(1);
 		}
 		ul {
 			list-style: none inside;
@@ -200,8 +204,10 @@ body.loggedIn {
 		right: 0;
 		background-color: fadeout(@ini_toolbar_background, 7%);
 		backdrop-filter: blur(2.5px);
-		-webkit-box-shadow: 1px 1px 1px .5px rgba(0,0,0,0.25);
-		box-shadow: 1px 1px 1px .5px rgba(0,0,0,0.25);
+		box-shadow: 1px 1px 1px .5px rgba(0,0,0,0.25),
+			inset 1pt 1pt 1pt rgba(0,0,0,.2),
+			inset -1pt -1pt 1pt rgba(255,255,255,.4);
+		border-bottom: transparent none 0;
 		z-index: 95;
 	}
 	#toolbar__layout [popover] {
@@ -209,11 +215,10 @@ body.loggedIn {
 		background-color: fadeout(@ini_toolbar_background, 7%);
 	}
 	#toolbar__layout a > span, #toolbar__layout button > span {
-		text-shadow: 1pt 1pt 1.5pt #00000011;
+		text-shadow: 1pt 1pt 1pt rgba(0,0,0,.1);
 	}
 	#toolbar__layout a > svg, #toolbar__layout button > svg {
-		-webkit-filter: drop-shadow(1pt 1pt 1.5pt #00000011);
-		filter: drop-shadow(1pt 1pt 1.5pt #00000011);
+		filter: drop-shadow(1pt 1pt 1pt rgba(0,0,0,.2));
 	}
 }
 
@@ -226,7 +231,6 @@ body.loggedIn {
 				background-color: fadeout(@ini_toolbar_background_dark, 7%);
 				color: @ini_toolbar_text_dark;
 				border-bottom-color: lighten(@ini_toolbar_background_dark, 10%);
-				box-shadow: 1pt 1pt 1pt 0 rgba(0,0,0,0.2);
 			}
 			a, button {
 				color: @ini_toolbar_text_dark;
@@ -248,7 +252,9 @@ body.loggedIn {
 				background-color: @ini_toolbar_background_dark;
 				border-color: lighten(@ini_toolbar_background_dark, 10%);
 				border-radius: 2px;
-				box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);
+				box-shadow: 1px 1px 1px .5px rgba(0,0,0,0.25),
+					inset 1pt 1pt 1pt rgba(0,0,0,.4),
+					inset -1pt -1pt 1pt rgba(255,255,255,.2);
 			}
 		}
 		&.mode_revisions #tb__tools__menu li[data-type="revs"] a,
@@ -274,6 +280,16 @@ body.loggedIn {
 		#toolbar__layout a > svg, #toolbar__layout button > svg {
 			-webkit-filter: drop-shadow(1pt 1pt 1.5pt #00000055);
 			filter: drop-shadow(1pt 1pt 1.5pt #00000055);
+		}
+
+		&.loggedIn {
+			#toolbar__layout {
+				background-color: fadeout(@ini_toolbar_background_dark, 7%);
+				box-shadow: 1px 1px 1px .5px rgba(0,0,0,0.4),
+					inset 1pt 1pt 1pt rgba(0,0,0,0.3),
+					inset -1pt -1pt 1pt rgba(255,255,255,0.1);
+				border-bottom: transparent none 0;
+			}
 		}
 	}
 }

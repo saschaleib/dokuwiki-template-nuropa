@@ -12,7 +12,7 @@
 	font-size: @ini_base_fontsize;
 	font-family: @ini_default_fonts;
 	color-scheme: light;
-	background-color: @ini_toolbar_background;
+	background-color: @ini_background;
 	scroll-behavior: smooth;
 	scrollbar-gutter: auto;
     scrollbar-width: thin;
@@ -97,7 +97,7 @@ body {
 
 	:root, html {
 		color-scheme: dark;
-		background-color: @ini_toolbar_background_dark;
+		background-color: @ini_background_dark;
 	}
 
     /* general colour settings: */
