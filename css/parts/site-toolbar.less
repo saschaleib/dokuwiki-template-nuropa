@@ -1,0 +1,295 @@
+/* Stylesheet for DokuWiki Nuropa template
+ * by Sascha Leib
+ * File name: css/parts/site-toolbar.css
+ */
+
+#toolbar__layout {
+	& {
+		clear: both;
+		width: 100vw;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		overflow: hidden;
+		background-color: @ini_toolbar_background;
+		color: @ini_toolbar_text;
+		font-family: @ini_toolbar_fonts;
+		font-size: @ini_toolbar_font_size;
+		line-height: 1em;
+		white-space: nowrap;
+		border-bottom: darken(@ini_toolbar_background, 15%) solid 1px;
+	}
+	ul, ol {
+		list-style: none inside;
+		column-gap: .25em;
+	}
+	a, button {
+		& {
+			font-family: @ini_toolbar_fonts;
+			font-size: @ini_toolbar_font_size;
+			line-height: @ini_toolbar_font_size;
+			background-color: transparent;
+			border: none;
+			border-radius: .25rem;
+			padding: .45em 3pt;
+			margin: 2px;
+			color: @ini_toolbar_text;
+			cursor: pointer;
+			display: grid;
+			grid-template-columns: 1em min-content;
+			align-items: center;
+			text-decoration: none;
+		}
+		& > * {
+			display: inline-block;
+		}
+	}
+	a:hover, button:hover {
+		backdrop-filter: brightness(.9);
+	}
+	a:focus, button:focus {
+		outline: @ini_toolbar_focus solid 2px;
+		outline-offset: 0;
+	}
+	a {
+		column-gap: .5em;
+	}
+	button {
+		column-gap: .3em;
+	}
+	svg {
+		fill: @ini_toolbar_icon;
+		width: 1em;
+		height: 1em;
+		display: inline-block;
+	}
+	svg text {
+		fill: @ini_toolbar_background;
+	}
+	li {
+		& {
+			display: inline-block;
+		}
+	}
+	[popover] {
+		& {
+			background-color: fadeout(@ini_toolbar_background, 8%);
+			border: none transparent 0;
+			backdrop-filter: blur(2.5px);
+			transform-origin: top center;
+			transition: transform .3s ease-in, display .3s linear allow-discrete;
+			transform: perspective(40cm) rotateX(90deg) scaleY(.1);
+			box-shadow: 1px 1px 1px .5px rgba(0,0,0,0.25),
+				inset 1pt 1pt 1pt rgba(0,0,0,.2),
+				inset -1pt -1pt 1pt rgba(255,255,255,.4);
+			padding: .25em;
+		}
+		&:popover-open {
+			transform: rotateX(0deg) scaleY(1);
+		}
+		ul {
+			list-style: none inside;
+			display: flex;
+			flex-flow: column nowrap;
+		}
+		li, li a {
+			box-sizing: border-box;
+			width: 100%;
+		}
+		li[aria-hidden="true"] {
+			display: none;
+		}
+		a {
+			padding: .5em .25em;
+		}
+	}
+	& > .tb-group {
+		display: flex;
+	}
+}
+
+#tb__tools__group {
+	& {
+		display: grid;
+		grid-template-columns: auto 2.5em;
+		margin-right: 12px;
+	}
+	#tb__tools__menu {
+		& {
+			display: flex;
+			flex-wrap: nowrap;
+			overflow: hidden;
+		}
+		&.compact {
+			max-width: 0 !important;
+		}
+	}
+}
+
+/* item highlights depending on wiki mode: */
+body.mode_revisions #toolbar__layout li[data-type="revs"] a,
+body.mode_backlink #toolbar__layout li[data-type="backlink"] a,
+body.mode_recent #toolbar__layout li[data-type="recent"] a,
+body.mode_media #toolbar__layout li[data-type="media"] a,
+body.mode_index #toolbar__layout li[data-type="index"] a,
+body.mode_admin #toolbar__layout li[data-type="admin"] a,
+body.mode_profile #toolbar__layout li[data-type="profile"] a,
+body.mode_login #toolbar__layout li[data-type="login"] a,
+body #toolbar__layout [popover] li a[aria-current="true"] {
+	backdrop-filter: brightness(0.9);
+	box-shadow: inset rgba(0,0,0,.3) 1px 1px 1px;
+}
+
+/* toolbar menu */
+#tb__menu__group {
+	& {
+		z-index: 1;
+		padding: 0 .25em 0 0;
+	}
+	#pagetools__btn {
+		& {
+			width: 1.8em; height: 1.8em;
+			padding: .1em;
+			margin: 2px 2px 2px 0;
+			border-radius: 50%;
+		}
+		svg {
+			width: 1.5em;
+			height: 1.5em;
+			transition: all .25s;
+			padding: 0 .1em 0 .2em;
+		}
+		&[data-isopen="true"] svg {
+			transform: rotate(90deg);
+		}
+		span {
+			display: none;
+		}
+	}
+}
+
+/* special cases for the languages menu: */
+#tb__languages__menu {
+	& {
+
+	}
+	ul li a {
+		& {
+			
+		}
+		&.wikilink2 bdi {
+			font-style: italic;
+			border-bottom: @ini_toolbar_text dotted 1.5px;
+		}
+		&::before {
+			content: attr(hreflang);
+			display: inline-block;
+			font-size: smaller;
+			width: 1.25em; height: 1.25em;
+			text-align: center;
+			text-transform: uppercase;
+		}
+	}
+}
+
+/* when logged in, the toolbar floats: */
+body.loggedIn {
+	& {
+		margin-top: @ini_toolbar_font_size * 2.4;
+	}
+	#toolbar__layout {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		background-color: fadeout(@ini_toolbar_background, 7%);
+		backdrop-filter: blur(2.5px);
+		box-shadow: 1px 1px 1px .5px rgba(0,0,0,0.25),
+			inset 1pt 1pt 1pt rgba(0,0,0,.2),
+			inset -1pt -1pt 1pt rgba(255,255,255,.4);
+		border-bottom: transparent none 0;
+		z-index: 95;
+	}
+	#toolbar__layout [popover] {
+		position: fixed;
+		background-color: fadeout(@ini_toolbar_background, 7%);
+	}
+	#toolbar__layout a > span, #toolbar__layout button > span {
+		text-shadow: 1pt 1pt 1pt rgba(0,0,0,.1);
+	}
+	#toolbar__layout a > svg, #toolbar__layout button > svg {
+		filter: drop-shadow(1pt 1pt 1pt rgba(0,0,0,.2));
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+
+    /* general colour settings: */
+    body.darkmode {
+		#toolbar__layout {
+			& {
+				background-color: fadeout(@ini_toolbar_background_dark, 7%);
+				color: @ini_toolbar_text_dark;
+				border-bottom-color: lighten(@ini_toolbar_background_dark, 10%);
+			}
+			a, button {
+				color: @ini_toolbar_text_dark;
+			}
+			a:hover, button:hover {
+				backdrop-filter: brightness(1.25);
+			}
+			a:focus, button:focus {
+				outline-color: @ini_toolbar_focus_dark;
+			}
+			svg {
+				fill: @ini_toolbar_icon_dark;
+			}
+			svg text {
+				fill: @ini_toolbar_background_dark;
+				text-transform: uppercase;
+			}
+			[popover] {
+				background-color: @ini_toolbar_background_dark;
+				border-color: lighten(@ini_toolbar_background_dark, 10%);
+				border-radius: 2px;
+				box-shadow: 1px 1px 1px .5px rgba(0,0,0,0.25),
+					inset 1pt 1pt 1pt rgba(0,0,0,.4),
+					inset -1pt -1pt 1pt rgba(255,255,255,.2);
+			}
+		}
+		&.mode_revisions #tb__tools__menu li[data-type="revs"] a,
+		&.mode_backlink #tb__tools__menu li[data-type="backlink"] a,
+		&.mode_recent #tb__tools__menu li[data-type="recent"] a,
+		&.mode_media #tb__tools__menu li[data-type="media"] a,
+		&.mode_index #tb__tools__menu li[data-type="index"] a,
+		&.mode_admin #tb__tools__menu li[data-type="admin"] a,
+		&.mode_profile #toolbar__layout li[data-type="profile"] a,
+		&.mode_login #toolbar__layout li[data-type="login"] a,
+		#toolbar__layout [popover] li a[aria-current="true"] {
+			backdrop-filter: brightness(1.5);
+		}
+		#languages__menu a.wikilink2 bdi {
+			border-bottom-color: @ini_toolbar_text_dark;
+		}
+		#languages__menu a::before {
+			border-color: @ini_toolbar_text_dark;
+		}
+		#toolbar__layout a > span, #toolbar__layout button > span {
+			text-shadow: 1pt 1pt 1.5pt #00000055;
+		}
+		#toolbar__layout a > svg, #toolbar__layout button > svg {
+			-webkit-filter: drop-shadow(1pt 1pt 1.5pt #00000055);
+			filter: drop-shadow(1pt 1pt 1.5pt #00000055);
+		}
+
+		&.loggedIn {
+			#toolbar__layout {
+				background-color: fadeout(@ini_toolbar_background_dark, 7%);
+				box-shadow: 1px 1px 1px .5px rgba(0,0,0,0.4),
+					inset 1pt 1pt 1pt rgba(0,0,0,0.3),
+					inset -1pt -1pt 1pt rgba(255,255,255,0.1);
+				border-bottom: transparent none 0;
+			}
+		}
+	}
+}

@@ -7,417 +7,417 @@
 
 /* everything is contained in the $p namespace: */
 $p = {
-
 	/* called to initialize the entire script */
-	init:	function() {
-        //console.info('init()')
-	    $p.gui.init();
-	    $p.keyboard.init();
+	init: function () {
+		//console.info('init()')
+		$p.gui.init();
+		$p.keyboard.init();
 	},
 
 	/* all functions that are related to the keyboard control */
 	keyboard: {
-		init: function() {
+		init: function () {
 			//console.info('keyboard.init()')
 		},
-		
+
 		/* ask to be informed about a specific key press event.
 		 * parameters:
 		 *   element: String - selector for the element to attach to (e.g. 'body', '#search')
-		 *   key: String - name of the key to look for (e.g. 'escape', 's', etc.)
-		 *   modifiers: Array - list of modifiers that are required to trigger the event (see docs)
+		 *   key: String - name of the key to look for (e.g. 'Escape', 's', etc.)
+		 *   modifiers: Array - list of modifiers that are required to trigger the event
 		 *   callback: Function - to be called when the event happens
 		 * Returns: String ID of the stored reference
 		 */
-		waitForKey: function(element, key, modifiers, callback) {
-			
+		waitForKey: function (element, key, modifiers, callback) {
 			/* build the storage object */
 			item = {
-				id: null, /* unique ID (see below) */
+				id: null /* unique ID (see below) */,
 				e: jQuery(element),
 				k: key,
 				m: modifiers,
 				c: callback,
-				$: null /* jQuery object (set below) */
+				$: null /* jQuery object (set below) */,
 			};
-			
+
 			/* give the item a unique id */
 			var exists = false;
 			do {
 				item.id = Math.random().toString(16).slice(2);
-				$p.keyboard._list.every( it => {
+				$p.keyboard._list.every((it) => {
 					if (item.id == it.id) {
 						exists = true; /* found a double! */
 					}
 					return !exists; /* must return true if not found! */
 				});
 			} while (exists);
-			
+
 			//console.log('new keyboard monitoring id ' + item.id + ' on object "' + element + '".');
-			
+
 			/* attach the event listener: */
-			item.e.on('keyup', null, item.id, $p.keyboard._callback._handleKeyUp);
+			item.e.on("keyup", null, item.id, $p.keyboard._callback._handleKeyUp);
 			$p.keyboard._list.push(item);
-			
+
 			return item.id; /* to remove the monitor, if needed. */
 		},
-		
+
 		/* cancel a specific active monitor (pass the id): */
-		cancel: function(id) {
+		cancel: function (id) {
 			//console.info('keyboard.cancel(' + id + ')');
-		
-			$p.keyboard._list = $p.keyboard._list.filter( it => { 
-				return (it.id !== id);
+
+			$p.keyboard._list = $p.keyboard._list.filter((it) => {
+				return it.id !== id;
 			});
 		},
-		
+
 		/* clear all waitForKey callbacks */
-		clear: function() {
+		clear: function () {
 			$p.keyboard._list = [];
 		},
-		
+
 		/* list of monitoring callbacks */
 		_list: [],
-		
+
 		/* internal callback functions */
 		_callback: {
-			
 			/* called internally on any registered keyup event */
-			_handleKeyUp: function(e) {
+			_handleKeyUp: function (e) {
 				//console.info('_handleKeyUp');
-				
+
 				/* collect the interesting info: */
 				let target = e.target;
-				let data = (e.data ? e.data : null);
+				let data = e.data ? e.data : null;
 				let evt = e.originalEvent;
 				let key = evt.key;
 				let modifiers = {
-					'alt': evt.altKey,
-					'ctrl': evt.ctrlKey,
-					'meta': evt.metaKey,
-					'shift': evt.shiftKey
+					alt: evt.altKey,
+					ctrl: evt.ctrlKey,
+					meta: evt.metaKey,
+					shift: evt.shiftKey,
 				};
-				
+
+				//console.log(key);
+
 				/* check if any registered callback matches: */
 				var match = null;
-				$p.keyboard._list.forEach( it => {
-					if ((it.id == data) && (it.k == key)) {
-						
-						// TODO: also check for modifiers! 
-						
+				$p.keyboard._list.forEach((it) => {
+					if (it.id == data && it.k == key) {
+						// TODO: also check for modifiers!
+
 						//console.log("correct key. calling callback:");
 						if (it.c && it.c instanceof Function) {
 							it.c();
 						}
 					}
 				});
-			}
-		}
+			},
+		},
 	},
 
 	gui: {
+		init: function () {
+			//console.info('gui.init()')
 
-        init: function() {
-
-            //console.info('gui.init()')
-
-            $p.gui.overlay.init();
-            $p.gui.toolbar.init();
-            $p.gui.sidebar.init();
-            $p.gui.toc.init();
-            $p.gui.menus.init();
-            $p.gui.editor.init();
-        },
-
-        toolbar: {
-
-            init: function() {
-                //console.info('gui.toolbar.init()');
-
-                jQuery(window).on('resize', function() {
-                    $p.gui.toolbar._callback.resized();
-                });
-
-                $p.gui.toolbar._callback.resized();
-            },
-
-            _callback: {
-                resized: function() {
-
-                    //console.info('gui.toolbar._callback.resized()');
-
-                    /* recalculate the overflow menu */
-
-                    /* first, check which items are visible in the toolbar: */
-                    let tb = jQuery('#pagetools-menu');
-                    let parentWidth = jQuery(tb).innerWidth();
-                    var itemPos = 0; /* current position */
-                    let shown = []; /* list of items shown in the toolbar */
-					let items = jQuery(tb).children('li');
-					
-					jQuery(items).show();
-                    jQuery(tb).children('li').each((i, it) => {
-
-                        let itemId = jQuery(it).data('type');
-                        let itemWidth = jQuery(it).outerWidth(true);
-                        if ( (itemId) && (itemPos + itemWidth - 10) < parentWidth ) {
-                            shown.push(itemId);
-                        } else {
-							//jQuery(it).hide();
-						}
-                        itemPos += itemWidth;
-                    });
-
-                    /* hide already shown items in the popup: */
-                    jQuery('#pagetools-popup').children('li').each((i, it) => {
-                        let itemId = jQuery(it).data('type');
-                        if (itemId) {
-                            if (shown.includes(itemId)) {
-                                jQuery(it).hide();
-                            } else {
-                                jQuery(it).show();
-                            }
-                        }
-                    });
-                }
-            }
-        },
-
-		sidebar: {
-			
-            init: function() {
-                //console.info('gui.sidebar.init()');
-
-				const btn = document.getElementById('tg_button');
-				if (btn) {
-					btn.addEventListener('click', $p.gui.sidebar._onSbBtnClick);
+			/* init sub-elements: */
+			Object.keys($p.gui).forEach( (key,i) => {
+				const obj = $p.gui[key];
+				if (typeof obj === 'object' && typeof obj.init == 'function') {
+					const init2 = obj.init.bind(obj)
+					init2();
 				}
-            },
-			
-			_onSbBtnClick: function(e) {
-                //console.info('gui.sidebar._onSbBtnClick()');
-				
-				const layout = document.getElementById('main-sidebar-layout');
-				if (layout) {
-					layout.classList.forEach( it => {
-						if ( it == 'toggle_auto') {
-							layout.classList.replace('toggle_auto', 'toggle_collapse');
-						} else if ( it == 'toggle_collapse') {
-							layout.classList.replace('toggle_collapse', 'toggle_auto');
-						}
-					});
-				}
-				e.preventDefault();
-			}
+			});
 		},
 
-		toc: {
-			
-            init: function() {
-                //console.info('gui.toc.init()');
+		popover: {
+			init: function () {
+				//console.info('gui.popover.init()');
 
-                jQuery('#toc-menubutton').on('click', $p.gui.toc._onTocBtnClick);
+				// add callback function to buttons using jQuery:
+				jQuery("button[popovertarget]").click(this._onBtnClick);
 
-            },
-			
-			_onTocBtnClick: function() {
-                console.info('$p.gui.toc._onTocBtnClick()');
-				
-				const toc = document.getElementById('toc');
-				if (toc) {
-					toc.classList.forEach( it => {
-						if ( it == 'toggle_hide') {
-							toc.classList.replace('toggle_hide', 'toggle_show');
-						} else if ( it == 'toggle_show') {
-							toc.classList.replace('toggle_show', 'toggle_hide');
-						}
-					});
+				// event on popover avoids jQuery to no have to deal with jQuery event wrappers
+				jQuery("[popover]").each((n, it) => {
+					it.addEventListener("toggle", this._onToggle);
+				});
+			},
+
+			alignPopup: function (popup, button, align = "center") {
+				console.info('$p.gui.popover.alignPopup(' + align + ')');
+				//console.log(popup);
+
+				const kOffsetX = 5;
+				const kOffsetY = 7;
+
+				// get the menu dimensions:
+				const mnu = jQuery(popup).position();
+				mnu.width = jQuery(popup).outerWidth();
+
+				// try to align the menu to the left of the button:
+				let mLeft = jQuery(button).position().left;
+				switch (align) {
+					case "right":
+						mLeft =
+							mLeft + jQuery(button).outerWidth() - jQuery(popup).outerWidth();
+						break;
+					case "center":
+						mLeft =
+							mLeft +
+							jQuery(button).outerWidth() / 2 -
+							jQuery(popup).outerWidth() / 2;
+					default: // = 'left'
+					// already set.
 				}
-			}
-		},
-        /**
-		 * Page.GUI.Menus Namespace
-		 *
-		 * @description Namespace for all functions related to the page menus
-		 */
-        menus: {
 
-            init: function() {
+				// but make sure it is fully visible:
+				if (mLeft < kOffsetX) mLeft = kOffsetX;
+				if (mLeft + mnu.width > window.innerWidth - kOffsetX)
+					mLeft = window.innerWidth - mnu.width - kOffsetX;
 
-                jQuery('*[aria-haspopup=menu]')
-                    .on('click', $p.gui.menus._callback.onMenuButtonClick );
-            },
+				jQuery(popup).css("left", mLeft);
 
-            _openMenus: [],
+				/* make sure the menu is under the button:*/
+				let mTop =
+					jQuery(button).position().top +
+					jQuery(button).outerHeight() +
+					kOffsetY;
+				jQuery(popup).css("top", mTop);
+			},
 
-            _callback: {
-
-                onMenuButtonClick: function(e) {
-
-					//console.info('onMenuButtonClick');
-					
-					let btn = e.currentTarget;
-					
-                    try {
-                        const tid = jQuery(this).attr('aria-controls');
-						const menu = jQuery('#' + tid);
-						const align = jQuery(this).attr('data-align_menu');
-						
-						if ( jQuery(this).attr('aria-expanded') == 'true' ) { /* menu already expanded */
-
-							menu.slideUp(200);
-							//jQuery(this).attr('aria-expanded', 'false');
-							$p.gui.overlay.hide(tid);
-							
-						} else {
-							
-							/* position the menu under the menu button: */
-							if (align == 'right') {
-								jQuery(menu).css('margin-left', 0 - (jQuery(menu).outerWidth() - 25) + 'px'); 
-							}
-							
-							/* show the menu: */
-							menu.slideDown(200, () => {
-								let a = jQuery(menu).find('a:visible').first();
-								a.focus();
-							});
-							jQuery(this).attr('aria-expanded', 'true');
-							$p.gui.menus._openMenus.push(tid);
-							$p.gui.overlay.show($p.gui.menus._callback.onBackdropClick, this);
-						}
-						
-                    } catch(e) {
-                        console.error(e);
-                    }
-
-                },
-
-                onBackdropClick: function() {
-
-                    try {
-						while ( $p.gui.menus._openMenus.length > 0) {
-							let tid = $p.gui.menus._openMenus.pop();
-							jQuery('#' + tid).slideUp(200);
-						}
-                    } catch(e) {
-                        console.error(e);
-                    }
-
-                }
-            }
-        },
-
-		/* editor */
-		editor: {
-			init: function() {
-                //console.info('gui.editor.init()');
+			_onBtnClick: function (e) {
+				//console.info('$p.gui.popover._onBtnClick()');
 
 				try {
-					if (document.body.classList.contains('mode_edit') || document.body.classList.contains('mode_preview')) {
-						
-						const tb = document.getElementById('size__ctl');
-						if (tb) {
-							/* create button: */
-							const btn = document.createElement('button');
-							btn.setAttribute('id', 'btn_focus');
-							btn.setAttribute('title', 'Focus mode');
-							btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 12C17 7.55 11.62 5.31 8.46 8.46C5.31 11.61 7.55 17 12 17C14.76 17 17 14.76 17 12M12 15C9.33 15 8 11.77 9.88 9.88C11.77 8 15 9.33 15 12C15 13.66 13.66 15 12 15M5 15H3V19C3 20.1 3.9 21 5 21H9V19H5M5 5H9V3H5C3.9 3 3 3.9 3 5V9H5M19 3H15V5H19V9H21V5C21 3.9 20.1 3 19 3M19 19H15V21H19C20.1 21 21 20.1 21 19V15H19" style="fill:#C0C0C0" /></svg>';
-							btn.addEventListener('click', $p.gui.editor._onButtonClick);
-							
-							tb.appendChild(btn);
-						}
-					}
-				} catch(err) {
-					console.error(err);
+					// which button has been clicked?
+					const btn = e.currentTarget;
+
+					// find the popover target:
+					const popup = document.getElementById(
+						btn.getAttribute("popovertarget"),
+					);
+					//console.log(' -> open: ' + popup.matches(':popover-open'));
+
+					// align the menu:
+					let mAlign = btn.getAttribute("data-alignmenu");
+					if (!mAlign) mAlign = "center";
+
+					// align the popup under the button:
+					$p.gui.popover.alignPopup(popup, btn, mAlign);
+
+					// modify the button to reflect the state change
+					// (this needs to be inverted, because it happens *before* the state change!):
+					btn.setAttribute("data-isopen", !popup.matches(":popover-open"));
+				} catch (err) {
+					console.log(err);
 				}
 			},
-			
-			_onButtonClick: function(e) {
 
-				document.body.classList.toggle('focus_mode');
-				e.preventDefault();
+			_onToggle: function (e) {
+				//console.info('$p.gui.popover._onToggle()');
+
+				try {
+					// set the 'isopen' attribute in the opener (button) of the menu:
+					document
+						.getElementById(e.target.getAttribute("data-controlledby"))
+						.setAttribute("data-isopen", e.newState == "open");
+				} catch (err) {
+					console.warn("Could not find opener element.");
+				}
+			},
+		},
+
+		toolbar: {
+			init: function () {
+				//console.info('$p.gui.toolbar.init()');
+
+				jQuery(window).on("resize", function () {
+					$p.gui.toolbar._resized();
+				});
+
+				this._resized();
+			},
+
+			/* callback for the resize event: */
+			_resized: function () {
+				//console.info('gui.toolbar._callback.resized()');
+
+				/* recalculate the overflow menu */
+
+				/* first, check which items are visible in the toolbar: */
+				let tb = jQuery("#tb__tools__menu");
+				let parentWidth = jQuery(tb).innerWidth();
+				var itemPos = 0; /* current position */
+				let shown = []; /* list of items shown in the toolbar */
+				let items = jQuery(tb).children("li");
+
+				jQuery(items).show();
+				jQuery(tb)
+					.children("li")
+					.each((i, it) => {
+						let itemId = jQuery(it).data("type");
+						let itemWidth = jQuery(it).outerWidth(true);
+						if (itemId && itemPos + itemWidth - 10 < parentWidth) {
+							shown.push(itemId);
+						} else {
+							//jQuery(it).hide();
+						}
+						itemPos += itemWidth;
+					});
+
+				/* hide already shown items in the popup: */
+				jQuery("#pagetools__popup ul")
+					.children("li")
+					.each((i, it) => {
+						let itemId = jQuery(it).data("type");
+						if (itemId) {
+							if (shown.includes(itemId)) {
+								it.setAttribute("aria-hidden", "true");
+							} else {
+								it.setAttribute("aria-hidden", "false");
+							}
+						}
+					});
+			},
+		},
+
+		search: {
+			init: function () {
+				//console.info("$p.gui.search.init()");
+
+				// use Escape key to exit the search field:
+				$p.keyboard.waitForKey(
+					document.getElementById("search__backdrop"),
+					"Escape",
+					null,
+					this.closeSearch,
+				);
+
+				// or click the Close-button:
+				document
+					.getElementById("search__close")
+					.addEventListener("click", $p.gui.search.closeSearch);
+
+				// attach to keyup event in search field:
+				document
+					.getElementById("qsearch__in")
+					.addEventListener("keyup", $p.gui.search._searchFieldOnKeyUp);
+			},
+
+			closeSearch: function () {
+				//console.info('$p.gui.search.closeSearch()');
+				document.activeElement.blur();
+			},
+
+			refreshSearch: function () {
+				//console.info("$p.gui.search.refreshSearch()");
+				const term = document.getElementById("qsearch__in").value.trim();
+				const qOut = document.getElementById("qsearch__out");
+
+				// function to fetch the search results:
+				const fetchResults = async (term) => {;
+					const response = await fetch(DOKU_BASE + 'lib/exe/ajax.php', {
+						method: 'POST',
+						body: new URLSearchParams({
+							call: 'qsearch',
+							q: encodeURI(term)
+						}),
+					});
+					qOut.innerHTML = await response.text();
+				};
+
+				if (term == "") {
+					console.log("search empty");
+					qOut.innerHTML = "";
+				} else if (term !== $p.gui.search.__lastSearch) {
+					$p.gui.search.__lastSearch = term;
+					fetchResults(term);
+				}
+				$p.gui.search.setBusyStatus(false);
+			},
+
+			_searchFieldOnKeyUp: function (e) {
+				//console.info("$p.gui.search._SearchFieldOnKeyUp()");
+
+				// set the refresh delay timeout:
+				if ($p.gui.search.__timeoutHandle) {
+					clearTimeout($p.gui.search.__timeoutHandle); // clear if already exists
+				}
+				$p.gui.search.__timeoutHandle = setTimeout(
+					$p.gui.search.refreshSearch, 350,
+				);
+				$p.gui.search.setBusyStatus(true);
+			},
+
+			setBusyStatus: function(stat) {
+				//console.info('$p.gui.search.setBusyStatus(' + stat + ')');
+				const form = document.getElementById('dw__search');
+				if (stat) {
+					form.classList.add('busy');
+				} else {
+					form.classList.remove('busy');
+				}
+			},
+
+			__timeoutHandle: null,
+			__lastSearch: ""
+		},
+
+		menu: {
+			init: function () {
+				console.info('$p.gui.menu.init()');
+				
+				return; /* TODO! */
+
 			}
 		},
 
-        /**
-		 * Page.GUI.Overlay Namespace
-		 *
-		 * @description Namespace for all functions related to the overlay
-		 */
-		overlay: {
-
-			init: function() {
-
-				let ov = jQuery('<div>')
-				    .attr('id','overlay')
-				    .attr('style', 'display:none;')
-				    .attr('tabindex', '-1');
-
-				// attach callback
-				jQuery(ov).click($p.gui.overlay.hide);
-
-				jQuery('body').append(ov);
+		sidebar: {
+			init: function () {
+				console.info('gui.sidebar.init()');
+				
+				// add event listener to menu button:
+				document.getElementById('tg__button')
+				.addEventListener('click', this.onMenuButtonClick);
 
 			},
 
-			show: function(callback, btn) {
+			/* called when the menu button is clicked: */
+			onMenuButtonClick: function(e) {
 
-				//console.log('$p.gui.overlay.show(...)');
-
-				let ov = jQuery('#overlay');
-				if (callback !== undefined && typeof callback == "function") {
-					$p.gui.overlay._callbacks.push({
-						'cb': callback,
-						'btn': btn
-					});
+				// the target may not be the button itself, but can be the SVG. Try to find the button...
+				let btn = e.target; // find the button!
+				let count = 0; // count levels
+				while (btn.tagName !== 'BUTTON' && count < 5) {
+					btn = btn.parentElement;
+					count += 1;
 				}
-				jQuery(ov).show();
-				
-				/* wait for the Esc key */
-				let id = $p.keyboard.waitForKey('body', 'Escape', [], $p.gui.overlay.hide);
-				$p.gui.overlay._monitors.push(id);
-			},
 
-			hide: function(tid) {
-				
-				//console.log('$p.gui.overlay.hide("' + tid + '")');
-
-				/* call and remove all callbacks (TODO: only unregister a specific callback!) */
-				while ($p.gui.overlay._callbacks.length > 0) {
-
-					const cbObj = $p.gui.overlay._callbacks.pop();
-					if (cbObj) {
-						if (cbObj.cb && cbObj.cb instanceof Function) {
-							cbObj.cb();
+				// find the navigation element:
+				const navId = btn.getAttribute('aria-controls');
+				if (navId) {
+					const nav = document.getElementById(navId);
+					const layout = document.getElementById('main__sidebar__layout');
+					if (nav && layout) {
+						// show/hide
+						if (btn.getAttribute('data-state') == 'default') {
+							btn.setAttribute('data-state', 'alternative');
+							layout.setAttribute('data-state', 'alternative');
+						} else {
+							btn.setAttribute('data-state', 'default');
+							layout.setAttribute('data-state', 'default');
 						}
-						/* update the button attributes */
-						if (cbObj.btn) {
-							jQuery(cbObj.btn).attr('aria-expanded', false);
-						}
+
 					}
 				}
-
-				/* if the list is now empty, also cancel all active keyboard monitors */
-				if ($p.gui.overlay._callbacks.length < 1) {
-					while ($p.gui.overlay._monitors.length > 0) {
-
-						let monitor = $p.gui.overlay._monitors.pop();
-						$p.keyboard.cancel(monitor);
-					}
-				}
-
-				/* remove the overlay: */
-				jQuery('#overlay').hide();
-			},
-			
-			/* reference to the Esc key monitor, if active: */
-			_monitors: [],
-
-			/* keep an internal list of functions waiting for a callback: */
-			_callbacks: []
+			}
 		}
 	}
 };
 
 // init when document is ready:
-jQuery(function() { $p.init(); });
+jQuery(function () {
+	$p.init();
+});
+
+// disable DW search scripts:
+jQuery.fn.dw_qsearch = function (overrides) {
+	// do nothing
+};

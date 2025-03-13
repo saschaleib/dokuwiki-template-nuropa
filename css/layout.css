@@ -1,0 +1,161 @@
+/* Stylesheet for DokuWiki Nuropa template
+ * by Sascha Leib
+ * File name: layout.css
+ */
+
+/* Root styles */
+* {
+	margin: 0;
+	padding: 0;
+}
+:root, html {
+	font-size: @ini_base_fontsize;
+	font-family: @ini_default_fonts;
+	color-scheme: light;
+	background-color: @ini_background;
+	scroll-behavior: smooth;
+	scrollbar-gutter: auto;
+    scrollbar-width: thin;
+}
+body {
+	color: @ini_text;
+	background-color: @ini_background;
+	width: 100%;
+	text-rendering: optimizeLegibility;
+	margin: 0; padding: 0;
+	scrollbar-gutter: auto;
+	scrollbar-width: thin;
+	scrollbar-color: @ini_background_alt @ini_background;
+	overflow-x: hidden;
+}
+
+/* utility classes: */
+.sr-only { 
+	border: 0 !important;
+	clip: rect(0, 0, 0, 0) !important;
+	-webkit-clip-path: inset(50%) !important;
+	clip-path: inset(50%) !important;
+	height: 1px !important;
+	margin: -1px !important;
+	overflow: hidden !important;
+	padding: 0 !important;
+	position: absolute !important;
+	white-space: nowrap !important;
+	width: 1px !important;
+}
+
+/* Skip Link */
+#skip__link {
+	position: fixed;
+	left: 4pt;
+	top: 4pt;
+	width: auto;
+	z-index: 9999;
+}
+#skip__link a {
+	position: absolute;
+	background-color: @ini_background;
+	font-size: 1.25em;
+	color: @ini_link;
+	height: 1px;
+	overflow: hidden;
+	clip: rect(1px,1px,1px,1px);
+}
+#skip__link a:focus {
+	position: static;
+	display: inline-block;
+	padding: 8px;
+	height: auto;
+	clip: auto;
+	overflow: visible;
+}
+
+/* modify the popover items */
+*[popover] {
+	position: absolute;
+	inset: unset;
+	width: max-content;
+	border-radius: .5em;
+	box-shadow: 1.5px 1.5px 1px .5px rgba(0, 0, 0, 0.4);
+	padding: 2px 5px 2px 2px;
+	z-index: 100;
+}
+
+/* general focus styles */
+:focus {
+	outline: 2px solid @ini_focus;
+	outline-offset: 2px;
+}
+
+/* Section Edit Buttons */
+main {
+	/* edit buttons */
+	.secedit {
+		& {
+			float: right;
+			margin-top: -22pt;
+			line-height: 0;
+		}
+		button {
+			& {
+				border: @ini_border solid 1pt;
+				background-color: transparent;
+				color: transparent;
+				width: 20pt;
+				height: 20pt;
+				border-radius: 50%;
+				font-size: 0;
+				cursor: pointer;
+			}
+			&::before {
+				content: ' ';
+				display: inline-block;
+				width: 13pt;
+				height: 13pt;
+				padding: 2pt;
+				background: transparent url('images/edit.svg') no-repeat center;
+				background-size: 10pt;
+			}
+			&:hover {
+				background-color: @ini_highlight;
+				border: @ini_text_alt solid 1pt;
+			}
+			&:focus {
+				background-color: @ini_highlight;
+				border: #666 solid 2px;
+				outline: transparent none 0;
+			}
+		}
+	}
+
+	.section_highlight {
+		border-radius: .25em;
+		outline: @ini_focus dashed 3px;
+		outline-offset: 2px;
+	}
+}
+
+
+@media (prefers-color-scheme: dark) {
+
+	:root, html {
+		color-scheme: dark;
+		background-color: @ini_background_dark;
+	}
+
+    /* general colour settings: */
+    body.darkmode {
+		
+		& {
+			color: @ini_text_dark;
+			background-color: @ini_background_dark;
+			scrollbar-color: @ini_background_alt_dark @ini_background_dark;
+		}
+
+		#skip__link a {
+			background-color: @ini_background_dark;
+			color: @ini_link_dark;
+		}
+
+	}
+}

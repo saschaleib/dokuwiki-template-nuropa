@@ -5,28 +5,50 @@
  * @author     Sascha Leib <sascha@leib.be>
  */
 
-/* position of the breadcrumbs and 'you are here' lists ('header' or 'post') */
-$conf['breadcrumbpos'] = 'banner';
-$conf['youareherepos'] = 'banner';
+/* TOOLBAR */
 
-/* what to show in place of a page headline */
-$conf['pageheadline'] = 'sitename';
-
-/* placement of the user info item */
-$conf['userinfo'] = 'toolbar';
-
-/* name of the banner file (without extension) and min height of the banner bar */
-$conf['bannerimg'] = 'banner'; /* empty = no banner bar */
-$conf['bannersize'] = '48px'; /* any CSS length, or 'auto' */
+/* what should be displayed in the left corner of the toolbar? ('user', 'langs' or 'none') */
+$conf['toolbaropt'] = 'user';
 
 /* appearance of the toolbar ('auto' or 'compact') */
 $conf['toolbarstyle'] = 'auto';
 
-/* allow dark mode styling ('off' or 'auto') */
+/* SEARCHBAR */
+
+/* How should the site logo be displayed ('image' or 'file') */
+$conf['sitelogo'] = 'image';
+
+/* what should be displayed to the right of the search field? ('user', 'langs' or 'none') */
+$conf['searchbaropt'] = 'langs';
+
+/* HEADLINE BAR */
+
+/* what to show in place of a page headline */
+$conf['pageheadline'] = 'sitename';
+
+/* MENU BAR */
+
+/* should a site-wide horizontal menu be added? */
+$conf['sitemenu'] = 'menu';
+$conf['menuplace'] = 'after';
+
+/* where to show the two hierarchical lists */
+$conf['youareherepos'] = 'menu';
+//$conf['breadcrumbpos'] = 'sidebar';
+
+/* name of the banner file (without extension) and min height of the banner bar */
+$conf['bannerimg'] = 'banner'; /* empty = no banner bar */
+
+/* show the TOC by default */
 $conf['showtoc'] = 'show';
 
 /* allow overriding the home link */
 $conf['homelink'] = '';
 
+/* GENERAL Settings */
+
 /* allow dark mode styling ('off' or 'auto') */
-$conf['darkmode'] = 'off';
+$conf['darkmode'] = 'auto';
+
+/* enable 'neatnik' mode (boolean) */
+$conf['neatnik'] = 'true';
