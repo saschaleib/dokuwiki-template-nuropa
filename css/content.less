@@ -3,16 +3,125 @@
  * File name: css/content.less
  */
 
- #main__content {
+main {
 	& {
 		border: red dashed 1px; 
 		line-height: 1.25em;
 	}
+
+	/* headlines and headline-like elements */
 	h1, h2, h3, h4, h5, h6 {
 		font-family: @ini_headline_fonts;
+		color: @ini_main_headline_color;
+		line-height: 1.1em;
 		margin: 1em 0 .5em 0;
 	}
+	h1 { font-size: 2em; }
+	h1:first-child { margin-top: .5em; }
+
+	h2 { font-size: 1.5em; }
+	h3 { font-size: 1.125em; }
+	h4 { font-size: 1em; }
+	h5 { font-size: .875em; }
+	h6 { font-size: .75em; }
+	h1 *, h2 *, h3 *, h4 *, h5 *, h6 * {
+		font-family: inherit;
+		font-size: inherit;
+		color: inherit;
+		margin: inherit;
+		line-height: inherit;
+	}
+
+	/* Definition Terms are like Headlines in many ways */
+	dl dt, summary {
+		font-family: @ini_headline_fonts;
+		color: @ini_main_headline_color;
+	}
+	dl.compact dl { /* except in compact mode */
+		font-weight: 600;
+		font-family: inherit;
+		color: inherit;
+	}
+
 	p, li {
 		margin: .5em 0;
 	}
- }
+	
+	/* lists: */
+	ul, ol {
+		margin: 0 2em 1em 1em;
+		padding-left: 1.75em;
+	}
+	ul { list-style: square outside; }
+	ul ul { list-style-type: disc; }
+	ul ul ul { list-style-type: none; }
+	ul ul ul li {margin-left: 1em; }
+	ul ul ul li:before { display: block; content: '\2043'; text-align:center; float: left; width: 1em; margin-left: -1em; }
+	ul ul ul ul li:before { content: '\FE63' }
+	ul ul ul ul ul li:before { content: '\00B7' }
+
+	/* numbered lists vary by nestling: */
+	ol { list-style: decimal outside; }
+	ol ol { list-style-type: lower-alpha; }
+	ol ol ol { list-style-type: lower-roman; }
+	ol ol ol ol { list-style-type: lower-greek; }
+	ol ol ol ol ol { list-style-type: decimal-leading-zero; font-size: .96em;}
+	ol ol ol ol ol ol { list-style-type: upper-alpha; font-size: .96em;}
+	ul ul ul ol li { margin-left: 0; }
+	ul ul ul ol li:before { display: none; content: ''; }
+
+	li::marker {
+		color: @ini_text_alt;
+	}
+
+	ul ul, ul ol,
+	ol ul, ol ol {
+		margin-bottom: 0;
+		padding-left: .25em;
+	}
+
+	/* asides */
+	aside {
+		& > * {
+			margin: .25em 0;
+		}
+		&.float-left, &.float-right {
+			width: 50%;
+			max-width: 220px;
+			min-width: 150px;
+			font-size: smaller;
+			line-height: 1.5em;
+		}
+		&.float-left {
+			clear: left;
+			float: left;
+			margin-right: .5em;
+		}
+		&.float-right {
+			clear: right;
+			float: right;
+			margin-left: .5em;
+		}
+		& footer {
+			line-height: 1.1em;
+		}
+	}
+
+}
+
+@media (prefers-color-scheme: dark) {
+	body.darkmode main {
+		h1, h2, h3, h4, h5, h6 {
+			color: @ini_main_headline_color_dark;
+		}
+		dl dt, summary {
+			color: @ini_main_headline_color_dark;
+		}
+		li::marker {
+			color: @ini_text_alt_dark;
+		}
+
+		
+	}
+
+}

@@ -87,11 +87,54 @@ body {
 	outline-offset: 2px;
 }
 
-/* DEBUG: Hide elements we're not looking at yet */
-#main-layout,
-#footer-layout {
-	/*display: none; */
+/* Section Edit Buttons */
+main {
+	/* edit buttons */
+	.secedit {
+		& {
+			float: right;
+			margin-top: -22pt;
+			line-height: 0;
+		}
+		button {
+			& {
+				border: @ini_border solid 1pt;
+				background-color: transparent;
+				color: transparent;
+				width: 20pt;
+				height: 20pt;
+				border-radius: 50%;
+				font-size: 0;
+				cursor: pointer;
+			}
+			&::before {
+				content: ' ';
+				display: inline-block;
+				width: 13pt;
+				height: 13pt;
+				padding: 2pt;
+				background: transparent url('images/edit.svg') no-repeat center;
+				background-size: 10pt;
+			}
+			&:hover {
+				background-color: @ini_highlight;
+				border: @ini_text_alt solid 1pt;
+			}
+			&:focus {
+				background-color: @ini_highlight;
+				border: #666 solid 2px;
+				outline: transparent none 0;
+			}
+		}
+	}
+
+	.section_highlight {
+		border-radius: .25em;
+		outline: @ini_focus dashed 3px;
+		outline-offset: 2px;
+	}
 }
+
 
 @media (prefers-color-scheme: dark) {
 
