@@ -5,23 +5,50 @@
 
 main {
 	& {
-		border: red dashed 1px; 
-		line-height: 1.25em;
+		line-height: 1.5;
 	}
+	
+	/* links */
+	a:any-link {
+		color: @ini_link;
+		text-decoration: none;
+		text-decoration-skip-ink: auto;
+	}
+	a.wikilink1:any-link {
+		color: @ini_wikilink;
+	}
+	a:any-link:hover {
+		text-decoration: underline;
+		text-decoration-style: solid;
+		text-decoration-line: underline;
+	}
+	a.wikilink2:any-link {
+		color: @ini_wikilink2;
+		text-decoration: underline;
+		text-decoration-style: wavy;
+	}
+	a.wikilink2:any-link:hover {
+		text-decoration-style: solid;
+	}
+	a[href^="#"] {
+		color: @ini_inpagelink;
+		text-decoration: underline;
+		text-decoration-style: dotted;
+	}
+
 
 	/* headlines and headline-like elements */
 	h1, h2, h3, h4, h5, h6 {
 		font-family: @ini_headline_fonts;
 		color: @ini_main_headline_color;
 		line-height: 1.1em;
-		margin: 1em 0 .5em 0;
+		margin: 1em 0 .67em 0;
 	}
-	h1 { font-size: 2em; }
-	h1:first-child { margin-top: .5em; }
+	h1 { font-size: 2em;  font-weight: normal;}
 
-	h2 { font-size: 1.5em; }
-	h3 { font-size: 1.125em; }
-	h4 { font-size: 1em; }
+	h2 { font-size: 1.5em; font-weight: normal; }
+	h3 { font-size: 1.125em; font-weight: normal; }
+	h4 { font-size: 1em; font-weight: normal; }
 	h5 { font-size: .875em; }
 	h6 { font-size: .75em; }
 	h1 *, h2 *, h3 *, h4 *, h5 *, h6 * {

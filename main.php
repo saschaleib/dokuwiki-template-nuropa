@@ -34,6 +34,7 @@ define('TPL_NL', ( tpl_getConf('neatnik') == 'true' ? chr(10) : '' ));
  ?>		<div id="main__sidebar__layout" data-config="toggle_<?php echo ( ($hasSidebar && ($ACT=='show')) ? 'auto' : 'hide' ); ?>" data-state="default">
 <?php include('tpl_sidebar.php') ?>
 			<main id="main__content"<?php echo ( my_headerstyle() == 'pagename' ? ' class="nopageheadline"' : '' ); ?>>
+				<h1 class="pagetitle"><?php tpl_pagetitle() ?></h1>
 <?php my_toc(str_repeat(TPL_TAB, 4)); 
 ?><!-- - - - - - - - - ARTICLE CONTENT - - - - - - - -->
 <?php tpl_content(false) ?>

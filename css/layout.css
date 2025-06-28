@@ -1,3 +1,4 @@
+@charset "UTF-8"; 
 /* Stylesheet for DokuWiki Nuropa template
  * by Sascha Leib
  * File name: layout.css
@@ -16,6 +17,7 @@
 	scroll-behavior: smooth;
 	scrollbar-gutter: auto;
     scrollbar-width: thin;
+	text-rendering: optimizeLegibility;
 }
 body {
 	color: @ini_text;
@@ -113,7 +115,7 @@ main {
 				width: 13pt;
 				height: 13pt;
 				padding: 2pt;
-				background: transparent url('images/edit.svg') no-repeat center;
+				background: transparent url('images/icon/edit.svg') no-repeat center;
 				background-size: 10pt;
 			}
 			&:hover {
@@ -133,6 +135,11 @@ main {
 		outline: @ini_focus dashed 3px;
 		outline-offset: 2px;
 	}
+}
+
+/* special: hide the page title */
+body main div.section_highlight_wrapper:first-of-type :is(h1, h2, h3, h4, h5, h6):first-of-type {
+	display: none;
 }
 
 

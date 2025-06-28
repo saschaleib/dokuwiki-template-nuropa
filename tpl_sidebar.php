@@ -8,8 +8,8 @@
 
 ?>				<div id="side__bar">
 					<header id="sb__header">
-						<h2 class="sr-only"><?php echo $lang['sidebar'] ?></h2>
 						<button type="button" id="tg__button" title="<?php echo $lang['sidebar'] ?>" data-state="default" aria-controls="sidebar__nav"><?php echo $svgIcon; ?></button>
+						<h2 class="sr-only"><?php echo $lang['sidebar'] ?></h2>
 					</header>
 					<nav id="sidebar__nav">
 <!-- - - - - - - - - Sidebar header include - - - - - - - -->

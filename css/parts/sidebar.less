@@ -3,7 +3,7 @@
  * File name: css/parts/sidebar.less
  */
 
- #main__sidebar__layout {
+#main__sidebar__layout {
 	& {
 		width: 100%;
 		max-width: @ini_site_width;
@@ -11,10 +11,30 @@
 		display: grid;
 		grid-template-columns: @ini_sidebar_width auto;
 		column-gap: 1rem;
-		transition-duration: .5s;
+		transition: grid-template-columns .4s linear, transform .5s ease-in-out, column-gap .5s linear;
+	}
+	
+	#sb__header {
+		& {
+			display: grid;
+			align-items: center;
+			grid-template-columns: 1.25rem auto;
+			column-gap: .25rem;
+			margin: .25rem 0 0 0;
+		}
+		h2 {
+			font-size: .9rem !important;
+			line-height: 1 !important;
+			margin: 0 !important; padding: 0 !important;
+			color: #CCC !important;
+			font-weight: normal !important;
+		}
 	}
 	
 	#sidebar__nav {
+		padding: .25rem .25rem .25rem .5rem;
+		background-color: fadeout(@ini_background, 15%);
+		backdrop-filter: blur(2pt);
 		transform-origin: top left;
 		transform: rotateY(0deg);
 		transition-duration: .5s;
@@ -23,9 +43,11 @@
 	&[data-state="alternative"] {
 		& {
 			grid-template-columns: 1.25rem auto;
+			column-gap: 0;
 		}
 		#side__bar {
 			overflow: hidden !important;
+			padding-right: .25rem;
 		}
 		#sidebar__nav {
 			transform: perspective(@ini_sidebar_width) rotateY(-90deg) translateX(-@ini_sidebar_width);
@@ -44,9 +66,14 @@
 			scrollbar-width: none;
 			overflow: hidden auto;
 			text-overflow: '\202F\2026';
-			padding: 0 0 0 .25rem;
+			padding: 0;
 			color: @ini_sidebar_textcolor;
 			margin-bottom: 2rem;
+			pointer-events: none;
+		}
+		
+		* {
+			pointer-events: auto;
 		}
 
 		#tg__button {
@@ -57,6 +84,7 @@
 				padding: .125rem;
 				cursor: pointer;
 				transition-duration: .5s;
+				margin: 0;
 			}
 			svg {
 				& {
@@ -187,19 +215,18 @@
 	}
 }
 
- @media (max-width: @ini_site_tablet_width) {
+@media (max-width: @ini_site_tablet_width) {
 
 	#main__sidebar__layout {
 		& {
 			grid-template-columns: 1.25rem auto;
+			column-gap: 0;
 		}
 		#sidebar__nav {
 			display: block;
 			position: relative;
-			background-color: fadeout(@ini_background, 10%);
 			border: @ini_border solid 1px;
 			box-shadow: 1pt 1pt 6pt fadeout(#000, 40%);
-			padding: .25rem .25rem .25rem .5rem;
 			transform: perspective(1024px) rotateY(-90deg) translateX(-100%);
 			transition-duration: .5s;
 			z-index: 9;
@@ -220,7 +247,6 @@
 			#tg__button {
 				&[data-state="default"] {
 					& {
-						margin: .25rem 0 0 -.25rem;
 					}
 					svg {
 						.top { transform: scaleX(65%) translateX(40%); }
@@ -245,7 +271,7 @@
 			}
 		}
 	}
- }
+}
  
  @media (prefers-color-scheme: dark) {
 	  #main__sidebar__layout {
