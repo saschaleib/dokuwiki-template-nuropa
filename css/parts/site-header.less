@@ -81,6 +81,7 @@
 			text-align: center;
 			color: @ini_searchbar_icon;
 			font-size: .8em;
+			font-weight: bold;
 		}
 	}
 
@@ -90,7 +91,6 @@
 	a:focus {
 		outline: @ini_focus solid 2px;
 	}
-
 }
 
 #site__logo {
@@ -235,7 +235,7 @@
 	#qsearch__out {
 		display: none;
 		margin-left: .5rem;
-		text-shadow: 3px 3px 2px rgba(0,0,0,.1);
+		text-shadow: 3px 3px 2px rgba(0,0,0,.05);
 	}
 
 	#search__backdrop {
@@ -252,7 +252,7 @@
 			margin-top: @ini_toolbar_font_size * 2.4;
 			padding: .25rem .5rem .25rem 0;
 			box-sizing: border-box;
-			backdrop-filter: ~"blur(0.67px) saturate(.33) brightness(.9)";
+			backdrop-filter: ~"blur(1px) saturate(.33) brightness(.9)";
 			z-index: 95;
 		}
 		header {
@@ -271,11 +271,10 @@
 			margin: .3rem auto;
 			padding: .5rem .5rem .5rem 0;
 			background-color: fadeout(@ini_searchpopup_background, 10%);
-			border: @ini_searchfield_border solid 1pt;
 			border-radius: 1rem;
-			box-shadow: .5pt 1.5pt .25em rgba(0,0,0,0.5),
-				inset 1.5pt 1.5pt 1.5pt rgba(0,0,0,0.2),
-				inset 2pt 2pt 2pt rgba(255,255,255,0.5);
+			box-shadow: 2pt 2pt 2pt rgba(0,0,0,.4),
+				inset 1pt 1pt 1pt rgba(255,255,255,.5),
+				inset -1pt -1pt 1pt rgba(0,0,0,.5);
 			backdrop-filter: blur(2px);
 			z-index: 999;
 			box-sizing: border-box;
@@ -521,13 +520,13 @@
 
 			#search__backdrop:focus-within {
 				& {
-					backdrop-filter: ~"blur(0.67px) saturate(.33) brightness(.5)";
+					backdrop-filter: ~"blur(1px) saturate(.33) brightness(.8)";
 				}
 				form {
 					background-color: fadeout(@ini_searchpopup_background_dark, 10%);
-					border-color: @ini_searchfield_border_dark;
-					-webkit-box-shadow: 1.5pt 1.5pt .25em rgba(0,0,0,.5);
-					box-shadow: 1.5pt 1.5pt .25em rgba(0,0,0,.6);
+					box-shadow: 3pt 3pt 3pt rgba(0,0,0,.6),
+						inset 1pt 1pt 1pt rgba(255,255,255,.2),
+						inset -1.5pt -1.5pt 1pt rgba(0,0,0,.6);
 				}
 				#qsearch__out {
 					& > strong {
@@ -620,7 +619,7 @@
 	}
 }
 @media (max-width: @ini_site_phone_width) and (prefers-color-scheme: dark) {
-	#searchbar__layout #search__backdrop:focus-within form {
+	body.darkmode #searchbar__layout #search__backdrop:focus-within form {
 		background-color: @ini_toolbar_background_dark;
 	}
 }
