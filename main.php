@@ -33,10 +33,12 @@ define('TPL_NL', ( tpl_getConf('neatnik') == 'true' ? chr(10) : '' ));
 <?php $hasSidebar = page_findnearest($conf['sidebar']);
  ?>		<div id="main__sidebar__layout" data-config="toggle_<?php echo ( ($hasSidebar && ($ACT=='show')) ? 'auto' : 'hide' ); ?>" data-state="default">
 <?php include('tpl_sidebar.php') ?>
-			<main id="main__content"<?php echo ( my_headerstyle() == 'pagename' ? ' class="nopageheadline"' : '' ); ?>>
-				<h1 class="pagetitle"><?php tpl_pagetitle() ?></h1>
-<?php my_toc(str_repeat(TPL_TAB, 4)); 
-?><!-- - - - - - - - - ARTICLE CONTENT - - - - - - - -->
+			<main id="main__content"<?php echo ( tpl_getConf('titleabovetoc') == 'true' ? ' class="hide-first-headline"' : '' ); ?>>
+<?php $out = my_youarehere(str_repeat(TPL_TAB, 4), 'content'); ?>
+<?php 	if (tpl_getConf('titleabovetoc') == 'true') {
+			echo str_repeat(TPL_TAB, 4) . '<h1 class="pagetitle">' . tpl_pagetitle(null, true) . '</h1>' . TPL_NL;
+		} ?>
+<?php my_toc(str_repeat(TPL_TAB, 4)); ?><!-- - - - - - - - - ARTICLE CONTENT - - - - - - - -->
 <?php tpl_content(false) ?>
 <!-- - - - - - - - - END OF ARTICLE  - - - - - - - -->
 <?php echo my_topbtn(str_repeat(TPL_TAB, 4)); ?>

@@ -26,7 +26,6 @@
 			font-size: .9rem !important;
 			line-height: 1 !important;
 			margin: 0 !important; padding: 0 !important;
-			color: #CCC !important;
 			font-weight: normal !important;
 		}
 	}
@@ -219,7 +218,7 @@
 
 	#main__sidebar__layout {
 		& {
-			grid-template-columns: 1.25rem auto;
+			grid-template-columns: .5rem auto;
 			column-gap: 0;
 		}
 		#sidebar__nav {
@@ -273,8 +272,8 @@
 	}
 }
  
- @media (prefers-color-scheme: dark) {
-	  #main__sidebar__layout {
+@media (prefers-color-scheme: dark) {
+	#main__sidebar__layout {
 		#sidebar__nav {
 			background-color: transparent;
 			border-color: transparent;
@@ -320,7 +319,7 @@
 			}
 		}
 	}
- }
+}
  
 @media (prefers-color-scheme: dark) and (max-width: @ini_site_tablet_width) {
 	#main__sidebar__layout #sidebar__nav {

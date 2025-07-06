@@ -215,18 +215,16 @@ function my_youarehere($prefix = "", $position) {
     if (isset($page)) {
         $page = (new PageResolver("root"))->resolveId($page);
         if ($page == $part . $parts[$i]) {
-            $out .= $prefix . '</ol>' . TPL_NL;
+			$out .= $prefix . TPL_TAB . '</ol>' . TPL_NL;
+			$out .= $prefix . '</nav>' . TPL_NL;
             return $out;
         }
     }
     $page = $part . $parts[$i];
-    if ($page == $conf["start"]) {
-        $out .= $prefix . '</ol>' . TPL_NL;
-        return $out;
+    if ($page !== $conf["start"]) { /* actual page link and end: */
+		$out .= $prefix . TPL_TAB . TPL_TAB . '<li aria-current="page">' . tpl_pagelink($page, null, true) . '</li>' . TPL_NL;
     }
 
-    /* actual page link and end: */
-    $out .= $prefix . TPL_TAB . TPL_TAB . '<li aria-current="page">' . tpl_pagelink($page, null, true) . '</li>' . TPL_NL;
     $out .= $prefix . TPL_TAB . '</ol>' . TPL_NL;
     $out .= $prefix . '</nav>' . TPL_NL;
 
@@ -263,20 +261,16 @@ function my_breadcrumbs($prefix = "", $position) {
     $out = '';
 
     /* begin listing */
-    $out .= $prefix . '<p class="sr-only">' . $lang["breadcrumb"] . "</p>\n";
-    $out .= $prefix . "<ol class=\"trace\" reversed>";
+    $out .= $prefix . '<p class="sr-only">' . $lang["breadcrumb"] . '</p>' . TPL_NL;
+    $out .= $prefix . '<ol class="trace" reversed>';
 
     $last = count($crumbs);
     $i = 0;
     foreach ($crumbs as $id => $name) {
         $i++;
-        $out .= "<li" .
-            ($i == $last ? ' class="current"' : "") .
-            "><bdi>" .
-            tpl_link(wl($id), hsc($name), "", true) .
-            "</bdi></li>";
+        $out .= '<li' . ($i == $last ? ' class="current"' : '') . '><bdi>' . tpl_link(wl($id), hsc($name), '', true) . '</bdi></li>';
     }
-    $out .= "</ol>\n";
+    $out .= '</ol>' . TPL_NL;
 
     return $out;
 }
@@ -349,19 +343,11 @@ function my_toc($prefix = "") {
 
     /* Build the hierarchical list of headline links: */
     if (count($toc) >= intval($conf["tocminheads"])) {
-        echo $prefix . "<aside id=\"toc\" class=\"toggle_{$tocView}\">\n";
+        echo $prefix . '<aside id="toc__nav" data-status="' . $tocView . '">' . TPL_NL;
         echo $prefix .
-            "\t<div id=\"toc_header\"><h2>" .
-            htmlentities($lang["toc"]) .
-            "</h2><button type=\"button\" id=\"toc-menubutton\" class=\"tg_button\" title=\"" .
-            htmlentities($lang["toc"]) .
-            '" aria-haspopup="true" aria-controls="toc-menu"><span class="sr-only">' .
-            htmlentities($lang["toc"]) .
-            "</span>" .
-            $iconSvg .
-            "</button></div>\n";
+            TPL_TAB . '<div id="toc__header"><h2>' . htmlentities($lang["toc"]) . '</h2><button type="button" id="toc__menubutton" class="tg_button" title="' . htmlentities($lang["toc"]) . '" aria-haspopup="true" aria-controls="toc-menu"><span class="sr-only">' . htmlentities($lang["toc"]) . '</span>' . $iconSvg . '</button></div>' .TPL_NL;
         echo $prefix .
-            "\t<div id=\"toc-menu\" class=\"tg_content\" role=\"menu\" aria-labelledby=\"toc-menubutton\">";
+            TPL_TAB . '<div id="toc__menu" class="tg_content" role="menu" aria-labelledby="toc-menubutton">';
 
         $level = 0;
         foreach ($toc as $it) {
@@ -370,54 +356,48 @@ function my_toc($prefix = "") {
 
             if ($cp > 0) {
                 while ($level < $nl) {
-                    echo "\n" .
+                    echo TPL_NL .
                         $prefix .
-                        str_repeat("\t", $level * 2 + 2) .
-                        "<ol>\n";
+                        str_repeat(TPL_TAB, $level * 2 + 2) .
+                        '<ol>' . TPL_NL;
                     $level++;
                 }
             } elseif ($cp < 0) {
                 while ($level > $nl) {
-                    echo "\n" .
+                    echo TPL_NL .
                         $prefix .
-                        str_repeat("\t", $level * 2) .
-                        "</ol>\n" .
+                        str_repeat(TPL_TAB, $level * 2) .
+                        '</ol>' . TPL_NL .
                         $prefix .
-                        str_repeat("\t", $level * 2 - 1) .
-                        "</li>\n";
+                        str_repeat(TPL_TAB, $level * 2 - 1) .
+                        '</li>' . TPL_NL;
                     $level--;
                 }
             } else {
-                echo "</li>\n";
+                echo '</li>' . TPL_NL;
             }
 
             $href =
-                (array_key_exists("link", $it) ? $it["link"] : "") .
-                (array_key_exists("hid", $it) && $it["hid"] !== ""
-                    ? "#" . $it["hid"]
-                    : "");
+                (array_key_exists('link', $it) ? $it['link'] : '') .
+                (array_key_exists('hid', $it) && $it['hid'] !== ''
+                    ? '#' . $it['hid']
+                    : '');
 
             echo $prefix .
-                str_repeat("\t", $nl * 2 + 1) .
-                '<li  role="presentation"><a role="menuitem" href="' .
-                $href .
-                '">' .
-                htmlentities($it["title"]) .
-                "</a>";
+                str_repeat(TPL_TAB, $nl * 2 + 1) .
+                '<li  role="presentation"><a role="menuitem" href="' . $href . '">' .
+                htmlentities($it["title"]) . '</a>';
             $level = $nl;
         }
 
         for ($i = $level - 1; $i > 0; $i--) {
-            echo "</li>\n" . $prefix . str_repeat("\t", $i * 2 + 1) . "</ol>";
+            echo '</li>' . TPL_NL . $prefix . str_repeat(TPL_TAB, $i * 2 + 1) . '</ol>';
         }
 
-        echo "</li>\n" .
-            $prefix .
-            "\t\t</ol>\n" .
-            $prefix .
-            "\t</div>\n" .
-            $prefix .
-            "</aside>\n";
+        echo '</li>' .TPL_NL . 
+            $prefix . TPL_TAB . TPL_TAB . '</ol>' . TPL_NL .
+            $prefix . TPL_TAB . '</div>' . TPL_NL .
+            $prefix . '</aside>' . TPL_NL;
     }
 }
 
@@ -565,16 +545,7 @@ function my_license_button($target) {
 
     $src = "lib/tpl/nuropa/images/license/" . $conf["license"] . ".svg";
 
-    echo "\t<a href=\"" .
-        $lic["url"] .
-        '" rel="license"' .
-        $trg .
-        '><img src="' .
-        DOKU_BASE .
-        $src .
-        '" alt="' .
-        $lic["name"] .
-        '" width="80" height="15" /></a>';
+    echo TPL_TAB . '<a href="' . $lic["url"] . '" rel="license"' . $trg . '><img src="' . DOKU_BASE . $src . '" alt="' . $lic["name"] . '" width="80" height="15" /></a>';
 }
 
 /**

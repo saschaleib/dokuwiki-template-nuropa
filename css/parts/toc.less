@@ -3,37 +3,127 @@
  * File name: css/parts/toc.less
  */
 
-#toc {
+#toc__nav {
 	& {
 		width: 40%;
 		max-width: calc((@ini_site_width - @ini_sidebar_width - 1rem ) * .4);
-		float:right;
-		margin-left: .25rem;
-		border-left: @ini_border solid 1px;
-		padding: 0 .125rem .25rem .5rem;
+		float: right;
+		margin: 2rem 0 .25rem .25rem;
+		padding: .25rem .25rem .25rem .5rem;
+		border-left: @ini_border solid 1pt;
+		overflow: hidden;
 	}
-	#toc_header {
-		display: grid;
-		grid-template-columns: auto 1.25rem;
-	}
-	h2 {
-		font-size: 1rem;
-		margin: 0;
-	}
-	ol {
+	#toc__header {
 		& {
-			margin: 0 0 0 1.5em;
-			padding: 0;
-			font-size: .9rem;
-			counter-reset: item;
+			text-align: right;
+			display: grid;
+			grid-template-columns: auto 1.25rem;
 		}
-		li {
-			margin: .125em  0 .125em -1em;
-			text-indent: 1em;
-			counter-increment: item;
+		h2 {
+			font-size: 1rem;
+			text-align: left;
+			line-height: 1;
+			height: 1rem;
+			margin: 0;
+			width: 100%;
+
 		}
-		&>li::marker { 
-			content: counters(item, '.'); 
+		button {
+			appearance: none;
+			border: none transparent 0;
+			background: @ini_background none;
+			border-radius: .25em;
+			cursor: pointer;
+		}
+		button svg {
+			width: 1rem; height: 1rem;
+			fill: @ini_sidebar_iconcolor;
+		}
+	}
+	#toc__menu {
+		& {
+		}
+		ol {
+			& {
+				margin: .25rem 0 0 .5em;
+				padding: 0;
+				font-size: .9rem;
+				list-style: none;
+			}
+			li {
+				margin: .125em  0 .125em 1em;
+				text-indent: -1em;
+			}
+		}
+	}
+	
+	/* collapsed state styles */
+	&[data-status="hide"] {
+		& {
+			width: 1.25rem;
+			border-left: transparent none 0;
+		}
+		#toc__header {
+			& {
+				grid-template-columns: 1.25rem;
+			}
+			h2 {
+				display: none;
+			}
+		}
+		#toc__menu {
+			& {
+				display: none;
+			}
+			ol {
+
+			}
+		}
+	}
+
+}
+
+/* if the main headline is shown on top, the margins need to be adjusted. */
+main.hide-first-headline {
+	#toc__nav {
+		margin-top: 0;
+		position: relative;
+		top: -.5rem;
+	}
+	#toc__nav[data-status="hide"] {
+	}
+}
+
+/* on smaller screens, the TOC is shown in the main text block. */
+@media (max-width: @ini_site_phone_width) {
+	#toc__nav {
+		& {
+			width: ~"calc(100% - 1.5rem)";
+			max-width: initial;
+			float: none;
+			margin: 0 auto;
+			top: 0 !important;
+		}
+		&[data-status="hide"] {
+			float: right;
+			top: -1.5rem !important;
 		}
 	}
 }
+
+ @media (prefers-color-scheme: dark) {
+
+	#toc__nav {
+		& {
+			border-left-color: @ini_border_dark;
+		}
+		#toc__header {
+			button {
+				background-color: @ini_background_dark;
+			}
+			button svg {
+				fill: @ini_sidebar_iconcolor_dark;
+			}
+		}
+	}
+ }

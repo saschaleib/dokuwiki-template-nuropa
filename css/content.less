@@ -13,6 +13,7 @@ main {
 		color: @ini_link;
 		text-decoration: none;
 		text-decoration-skip-ink: auto;
+		border-radius: .25em;
 	}
 	a.wikilink1:any-link {
 		color: @ini_wikilink;
@@ -25,7 +26,7 @@ main {
 	a.wikilink2:any-link {
 		color: @ini_wikilink2;
 		text-decoration: underline;
-		text-decoration-style: wavy;
+		text-decoration-style: dashed;
 	}
 	a.wikilink2:any-link:hover {
 		text-decoration-style: solid;
@@ -33,7 +34,7 @@ main {
 	a[href^="#"] {
 		color: @ini_inpagelink;
 		text-decoration: underline;
-		text-decoration-style: dotted;
+		text-decoration-style: dashed;
 	}
 
 
@@ -57,6 +58,11 @@ main {
 		color: inherit;
 		margin: inherit;
 		line-height: inherit;
+	}
+
+	/* main headline outside of main text: */
+	h1.pagetitle {
+		margin:  2.5rem 0 .5em 0;
 	}
 
 	/* Definition Terms are like Headlines in many ways */
@@ -133,7 +139,6 @@ main {
 			line-height: 1.1em;
 		}
 	}
-
 }
 
 @media (prefers-color-scheme: dark) {
@@ -148,7 +153,20 @@ main {
 			color: @ini_text_alt_dark;
 		}
 
-		
+		/* links */
+		a:any-link {
+			color: @ini_link_dark;
+		}
+		a.wikilink1:any-link {
+			color: @ini_wikilink_dark;
+		}
+		a.wikilink2:any-link {
+			color: @ini_wikilink2_dark;
+		}
+		a[href^="#"] {
+			color: @ini_inpagelink_dark;
+		}
+
 	}
 
 }

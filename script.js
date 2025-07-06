@@ -275,7 +275,32 @@ $p = {
 							}
 						}
 					});
+			}
+		},
+		
+		toc: {
+			init: function () {
+				//console.info('$p.gui.toc.init()');
+
+				// add event listener to menu button:
+				document.getElementById('toc__menubutton')
+				.addEventListener('click', this.onTocButtonClick);
 			},
+			
+			/* called when the TOC button is clicked: */
+			onTocButtonClick: function(e) {
+				//console.info('$p.gui.toc.onTocButtonClick(', e, ')');
+				
+				const toc = document.getElementById('toc__nav');
+				if (toc) {
+					const stat = toc.getAttribute('data-status');
+					if ( stat == 'show' ) {
+						toc.setAttribute('data-status', 'hide');
+					} else {
+						toc.setAttribute('data-status', 'show');
+					}
+				}
+			}
 		},
 
 		search: {
@@ -362,7 +387,7 @@ $p = {
 
 		menu: {
 			init: function () {
-				console.info('$p.gui.menu.init()');
+				console.info('$p.gui.menu.init() -- TODO!');
 				
 				return; /* TODO! */
 
@@ -371,7 +396,7 @@ $p = {
 
 		sidebar: {
 			init: function () {
-				console.info('gui.sidebar.init()');
+				//console.info('gui.sidebar.init()');
 				
 				// add event listener to menu button:
 				document.getElementById('tg__button')

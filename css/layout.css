@@ -137,9 +137,11 @@ main {
 	}
 }
 
-/* special: hide the page title */
-body main div.section_highlight_wrapper:first-of-type :is(h1, h2, h3, h4, h5, h6):first-of-type {
-	display: none;
+/* special: hide the page title, if configured */
+main.hide-first-headline {
+	div.section_highlight_wrapper:first-of-type :is(h1, h2, h3, h4, h5, h6):first-of-type {
+		display: none;
+	}
 }
 
 
