@@ -7,19 +7,18 @@
 if (!defined('DOKU_INC')) die();
  ?>	<div id="footer__layout">
 			<footer><!-- BEGIN FOOTER -->
-				<div id="staticfooter">
+				<p id="staticfooter">
 <?php				tpl_includeFile('footer.html'); ?>
-				</div>
-				<div id="ftLicenseButtons">
-					<div class="license">
-						<!-- license text -->
-						<?php tpl_license('');?>
+				</p>
+				<p id="ftLicenseInfo">
+					<!-- license text -->
+					<?php tpl_license('') ?>
 
-						<!-- alternatively include file: licenseinfo.html -->
-						<?php tpl_includeFile('licenseinfo.html'); ?>
-						<!-- end of license info -->
-					</div>
-<?php if($conf['license'] != null): ?>					<p class="buttons noprint">
+					<!-- alternatively include file: licenseinfo.html -->
+					<?php tpl_includeFile('licenseinfo.html') ?>
+<!-- end of license info -->
+				</p>
+<?php if($conf['license'] != null): ?>				<p id="ftLicenseButtons">
 					<?php 
 						$target = ($conf['target']['extern']) ? 'target="'.$conf['target']['extern'].'"' : '';
 						my_license_button($target);
@@ -30,8 +29,8 @@ if (!defined('DOKU_INC')) die();
 						<a href="//validator.w3.org/check/referer" title="Valid HTML5" <?php echo $target?>><img src="<?php echo tpl_basedir(); ?>images/button/html5.svg" width="80" height="15" alt="Valid HTML5"></a>
 						<a href="//jigsaw.w3.org/css-validator/check/referer?profile=css3" title="Valid CSS" <?php echo $target?>><img src="<?php echo tpl_basedir(); ?>images/button/css.svg" width="80" height="15" alt="Valid CSS"></a>
 						<a href="https://dokuwiki.org/" title="Driven by DokuWiki" <?php echo $target?>><img src="<?php echo tpl_basedir(); ?>images/button/dw.svg" width="80" height="15" alt="Driven by DokuWiki"></a>
-					</p><?php endif; ?>
-				</div>
+				</p><?php endif; ?>
+
 			</footer><!-- END OF FOOTER -->
 			<div class="no"><?php tpl_indexerWebBug() /* provide DokuWiki housekeeping, required in all templates */ ?></div>
 		</div>

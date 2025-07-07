@@ -283,8 +283,10 @@ $p = {
 				//console.info('$p.gui.toc.init()');
 
 				// add event listener to menu button:
-				document.getElementById('toc__menubutton')
-				.addEventListener('click', this.onTocButtonClick);
+				const btn = document.getElementById('toc__menubutton');
+				if (btn) {
+					btn.addEventListener('click', this.onTocButtonClick);
+				}
 			},
 			
 			/* called when the TOC button is clicked: */

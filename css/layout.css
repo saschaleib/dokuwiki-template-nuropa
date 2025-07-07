@@ -95,11 +95,13 @@ main {
 	.secedit {
 		& {
 			float: right;
-			margin-top: -22pt;
+			margin-top: -25px;
+			margin-right: -25px;
 			line-height: 0;
 		}
 		button {
 			& {
+				appearance: none;
 				border: @ini_border solid 1pt;
 				background-color: transparent;
 				color: transparent;

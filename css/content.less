@@ -18,6 +18,10 @@ main {
 	a.wikilink1:any-link {
 		color: @ini_wikilink;
 	}
+	a.interwiki {
+		background-size: 1.1em;
+		background-position: center left;
+	}
 	a:any-link:hover {
 		text-decoration: underline;
 		text-decoration-style: solid;
@@ -37,6 +41,11 @@ main {
 		text-decoration-style: dashed;
 	}
 
+	/* abbbreviations a reslightly widened and made smaller */
+	abbr {
+		letter-spacing: .01em;
+		font-size: 97%;
+	}
 
 	/* headlines and headline-like elements */
 	h1, h2, h3, h4, h5, h6 {
@@ -65,6 +74,25 @@ main {
 		margin:  2.5rem 0 .5em 0;
 	}
 
+	/* default paragraph settings */
+	p,
+	blockquote,
+	div.table {
+		margin-bottom: .5em;
+		margin-top: .5em;
+	}
+
+	/* hyphenation only in the main-content */
+	p, li {
+		word-wrap: break-word;
+		overflow-wrap: break-word;
+		hyphens: auto;
+		-ms-hyphens: auto;
+		-moz-hyphens: auto;
+		-webkit-hyphens: auto;
+		hyphenate-limit-chars: 6 2 3;
+	}
+
 	/* Definition Terms are like Headlines in many ways */
 	dl dt, summary {
 		font-family: @ini_headline_fonts;
@@ -78,6 +106,76 @@ main {
 
 	p, li {
 		margin: .5em 0;
+	}
+	
+	/* preformatted */
+	pre, code, samp, kbd {
+		font-family: @ini_monospace_fonts;
+		font-size-adjust: @ini_monospace_size_adjust;
+		
+	}
+	pre {
+		color: @ini_text_alt;
+		overflow: auto;
+		white-space: pre-wrap;
+		hyphens: auto;
+		hyphenate-character: '\23CE';
+		word-wrap: normal;
+		overflow-wrap: anywhere;
+		border: @ini_border solid 1px;
+		border-radius: .25em;
+		padding: .5em 0 .5em .5em;
+		background-color: @ini_background_alt;
+		margin: .25em 0 .5em 0;
+		box-shadow: inset -.5pt -.5pt 1.5pt rgba(0,0,0,.3),
+					inset 1pt 1pt 2pt rgba(255,255,255,.7);
+		text-shadow: 1pt 1pt 2pt rgba(0,0,0,.1);
+	}
+
+	/* code block with download option: */
+	dl.file, dl.code {
+		& {
+		}
+		dt {
+			width: fit-content;
+			background-color: @ini_background_alt;
+			font-size: smaller;
+			padding: .25em .5em .75em .25em;
+			border-radius: .25em .25em 0 0;
+			box-shadow: inset -.5pt -.5pt 1.5pt rgba(0,0,0,.3);
+		}
+		dd {
+			& {
+				margin-left: 0;
+			}
+			pre {
+				margin-top: -.5em;
+				border: transparent none 0;
+				border-radius: 0 .25em .25em .25em;
+				box-shadow: inset -.5pt -.5pt 1.5pt rgba(0,0,0,.3);
+			}
+		}
+	}
+	
+	/* block quotes */
+	blockquote {
+		& {
+			display: grid;
+			grid-template-columns: .25em auto;
+			column-gap: .75em;
+			font-family: @ini_alternate_fonts;
+			font-size-adjust: @ini_alt_font_size_adjust;
+		}
+		& blockquote {
+			margin-left: -.5em;
+		}
+		&:before {
+			content: '';
+			display: block;
+			width: .25em;
+			border-right: @ini_border solid .25em;
+			border-radius: 0 .5em .5em 0;
+		}
 	}
 	
 	/* lists: */
@@ -113,6 +211,48 @@ main {
 		padding-left: .25em;
 	}
 
+	/*  tables */
+	div.table {
+		overflow-x: auto;
+	}
+	table {
+		& {
+			border-collapse: collapse;
+			empty-cells: show;
+			border-spacing: 0;
+			font-size: smaller;
+			border: 1px solid @ini_border;
+			margin-bottom: 1em;
+		}
+		th, td {
+			padding: .5em .3em;
+			vertical-align: top;
+			border: 1px solid @ini_border;
+			line-height: 1.25em;
+		}
+		th.centeralign, td.centeralign {
+			text-align: center;
+		}
+		th.rightalign, td.rightalign {
+			text-align: right;
+		}
+		th {
+			font-weight: bold;
+			background-color: @ini_background_alt;
+			text-align: left;
+		}
+		&.inline {
+			min-width: 50%;
+			margin-bottom: 0;
+		}
+		&.inline tr:hover td {
+			background-color: darken(@ini_background_alt, 5%);
+		}
+		&.inline tr:hover th {
+			background-color: darken(@ini_background_alt, 10%);
+		}
+	}
+
 	/* asides */
 	aside {
 		& > * {
@@ -139,19 +279,46 @@ main {
 			line-height: 1.1em;
 		}
 	}
+	
+	/* horizontal bars */
+	hr {
+		margin: .5em 1em .25em 0;
+		height: 1pt;
+		background: transparent linear-gradient(to right,transparent,#5B5B5B,transparent);
+		border: transparent 0 none;
+	}
+	
+	/* footnotes section */
+	div.footnotes {
+		border-top: transparent 0 none !important;
+		margin-top: 1.5em;
+		font-size: smaller;
+	}
+	div.footnotes:before {
+		content: ' ';
+		display: block;
+		width: 33%;
+		min-width: 5em;
+		border-top: @ini_border solid 1.5pt;
+		height: .5em;
+	}
+	div.footnotes div.fn {
+		margin-left: 1em;
+	}
+}
+
+/* footnotes and similar poups: */
+.JSpopup {
+	font-size: smaller;
+	background-color: @ini_background;
+	color: @ini_text;
+	border: @ini_border solid 1px;
+	padding: .25em;
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, .5);
 }
 
 @media (prefers-color-scheme: dark) {
 	body.darkmode main {
-		h1, h2, h3, h4, h5, h6 {
-			color: @ini_main_headline_color_dark;
-		}
-		dl dt, summary {
-			color: @ini_main_headline_color_dark;
-		}
-		li::marker {
-			color: @ini_text_alt_dark;
-		}
 
 		/* links */
 		a:any-link {
@@ -167,6 +334,81 @@ main {
 			color: @ini_inpagelink_dark;
 		}
 
+		/* headlines and headline-like elements */
+		h1, h2, h3, h4, h5, h6 {
+			color: @ini_main_headline_color_dark;
+		}
+
+		/* Definition Terms are like Headlines in many ways */
+		dl dt, summary {
+			color: @ini_main_headline_color_dark;
+		}
+		
+		pre {
+			color: @ini_text_alt_dark;
+			border-color: @ini_border_dark;
+			background-color: @ini_background_alt_dark;
+			box-shadow: inset -0.5pt -0.5pt 1.5pt rgba(0,0,0,0.7),
+						inset 1pt 1pt 2pt rgba(255,255,255,0.1);
+			text-shadow: 1pt 1pt 2pt rgba(0,0,0,.3);
+		}
+
+		/* code block with download option: */
+		dl.file, dl.code {
+			dt {
+				background-color: @ini_background_alt_dark;
+				box-shadow: inset -.5pt -.5pt 1.5pt rgba(0,0,0,.7);
+			}
+			dd pre {
+				box-shadow: inset -.5pt -.5pt 1.5pt rgba(0,0,0,.7);
+			}
+		}
+		
+		/* block quotes */
+		blockquote:before {
+			border-right-color: @ini_border_dark;
+		}
+		
+		/* lists: */
+		li::marker {
+			color: @ini_text_alt_dark;
+		}
+
+		/*  tables */
+		table {
+			& {
+				border: 1px solid @ini_border_dark;
+			}
+			th, td {
+				border-color: @ini_border_dark;
+			}
+			th {
+				background-color: @ini_background_alt_dark;
+			}
+			&.inline tr:hover td {
+				background-color: lighten(@ini_background_alt_dark, 5%);
+			}
+			&.inline tr:hover th {
+				background-color: lighten(@ini_background_alt_dark, 10%);
+			}
+		}
+
+		/* horizontal bars */
+		hr {
+			background: transparent linear-gradient(to right,transparent,#a2a2a2,transparent);
+		}
+		
+		/* footnotes section */
+		div.footnotes:before {
+			border-top-color: @ini_border_dark;
+		}
 	}
 
+	/* footnotes and similar poups: */
+	.JSpopup {
+		background-color: @ini_background_dark;
+		color: @ini_text_dark;
+		border-color: @ini_border_dark;
+		box-shadow: 2px 2px 4px rgba(0, 0, 0, .7);
+	}
 }

@@ -1,0 +1,28 @@
+/* Stylesheet for DokuWiki Nuropa template
+ * by Sascha Leib
+ * File name: css/parts/admin.less
+ */
+
+body.mode_admin {
+	
+	h1.pagetitle {
+		display: none;
+	}
+	
+	ul.admin_tasks {
+		& {
+			list-style: none inside;
+			columns: 2;
+			margin: 0 0 1rem 0;
+			padding: 0;
+		}
+		li a {
+			display: grid;
+			grid-template-columns: 1.5rem auto;
+			border: grey solid 1px;
+			background-color: #EEE;
+			border-radius: .25rem;
+			padding: .5rem;
+		}
+	}
+}

@@ -171,17 +171,17 @@
 				&:focus {
 				    & {
 						margin-left: .75rem;
-						box-shadow: inset -2pt -2pt 2pt rgba(0,0,0,0.2),
-									inset  2pt  2pt 2pt rgba(255,255,255,.4);
+						box-shadow: inset -1pt -1pt 1pt rgba(0,0,0,0.2),
+									inset 1pt 1pt 1pt rgb(255, 255, 255, .8);
 					}
     				span {
     					display: inline-block;
 						color: @ini_searchfield_text;
-						text-shadow: 2pt 2pt 2pt rgba(0,0,0,.2);
+						text-shadow: 1pt 1pt 1pt rgba(0,0,0,0.1);
     				}
 					svg {
 						fill: @ini_searchbar_icon;
-						filter: drop-shadow(2pt 2pt 1pt rgba(0,0,0,0.1));
+						filter: drop-shadow(1pt 1pt 1pt rgba(0,0,0,0.1));
 					}
 			    }
 			}
@@ -216,8 +216,8 @@
 				& {
 					grid-template-columns: 1rem auto;
 					padding-right: .5rem;
-					box-shadow: inset -2pt -2pt 2pt rgba(0,0,0,0.2),
-								inset 2pt 2pt 2pt rgba(255,255,255,.4);
+					box-shadow: inset -1pt -1pt 1pt rgba(0,0,0,0.2),
+								inset 2pt 2pt 2pt rgb(255, 255, 255);
 				}
 				span {
 					display: inline-block;
@@ -270,11 +270,11 @@
 			max-width: 38rem;
 			margin: .3rem auto;
 			padding: .5rem .5rem .5rem 0;
-			background-color: fadeout(@ini_searchpopup_background, 10%);
+			background-color: fadeout(@ini_searchpopup_background, 20%);
 			border-radius: 1rem;
-			box-shadow: 2pt 2pt 2pt rgba(0,0,0,.4),
-				inset 1pt 1pt 1pt rgba(255,255,255,.5),
-				inset -1pt -1pt 1pt rgba(0,0,0,.5);
+			box-shadow: 1pt 1pt 2pt 0 rgba(0,0,0,.5),
+				inset 1pt 1pt 1pt rgba(255,255,255,.7),
+				inset -1pt -1pt 1pt rgba(255,255,255,.6);
 			backdrop-filter: blur(2px);
 			z-index: 999;
 			box-sizing: border-box;
