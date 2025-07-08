@@ -347,7 +347,7 @@ function my_toc($prefix = "") {
         echo $prefix .
             TPL_TAB . '<div id="toc__header"><h2>' . htmlentities($lang["toc"]) . '</h2><button type="button" id="toc__menubutton" class="tg_button" title="' . htmlentities($lang["toc"]) . '" aria-haspopup="true" aria-controls="toc-menu"><span class="sr-only">' . htmlentities($lang["toc"]) . '</span>' . $iconSvg . '</button></div>' .TPL_NL;
         echo $prefix .
-            TPL_TAB . '<div id="toc__menu" class="tg_content" role="menu" aria-labelledby="toc-menubutton">';
+            TPL_TAB . '<div id="toc__menu" class="tg_content" role="menu" aria-labelledby="toc__menubutton">';
 
         $level = 0;
         foreach ($toc as $it) {

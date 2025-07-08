@@ -131,6 +131,14 @@ main {
 					inset 1pt 1pt 2pt rgba(255,255,255,.7);
 		text-shadow: 1pt 1pt 2pt rgba(0,0,0,.1);
 	}
+	code {
+		padding: .2em .4em;
+		margin: 0;
+		font-size: 85%;
+		white-space: break-spaces;
+		background-color: @ini_background_alt;
+		border-radius: 6px;
+	}
 
 	/* code block with download option: */
 	dl.file, dl.code {
@@ -161,18 +169,19 @@ main {
 	blockquote {
 		& {
 			display: grid;
-			grid-template-columns: .25em auto;
-			column-gap: .75em;
+			grid-template-columns: 0 auto;
+			column-gap: 1em;
 			font-family: @ini_alternate_fonts;
 			font-size-adjust: @ini_alt_font_size_adjust;
+			margin-left: .5em;
 		}
 		& blockquote {
-			margin-left: -.5em;
+			margin-left: -.6em;
 		}
 		&:before {
 			content: '';
 			display: block;
-			width: .25em;
+			width: 0;
 			border-right: @ini_border solid .25em;
 			border-radius: 0 .5em .5em 0;
 		}
@@ -351,6 +360,9 @@ main {
 			box-shadow: inset -0.5pt -0.5pt 1.5pt rgba(0,0,0,0.7),
 						inset 1pt 1pt 2pt rgba(255,255,255,0.1);
 			text-shadow: 1pt 1pt 2pt rgba(0,0,0,.3);
+		}
+		code {
+			background-color: @ini_background_alt_dark;
 		}
 
 		/* code block with download option: */

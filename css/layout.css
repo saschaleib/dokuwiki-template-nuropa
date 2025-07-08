@@ -146,6 +146,12 @@ main.hide-first-headline {
 	}
 }
 
+/* back to top button */
+#to-top-block {
+	text-align: right;
+	position: sticky;
+    bottom: 0;
+}
 
 @media (prefers-color-scheme: dark) {
 
