@@ -111,10 +111,9 @@ main {
 	/* preformatted */
 	pre, code, samp, kbd {
 		font-family: @ini_monospace_fonts;
-		font-size-adjust: @ini_monospace_size_adjust;
-		
 	}
 	pre {
+		font-size-adjust: @ini_monospace_block_adjust;		
 		color: @ini_text_alt;
 		overflow: auto;
 		white-space: pre-wrap;
@@ -132,6 +131,7 @@ main {
 		text-shadow: 1pt 1pt 2pt rgba(0,0,0,.1);
 	}
 	code {
+		font-size-adjust: @ini_monospace_inline_adjust;		
 		padding: .2em .4em;
 		margin: 0;
 		font-size: 85%;

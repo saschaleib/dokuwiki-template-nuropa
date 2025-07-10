@@ -1,0 +1,263 @@
+/* Stylesheet for DokuWiki Nuropa template
+ * by Sascha Leib
+ * File name: css/tools/revisions.less
+ */
+
+body.mode_revisions #page__revisions,
+body.mode_recent #dw__recent {
+	
+	ul {
+		& {
+			margin: 0; padding: 0;
+			list-style: none;
+		}
+		li {
+			& {
+				padding: .25em .25em .25em 1.25em;
+				text-indent: -1em;
+				margin: 0;
+			}
+			&:nth-child(odd) {
+				background-color: darken(@ini_background, 8%);
+			}
+			.date, .user bdo {
+				font-family: @ini_monospace_fonts;
+				font-size-adjust: @ini_monospace_inline_adjust;
+			}
+			.sizechange {
+				&.positive { color: #31752F; }
+				&.negative { color: #b9330b; }
+			}
+		}
+	}
+	
+	button {
+		& {
+			appearance: none;
+			border: #CCC solid 1.5pt;
+			padding: .25em .5em;
+			margin: 2pt .25rem;
+			border-radius: 1pt;
+			color: #000;
+			display: inline-grid;
+			grid-template-columns: 1rem auto;
+			column-gap: .25rem;
+			cursor: pointer;
+		}
+		&::before {
+			content: '';
+			display: inline-block;
+			width: 1rem;
+			height: 1rem;
+			background: transparent none center no-repeat;
+		}
+		&[type="submit"] {
+			& {
+				background-color: #cfd;
+			}
+			&::before {
+				background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M21,9L17,5V8H10V10H17V13M7,11L3,15L7,19V16H14V14H7V11Z' /%3E%3C/svg%3E");
+			}
+		}
+	}
+}
+body main .pagenav {
+
+	button {
+		& {
+			appearance: none;
+			border: #CCC solid 1.5pt;
+			padding: .25em .5em;
+			margin: 2pt .25rem;
+			border-radius: 1pt;
+			color: #000;
+			background-color: #ECEFF1;
+			display: inline-grid;
+			grid-template-columns: 1rem auto;
+			column-gap: .25rem;
+			cursor: pointer;
+		}
+		&::before {
+			content: '';
+			display: inline-block;
+			width: 1rem;
+			height: 1rem;
+			background: transparent none center no-repeat;
+		}
+	}
+	.pagenav-next button[type="submit"]::before {
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4,5V19L11,12M18,5V19H20V5M11,5V19L18,12' /%3E%3C/svg%3E");
+	}
+	.pagenav-prev button[type="submit"]::before {
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20,5V19L13,12M6,5V19H4V5M13,5V19L6,12' /%3E%3C/svg%3E");
+	}
+}
+
+body.mode_diff {
+	
+	select {
+		& {
+			appearance: none;
+			border: @ini_border solid 1pt;
+			padding: .25em 1.5em .25em .5em;
+			font-size: 1em;
+			line-height: 1.2;
+			border-radius: .25em;
+			cursor: pointer;
+			background: @ini_background_neu url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z' /%3E%3C/svg%3E") right center no-repeat;
+			background-size: 1.1em;
+			color: @ini_text_neu;
+		}
+		&:hover {
+			filter: brightness(.9);
+			box-shadow: 1pt 1pt 2pt rgba(0,0,0,.2);
+		}
+	}
+	
+	.diffoptions {
+		& {
+			border: @ini_border solid 1pt;
+			background-color: @ini_background_alt;
+			padding: .25em .25em 0 .5em;
+		}
+		p {
+			font-size: smaller;
+		}
+	}
+	
+	table.diff {
+		width: 100%;
+		background-color: #F2F3F9;
+	}
+	td {
+		border: none;
+	}
+	.diffnav {
+		a {
+			display: inline-block;
+			padding: 2pt;
+			border: @ini_link solid 1px;
+			margin: 2pt;
+			border-radius: 2pt;
+			font-size: smaller;
+		}
+		& > form:first-child {
+			margin-top: 2em;
+		}
+	}
+	.diff-blockheader {
+		font-family: @ini_headline_fonts;
+		font-size: 1.1rem;
+		font-weight: normal;
+		line-height: 1.1;
+		background-color: #CFD8DC;
+		color: #263238;
+	}
+	.diff-lineheader {
+		text-align: center;
+		background-color: #CFD8DC;
+		color: #263238;
+	}
+	.diff-deletedline {
+		& {
+			background-color: #FFCDD2;
+			color: #47373F;
+		}
+		.diff-mark, del {
+			color: #B71C1C;
+			text-decoration: none;
+		}
+	}
+	.diff-addedline {
+		& {
+			background-color: #E8F5E9;
+			color: #37473F;
+		}
+		.diff-mark {
+			color: #1B5E20;
+		}
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	
+	body.darkmode.mode_revisions #page__revisions,
+	body.darkmode.mode_recent #dw__recent {
+
+		ul li {
+			&:nth-child(odd) {
+				background-color: lighten(@ini_background_dark, 8%);
+			}
+			.sizechange {
+				&.positive { color: #31752F; }
+				&.negative { color: #b9330b; }
+			}
+		}
+		
+		button[type="submit"] {
+			& {
+				border-color: #646464;
+				background-color: #388E3C;
+			}
+		}
+	}
+	body main .pagenav {
+		button {
+			& {
+				border-color: #646464;
+				background-color: #78909C;
+			}
+		}
+	}
+	body.mode_diff {
+		
+		select {
+			& {
+				border-color: @ini_border_dark;
+				background: @ini_background_neu_dark url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z' style='fill:%23F5F5F5' /%3E%3C/svg%3E") right center no-repeat;
+				color: @ini_text_neu_dark;
+			}
+			&:hover {
+				filter: brightness(1.1);
+				box-shadow: 1pt 1pt 2pt rgba(0,0,0,.2);
+			}
+		}
+		.diffoptions {
+			& {
+				border-color: @ini_border_dark;
+				background-color: @ini_background_alt_dark;
+			}
+		}
+		
+		table.diff {
+			background-color: #263238;
+		}
+		.diffnav {
+			a {
+				border-color: @ini_link_dark;
+			}
+		}
+		.diff-blockheader, .diff-lineheader {
+			background-color: #35454d;
+			color: #C7C7C7;
+		}
+		.diff-deletedline {
+			& {
+				background-color: #383226;
+				color: #B9A6A6;
+			}
+			.diff-mark, del {
+				color: #F96E6E;
+			}
+		}
+		.diff-addedline {
+			& {
+				background-color: #323826;
+				color: #9c9f94;
+			}
+			.diff-mark {
+				color: #388E3C;
+			}
+		}
+	}
+}

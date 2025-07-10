@@ -16,7 +16,7 @@
 	background-color: @ini_background;
 	scroll-behavior: smooth;
 	scrollbar-gutter: auto;
-    scrollbar-width: thin;
+    scrollbar-width: auto;
 	text-rendering: optimizeLegibility;
 }
 body {
@@ -174,5 +174,12 @@ main.hide-first-headline {
 			color: @ini_link_dark;
 		}
 
+	}
+}
+
+/* smaller scrollbar when size gets tight */
+@media (max-width: @ini_site_width) {
+	:root, html {
+		scrollbar-width: thin;
 	}
 }

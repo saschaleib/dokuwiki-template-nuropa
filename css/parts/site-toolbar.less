@@ -147,6 +147,7 @@ body #toolbar__layout [popover] li a[aria-current="true"] {
 	& {
 		z-index: 1;
 		padding: 0 .25em 0 0;
+		box-shadow: -.5rem 0 .5rem @ini_toolbar_background;
 	}
 	#pagetools__btn {
 		& {
@@ -154,7 +155,6 @@ body #toolbar__layout [popover] li a[aria-current="true"] {
 			padding: .1em;
 			margin: 2px 2px 2px 0;
 			border-radius: 50%;
-			box-shadow: -.5rem 0 .5rem @ini_toolbar_background;
 		}
 		svg {
 			width: 1.5em;
@@ -222,9 +222,6 @@ body.loggedIn {
 	}
 	#toolbar__layout a > svg, #toolbar__layout button > svg {
 		filter: drop-shadow(1pt 1pt 1pt rgba(0,0,0,.1));
-	}
-	#tb__menu__group #pagetools__btn {
-		box-shadow: -.5rem 0 .5rem fadeout(@ini_toolbar_background, 7%);
 	}
 }
 
@@ -304,6 +301,9 @@ body.loggedIn {
 			filter: drop-shadow(1pt 1pt 1.5pt #00000055);
 		}
 
+		#tb__menu__group {
+			box-shadow: -.5rem 0 .5rem @ini_toolbar_background_dark;
+		}
 		&.loggedIn {
 			#toolbar__layout {
 				background-color: fadeout(@ini_toolbar_background_dark, 7%);
@@ -311,9 +311,6 @@ body.loggedIn {
 					inset 1pt 1pt 1pt rgba(0,0,0,0.3),
 					inset -1pt -1pt 1pt rgba(255,255,255,0.1);
 				border-bottom: transparent none 0;
-			}
-			#tb__menu__group #pagetools__btn {
-				box-shadow: -.5rem 0 .5rem fadeout(@ini_toolbar_background_dark, 7%);
 			}
 		}
 	}
