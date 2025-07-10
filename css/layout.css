@@ -155,7 +155,7 @@ main.hide-first-headline {
 
 @media (prefers-color-scheme: dark) {
 
-	:root, html {
+	:root:has(body.darkmode), html:has(body.darkmode) {
 		color-scheme: dark;
 		background-color: @ini_background_dark;
 	}

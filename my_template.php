@@ -334,7 +334,7 @@ function my_toc($prefix = "") {
 
     /* inline icons: */
     $iconSvg =
-        "<svg width='100%' height='100%' viewBox='0 0 24 24' version='1.1' xmlns='http://www.w3.org/2000/svg'><rect class='top-bar' x='5' y='6' width='14' height='2'></rect><rect class='middle-bar' x='5' y='11' width='14' height='2'></rect><rect class='bottom-bar' x='5' y='16' width='14' height='2'></rect></svg>";
+        "<svg width='100%' height='100%' viewBox='0 0 24 24' version='1.1' xmlns='http://www.w3.org/2000/svg'><rect class='top-bar' x='5' y='6' width='14' height='2'></rect><rect class='middle-bar' x='5' y='11.1' width='14' height='2'></rect><rect class='bottom-bar' x='5' y='16.2' width='14' height='2'></rect></svg>";
 
     $tocView = tpl_getConf("showtoc", "hide");
     if (in_array($ACT, ["admin"])) {

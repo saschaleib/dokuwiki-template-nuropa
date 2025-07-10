@@ -1,0 +1,242 @@
+/* Stylesheet for DokuWiki Nuropa template
+ * by Sascha Leib
+ * File name: css/tools/user.less
+ */
+ 
+body.mode_profile,
+body.mode_login,
+body.mode_resendpwd {
+	
+	fieldset {
+		border: @ini_border solid 1pt;
+		background-color: @ini_background_alt;
+		padding: .25rem .25rem .25rem .5rem;
+		border-radius: .25rem;
+		color: @ini_text_alt;
+	}
+	legend {
+		font-size: smaller;
+		margin-bottom: .25rem;
+	}
+	input[type="text"], input[type="email"], input[type="password"] {
+		& {
+			appearance: none;
+			border: @ini_border solid 1pt;
+			font-family: @ini_monospace_fonts;
+			line-height: 1.2;
+			padding: .25em;
+			box-sizing: border-box;
+			margin-right: .25rem;
+			border-radius: 2pt;
+		}
+		&:focus {
+			box-shadow: inset 1pt 1pt 3pt rgba(0,0,0,0.4);
+		}
+	}
+	button {
+		& {
+			appearance: none;
+			border: @ini_border solid 2pt;
+			background-color: @ini_background_neu;
+			color: #000;
+			padding: .25em .5em;
+			margin: .5em .25em;
+			border-radius: .25em;
+			cursor: pointer;
+		}
+		&:hover {
+			filter: brightness(.9);
+		}
+	}
+	
+	#dw__register fieldset {
+		label {
+			& {
+				display: inline-grid;
+				width: 100%;
+				grid-template-columns: 3fr 7fr;
+				column-gap: .5em;
+				justify-items: stretch;
+				align-items: baseline;
+			}
+			& > span:first-child {
+				min-width: 14em;
+				text-align: right;
+				padding: 0;
+			}
+			& > span::after {
+				content: ':';
+			}
+			& > input {
+				width: 100%;
+			}
+		}
+		button {
+			margin-top: 1rem;
+		}
+		button[type="submit"] {
+			background-color: #FCD;
+		}
+		button[type="reset"] {
+			background-color: #C8E6C9;
+		}
+	}
+	
+	#dw__profiletoken fieldset {
+		p {
+			text-align: left;
+		}
+		code {
+			border: @ini_border solid 1pt;
+			padding: .25em;
+		}
+		button[name="regen"] {
+			background-color: #B2EBF2;
+		}
+	}
+	
+	#dw__profiledelete fieldset {
+		legend {
+			color: #D50000;
+		}
+		label {
+			& {
+				width: 100%;
+				display: inline-grid;
+				grid-template-columns: 4rem auto;
+				column-gap: .5em;
+				justify-items: start;
+				align-items: baseline;
+			}
+			input {
+				justify-self: center;
+			}
+			span {
+				text-align: left;
+			}
+			&.block {
+				justify-items: stretch;
+				margin-top: 1rem;
+				grid-template-columns: 3fr 7fr;
+			}
+			&.block span {
+				text-align: right;
+			}
+		}
+		button {
+			background-color: #FCD;
+			color: #D50000;
+		}
+	}
+	
+	#dw__login fieldset {
+		
+		label {
+			& {
+				display: inline-grid;
+				width: 100%;
+				grid-template-columns: 14em auto;
+				column-gap: .5em;
+				justify-items: stretch;
+				align-items: baseline;
+			}
+			& > span:first-child {
+				min-width: 14em;
+				text-align: right;
+				padding: 0;
+			}
+			& > span::after {
+				content: ':';
+			}
+			& > input {
+				width: 100%;
+			}
+			&[for="remember__me"] {
+				& {
+					margin-left: 14.5em;
+					grid-template-columns: min-content auto;
+				}
+				input {
+					justify-self: end;
+					width: fit-content;
+					margin: 0 .5em;
+				}
+				& > span {
+					justify-self: start;
+				}
+				& > span::after {
+					content: none;
+				}
+			}
+		}
+		button[type="submit"] {
+			margin-top: 1em;
+			background-color: #C8E6C9;
+		}
+	}
+ }
+ 
+ @media (prefers-color-scheme: dark) {
+	body.darkmode.mode_profile,
+	body.darkmode.mode_login,
+	body.darkmode.mode_resendpwd {
+		
+		fieldset {
+			border-color: @ini_border_dark;
+			background-color: @ini_background_alt_dark;
+			color: @ini_text_alt_dark;
+		}
+		input[type="text"], input[type="email"], input[type="password"] {
+			& {
+				border-color: @ini_border_dark;
+			}
+			&:focus {
+				box-shadow: inset -1pt -1pt 2pt rgba(255,255,255,0.4);
+			}
+		}
+		button {
+			& {
+				border-color: @ini_border_dark;
+				background-color: @ini_background_neu_dark;
+				color: #FFF;
+			}
+			&:hover {
+				filter: brightness(1.1);
+			}
+		}
+		
+		#dw__register fieldset {
+			button[type="submit"] {
+				background-color: #733;
+			}
+			button[type="reset"] {
+				background-color: #464;
+			}
+		}
+		
+		#dw__profiletoken fieldset {
+			code {
+				border-color: @ini_border_dark;
+			}
+			button[name="regen"] {
+				background-color: #466;
+			}
+		}
+		
+		#dw__profiledelete fieldset {
+			legend {
+				color: #ea5a5a;
+			}
+			button {
+				background-color: #733;;
+				color: #FEE;
+			}
+		}
+		
+		#dw__login fieldset {
+			button[type="submit"] {
+				background-color: #464;
+			}
+		}
+	 }
+ }
