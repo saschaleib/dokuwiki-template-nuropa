@@ -1,0 +1,137 @@
+/* Stylesheet for DokuWiki Nuropa template
+ * by Sascha Leib
+ * File name: css/tools/mediamanager.less
+ */
+
+/* tree view for both versions of media manager */
+body.mode_media,
+body > #media__manager {
+	#media__tree {
+		& {
+			margin: 0; padding: 0;
+		}
+		ul[role="tree"] {
+			& {
+				list-style: none;
+				margin: 0; padding: 0;
+			}
+			li {
+				& {
+					margin: 0; padding: 0;
+				}
+				&:nth-of-type(odd) {
+					background-color: @ini_background;
+				}
+				&:nth-of-type(even) {
+					background-color: darken(@ini_background, 5%);
+				}
+				
+				ul {
+					list-style: none;
+					margin: 0 0 0 .5em;
+					border: @ini_border solid 1px;
+					border-width: 1px 0;
+				}
+				&::before {
+					content: none;
+				}
+			}
+			img {
+				display: inline-block;
+				padding: 0 .25em;
+				margin: 0 .125em;
+				cursor: pointer;
+				vertical-align: middle;
+			}
+			a {
+				&:link {
+					color: @ini_link;
+					text-decoration: none;
+					display: inline-block;
+				}
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+			div.li {
+				display: inline-block;
+			}
+		}
+	}
+}
+
+/* full media manager layout */
+#mediamanager__page {
+	& {
+		min-width: 50em;
+		width: 100%;
+		display: grid;
+		grid-template-columns: auto auto auto;
+	}
+	& > h1, & > .notify {
+		grid-column: 1 / span 5;
+	}
+	h2 {
+	}
+	div.namespaces {
+		& {
+			min-width: 10em;
+		}
+		h2 {
+			font-size: 1rem;
+			line-height: 1.25;
+			margin: 0;
+			padding: 0;
+			
+		}
+			
+	}
+	div.filelist {
+		width: 50%;
+		min-width: 25em; /* @change */
+	}
+	div.file {
+		width: 30%;
+		min-width: 15em; /* @change */
+	}
+	
+	.tabs li {
+		white-space: nowrap;
+	}
+}
+
+/* media selector popup only */
+body > #media__manager {
+	
+	& {
+		display: grid;
+		grid-template-columns: 30% 70%;
+		column-gap: .5rem;
+	}
+	
+	#mediamgr__aside {
+		.pad {
+			padding: 0 0 0 .25rem;
+		}
+		h1 {
+			font-size: 1.5rem;
+			font-family: @ini_headline_fonts;
+			color: @ini_main_headline_color;
+		}
+		#media__opts {
+			& {
+				border: @ini_border solid 1px;
+				font-size: smaller;
+				padding: .25rem;
+				margin-bottom: .25rem;
+			}
+			input[type="checkbox"] {
+				margin: 0 .25em 0 0;
+				border-radius: .25em;
+			}
+		}
+	}
+	#media__tree {
+		border: @ini_border solid 1px;
+	}
+}
